@@ -12,7 +12,7 @@ export default function Layout() {
   return (
     <div className="pt-4">
       <div>{point}</div>
-      <div className="flex">
+      <div className="flex flex-col">
         <Navbar />
         <main className="flex">
           <Outlet />
