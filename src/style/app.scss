@@ -1,0 +1,30 @@
+@import './variables.scss';
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,500;1,600&family=Square+Peg&display=swap');
+@import 'animate.css';
+
+body {
+  font-family: $primary-font;
+  background: $primary-bg;
+  color: whitesmoke;
+  padding: 0 2vw;
+  // line-height: 1.5;
+  // color: #333;
+}
+
+.font-primary {
+  font-family: $primary-font;
+}
+
+.font-secondary {
+  font-family: $secondary-font;
+}
+
+.bg-primary {
+  background: $primary-bg;
+}
+
+.color-primary {
+  color: $primary-color;
+}
