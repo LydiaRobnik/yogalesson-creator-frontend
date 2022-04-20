@@ -12,7 +12,7 @@ export default function Layout() {
   return (
     <div className="pt-4">
       <div>{point}</div>
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-8">
         <Navbar />
         <main className="flex">
           <Outlet />

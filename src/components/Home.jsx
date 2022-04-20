@@ -7,7 +7,9 @@ export default function Home() {
 
   useEffect(() => {
     console.log('useEffect', asanas);
-    http.get('/asana').then((resp) => setAsanas(resp.data));
+    http()
+      .get('/asana')
+      .then((resp) => setAsanas(resp.data));
 
     return () => {};
   }, []);
@@ -15,7 +17,7 @@ export default function Home() {
   return (
     <div className="home flex flex-col items-center color-primary">
       <div className="font-bold text-3xl md:text-7xl">
-        Yoga Lesson Creator {asanas.length}{' '}
+        Yoga Lesson Creator with {asanas.length} Asanas
       </div>
       <div className="flex flex-wrap gap-4">
         {asanas.map((asana) => (
@@ -23,7 +25,7 @@ export default function Home() {
             key={asana.id}
             className="flex flex-col items-center font-primary border-2 border-gray-600 rounded-lg p-4"
           >
-            <img className="w-32" src={asana.img_url} alt="" />
+            <img className="w-32 invert" src={asana.img_url} alt="" />
             <div className="flex-1 font-bold pt-4">{asana.sanskrit_name}</div>
             <div className="flex-1 text-sm italic pt-4">
               {asana.english_name}
