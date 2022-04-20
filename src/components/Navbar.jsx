@@ -21,6 +21,9 @@ export default function Navbar() {
 
     if (!result) {
       setError('Invalid username or password!');
+    } else {
+      setName('');
+      setPassword('');
     }
   }
 
