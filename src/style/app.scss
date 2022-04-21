@@ -25,6 +25,22 @@ body {
   background: $primary-bg;
 }
 
+.bg-secondary {
+  background: $color3;
+}
+
 .color-primary {
   color: $primary-color;
+}
+
+.color-secondary {
+  color: $secondary-color;
+}
+
+.color-1 {
+  color: $color1;
+}
+
+.color-5 {
+  color: $color5;
 }

@@ -34,7 +34,7 @@ export default function Navbar() {
       <NavLink to="/user/planner">Planner</NavLink>
       {loggedIn ? (
         <div>
-          <span className="pr-2 text-sm text-green-300">Hi {user.name}</span>
+          <span className="pr-2 text-sm color-5">Hi {user.name}</span>
           <button onClick={() => logout()}>Logout</button>
         </div>
       ) : (
