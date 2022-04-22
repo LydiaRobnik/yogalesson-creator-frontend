@@ -13,6 +13,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
+    "@fullpage/react-fullpage": "^0.1.23",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
     "animate.css": "^4.1.1",

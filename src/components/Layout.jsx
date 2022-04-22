@@ -14,7 +14,7 @@ export default function Layout() {
       <div>{point}</div>
       <div className="flex flex-col gap-8">
         <Navbar />
-        <main className="flex">
+        <main className="">
           <Outlet />
         </main>
       </div>

@@ -29,7 +29,7 @@ export default function Navbar() {
 
   return (
     <nav className="flex gap-5 pt-4">
-      <NavLink to="/">Home</NavLink>
+      <NavLink to="/home">Home</NavLink>
       <NavLink to="/user">Dashboard</NavLink>
       <NavLink to="/user/planner">Planner</NavLink>
       {loggedIn ? (
