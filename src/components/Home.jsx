@@ -35,13 +35,13 @@ export default function Home() {
                 </p>
               </div>
               <div className="section color-primary text-5xl">
-                <Planner />
+                <p>Feature 1</p>
               </div>
               <div className="section color-primary text-5xl">
-                <p>Section 3</p>
+                <p>Feature 2</p>
               </div>
               <div className="section color-primary text-5xl">
-                <p>Section 4</p>
+                <p>Feature 3</p>
               </div>
             </ReactFullpage.Wrapper>
           );
