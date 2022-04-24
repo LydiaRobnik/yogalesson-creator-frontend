@@ -3,6 +3,12 @@ import { NavLink, Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import './style/navbar.scss';
 
+const navLinks = [
+  { path: '/home', name: 'Home', icon: null },
+  { path: '/user/dashboard', name: 'Dashboard', icon: null },
+  { path: '/user/planner', name: 'Planner', icon: null },
+];
+
 export default function Navbar() {
   const { loggedIn, login, logout, user } = useContext(AuthContext);
   const [name, setName] = useState('');
@@ -28,37 +34,57 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="flex gap-5 pt-4">
-      <NavLink to="/home">Home</NavLink>
-      <NavLink to="/user">Dashboard</NavLink>
-      <NavLink to="/user/planner">Planner</NavLink>
-      {loggedIn ? (
-        <div>
-          <span className="pr-2 text-sm color-5">Hi {user.name}</span>
-          <button onClick={() => logout()}>Logout</button>
-        </div>
-      ) : (
-        <form onSubmit={handleLogin} className="flex gap-4 color-primary">
-          <input
-            className="p-1 rounded-lg w-32"
-            type="text"
-            minLength={3}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Username"
-          />
-          <input
-            className="p-1 rounded-lg w-32"
-            type="password"
-            minLength={4}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-          />
-          <button type="submit">Login</button>
-          {error && (
-            <div className="text-sm pl-5 pt-2 text-red-500">{error}</div>
-          )}
-        </form>
-      )}
+    <nav className="flex justify-between gap-5 pt-4">
+      <div className="flex gap-5">
+        {navLinks.map(({ path, name, icon }) => (
+          <NavLink
+            key={path}
+            data-hover={name}
+            className={({ isActive }) =>
+              `${isActive ? 'border-dashed border-b-2' : 'opacity-60'}`
+            }
+            to={path}
+          >
+            {name}
+          </NavLink>
+        ))}
+      </div>
+      <div>
+        {loggedIn ? (
+          <div>
+            <span className="pr-2 text-sm color-5">Hi {user.name}</span>
+            <button className="btn-blue py-0" onClick={() => logout()}>
+              Logout
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={handleLogin} className="flex gap-4 color-primary">
+            <input
+              className="px-1 rounded-lg w-32"
+              type="text"
+              minLength={3}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Username"
+            />
+            <input
+              className="px-1 rounded-lg w-32"
+              type="password"
+              minLength={4}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+            />
+            <button
+              type="submit"
+              className="border-dashed border-b-2 hover:text-red-800"
+            >
+              Login
+            </button>
+            {error && (
+              <div className="text-sm pl-5 pt-2 text-red-500">{error}</div>
+            )}
+          </form>
+        )}
+      </div>
     </nav>
   );
 }

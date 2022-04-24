@@ -1,0 +1,104 @@
+@import '../../style/variables.scss';
+
+// Tailwindcss Colors
+
+$gray-400: #9ca3af;
+$gray-500: #6b7280;
+$gray-600: #4b5563;
+$gray-700: #374151;
+$gray-800: #1f2937;
+$gray-900: #111827;
+
+$cyan-500: #06b6d4;
+$cyan-600: #0891b2;
+$cyan-700: #0e7490;
+$cyan-800: #155e75;
+
+body {
+}
+
+.page404 {
+  background-color: $gray-900;
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  // font-family: $primary-font;
+  margin: 0;
+
+  // width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .text-container {
+    position: relative;
+    z-index: 1;
+    margin: 1rem 0;
+    text-align: center;
+
+    h1 {
+      color: white;
+      font-family: 'Pridi';
+      font-family: $primary-font;
+      font-size: 5rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      color: $gray-500;
+      font-weight: 500;
+      letter-spacing: 0.05rem;
+      margin: 0.5rem 0;
+    }
+    a {
+      color: $cyan-500;
+
+      &:hover {
+        border-bottom: 0.2rem solid $cyan-500;
+      }
+    }
+  }
+
+  svg {
+    background-color: $gray-700;
+    width: 100%;
+    overflow: visible;
+
+    > path:nth-child(1) {
+      fill: $gray-600;
+      stroke: $gray-800;
+    }
+
+    > path:nth-child(2) {
+      fill: $gray-900;
+    }
+
+    > path:nth-child(6) {
+      fill: $gray-800;
+    }
+
+    text {
+      fill: $gray-500;
+      font-size: 660px;
+      font-weight: 800;
+      filter: drop-shadow(0 0 50px $gray-800);
+    }
+
+    > path:nth-child(8) {
+      fill: $gray-900;
+    }
+  }
+
+  .cactus {
+    path:nth-child(1) {
+      fill: $cyan-700;
+    }
+    path:nth-child(2) {
+      fill: $cyan-800;
+    }
+    path:nth-child(3) {
+      fill: black;
+    }
+  }
+}

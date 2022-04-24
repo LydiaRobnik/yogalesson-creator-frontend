@@ -2,13 +2,12 @@
 
 nav {
   font-family: $page-font;
-  
+
   a {
-    color: $primary-color; 
-  
+    color: $primary-color;
+
     &:hover {
       color: $secondary-color;
     }
   }
 }
-

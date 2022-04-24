@@ -4,7 +4,14 @@
 }
 
 html {
-  /* font-size: 0.75rem; */
+  /*  the new standard -> 1rem = 10px */
+  /* font-size: 62.5%; */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {

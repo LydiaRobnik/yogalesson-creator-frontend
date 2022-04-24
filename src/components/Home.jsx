@@ -10,7 +10,7 @@ import Navbar from './Navbar';
 export default function Home() {
   const navigate = useNavigate();
   return (
-    <div className="pl-8">
+    <div className="px-8">
       <ReactFullpage
         //fullpage options
         licenseKey={'gplv3-license'}
@@ -19,27 +19,23 @@ export default function Home() {
           return (
             <ReactFullpage.Wrapper>
               <div className="section color-primary">
-                <div className="h-full">
-                  <div className="flex flex-col justify-center h-full">
-                    <p className="text-5xl">
-                      Section 1 (welcome to fullpage.js)
-                    </p>
-                    <div>
+                <div className="flex flex-col justify-center h-full">
+                  <p className="text-5xl">Section 1 (welcome to fullpage.js)</p>
+                  <div>
+                    <button
+                      className="btn-blue border-4 p-4 mt-8 rounded-xl"
+                      onClick={() => fullpageApi.moveSectionDown()}
+                    >
+                      Click me to move down
+                    </button>
+                    <p className="pt-5 pr-5">
                       <button
-                        className="border-4 p-4 mt-8 rounded-xl"
-                        onClick={() => fullpageApi.moveSectionDown()}
+                        className="border-dashed border-b-2"
+                        onClick={() => navigate('/user')}
                       >
-                        Click me to move down
+                        Login
                       </button>
-                      <p className="pt-5 pr-5">
-                        <button
-                          className="border-dashed border-b-2"
-                          onClick={() => navigate('/user')}
-                        >
-                          Login
-                        </button>
-                      </p>
-                    </div>
+                    </p>
                   </div>
                 </div>
               </div>

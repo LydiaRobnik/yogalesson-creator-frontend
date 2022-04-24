@@ -22,7 +22,8 @@ function App() {
             <Route index red element={<Navigate replace to="/home" />} />
             {/* protected user section */}
             <Route path={`user`} element={<UserSection />}>
-              <Route index element={<Dashboard />} />
+              <Route index red element={<Navigate replace to="dashboard" />} />
+              <Route path="dashboard" element={<Dashboard />} />
               <Route path="planner" element={<Planner />} />
             </Route>
             <Route path={`/403`} element={<Page403 />} />
