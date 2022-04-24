@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './style/404.scss';
+import './404.scss';
 
 export default function Page404() {
   const navigate = useNavigate();

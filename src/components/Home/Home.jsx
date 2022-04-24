@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import http from '../api/http-common';
-import 'fullpage.js/vendors/scrolloverflow'; // Optional. When using scrollOverflow:true
 import ReactFullpage from '@fullpage/react-fullpage';
-import './style/home.scss';
-import Planner from './user/Planner';
-import Navbar from './Navbar';
+import 'fullpage.js/vendors/scrolloverflow'; // Optional. When using scrollOverflow:true
+import Navbar from '../Navbar/Navbar';
+import './home.scss';
 
 export default function Home() {
   const navigate = useNavigate();

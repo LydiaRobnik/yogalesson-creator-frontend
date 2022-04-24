@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import http from '../../api/http-common';
+import './dashboard.scss';
 
 export default function Dashboard() {
   const [asanas, setAsanas] = useState([]);

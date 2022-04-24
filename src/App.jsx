@@ -1,13 +1,13 @@
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
-import Layout from './components/Layout';
-import Home from './components/Home';
-import './style/app.scss';
 import AuthState from './context/AuthContext';
-import UserSection from './components/user/UserSection';
-import Dashboard from './components/user/Dashboard';
-import Planner from './components/user/Planner';
-import Page403 from './components/403';
-import Page404 from './components/404';
+import Layout from './components/Layout/Layout';
+import Home from './components/Home/Home';
+import UserSection from './components/User/UserSection';
+import Dashboard from './components/Dashboard/Dashboard';
+import Planner from './components/Planner/Planner';
+import Page404 from './components/Error/404';
+import Page403 from './components/Error/403';
+import './style/app.scss';
 
 function App() {
   const navigate = useNavigate();
