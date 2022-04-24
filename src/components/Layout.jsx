@@ -10,11 +10,11 @@ export default function Layout() {
   const point = useBreakpoints();
 
   return (
-    <div className="pt-4">
-      <div>{point}</div>
-      <div className="flex flex-col">
+    <div className="px-8">
+      <div className="flex flex-col gap-8">
         <Navbar />
-        <main className="flex">
+        <div>{point}</div>
+        <main className="">
           <Outlet />
         </main>
       </div>

@@ -1,5 +1,13 @@
 @import '../../style/variables.scss';
 
 nav {
-  // font-size: smaller;
+  font-family: $page-font;
+
+  a {
+    color: $primary-color;
+
+    &:hover {
+      color: $secondary-color;
+    }
+  }
 }

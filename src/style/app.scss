@@ -8,7 +8,6 @@ body {
   font-family: $primary-font;
   background: $primary-bg;
   color: whitesmoke;
-  padding: 0 2vw;
   // line-height: 1.5;
   // color: #333;
 }
@@ -25,6 +24,29 @@ body {
   background: $primary-bg;
 }
 
+.bg-secondary {
+  background: $color3;
+}
+
 .color-primary {
   color: $primary-color;
+}
+
+.color-secondary {
+  color: $secondary-color;
+}
+
+.color-1 {
+  color: $color1;
+}
+
+.color-5 {
+  color: $color5;
+}
+
+.btn-blue {
+  @apply bg-blue-500 text-white py-2 px-4 rounded;
+}
+.btn-blue:hover {
+  @apply bg-blue-700;
 }

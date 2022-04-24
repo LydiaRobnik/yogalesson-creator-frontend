@@ -1,36 +1,62 @@
 import React, { useEffect, useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import http from '../api/http-common';
+import 'fullpage.js/vendors/scrolloverflow'; // Optional. When using scrollOverflow:true
+import ReactFullpage from '@fullpage/react-fullpage';
 import './style/home.scss';
+import Planner from './user/Planner';
+import Navbar from './Navbar';
 
 export default function Home() {
-  const [asanas, setAsanas] = useState([]);
-
-  useEffect(() => {
-    console.log('useEffect', asanas);
-    http.get('/asana').then((resp) => setAsanas(resp.data));
-
-    return () => {};
-  }, []);
-
+  const navigate = useNavigate();
   return (
-    <div className="home flex flex-col items-center color-primary">
-      <div className="font-bold text-3xl md:text-7xl">
-        Yoga Lesson Creator {asanas.length}{' '}
-      </div>
-      <div className="flex flex-wrap gap-4">
-        {asanas.map((asana) => (
-          <div
-            key={asana.id}
-            className="flex flex-col items-center font-primary border-2 border-gray-600 rounded-lg p-4"
-          >
-            <img className="w-32" src={asana.img_url} alt="" />
-            <div className="flex-1 font-bold pt-4">{asana.sanskrit_name}</div>
-            <div className="flex-1 text-sm italic pt-4">
-              {asana.english_name}
-            </div>
-          </div>
-        ))}
-      </div>
+    <div className="px-8">
+      <ReactFullpage
+        //fullpage options
+        licenseKey={'gplv3-license'}
+        scrollingSpeed={1000} /* Options here */
+        render={({ state, fullpageApi }) => {
+          return (
+            <ReactFullpage.Wrapper>
+              <div className="section color-primary">
+                <div className="flex flex-col justify-center h-full">
+                  <p className="text-5xl">Section 1 (welcome to fullpage.js)</p>
+                  <div>
+                    <button
+                      className="btn-blue border-4 p-4 mt-8 rounded-xl"
+                      onClick={() => fullpageApi.moveSectionDown()}
+                    >
+                      Click me to move down
+                    </button>
+                    <p className="pt-5 pr-5">
+                      <button
+                        className="border-dashed border-b-2"
+                        onClick={() => navigate('/user')}
+                      >
+                        Login
+                      </button>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="section color-primary">
+                <div className="h-full">
+                  <Navbar />
+                  <div className="flex flex-col justify-center h-full text-5xl">
+                    <p>Feature 1</p>
+                  </div>
+                </div>
+              </div>
+              <div className="section color-primary text-5xl">
+                <p>Feature 2</p>
+              </div>
+              <div className="section color-primary text-5xl">
+                <p>Feature 3</p>
+              </div>
+            </ReactFullpage.Wrapper>
+          );
+        }}
+      />
     </div>
   );
 }
