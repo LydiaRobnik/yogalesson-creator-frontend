@@ -28,12 +28,36 @@ body {
     font-family: $font-noto;
   }
 
-  .bg-primary {
-    background: $bg-primary;
+  .bg-light {
+    background: $clr-light;
   }
 
-  .bg-secondary {
-    background: $clr-blue-dark;
+  .bg-red {
+    background: $clr-red;
+  }
+
+  .bg-beige {
+    background: $clr-beige;
+  }
+
+  .bg-beige-light {
+    background: $clr-beige-light;
+  }
+
+  .bg-blue-light {
+    background: $clr-blue-light;
+  }
+
+  .bg-blue-middle {
+    background: $clr-blue-middle;
+  }
+
+  .bg-blue-dark {
+    background: $clr-blue-dark ;
+  }
+
+  .bg-blue-darkest {
+    background: $clr-blue-darkest;
   }
 
   .color-primary {
