@@ -8,52 +8,48 @@
 @import 'animate.css';
 
 body {
-  font-family: $primary-font;
-  background: $primary-bg;
+  font-family: $font-raleway;
+  background: $bg-primary;
   color: whitesmoke;
   // line-height: 1.5;
   // color: #333;
 }
 
-@layer utilities {
-  .font-primary {
-    font-family: $primary-font;
-  }
-
-  .font-secondary {
-    font-family: $secondary-font;
-  }
-
-  .bg-primary {
-    background: $primary-bg;
-  }
-
-  .bg-secondary {
-    background: $color3;
-  }
-
-  .color-primary {
-    color: $primary-color;
-  }
-
-  .color-secondary {
-    color: $secondary-color;
-  }
-
-  .color-1 {
-    color: $color1;
-  }
-
-  .color-5 {
-    color: $color5;
-  }
+.font-raleway {
+  font-family: $font-raleway;
 }
 
-@layer components {
-  .btn-blue {
-    @apply bg-blue-500 text-white py-2 px-4 rounded;
-  }
-  .btn-blue:hover {
-    @apply bg-blue-700;
-  }
+.font-peg {
+  font-family: $font-peg;
+}
+
+.bg-primary {
+  background: $bg-primary;
+}
+
+.bg-secondary {
+  background: $clr-blue-dark;
+}
+
+.color-primary {
+  color: $clr-primary;
+}
+
+.color-secondary {
+  color: $clr-secondary;
+}
+
+.color-1 {
+  color: $color1;
+}
+
+.color-5 {
+  color: $color5;
+}
+
+.btn-blue {
+  @apply bg-blue-500 text-white py-2 px-4 rounded;
+}
+.btn-blue:hover {
+  @apply bg-blue-700;
 }
