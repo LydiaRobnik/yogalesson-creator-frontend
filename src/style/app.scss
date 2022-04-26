@@ -15,41 +15,47 @@ body {
   // color: #333;
 }
 
-.font-raleway {
-  font-family: $font-raleway;
-}
+@layer utilities {
+  .font-raleway {
+    font-family: $font-raleway;
+  }
 
-.font-peg {
-  font-family: $font-peg;
-}
+  .font-peg {
+    font-family: $font-peg;
+  }
 
-.bg-primary {
-  background: $bg-primary;
-}
+  .font-noto {
+    font-family: $font-noto;
+  }
 
-.bg-secondary {
-  background: $clr-blue-dark;
-}
+  .bg-primary {
+    background: $bg-primary;
+  }
 
-.color-primary {
-  color: $clr-primary;
-}
+  .bg-secondary {
+    background: $clr-blue-dark;
+  }
 
-.color-secondary {
-  color: $clr-secondary;
-}
+  .color-primary {
+    color: $clr-primary;
+  }
 
-.color-1 {
-  color: $color1;
-}
+  .color-secondary {
+    color: $clr-secondary;
+  }
 
-.color-5 {
-  color: $color5;
-}
+  .color-1 {
+    color: $color1;
+  }
 
-.btn-blue {
-  @apply bg-blue-500 text-white py-2 px-4 rounded;
-}
-.btn-blue:hover {
-  @apply bg-blue-700;
+  .color-5 {
+    color: $color5;
+  }
+
+  .btn-blue {
+    @apply bg-blue-500 text-white py-2 px-4 rounded;
+  }
+  .btn-blue:hover {
+    @apply bg-blue-700;
+  }
 }
