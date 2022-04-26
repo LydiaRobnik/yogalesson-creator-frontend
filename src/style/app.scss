@@ -1,4 +1,7 @@
 @import './variables.scss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,500;1,600&family=Square+Peg&display=swap');
@@ -12,41 +15,45 @@ body {
   // color: #333;
 }
 
-.font-primary {
-  font-family: $primary-font;
+@layer utilities {
+  .font-primary {
+    font-family: $primary-font;
+  }
+
+  .font-secondary {
+    font-family: $secondary-font;
+  }
+
+  .bg-primary {
+    background: $primary-bg;
+  }
+
+  .bg-secondary {
+    background: $color3;
+  }
+
+  .color-primary {
+    color: $primary-color;
+  }
+
+  .color-secondary {
+    color: $secondary-color;
+  }
+
+  .color-1 {
+    color: $color1;
+  }
+
+  .color-5 {
+    color: $color5;
+  }
 }
 
-.font-secondary {
-  font-family: $secondary-font;
-}
-
-.bg-primary {
-  background: $primary-bg;
-}
-
-.bg-secondary {
-  background: $color3;
-}
-
-.color-primary {
-  color: $primary-color;
-}
-
-.color-secondary {
-  color: $secondary-color;
-}
-
-.color-1 {
-  color: $color1;
-}
-
-.color-5 {
-  color: $color5;
-}
-
-.btn-blue {
-  @apply bg-blue-500 text-white py-2 px-4 rounded;
-}
-.btn-blue:hover {
-  @apply bg-blue-700;
+@layer components {
+  .btn-blue {
+    @apply bg-blue-500 text-white py-2 px-4 rounded;
+  }
+  .btn-blue:hover {
+    @apply bg-blue-700;
+  }
 }
