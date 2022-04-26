@@ -60,20 +60,36 @@ body {
     background: $clr-blue-darkest;
   }
 
-  .color-primary {
-    color: $clr-primary;
+  .color-light {
+    color: $clr-light;
   }
 
-  .color-secondary {
-    color: $clr-secondary;
+  .color-red {
+    color: $clr-red;
   }
 
-  .color-1 {
-    color: $color1;
+  .color-beige {
+    color: $clr-beige;
   }
 
-  .color-5 {
-    color: $color5;
+  .color-beige-light {
+    color: $clr-beige-light;
+  }
+
+  .color-blue-light {
+    background: $clr-blue-light;
+  }
+
+  .color-blue-middle {
+    background: $clr-blue-middle;
+  }
+
+  .color-blue-dark {
+    background: $clr-blue-dark ;
+  }
+
+  .color-blue-darkest {
+    background: $clr-blue-darkest;
   }
 
   .btn-blue {
