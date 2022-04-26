@@ -1,5 +1,12 @@
 @import '../../style/variables.scss';
 
 footer {
-  // font-size: smaller;
+  // scss-variablen verwenden
+  background: $clr-red;
+}
+
+// tailwind auslagern mit @apply -> Mischen mit css möglich!
+.margin-left-ausgelagert {
+  @apply ml-2 sm:ml-3 md:ml-4 lg:ml-5;
+  font-weight: bold;
 }
