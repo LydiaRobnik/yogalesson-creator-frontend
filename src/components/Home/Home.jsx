@@ -3,6 +3,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import ReactFullpage from "@fullpage/react-fullpage";
 import "fullpage.js/vendors/scrolloverflow"; // Optional. When using scrollOverflow:true
 import Navbar from "../Navbar/Navbar";
+import TestResponsive from "./TestResponsive";
 import "./home.scss";
 
 export default function Home() {
@@ -16,18 +17,11 @@ export default function Home() {
         render={({ state, fullpageApi }) => {
           return (
             <ReactFullpage.Wrapper>
-              <button
-                className="btn-blue border-4 p-4 mt-8 rounded-xl"
-                onClick={() => fullpageApi.moveSectionDown()}
-              >
-                Click me to move down
-              </button>
-              <button
-                className="border-dashed border-b-2"
-                onClick={() => navigate("/user")}
-              >
-                Login
-              </button>
+              <div className="section color-primary">
+                <div className="h-full">
+                  <TestResponsive />
+                </div>
+              </div>
               <div className="section color-primary">
                 <div className="h-full">
                   <Navbar />
