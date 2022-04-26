@@ -1,0 +1,13 @@
+@import '../../style/variables.scss';
+
+nav {
+  font-family: $font-noto;
+
+  a {
+    color: $clr-primary;
+
+    &:hover {
+      color: $clr-secondary;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import './style/navbar.scss';
+import { AuthContext } from '../../context/AuthContext';
+import './navbar.scss';
 
 const navLinks = [
   { path: '/home', name: 'Home', icon: null },

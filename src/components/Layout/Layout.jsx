@@ -1,9 +1,9 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import useBreakpoints from '../custom/useBreakpoint';
-import Footer from './Footer';
-import Navbar from './Navbar';
-import './style/layout.scss';
+import useBreakpoints from '../../custom/useBreakpoint';
+import Navbar from '../Navbar/Navbar';
+import Footer from '../Footer/Footer';
+import './layout.scss';
 
 export default function Layout() {
   // hook to get the current breakpoint of screen size

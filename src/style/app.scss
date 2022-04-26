@@ -1,39 +1,42 @@
 @import './variables.scss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,500;1,600&family=Square+Peg&display=swap');
 @import 'animate.css';
 
 body {
-  font-family: $primary-font;
-  background: $primary-bg;
+  font-family: $font-raleway;
+  background: $bg-primary;
   color: whitesmoke;
   // line-height: 1.5;
   // color: #333;
 }
 
-.font-primary {
-  font-family: $primary-font;
+.font-raleway {
+  font-family: $font-raleway;
 }
 
-.font-secondary {
-  font-family: $secondary-font;
+.font-peg {
+  font-family: $font-peg;
 }
 
 .bg-primary {
-  background: $primary-bg;
+  background: $bg-primary;
 }
 
 .bg-secondary {
-  background: $color3;
+  background: $clr-blue-dark;
 }
 
 .color-primary {
-  color: $primary-color;
+  color: $clr-primary;
 }
 
 .color-secondary {
-  color: $secondary-color;
+  color: $clr-secondary;
 }
 
 .color-1 {
