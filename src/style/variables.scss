@@ -1,7 +1,15 @@
-$font-raleway: 'Raleway', sans-serif;
-$font-peg: 'Square Peg', cursive;
-$font-noto: 'Noto Sans', sans-serif;
+// fonts
+@import url('https://fonts.googleapis.com/css2?family=Manjari:wght@100;400;700&display=swap');
+@font-face {
+  font-family: moontime;
+  src: url('../../public/MoonTime-Regular.ttf');
+}
 
+// fonts
+$font-moontime: 'Moontime', serif;
+$font-manjari: 'Manjari', sans-serif;
+
+// colors
 $clr-light: #FFF6EC;
 $clr-red: #c94d4e;
 $clr-beige: #f1a185;
@@ -11,9 +19,7 @@ $clr-blue-middle: #738b94;
 $clr-blue-dark: #1d3542;
 $clr-blue-darkest: #001a29;
 
-$bg-primary: $clr-beige;
-$clr-primary: $clr-blue-dark;
-$clr-secondary: $clr-red;
+
 
 // ###################### Archive ######################
 
@@ -32,3 +38,13 @@ $color5: #694736;
 // $font2: 'Garet';
 // $font2: 'Glacial Indifference';
 // $font3: 'Manjari thin';
+
+// do not use this color variables (use the color schemes above)
+$bg-primary: $clr-beige;
+$clr-primary: $clr-blue-dark;
+$clr-secondary: $clr-red;
+
+// fonts draft version
+$font-raleway: 'Raleway', sans-serif;
+$font-peg: 'Square Peg', cursive;
+$font-noto: 'Noto Sans', sans-serif;

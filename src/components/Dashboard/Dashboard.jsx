@@ -23,7 +23,7 @@ export default function Dashboard() {
 			<main>
 				<div>
 					<button className="btn-blue btn-blue:hover">new class</button>
-					<button className="btn-blue btn-blue:hover">random class</button>
+					<button className="btn-red btn-blue:hover">random class</button>
 				</div>
 				<h2>recently used</h2>
 				{}
