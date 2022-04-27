@@ -4,8 +4,8 @@ import ReactFullpage from '@fullpage/react-fullpage';
 import 'fullpage.js/vendors/scrolloverflow'; // Optional. When using scrollOverflow:true
 import Navbar from '../Navbar/Navbar';
 import './home.scss';
-import Section1 from '../Section1/Section1';
-import Section2 from '../Section2/Section2';
+import Section1 from '../Sections/Section1';
+import Section2 from '../Sections/Section2';
 import TestResponsive from './TestResponsive';
 
 export default function Home() {

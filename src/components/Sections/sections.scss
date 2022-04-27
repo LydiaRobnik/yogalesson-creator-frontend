@@ -1,0 +1,21 @@
+@import '../../style/variables.scss';
+
+.section-container {
+  @apply h-full flex;
+  
+  .sectionTitle {
+    font-family: $font-moontime;
+    color: $clr-beige-light;
+  }
+}
+
+.sectionTitleColor {
+  background-color: $clr-blue-darkest;
+}
+
+.featureText {
+  color: $clr-blue-darkest;
+  font-family: $font-manjari;
+}
+
+
