@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
-import ReactFullpage from '@fullpage/react-fullpage';
-import 'fullpage.js/vendors/scrolloverflow'; // Optional. When using scrollOverflow:true
-import Navbar from '../Navbar/Navbar';
-import './home.scss';
-import LoginModal from '../Navbar/LoginModal.jsx'
+import React, { useEffect, useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import ReactFullpage from "@fullpage/react-fullpage";
+import "fullpage.js/vendors/scrolloverflow"; // Optional. When using scrollOverflow:true
+import Navbar from "../Navbar/Navbar";
+import "./home.scss";
+import LoginModal from "../Navbar/LoginModal.jsx";
+import TestResponsive from "./TestResponsive";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -23,14 +24,16 @@ export default function Home() {
                 </div>
               </div>
               <div className="section color-primary">
-                  <Navbar className="z-1"/>
-                  <img className="z-0" src="https://yogalesson-createor-backend.herokuapp.com/images/hero.jpeg" />
+                <Navbar className="z-1" />
+                <img
+                  className="z-0"
+                  src="https://yogalesson-createor-backend.herokuapp.com/images/hero.jpeg"
+                />
               </div>
               <div className="section">
                 <img src="https://yogalesson-createor-backend.herokuapp.com/images/Section1.jpg" />
               </div>
-              <div className="section color-primary text-5xl">
-              </div>
+              <div className="section color-primary text-5xl"></div>
             </ReactFullpage.Wrapper>
           );
         }}

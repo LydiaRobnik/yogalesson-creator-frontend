@@ -11,7 +11,7 @@
 @layer base {
   body {
     font-family: $font-manjari;
-    background: $bg-primary;
+    background: white;
     color: whitesmoke;
     // line-height: 1.5;
     // color: #333;
@@ -31,6 +31,7 @@
     font-family: $font-manjari;
     padding: 0.35rem 0.5rem !important;
   }
+
 }
 
 
