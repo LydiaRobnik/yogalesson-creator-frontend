@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
-import ReactFullpage from "@fullpage/react-fullpage";
-import "fullpage.js/vendors/scrolloverflow"; // Optional. When using scrollOverflow:true
-import Navbar from "../Navbar/Navbar";
-import TestResponsive from "./TestResponsive";
-import "./home.scss";
+import React, { useEffect, useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
+import ReactFullpage from '@fullpage/react-fullpage';
+import 'fullpage.js/vendors/scrolloverflow'; // Optional. When using scrollOverflow:true
+import Navbar from '../Navbar/Navbar';
+import './home.scss';
+import LoginModal from '../Navbar/LoginModal.jsx'
 
 export default function Home() {
   const navigate = useNavigate();
@@ -30,7 +30,6 @@ export default function Home() {
                 <img src="https://yogalesson-createor-backend.herokuapp.com/images/Section1.jpg" />
               </div>
               <div className="section color-primary text-5xl">
-                <p>Feature 3</p>
               </div>
             </ReactFullpage.Wrapper>
           );
