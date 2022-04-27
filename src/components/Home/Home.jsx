@@ -12,23 +12,16 @@ export default function Home() {
     <div className="px-0">
       <ReactFullpage
         //fullpage options
-        licenseKey={'gplv3-license'}
+        licenseKey={"gplv3-license"}
         scrollingSpeed={1000} /* Options here */
         render={({ state, fullpageApi }) => {
           return (
             <ReactFullpage.Wrapper>
-                    <button
-                      className="btn-blue border-4 p-4 mt-8 rounded-xl"
-                      onClick={() => fullpageApi.moveSectionDown()}
-                    >
-                      Click me to move down
-                    </button>
-                      <button
-                        className="border-dashed border-b-2"
-                        onClick={() => navigate('/user')}
-                      >
-                        Login
-                      </button>
+              <div className="section color-primary">
+                <div className="h-full">
+                  <TestResponsive />
+                </div>
+              </div>
               <div className="section color-primary">
                   <Navbar className="z-1"/>
                   <img className="z-0" src="https://yogalesson-createor-backend.herokuapp.com/images/hero.jpeg" />

@@ -6,7 +6,9 @@ const apiClient = (token) =>
     baseURL: process.env.REACT_APP_API_URL,
     headers: {
       'Content-type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${
+        token === true ? localStorage.getItem('token') : token
+      }`,
     },
   });
 
