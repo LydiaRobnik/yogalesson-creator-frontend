@@ -15,6 +15,7 @@ export default function TestResponsive() {
       <div className="w-full md:w-1/2 flex items-center justify-center border-2 border-blue-500 text-6xl relative">
         <div>
           <img
+            className="h-screen"
             src="https://yogalesson-createor-backend.herokuapp.com//images/Section1.jpg"
             alt=""
           />

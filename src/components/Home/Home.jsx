@@ -9,7 +9,7 @@ import "./home.scss";
 export default function Home() {
   const navigate = useNavigate();
   return (
-    <div className="px-8">
+    <div className="px-0">
       <ReactFullpage
         //fullpage options
         licenseKey={"gplv3-license"}
@@ -23,15 +23,11 @@ export default function Home() {
                 </div>
               </div>
               <div className="section color-primary">
-                <div className="h-full">
-                  <Navbar />
-                  <div className="flex flex-col justify-center h-full text-5xl">
-                    <p>Feature 1</p>
-                  </div>
-                </div>
+                  <Navbar className="z-1"/>
+                  <img className="z-0" src="https://yogalesson-createor-backend.herokuapp.com/images/hero.jpeg" />
               </div>
-              <div className="section color-primary text-5xl">
-                <p>Feature 2</p>
+              <div className="section">
+                <img src="https://yogalesson-createor-backend.herokuapp.com/images/Section1.jpg" />
               </div>
               <div className="section color-primary text-5xl">
                 <p>Feature 3</p>
