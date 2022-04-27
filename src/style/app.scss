@@ -1,31 +1,46 @@
-@import './variables.scss';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import './variables.scss';
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,500;1,600&family=Square+Peg&display=swap');
 @import 'animate.css';
 
-body {
-  font-family: $font-raleway;
-  background: $bg-primary;
-  color: whitesmoke;
-  // line-height: 1.5;
-  // color: #333;
+
+@layer base {
+  body {
+    font-family: $font-manjari;
+    background: $bg-primary;
+    color: whitesmoke;
+    // line-height: 1.5;
+    // color: #333;
+  }
+  
+  h1{
+    font-family: $font-moontime;
+    color: $clr-beige;
+  }
+  
+  h2, h3, h4, h6, h6, p {
+    font-family: $font-manjari;
+  }
+
+  button {
+    @apply rounded cursor-pointer font-bold;
+    font-family: $font-manjari;
+    padding: 0.35rem 0.5rem !important;
+  }
 }
 
+
 @layer utilities {
-  .font-raleway {
-    font-family: $font-raleway;
+  .font-moontime {
+    font-family: $font-moontime;
   }
 
-  .font-peg {
-    font-family: $font-peg;
-  }
-
-  .font-noto {
-    font-family: $font-noto;
+  .font-manjari {
+    font-family: $font-manjari;
   }
 
   .bg-light {
@@ -77,25 +92,38 @@ body {
   }
 
   .color-blue-light {
-    background: $clr-blue-light;
+    color: $clr-blue-light;
   }
 
   .color-blue-middle {
-    background: $clr-blue-middle;
+    color: $clr-blue-middle;
   }
 
   .color-blue-dark {
-    background: $clr-blue-dark ;
+    color: $clr-blue-dark ;
   }
 
   .color-blue-darkest {
-    background: $clr-blue-darkest;
+    color: $clr-blue-darkest;
   }
 
   .btn-blue {
-    @apply bg-blue-500 text-white py-2 px-4 rounded;
+    background-color: $clr-blue-darkest;
+    color: $clr-light
   }
   .btn-blue:hover {
-    @apply bg-blue-700;
+    background-color: $clr-blue-dark;
+    color: $clr-beige;
   }
+
+  .btn-red {
+    background-color: $clr-red;
+    color: $clr-light;
+  }
+  .btn-red:hover {
+    background-color: $clr-beige;
+    @apply text-white;
+  }
+
 }
+
