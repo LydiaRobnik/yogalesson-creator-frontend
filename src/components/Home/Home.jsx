@@ -4,11 +4,13 @@ import ReactFullpage from '@fullpage/react-fullpage';
 import 'fullpage.js/vendors/scrolloverflow'; // Optional. When using scrollOverflow:true
 import Navbar from '../Navbar/Navbar';
 import './home.scss';
+import Section1 from '../Section1/Section1';
+import Section2 from '../Section2/Section2';
 
 export default function Home() {
   const navigate = useNavigate();
   return (
-    <div className="px-8">
+    <div className="px-0 mx-0 my-0">
       <ReactFullpage
         //fullpage options
         licenseKey={'gplv3-license'}
@@ -31,13 +33,13 @@ export default function Home() {
               <div className="section color-primary">
                 <div className="h-full">
                   <Navbar />
-                  <div className="flex flex-col justify-center h-full text-5xl">
-                    <p>Feature 1</p>
+                  <div>
+                    <Section1 />
                   </div>
                 </div>
               </div>
               <div className="section color-primary text-5xl">
-                <p>Feature 2</p>
+              <Section2 />
               </div>
               <div className="section color-primary text-5xl">
                 <p>Feature 3</p>

@@ -1,0 +1,16 @@
+@import '../../style/variables.scss';
+
+.container > div {
+  font-family: $font-noto;
+  border: 1px solid black;
+  width: 50%;
+  padding: 0;
+  @apply sm:flex-wrap;
+}
+.picture {
+    border: 1px solid red;
+}
+
+.text {
+    border: 1px solid blue;
+}
