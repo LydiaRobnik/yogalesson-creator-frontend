@@ -7,29 +7,46 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 
 const navigation = [
-  { name: 'Dashboard', href: '#', current: false },
-  { name: 'Classes', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
+  { name: 'Dashboard', path: '/user/dashboard', current: false },
+  { name: 'Classes', path: '/user/planner', current: false },
+  { name: 'Calendar', path: '/', current: false },
 ]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const navLinks = [
-  { path: '/home', name: 'Home', icon: null },
-  { path: '/user/dashboard', name: 'Dashboard', icon: null },
-  { path: '/user/planner', name: 'Planner', icon: null },
-];
-
 export default function Navbar() {
+  const { loggedIn, login, logout, user } = useContext(AuthContext);
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  async function handleLogin(e) {
+    e.preventDefault();
+    setError('');
+
+    const result = await login({
+      user: name,
+      type: 'username',
+      password: password,
+    });
+
+    if (!result) {
+      setError('Invalid username or password!');
+    } else {
+      setName('');
+      setPassword('');
+    }
+  }
+
   return (
     <Disclosure as="nav" className="bg-light color">
       {({ open }) => (
         <>
-          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-            <div className="relative flex items-center justify-between h-16">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+          <div className="max-w-7xl mx-auto px-2 sm:px-6">
+            <div className="relative flex items-center justify-between h-16 mx-auto">
+              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden mx-auto">
                 {/* Mobile menu button*/}
                 <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="sr-only">Open main menu</span>
@@ -54,13 +71,15 @@ export default function Navbar() {
                   />
                   <p className="color-blue-darkest">PlanAsana<br></br>
                   YOGA OFF THE MAT</p>
-                </div>
+                </div> 
+              
                 <div className="hidden sm:block sm:ml-6 ">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <a
+                      <NavLink
                         key={item.name}
                         href={item.href}
+                        to={item.path}
                         className={classNames(
                           item.current ? 'bg-gray-900 text-white' : 'color-blue-darkest hover:bg-gray-700 hover:text-white',
                           'px-3 py-2 rounded-md text-sm font-medium'
@@ -68,11 +87,49 @@ export default function Navbar() {
                         aria-current={item.current ? 'page' : undefined}
                       >
                         {item.name}
-                      </a>
+                      </NavLink>
                     ))}
                   </div>
                 </div>
               </div>
+
+              <div className="color-blue-darkest">
+        {loggedIn ? (
+          <div>
+            <span className="pr-2 text-sm color-5">Hi {user.name}</span>
+            <button className="btn-blue py-0" onClick={() => logout()}>
+              Logout
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={handleLogin} className="flex gap-4 color-primary">
+            <input
+              className="px-1 rounded-lg w-32"
+              type="text"
+              minLength={3}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Username"
+            />
+            <input
+              className="px-1 rounded-lg w-32"
+              type="password"
+              minLength={4}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+            />
+            <button
+              type="submit"
+              className="border-dashed border-b-2 hover:text-red-800"
+            >
+              Login
+            </button>
+            {error && (
+              <div className="text-sm pl-5 pt-2 text-red-500">{error}</div>
+            )}
+          </form>
+        )}
+      </div>
+
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {/* Profile dropdown */}
                 <Menu as="div" className="ml-3 relative">
