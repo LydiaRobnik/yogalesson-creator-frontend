@@ -8,9 +8,15 @@ export default function TestResponsive() {
           border-2 border-red-500 text-6xl font-bold
           hidden md:flex"
       >
-        <div>text overlay</div>
-        <div>text overlay</div>
-        <div>text overlay</div>
+        <lottie-player
+          src="https://assets1.lottiefiles.com/packages/lf20_s00z9gco.json"
+          background="transparent"
+          speed="1"
+          style={{ width: "300px", height: "300px" }}
+          loop
+          // controls
+          autoplay
+        ></lottie-player>
       </div>
       <div className="w-full md:w-1/2 flex items-center justify-center border-2 border-blue-500 text-6xl relative">
         <div>

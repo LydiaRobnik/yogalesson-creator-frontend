@@ -14,21 +14,21 @@ export default function Footer() {
 
   useEffect(() => {
     if (loggedIn) {
-      // asanaService.getDefaultAsanas().then((data) => {
-      //   console.log("getDefaultAsanas", data);
-      // });
+      asanaService.getDefaultAsanas().then((data) => {
+        console.log("getDefaultAsanas", data);
+      });
 
       asanaService.getRandomAsanas(3).then((data) => {
         console.log("getRandomAsanas", data);
       });
 
-      // asanaService.getUserAsanas(user.id).then((data) => {
-      //   console.log("getUserAsanas", data);
-      // });
+      asanaService.getUserAsanas(user.id).then((data) => {
+        console.log("getUserAsanas", data);
+      });
 
-      // asanaService.getAsana("6267e2774dc8720798465c55").then((data) => {
-      //   console.log("getAsana", data);
-      // });
+      asanaService.getAsana("6267e2774dc8720798465c55").then((data) => {
+        console.log("getAsana", data);
+      });
 
       asanaService.getUserSequences(user.id).then((data) => {
         console.log("getUserSequences", data);
@@ -38,11 +38,11 @@ export default function Footer() {
         console.log("getSequence", data);
       });
 
-      asanaService.getUserClasses(user.id).then((data) => {
+      asanaService.getUserClasses(user.id, true).then((data) => {
         console.log("getUserClasses", data);
       });
 
-      asanaService.getClass("12").then((data) => {
+      asanaService.getClass("626937304fff0adc4c4b8d85").then((data) => {
         console.log("getClass", data);
       });
     }

@@ -28,7 +28,7 @@ class AsanaService {
   async getUserSequences(userId) {
     return await (
       await http().get(`/sequence/?user=${userId}`)
-    ).data;
+    ).data.sort((a, b) => new Date(b.modifiedAt) - new Date(a.modifiedAt));
   }
 
   async getSequence(id) {
@@ -55,10 +55,12 @@ class AsanaService {
     ).data;
   }
 
-  async getUserClasses(userId) {
+  async getUserClasses(userId, favouritesOnly = false) {
     return await (
-      await http().get(`/class/?user=${userId}`)
-    ).data;
+      await http().get(
+        `/class/?user=${userId}${favouritesOnly ? "&favourite=true" : ""}`
+      )
+    ).data.sort((a, b) => b.modifiedAt - a.modifiedAt);
   }
 
   async getClass(id) {
