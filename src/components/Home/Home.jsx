@@ -6,6 +6,7 @@ import Navbar from '../Navbar/Navbar';
 import './home.scss';
 import Section1 from '../Sections/Section1';
 import Section2 from '../Sections/Section2';
+import Section3 from '../Sections/Section3';
 import LoginModal from "../Navbar/LoginModal.jsx";
 import TestResponsive from './TestResponsive';
 
@@ -21,31 +22,14 @@ export default function Home() {
           return (
             <ReactFullpage.Wrapper>
               <div className="section color-primary">
-                <div className="h-full">
-                  <Navbar />
-                  <div>
-                    <Section1 />
-                  </div>
-                </div>
-              </div>
-              <div className="section color-primary text-5xl">
-              <Section2 />
-              </div>
-              <div className="section color-primary">
                 <Navbar className="z-1" />
                 <img
                   className="z-0"
                   src="https://yogalesson-createor-backend.herokuapp.com/images/hero.jpeg"
                 />
               </div>
-              <div className="section color-primary">
-                <div className="h-full">
-                  <TestResponsive />
-                </div>
-              </div>
               <div className="top section color-primary h-full w-full">
                 <div className="h-full">
-                  
                   <Navbar className="z-1"/>
                   <div className="hero">
                     <h2 className="color-beige-light font-moontime text-xl">yoga class planning</h2>
@@ -53,25 +37,20 @@ export default function Home() {
                     <p>create well structured yoga classes</p>
                   </div>
                   <LoginModal />
-                  <button
-              type="submit"
-              className="bg-red-700 hover:bg-red-500 text-white font-bold py-2 px-10"
-              >
-              try it now
-            </button>
+                  <button type="submit" className="bg-red-700 hover:bg-red-500 text-white font-bold py-2 px-10">
+                   try it now
+                  </button>
               </div>
-
               </div>
-              <div className="section">
-                <p>Section 1</p>
-              </div>
-
-              <div className="section color-primary text-5xl">
-              <p>Section 2</p>
-              </div>
-
-              <div className="section color-primary text-5xl"></div>
-            
+                  <div className="section color-primary">
+                    <Section1 />
+                  </div>
+                  <div className="section color-primary">
+                    <Section2 />
+                  </div>
+                  <div className="section color-primary">
+                    <Section3 />
+                  </div>
             </ReactFullpage.Wrapper>
           );
         }}

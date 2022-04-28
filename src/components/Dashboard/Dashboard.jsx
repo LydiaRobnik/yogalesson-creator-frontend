@@ -71,7 +71,7 @@ export default function Dashboard() {
         {classes.length === 0 && (
           <>
             <div className="flex flex-col justify-center">
-              <span className="material-symbols-outlined color-blue-darkest text-center text-4xl p-2">
+              <span className="material-symbols-outlined color-blue-darkest text-center text-10xl p-2">
                 note_add
               </span>
               <h3 className="color-blue-darkest text-center font-bold">

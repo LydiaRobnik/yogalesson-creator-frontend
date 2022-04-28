@@ -10,7 +10,7 @@ export default function Section1() {
       <div className="sectionTitleColor md:w-1/2 flex-col items-center justify-center text-6xl font-bold md:shrink-0 border-2 border-red-500">
         <div className="sectionTitle flex items-center justify-center font-light text-10xl leading-relaxed">Beginners Class</div>
          <div className="max-w-screen-lg mx-auto p-4">
-          <div className="grid gap-4 grid-cols-4">
+          <div className="flex flex-wrap">
            <div className="bg-clip-border m-4 p-16 border-4 bg-white rounded-lg"></div>
            <div className="bg-clip-border m-4 p-16 border-4 bg-white rounded-lg"></div>
            <div className="bg-clip-border m-4 p-16 border-4 bg-white rounded-lg"></div>
