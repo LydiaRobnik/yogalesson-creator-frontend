@@ -23,17 +23,36 @@ export default function Home() {
                   <TestResponsive />
                 </div>
               </div>
-              <div className="section color-primary">
-                <Navbar className="z-1" />
-                <img
-                  className="z-0"
-                  src="https://yogalesson-createor-backend.herokuapp.com/images/hero.jpeg"
-                />
+
+              <div className="top section color-primary h-full w-full">
+                <div className="h-full">
+                  
+                  <Navbar className="z-1"/>
+                  <div className="hero">
+                    <h2 className="color-beige-light font-moontime text-xl">yoga class planning</h2>
+                    <h3>easy and quick</h3>
+                    <p>create well structured yoga classes</p>
+                  </div>
+                  <LoginModal />
+                  <button
+              type="submit"
+              className="bg-red-700 hover:bg-red-500 text-white font-bold py-2 px-10"
+              >
+              try it now
+            </button>
+              </div>
+
               </div>
               <div className="section">
-                <img src="https://yogalesson-createor-backend.herokuapp.com/images/Section1.jpg" />
+                <p>Section 1</p>
               </div>
+
+              <div className="section color-primary text-5xl">
+              <p>Section 2</p>
+              </div>
+
               <div className="section color-primary text-5xl"></div>
+            
             </ReactFullpage.Wrapper>
           );
         }}
