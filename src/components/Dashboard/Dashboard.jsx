@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import http from "../../api/http-common";
+import asanaService from "../../api/asanaService";
+import { AuthContext } from "../../context/AuthContext";
 import "./dashboard.scss";
 import useBreakpoint from "../../custom/useBreakpoint";
 
@@ -14,6 +16,7 @@ export default function Dashboard({ loading, setLoading }) {
   const [classes, setClasses] = useState(data);
   const [asanas, setAsanas] = useState(data);
   const point = useBreakpoint();
+  const { loggedIn, user } = useContext(AuthContext);
   // const latestClasses = classes.slice();
 
   // sort classes by date
@@ -22,13 +25,29 @@ export default function Dashboard({ loading, setLoading }) {
   });
 
   // fetches
+  console.log("Lydia:", user);
+
+  useEffect(() => {
+    if (loggedIn) {
+      const fetchData = () => {
+        setLoading(true);
+        asanaService.getUserClasses(user.id, true).then((data) => {
+          console.log("dataLydia", data);
+        });
+        setLoading(false);
+      };
+      fetchData();
+    }
+    return () => {};
+  }, [loggedIn]);
+
   // useEffect(() => {
   //   console.log("useEffect");
 
   //   const fetchData = () => {
   //     setLoading(true);
   //     http(true)
-  //       .get("/class")
+  //       .get("/api/asanaSer")
   //       .then((resp) => {
   //         console.log("latest classes", resp.data);
   //         setAsanas(resp.data);
@@ -119,7 +138,7 @@ export default function Dashboard({ loading, setLoading }) {
               {classes &&
                 classes.map((classItem, index) => (
                   <>
-                    <ClassCard classItem={classItem} key={index} />
+                    <ClassCard classItem={classItem} />
                   </>
                 ))}
             </div>
