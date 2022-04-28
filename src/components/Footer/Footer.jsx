@@ -1,5 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import asanaService from "../../api/asanaService";
 import { AuthContext } from "../../context/AuthContext";
 import "./footer.scss";
 
@@ -10,6 +11,36 @@ export default function Footer() {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (loggedIn) {
+      // asanaService.getDefaultAsanas().then((data) => {
+      //   console.log("getDefaultAsanas", data);
+      // });
+
+      asanaService.getRandomAsanas(3).then((data) => {
+        console.log("getRandomAsanas", data);
+      });
+
+      // asanaService.getUserAsanas(user.id).then((data) => {
+      //   console.log("getUserAsanas", data);
+      // });
+
+      // asanaService.getAsana("6267e2774dc8720798465c55").then((data) => {
+      //   console.log("getAsana", data);
+      // });
+
+      // asanaService.getUserSequences(user.id).then((data) => {
+      //   console.log("getUserSequences", data);
+      // });
+
+      // asanaService.getUserClasses(user.id).then((data) => {
+      //   console.log("getUserClasses", data);
+      // });
+    }
+
+    return () => {};
+  }, [loggedIn]);
 
   async function handleSignup(e) {
     e.preventDefault();
