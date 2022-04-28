@@ -7,15 +7,21 @@
     font-family: $font-moontime;
     color: $clr-beige-light;
   }
-}
-
-.sectionTitleColor {
+  .square {
+  width: 100%;
+  height: 100%;
+  }
+  .sectionTitleColor {
   background-color: $clr-blue-darkest;
 }
-
 .featureText {
   color: $clr-blue-darkest;
   font-family: $font-manjari;
 }
+}
+
+
+
+
 
 
