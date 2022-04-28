@@ -132,7 +132,9 @@ export default function Dashboard() {
             favorites
           </h2>
         )}
-        <div className={`justify-center grid gap-4 ${gridResponsibility()}`}>
+        <div
+          className={`justify-center grid gap-4  mb-8 ${gridResponsibility()}`}
+        >
           {classes &&
             classes.map((classItem) => (
               <>
