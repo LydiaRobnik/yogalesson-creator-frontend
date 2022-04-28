@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import http from "../../api/http-common";
+import React, { useEffect, useState, useContext } from "react";
+import asanaService from "../../api/asanaService";
+import { AuthContext } from "../../context/AuthContext";
 import "./dashboard.scss";
 import useBreakpoint from "../../custom/useBreakpoint";
 
@@ -7,37 +8,43 @@ import useBreakpoint from "../../custom/useBreakpoint";
 import ClassCard from "../ClassCard/ClassCard.jsx";
 
 // import data
-import data from "../../assets/class";
+// import data from "../../assets/class";
 
 export default function Dashboard({ loading, setLoading }) {
   // states
-  const [classes, setClasses] = useState(data);
-  const [asanas, setAsanas] = useState(data);
+  const [classes, setClasses] = useState([]);
   const point = useBreakpoint();
+  const { loggedIn, user } = useContext(AuthContext);
   // const latestClasses = classes.slice();
 
   // sort classes by date
-  classes.sort((a, b) => {
-    return new Date(b.modifiedAt) - new Date(a.modifiedAt);
-  });
+  // classes.sort((a, b) => {
+  //   return new Date(b.modifiedAt) - new Date(a.modifiedAt);
+  // });
 
   // fetches
-  // useEffect(() => {
-  //   console.log("useEffect");
+  useEffect(() => {
+    if (loggedIn) {
+      const fetchData = () => {
+        setLoading(true);
+        asanaService.getUserClasses(user.id).then((data) => {
+          setClasses(data);
+        });
+        setLoading(false);
+      };
+      fetchData();
+    }
 
-  //   const fetchData = () => {
-  //     setLoading(true);
-  //     http(true)
-  //       .get("/class")
-  //       .then((resp) => {
-  //         console.log("latest classes", resp.data);
-  //         setAsanas(resp.data);
-  //       });
-  //     setLoading(false);
-  //   };
+    return () => {};
+  }, [loggedIn]);
 
-  //   fetchData();
-  // }, []);
+  classes
+    ? console.log("Lydia's Classes:", classes)
+    : console.log("no classes");
+
+  // filter favorites
+  const favorites = classes.filter((classItem) => classItem.favourite === true);
+  console.log("favorites:", favorites);
 
   const gridResponsibility = () => {
     if (point === "sm") {
@@ -118,9 +125,9 @@ export default function Dashboard({ loading, setLoading }) {
             >
               {classes &&
                 classes.map((classItem) => (
-                  <>
+                  <div key={classItem._id}>
                     <ClassCard classItem={classItem} />
-                  </>
+                  </div>
                 ))}
             </div>
           </div>
@@ -131,10 +138,10 @@ export default function Dashboard({ loading, setLoading }) {
           >
             {/* edit the following line, after addition of the favorits key into backend */}
             {classes.length > 0 ||
-              (classes.length.favorit === 0 && (
+              (favorites.length === 0 && (
                 <>
                   <div className="flex flex-col justify-center">
-                    <span class="material-symbols-outlined color-blue-darkest text-center text-4xl p-2">
+                    <span className="material-symbols-outlined color-blue-darkest text-center text-4xl p-2">
                       folder_special
                     </span>
                     <h3 className="color-blue-darkest text-center font-bold">
@@ -146,7 +153,7 @@ export default function Dashboard({ loading, setLoading }) {
                   </div>
                 </>
               ))}
-            {classes.length > 0 && (
+            {favorites.length > 0 && (
               <h2
                 className={`color-blue-darkest text-4xl mt-8 mb-4 ${
                   point === "xs" ? "text-center" : "text-start"
@@ -158,11 +165,11 @@ export default function Dashboard({ loading, setLoading }) {
             <div
               className={`justify-center grid gap-4  mb-8 ${gridResponsibility()}`}
             >
-              {classes &&
-                classes.map((classItem) => (
-                  <>
-                    <ClassCard classItem={classItem} />
-                  </>
+              {favorites &&
+                favorites.map((favoritItem) => (
+                  <div key={favoritItem._id}>
+                    <ClassCard classItem={favoritItem} />
+                  </div>
                 ))}
             </div>
           </div>
