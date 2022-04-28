@@ -117,9 +117,9 @@ export default function Dashboard({ loading, setLoading }) {
               className={`justify-center grid gap-4 ${gridResponsibility()}`}
             >
               {classes &&
-                classes.map((classItem) => (
+                classes.map((classItem, index) => (
                   <>
-                    <ClassCard classItem={classItem} />
+                    <ClassCard classItem={classItem} key={index} />
                   </>
                 ))}
             </div>
