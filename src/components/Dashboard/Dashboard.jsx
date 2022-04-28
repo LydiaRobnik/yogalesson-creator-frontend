@@ -54,15 +54,23 @@ export default function Dashboard() {
           point === "xs" ? "justify-center" : "justify-start"
         }`}
       >
-        <button className="btn-blue btn-blue:hover mx-2">new class</button>
-        <button className="btn-red btn-blue:hover mx-2">random class</button>
+        <button className="btn-blue btn-blue:hover mx-2 flex flex-row items-center">
+          <p className="font-material inline pr-2">add</p>
+          <p className="inline pt-1">new class</p>
+        </button>
+        <button className="btn-red btn-blue:hover mx-2 flex flex-row items-center">
+          <p className="font-material inline pr-2">add</p>
+          <p className="inline pt-1">random class</p>
+        </button>
       </div>
 
       <div
         className="px-6
        w-full"
       >
-        <h2 className="color-blue-darkest">recently used</h2>
+        {classes.length > 0 && (
+          <h2 className="color-blue-darkest">recently used</h2>
+        )}
         <div className={`justify-center grid gap-4 ${gridResponsibility()}`}>
           {classes &&
             classes.map((classItem) => (
@@ -73,13 +81,14 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div>
-        <h2 className="color-blue-darkest">favorites</h2>
-        <div
-          className={`justify-center grid gap-4 ${
-            point === "sm" ? "grid-cols-3" : "grid-cols-2"
-          }`}
-        >
+      <div
+        className="px-6
+       w-full"
+      >
+        {classes.length > 0 && (
+          <h2 className="color-blue-darkest">favorites</h2>
+        )}
+        <div className={`justify-center grid gap-4 ${gridResponsibility()}`}>
           {classes &&
             classes.map((classItem) => (
               <>

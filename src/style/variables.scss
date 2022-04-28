@@ -3,11 +3,14 @@
 @font-face {
   font-family: moontime;
   src: url('../../public/MoonTime-Regular.ttf');
-}
+};
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
 
 // fonts
 $font-moontime: 'Moontime', serif;
 $font-manjari: 'Manjari', sans-serif;
+$font-material: 'Material Icons', sans-serif;
 
 // colors
 $clr-light: #FFF6EC;
