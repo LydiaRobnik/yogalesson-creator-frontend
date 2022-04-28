@@ -30,13 +30,21 @@ export default function Footer() {
       //   console.log("getAsana", data);
       // });
 
-      // asanaService.getUserSequences(user.id).then((data) => {
-      //   console.log("getUserSequences", data);
-      // });
+      asanaService.getUserSequences(user.id).then((data) => {
+        console.log("getUserSequences", data);
+      });
 
-      // asanaService.getUserClasses(user.id).then((data) => {
-      //   console.log("getUserClasses", data);
-      // });
+      asanaService.getSequence("626937084fff0adc4c4b8d82").then((data) => {
+        console.log("getSequence", data);
+      });
+
+      asanaService.getUserClasses(user.id).then((data) => {
+        console.log("getUserClasses", data);
+      });
+
+      asanaService.getClass("12").then((data) => {
+        console.log("getClass", data);
+      });
     }
 
     return () => {};

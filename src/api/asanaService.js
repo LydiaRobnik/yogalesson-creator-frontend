@@ -43,11 +43,13 @@ class AsanaService {
   }
 
   async saveSequence(sequenceObj) {
-    const res = await http().put("/sequence", sequenceObj);
+    if (!sequenceObj._id) throw new Error("Sequence must have an _id");
+    const res = await http().put(`/sequence/${sequenceObj._id}`, sequenceObj);
     return res;
   }
 
   async deleteSequence(id) {
+    if (!id) throw new Error("invalid _id");
     return await (
       await http().delete(`/sequence/${id}`)
     ).data;
@@ -71,11 +73,13 @@ class AsanaService {
   }
 
   async saveClass(classObj) {
+    if (!classObj._id) throw new Error("Class must have an _id");
     const res = await http().put("/class", classObj);
     return res;
   }
 
   async deleteClass(id) {
+    if (!id) throw new Error("invalid _id");
     return await (
       await http().delete(`/class/${id}`)
     ).data;
