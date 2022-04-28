@@ -7,7 +7,10 @@ const ClassCard = ({ classItem }) => {
         <img className="w-full" src="Logo.png" alt="preview class" />
         <div className="px-6 pt-4 pb-2">
           <h3 className="color-blue-darkest">{classItem.title}</h3>
-          <p className="color-blue-darkest">{classItem.modifiedAt}</p>
+          <p className="color-blue-darkest">
+            {new Date(classItem.modifiedAt).toLocaleDateString()} -
+            {new Date(classItem.modifiedAt).toLocaleString()}
+          </p>
         </div>
       </div>
     </>
