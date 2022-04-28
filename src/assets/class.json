@@ -1,0 +1,197 @@
+[
+  
+  {
+    "title": "heart opener",
+    "user": "<userid>",
+    "duration": 35,
+    "audio": "mp3",
+    "modifiedAt": "Wed Apr 27 2022 12:19:31 GMT+0200",
+    "plan": [
+      {
+        "user": "<userid>",
+        "type": "sequence",
+        "title": "seq-name",
+        "duration": 15,
+        "audio": "mp3",
+        "modifiedAt": "Wed Apr 27 2022 12:19:31 GMT+0200",
+        "description": "text",
+        "asanas": [
+          {
+            "asana": "embedded",
+            "duration": 4
+          },
+          {
+            "asana": "embedded",
+            "duration": 5
+          },
+          {
+            "asana": "embedded",
+            "duration": 3
+          }
+        ]
+      }
+    ]
+  }, 
+  {
+    "title": "beginners",
+    "user": "<userid>",
+    "duration": 35,
+    "audio": "mp3",
+    "modifiedAt": "Wed Apr 27 2022 11:19:31 GMT+0200",
+    "plan": [
+      {
+        "user": "<userid>",
+        "type": "sequence",
+        "title": "seq-name",
+        "duration": 15,
+        "audio": "mp3",
+        "modifiedAt": "Wed Apr 27 2022 11:19:31 GMT+0200",
+        "description": "text",
+        "asanas": [
+          {
+            "asana": "embedded",
+            "duration": 4
+          },
+          {
+            "asana": "embedded",
+            "duration": 5
+          },
+          {
+            "asana": "embedded",
+            "duration": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "back bends",
+    "user": "<userid>",
+    "duration": 35,
+    "audio": "mp3",
+    "modifiedAt": "Wed Apr 28 2022 12:19:31 GMT+0200",
+    "plan": [
+      {
+        "user": "<userid>",
+        "type": "sequence",
+        "title": "seq-name",
+        "duration": 15,
+        "audio": "mp3",
+        "modifiedAt": "Wed Apr 28 2022 12:19:31 GMT+0200",
+        "description": "text",
+        "asanas": [
+          {
+            "asana": "embedded",
+            "duration": 4
+          },
+          {
+            "asana": "embedded",
+            "duration": 5
+          },
+          {
+            "asana": "embedded",
+            "duration": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "back bends",
+    "user": "<userid>",
+    "duration": 35,
+    "audio": "mp3",
+    "modifiedAt": "Wed Apr 28 2022 12:19:31 GMT+0200",
+    "plan": [
+      {
+        "user": "<userid>",
+        "type": "sequence",
+        "title": "seq-name",
+        "duration": 15,
+        "audio": "mp3",
+        "modifiedAt": "Wed Apr 28 2022 12:19:31 GMT+0200",
+        "description": "text",
+        "asanas": [
+          {
+            "asana": "embedded",
+            "duration": 4
+          },
+          {
+            "asana": "embedded",
+            "duration": 5
+          },
+          {
+            "asana": "embedded",
+            "duration": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "back bends",
+    "user": "<userid>",
+    "duration": 35,
+    "audio": "mp3",
+    "modifiedAt": "Wed Apr 28 2022 12:19:31 GMT+0200",
+    "plan": [
+      {
+        "user": "<userid>",
+        "type": "sequence",
+        "title": "seq-name",
+        "duration": 15,
+        "audio": "mp3",
+        "modifiedAt": "Wed Apr 28 2022 12:19:31 GMT+0200",
+        "description": "text",
+        "asanas": [
+          {
+            "asana": "embedded",
+            "duration": 4
+          },
+          {
+            "asana": "embedded",
+            "duration": 5
+          },
+          {
+            "asana": "embedded",
+            "duration": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "back bends",
+    "user": "<userid>",
+    "duration": 35,
+    "audio": "mp3",
+    "modifiedAt": "Wed Apr 28 2022 12:19:31 GMT+0200",
+    "plan": [
+      {
+        "user": "<userid>",
+        "type": "sequence",
+        "title": "seq-name",
+        "duration": 15,
+        "audio": "mp3",
+        "modifiedAt": "Wed Apr 28 2022 12:19:31 GMT+0200",
+        "description": "text",
+        "asanas": [
+          {
+            "asana": "embedded",
+            "duration": 4
+          },
+          {
+            "asana": "embedded",
+            "duration": 5
+          },
+          {
+            "asana": "embedded",
+            "duration": 3
+          }
+        ]
+      }
+    ]
+  }
+
+
+]

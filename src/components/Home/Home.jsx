@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
-import ReactFullpage from '@fullpage/react-fullpage';
-import 'fullpage.js/vendors/scrolloverflow'; // Optional. When using scrollOverflow:true
-import Navbar from '../Navbar/Navbar';
-import './home.scss';
-import LoginModal from '../Navbar/LoginModal.jsx'
-import TestResponsive from './TestResponsive.jsx'
+import React, { useEffect, useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import ReactFullpage from "@fullpage/react-fullpage";
+import "fullpage.js/vendors/scrolloverflow"; // Optional. When using scrollOverflow:true
+import Navbar from "../Navbar/Navbar";
+import "./home.scss";
+import LoginModal from "../Navbar/LoginModal.jsx";
+import TestResponsive from "./TestResponsive";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -23,6 +23,7 @@ export default function Home() {
                   <TestResponsive />
                 </div>
               </div>
+
               <div className="top section color-primary h-full w-full">
                 <div className="h-full">
                   
@@ -40,13 +41,18 @@ export default function Home() {
               try it now
             </button>
               </div>
+
               </div>
               <div className="section">
                 <p>Section 1</p>
               </div>
+
               <div className="section color-primary text-5xl">
               <p>Section 2</p>
               </div>
+
+              <div className="section color-primary text-5xl"></div>
+            
             </ReactFullpage.Wrapper>
           );
         }}
