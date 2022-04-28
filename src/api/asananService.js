@@ -1,23 +1,15 @@
 import http from "./http-common";
 
 class AsanaService {
-  async createUser(user) {
-    try {
-      return await http.post(`/user`, user);
-    } catch (err) {
-      if (err.response?.data?.detail) {
-        console.log(err.response?.data);
-        console.log(err.response?.data?.detail);
-        // throw new Error(err.response.data.detail);
-      }
-      console.log(err);
-      // throw new Error(err);
-    }
-  }
-
   async getDefaultAsanas() {
     return await (
-      await http.get(`/asana/?user_id=1`)
+      await http.get(`/asana/?default=true`)
+    ).data;
+  }
+
+  async getUserAsanas(userId) {
+    return await (
+      await http.get(`/asana/?user=${userId}`)
     ).data;
   }
 
