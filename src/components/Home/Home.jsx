@@ -6,6 +6,7 @@ import Navbar from '../Navbar/Navbar';
 import './home.scss';
 import Section1 from '../Sections/Section1';
 import Section2 from '../Sections/Section2';
+import LoginModal from "../Navbar/LoginModal.jsx";
 import TestResponsive from './TestResponsive';
 
 export default function Home() {
@@ -31,13 +32,18 @@ export default function Home() {
               <Section2 />
               </div>
               <div className="section color-primary">
+                <Navbar className="z-1" />
+                <img
+                  className="z-0"
+                  src="https://yogalesson-createor-backend.herokuapp.com/images/hero.jpeg"
+                />
+              </div>
+              <div className="section color-primary">
                 <div className="h-full">
                   <TestResponsive />
                 </div>
               </div>
-              <div className="section color-primary text-5xl">
-                <p>Feature 3</p>
-              </div>
+              <div className="section color-primary text-5xl"></div>
             </ReactFullpage.Wrapper>
           );
         }}
