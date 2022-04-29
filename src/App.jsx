@@ -10,6 +10,8 @@ import './style/app.scss';
 
 function App() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   return (
     <>
         <Routes>
@@ -21,7 +23,12 @@ function App() {
             {/* protected user section */}
             <Route path={`user`} element={<UserSection />}>
               <Route index red element={<Navigate replace to="dashboard" />} />
-              <Route path="dashboard" element={<Dashboard />} />
+              <Route
+                path="dashboard"
+                element={
+                  <Dashboard loading={loading} setLoading={setLoading} />
+                }
+              />
               <Route path="planner" element={<Planner />} />
             </Route>
             <Route path={`/403`} element={<Page403 />} />

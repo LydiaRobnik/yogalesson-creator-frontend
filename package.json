@@ -17,6 +17,7 @@
     "@fullpage/react-fullpage": "^0.1.23",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.6",
+    "@lottiefiles/lottie-player": "^1.5.7",
     "animate.css": "^4.1.1",
     "axios": "^0.26.1",
     "loaders.css": "^0.1.2",
