@@ -93,7 +93,7 @@ export default function Dashboard({ loading, setLoading }) {
           </div>
 
           <div
-            className={`px-6
+            className={`p-6
         w-full ${point === "xs" ? "justify-center" : "justify-start"}`}
           >
             {classes.length === 0 && (
@@ -113,9 +113,7 @@ export default function Dashboard({ loading, setLoading }) {
             )}
             {classes.length > 0 && (
               <h2
-                className={`color-blue-darkest text-4xl mt-8 mb-4 ${
-                  point === "xs" ? "text-center" : "text-start"
-                }`}
+                className={`${point === "xs" ? "text-center" : "text-start"}`}
               >
                 recently used
               </h2>
@@ -133,10 +131,9 @@ export default function Dashboard({ loading, setLoading }) {
           </div>
 
           <div
-            className={`px-6
+            className={`p-6
        w-full ${point === "xs" ? "justify-center" : "justify-start"}`}
           >
-            {/* edit the following line, after addition of the favorits key into backend */}
             {classes.length > 0 ||
               (favorites.length === 0 && (
                 <>
@@ -154,13 +151,18 @@ export default function Dashboard({ loading, setLoading }) {
                 </>
               ))}
             {favorites.length > 0 && (
-              <h2
-                className={`color-blue-darkest text-4xl mt-8 mb-4 ${
-                  point === "xs" ? "text-center" : "text-start"
-                }`}
-              >
-                favorites
-              </h2>
+              <div className="flex flex-row ">
+                <h2
+                  className={`inline ${
+                    point === "xs" ? "text-center" : "text-start"
+                  }`}
+                >
+                  favorites
+                </h2>
+                <span className="font-material color-red text-4xl mt-7 mb-5">
+                  star
+                </span>
+              </div>
             )}
             <div
               className={`justify-center grid gap-4  mb-8 ${gridResponsibility()}`}
