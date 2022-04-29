@@ -8,6 +8,7 @@ import Page404 from './components/Error/404';
 import Page403 from './components/Error/403';
 import './style/app.scss';
 import {useState} from 'react';
+import AuthState from "./context/AuthContext";
 
 function App() {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ function App() {
 
   return (
     <>
+      <AuthState>
         <Routes>
           {/* home without navbar */}
           <Route path={`/home`} element={<Home />} />
@@ -37,6 +39,7 @@ function App() {
           <Route path={`/403`} element={<Page403 />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
+      <AuthState>
     </>
   );
 }
