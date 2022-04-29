@@ -1,15 +1,15 @@
 import React, { useContext, useState, Fragment, useRef} from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import './navbar.scss';
+import '../Navbar/navbar.scss';
 
 /* This example requires Tailwind CSS v2.0+ */
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationIcon } from '@heroicons/react/outline'
 
 export default function Example({data}) {
-  const [open, setOpen] = useState(true)
   const cancelButtonRef = useRef(null)
+  const [open, setOpen] = useState(data)
 
   return (
     <Transition.Root show={open} as={Fragment}>
