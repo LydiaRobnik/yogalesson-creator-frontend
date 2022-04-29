@@ -5,7 +5,7 @@ import "./planner.scss";
 import asanaService from "../../api/asanaService";
 import Sequence from "../Sequence/Sequence";
 
-export default function Planner(setLoading, loading) {
+export default function Planner({ loading, setLoading }) {
   const { loggedIn, user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [showModalStartOption, setShowModalStartOption] = useState(true);
@@ -16,11 +16,11 @@ export default function Planner(setLoading, loading) {
   useEffect(() => {
     if (loggedIn) {
       const fetchData = () => {
-        // setLoading(true);
+        setLoading(true);
         asanaService.getUserSequences(user.id).then((data) => {
           setSavedSequences(data);
         });
-        // setLoading(false);
+        setLoading(false);
       };
       fetchData();
     }
