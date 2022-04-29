@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
-import AuthState from './context/AuthContext';
 import Layout from './components/Layout/Layout';
 import Home from './components/Home/Home';
 import UserSection from './components/User/UserSection';
@@ -13,7 +12,6 @@ function App() {
   const navigate = useNavigate();
   return (
     <>
-      <AuthState>
         <Routes>
           {/* home without navbar */}
           <Route path={`/home`} element={<Home />} />
@@ -31,7 +29,6 @@ function App() {
           <Route path={`/403`} element={<Page403 />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
-      </AuthState>
     </>
   );
 }
