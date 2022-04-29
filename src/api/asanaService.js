@@ -6,7 +6,7 @@ class AsanaService {
       const resp = await cb();
       return resp;
     } catch (error) {
-      console.log("❌", error);
+      console.log("❌", error?.response?.data, error.message);
     }
   }
 
