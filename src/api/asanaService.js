@@ -7,6 +7,12 @@ class AsanaService {
       return resp;
     } catch (error) {
       if (error.response && error.response.status === 400) {
+        if (error.response.data.errors?.length > 0) {
+          throw new Error(
+            `❌ Input Error: ${error.response.data.errors[0].msg} -
+              ${error.response.data.errors[0].param}`
+          );
+        }
         console.log("❌", error?.response?.data, error.message);
         throw new Error(`❌ Input Error: ${error.response.data}`);
       } else {

@@ -54,10 +54,13 @@ export default function Footer() {
         // });
 
         // Example for: create a Yoga-Class
-        // testCreateClass();
+        // testCreateClass().catch((error) => setError(error.message));
 
         // Example for: create a Yoga-Sequence
-        testCreateSequence();
+        // testCreateSequence().catch((error) => setError(error.message));
+
+        // Example for: create a Yoga-Asana
+        testCreateAsana().catch((error) => setError(error.message));
       } catch (error) {
         setError(error.message);
       }
@@ -134,7 +137,7 @@ export default function Footer() {
     const createSequence = async () => {
       const asanas = await asanaService.getRandomAsanas(5);
 
-      const nr = 3;
+      const nr = 5;
 
       const seqObj = {
         user: userId,
@@ -152,6 +155,46 @@ export default function Footer() {
 
     const result = await asanaService.createSequence(seqObj);
     console.log("📒 createSequence", result);
+  }
+
+  /**
+   * Example for: create a Yoga-Sequence
+   */
+  async function testCreateAsana() {
+    const lydiaUserId = "62601f220295d1ebcf9e0599"; // -> Lydia user-id
+    // const userId = lydiaUserId;
+    const userId = user.id;
+
+    // asanaService.getUserClasses(lydiaUserId, true).then((data) => {
+    //   console.log("lydiaUserId >> getUserClasses", data);
+    // });
+    // asanaService.getUserClasses(lydiaUserId, false).then((data) => {
+    //   console.log("lydiaUserId >> getUserClasses", data);
+    // });
+
+    const createAsana = async () => {
+      const asanas = await asanaService.getRandomAsanas(5);
+
+      const nr = 5;
+
+      const asanaObj = {
+        user: userId,
+        img_url: "https://www.dropbox.com/s/px1foombb3v24se/dolphin.svg?raw=1",
+        asana: {
+          sanskrit: "My own Asana",
+          name: "Custom Asana"
+        },
+        level: "advanced beginners",
+        tags: ["arm balances", "abdominals", "back", "inversion"]
+      };
+
+      return asanaObj;
+    };
+
+    const asanaObj = await createAsana();
+
+    const result = await asanaService.createAsana(asanaObj);
+    console.log("📒 createAsana", result);
   }
 
   async function handleSignup(e) {
