@@ -1,1 +1,10 @@
 @import '../../style/variables.scss';
+
+
+main{
+    @apply flex flex-col items-center;
+
+    .modal{
+        @apply p-3 color-blue-darkest text-center;
+    }
+}
