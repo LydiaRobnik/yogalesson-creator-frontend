@@ -5,6 +5,7 @@ import './navbar.scss';
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import LoginModal from "../Login/LoginModal.jsx";
 
 const navigation = [
   { name: 'Dashboard', path: '/user/dashboard', current: false },
@@ -21,6 +22,7 @@ export default function Navbar() {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [open, setOpen] = useState(true)
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -41,6 +43,7 @@ export default function Navbar() {
   }
 
   return (
+    <>
     <Disclosure as="nav" className="bg-light color">
       {({ open }) => (
         <>
@@ -136,6 +139,13 @@ export default function Navbar() {
       </div>
 
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <button
+              className="bg-red-700 hover:bg-red-500 text-white font-bold "
+              onClick={() => setOpen(true)}
+            >
+              login
+            </button>
+            <p className="text-black">{open ? "true" : "false"}</p>
                 {/* Profile dropdown */}
                 {loggedIn && (
                 <Menu as="div" className="ml-3 relative">
@@ -184,6 +194,7 @@ export default function Navbar() {
                           <a
                           href="#"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            onClick={() => logout()}
                           >
                             Sign out
                           </a>
@@ -218,5 +229,7 @@ export default function Navbar() {
         </>
       )}
     </Disclosure>
+    {/* <LoginModal data={open}/> */}
+    </>
   )
 }
