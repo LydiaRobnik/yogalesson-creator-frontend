@@ -229,7 +229,7 @@ export default function Navbar() {
         </>
       )}
     </Disclosure>
-    <LoginModal data={open}/>
+    {/* <LoginModal data={open}/> */}
     </>
   )
 }

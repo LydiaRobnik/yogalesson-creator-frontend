@@ -1,0 +1,32 @@
+@import '../../style/variables.scss';
+
+.section-container {
+  @apply h-full flex;
+  
+  .sectionTitle {
+    font-family: $font-moontime;
+    color: $clr-beige-light;
+  }
+  .square {
+  width: 100%;
+  height: 100%;
+  }
+  .sectionTitleColor {
+  background-color: $clr-blue-darkest;
+}
+.featureText {
+  color: $clr-blue-darkest;
+  font-family: $font-manjari;
+}
+}
+
+.cardsHome {
+  background-color: $clr-beige;
+  height: 40%;
+  width: 25%;
+}
+
+
+
+
+

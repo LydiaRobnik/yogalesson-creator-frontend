@@ -4,6 +4,9 @@ import ReactFullpage from "@fullpage/react-fullpage";
 import "fullpage.js/vendors/scrolloverflow"; // Optional. When using scrollOverflow:true
 import Navbar from "../Navbar/Navbar";
 import "./home.scss";
+import Section1 from '../Sections/Section1';
+import Section2 from '../Sections/Section2';
+import Section3 from '../Sections/Section3';
 import TestResponsive from "./TestResponsive";
 import Footer from "../Footer/Footer.jsx";
 
@@ -45,13 +48,16 @@ export default function Home() {
               </div>
 
               </div>
-              <div className="section">
-                <p>Section 1</p>
-              </div>
 
-              <div className="section color-primary text-5xl">
-              <p>Section 2</p>
-              </div>
+              <div className="section color-primary">
+                    <Section1 />
+                  </div>
+                  <div className="section color-primary">
+                    <Section2 />
+                  </div>
+                  <div className="section color-primary">
+                    <Section3 />
+                  </div>
 
               <div className="section color-primary text-5xl">
                 <Footer />
