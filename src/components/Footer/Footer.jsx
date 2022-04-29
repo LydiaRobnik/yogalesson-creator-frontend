@@ -74,7 +74,7 @@ export default function Footer() {
     <footer>
       <div className="font-peg md:font-raleway">Footer</div>
       <div className="ml-2 sm:ml-3 md:ml-4 lg:ml-5">Tailwind Beispiel</div>
-      <div className="margin-left-ausgelagert">Tailwind ausgelagert</div>
+      <div className="margin-left-ausgelagert">Tailwind ausgelagert!</div>
 
       <form onSubmit={handleSignup} className="flex gap-4 text-black">
         <input
