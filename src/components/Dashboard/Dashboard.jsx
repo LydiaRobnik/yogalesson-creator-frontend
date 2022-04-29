@@ -15,9 +15,9 @@ export default function Dashboard({ loading, setLoading }) {
   // const latestClasses = classes.slice();
 
   // sort classes by date
-  // classes.sort((a, b) => {
-  //   return new Date(b.modifiedAt) - new Date(a.modifiedAt);
-  // });
+  classes.sort((a, b) => {
+    return new Date(b.modifiedAt) - new Date(a.modifiedAt);
+  });
 
   // fetches
   useEffect(() => {
