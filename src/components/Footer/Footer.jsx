@@ -13,6 +13,12 @@ export default function Footer() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    testApiCalls();
+
+    return () => {};
+  }, [loggedIn]);
+
+  const testApiCalls = async () => {
     if (loggedIn) {
       asanaService.getDefaultAsanas().then((data) => {
         console.log("getDefaultAsanas", data);
@@ -45,10 +51,102 @@ export default function Footer() {
       asanaService.getClass("626937304fff0adc4c4b8d85").then((data) => {
         console.log("getClass", data);
       });
-    }
 
-    return () => {};
-  }, [loggedIn]);
+      // Example for: create a Yoga-Class
+      // testCreateClass();
+
+      // Example for: create a Yoga-Sequence
+      // testCreateSequence();
+    }
+  };
+
+  /**
+   * Example for: create a Yoga-Class
+   */
+  async function testCreateClass() {
+    const lydiaUserId = "62601f220295d1ebcf9e0599"; // -> Lydia user-id
+
+    asanaService.getUserClasses(lydiaUserId, true).then((data) => {
+      console.log("lydiaUserId >> getUserClasses", data);
+    });
+    asanaService.getUserClasses(lydiaUserId, false).then((data) => {
+      console.log("lydiaUserId >> getUserClasses", data);
+    });
+
+    const createClass = async () => {
+      const asanas = await asanaService.getRandomAsanas(5);
+      const asanas2 = await asanaService.getRandomAsanas(5);
+
+      const nr = 4;
+
+      const classObj = {
+        title: `Lydias ${nr}nd Class`,
+        user: lydiaUserId,
+        plan: [
+          {
+            user: lydiaUserId,
+            type: "sequence",
+            duration: 4,
+            description: `Lydia's ${nr}nd class text to sequence no.1`,
+            title: `Lydia's ${nr}nd class sequence no.1`,
+            asanas: asanas
+          },
+          {
+            user: lydiaUserId,
+            type: "sequence 2",
+            duration: 4,
+            description: `Lydia's ${nr}nd class text to sequence no. 2`,
+            title: `Lydia's ${nr}nd class sequence no. 2`,
+            asanas: asanas2
+          }
+        ],
+        favourite: true
+      };
+
+      return classObj;
+    };
+
+    const classObj = await createClass();
+
+    const result = await asanaService.createClass(classObj);
+    console.log("createClass", result);
+  }
+
+  /**
+   * Example for: create a Yoga-Sequence
+   */
+  async function testCreateSequence() {
+    const lydiaUserId = "62601f220295d1ebcf9e0599"; // -> Lydia user-id
+
+    // asanaService.getUserClasses(lydiaUserId, true).then((data) => {
+    //   console.log("lydiaUserId >> getUserClasses", data);
+    // });
+    // asanaService.getUserClasses(lydiaUserId, false).then((data) => {
+    //   console.log("lydiaUserId >> getUserClasses", data);
+    // });
+
+    const createSequence = async () => {
+      const asanas = await asanaService.getRandomAsanas(5);
+
+      const nr = 2;
+
+      const seqObj = {
+        user: lydiaUserId,
+        type: "sequence",
+        duration: 4,
+        description: `Lydia's ${nr}nd class text to sequence no.1`,
+        title: `Lydia's ${nr}nd class sequence no.1`,
+        asanas: asanas
+      };
+
+      return seqObj;
+    };
+
+    const seqObj = await createSequence();
+
+    const result = await asanaService.createSequence(seqObj);
+    console.log("📒 createSequence", result);
+  }
 
   async function handleSignup(e) {
     e.preventDefault();
