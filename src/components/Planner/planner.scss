@@ -2,7 +2,7 @@
 
 
 main{
-    @apply flex flex-col items-center min-h-screen min-w-full mx-7;
+    @apply flex flex-col items-center;
 
     .modal{
         @apply p-3 color-blue-darkest text-center;

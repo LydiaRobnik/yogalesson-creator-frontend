@@ -8,11 +8,10 @@ import ClassCard from "../ClassCard/ClassCard.jsx";
 
 export default function Dashboard({ loading, setLoading }) {
   // states
+  const { loggedIn, user } = useContext(AuthContext);
   const [classes, setClasses] = useState([]);
   const point = useBreakpoint();
-  const { loggedIn, user } = useContext(AuthContext);
   const navigate = useNavigate();
-  // const latestClasses = classes.slice();
 
   // sort classes by date
   classes.sort((a, b) => {
