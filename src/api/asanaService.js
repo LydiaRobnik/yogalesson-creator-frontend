@@ -1,12 +1,18 @@
 import http from "./http-common";
 
 class AsanaService {
-  async doApiCall(cb) {
+  async doApiCall(apiCallback) {
     try {
-      const resp = await cb();
+      const resp = await apiCallback();
       return resp;
     } catch (error) {
-      console.log("❌", error?.response?.data, error.message);
+      if (error.response && error.response.status === 400) {
+        console.log("❌", error?.response?.data, error.message);
+        throw new Error(`❌ Input Error: ${error.response.data}`);
+      } else {
+        console.log("❌", error.message);
+        throw new Error(`❌ ${error.message}`);
+      }
     }
   }
 

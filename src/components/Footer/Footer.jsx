@@ -20,43 +20,47 @@ export default function Footer() {
 
   const testApiCalls = async () => {
     if (loggedIn) {
-      // asanaService.getDefaultAsanas().then((data) => {
-      //   console.log("getDefaultAsanas", data);
-      // });
+      try {
+        // asanaService.getDefaultAsanas().then((data) => {
+        //   console.log("getDefaultAsanas", data);
+        // });
 
-      // asanaService.getRandomAsanas(3).then((data) => {
-      //   console.log("getRandomAsanas", data);
-      // });
+        // asanaService.getRandomAsanas(3).then((data) => {
+        //   console.log("getRandomAsanas", data);
+        // });
 
-      // asanaService.getUserAsanas(user.id).then((data) => {
-      //   console.log("getUserAsanas", data);
-      // });
+        // asanaService.getUserAsanas(user.id).then((data) => {
+        //   console.log("getUserAsanas", data);
+        // });
 
-      // asanaService.getAsana("6267e2774dc8720798465c55").then((data) => {
-      //   console.log("getAsana", data);
-      // });
+        // asanaService.getAsana("6267e2774dc8720798465c55").then((data) => {
+        //   console.log("getAsana", data);
+        // });
 
-      // asanaService.getUserSequences(user.id).then((data) => {
-      //   console.log("getUserSequences", data);
-      // });
+        // asanaService.getUserSequences(user.id).then((data) => {
+        //   console.log("getUserSequences", data);
+        // });
 
-      // asanaService.getSequence("626937084fff0adc4c4b8d82").then((data) => {
-      //   console.log("getSequence", data);
-      // });
+        // asanaService.getSequence("626937084fff0adc4c4b8d82").then((data) => {
+        //   console.log("getSequence", data);
+        // });
 
-      // asanaService.getUserClasses(user.id, true).then((data) => {
-      //   console.log("getUserClasses", data);
-      // });
+        // asanaService.getUserClasses(user.id, true).then((data) => {
+        //   console.log("getUserClasses", data);
+        // });
 
-      // asanaService.getClass("626937304fff0adc4c4b8d85").then((data) => {
-      //   console.log("getClass", data);
-      // });
+        // asanaService.getClass("626937304fff0adc4c4b8d85").then((data) => {
+        //   console.log("getClass", data);
+        // });
 
-      // Example for: create a Yoga-Class
-      // testCreateClass();
+        // Example for: create a Yoga-Class
+        // testCreateClass();
 
-      // Example for: create a Yoga-Sequence
-      testCreateSequence();
+        // Example for: create a Yoga-Sequence
+        testCreateSequence();
+      } catch (error) {
+        setError(error.message);
+      }
     }
   };
 
@@ -117,6 +121,8 @@ export default function Footer() {
    */
   async function testCreateSequence() {
     const lydiaUserId = "62601f220295d1ebcf9e0599"; // -> Lydia user-id
+    // const userId = lydiaUserId;
+    const userId = user.id;
 
     // asanaService.getUserClasses(lydiaUserId, true).then((data) => {
     //   console.log("lydiaUserId >> getUserClasses", data);
@@ -128,14 +134,14 @@ export default function Footer() {
     const createSequence = async () => {
       const asanas = await asanaService.getRandomAsanas(5);
 
-      const nr = 2;
+      const nr = 3;
 
       const seqObj = {
-        user: lydiaUserId,
+        user: userId,
         type: "sequence",
         duration: 4,
-        description: `Lydia's ${nr}nd class text to sequence no.1`,
-        title: `Lydia's ${nr}nd class sequence no.1`,
+        // description: `${user.username}'s ${nr}nd sequence`,
+        title: `${user.name}'s ${nr}nd sequence1`,
         asanas: asanas
       };
 
