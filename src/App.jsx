@@ -39,7 +39,7 @@ function App() {
           <Route path={`/403`} element={<Page403 />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
-      <AuthState>
+      </AuthState>
     </>
   );
 }
