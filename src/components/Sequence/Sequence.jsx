@@ -1,4 +1,5 @@
 import React from "react";
+import "./sequence.scss";
 
 const Sequence = ({ sequence }) => {
   return (
