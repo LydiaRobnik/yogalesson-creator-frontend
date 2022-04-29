@@ -1,20 +1,17 @@
 import React, { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import asanaService from "../../api/asanaService";
 import { AuthContext } from "../../context/AuthContext";
 import "./dashboard.scss";
 import useBreakpoint from "../../custom/useBreakpoint";
-
-// import components
 import ClassCard from "../ClassCard/ClassCard.jsx";
-
-// import data
-// import data from "../../assets/class";
 
 export default function Dashboard({ loading, setLoading }) {
   // states
   const [classes, setClasses] = useState([]);
   const point = useBreakpoint();
   const { loggedIn, user } = useContext(AuthContext);
+  const navigate = useNavigate();
   // const latestClasses = classes.slice();
 
   // sort classes by date
@@ -37,10 +34,6 @@ export default function Dashboard({ loading, setLoading }) {
 
     return () => {};
   }, [loggedIn]);
-
-  classes
-    ? console.log("Lydia's Classes:", classes)
-    : console.log("no classes");
 
   // filter favorites
   const favorites = classes.filter((classItem) => classItem.favourite === true);
@@ -82,13 +75,16 @@ export default function Dashboard({ loading, setLoading }) {
               point === "xs" ? "justify-center" : "justify-start"
             }`}
           >
-            <button className="btn-blue btn-blue:hover mx-2 flex flex-row items-center">
+            <button
+              onClick={() => navigate("/user/planner")}
+              className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
+            >
               <p className="font-material inline pr-2">add</p>
-              <p className="inline pt-1">new class</p>
+              <p className="inline pt-1 text-lg">new class</p>
             </button>
             <button className="btn-red btn-blue:hover mx-2 flex flex-row items-center">
               <p className="font-material inline pr-2">add</p>
-              <p className="inline pt-1">random class</p>
+              <p className="inline pt-1 text-lg">random class</p>
             </button>
           </div>
 
