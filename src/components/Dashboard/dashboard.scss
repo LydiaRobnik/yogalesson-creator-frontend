@@ -1,7 +1,11 @@
 @import '../../style/variables.scss';
 
-
-
 main{
     @apply flex flex-col items-center;
-    }
+
+
+    h2{
+        @apply color-blue-darkest text-4xl mt-8 mb-4;
+
+    };
+};
