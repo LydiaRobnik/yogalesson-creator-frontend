@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import "./planner.scss";
 import asanaService from "../../api/asanaService";
 import Sequence from "../Sequence/Sequence";
 import NewSequence from "../NewSequence.jsx/NewSequence";
 
 export default function Planner({ loading, setLoading }) {
+  const [selectedAsanas, setSelectedAsanas] = useOutletContext();
   const { loggedIn, user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [yogaClass, setYogaClass] = useState({
@@ -55,6 +56,7 @@ export default function Planner({ loading, setLoading }) {
         <NewSequence
           sequenceToAdd={sequenceToAdd}
           setSequenceToAdd={setSequenceToAdd}
+          asanas={selectedAsanas}
         />
 
         <div className=" w-screen h-screen mx-10 flex flex-row justify-center">

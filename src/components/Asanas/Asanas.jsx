@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import "./asanas.scss";
 import asanaService from "../../api/asanaService";
 import AsanaCard from "../AsanaCard/AsanaCard";
@@ -9,6 +9,7 @@ const Asanas = ({ loading, setLoading }) => {
   const { loggedIn, user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [asanas, setAsanas] = useState([]);
+  const [selectedAsanas, setSelectedAsanas] = useOutletContext();
 
   // fetches
   useEffect(() => {
@@ -33,7 +34,7 @@ const Asanas = ({ loading, setLoading }) => {
       {asanas &&
         asanas.map((asana) => (
           <div key={asana._id}>
-            <AsanaCard asana={asana} />
+            <AsanaCard asana={asana} setSelectedAsanas={setSelectedAsanas} />
           </div>
         ))}
     </div>

@@ -1,9 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function UserSection() {
   const { loggedIn, user } = useContext(AuthContext);
+
+  const [selectedAsanas, setSelectedAsanas] = useState([]);
 
   const navigate = useNavigate();
 
@@ -18,7 +20,13 @@ export default function UserSection() {
   return (
     <div className="pt-4">
       <div className="flex flex-col">
-        <main className="flex">{loggedIn ? <Outlet /> : <div>nope</div>}</main>
+        <main className="flex">
+          {loggedIn ? (
+            <Outlet context={[selectedAsanas, setSelectedAsanas]} />
+          ) : (
+            <div>nope</div>
+          )}
+        </main>
       </div>
     </div>
   );
