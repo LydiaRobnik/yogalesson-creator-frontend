@@ -18,9 +18,7 @@ export default function UserSection() {
   return (
     <div className="pt-4">
       <div className="flex flex-col">
-        <main className="flex">
-          {loggedIn ? <Outlet bool={true} /> : <div>nope</div>}
-        </main>
+        <main className="flex">{loggedIn ? <Outlet /> : <div>nope</div>}</main>
       </div>
     </div>
   );
