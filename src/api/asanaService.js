@@ -143,7 +143,7 @@ class AsanaService {
   async saveClass(classObj) {
     if (!classObj._id) throw new Error("Class must have an _id");
     const resp = await this.doApiCall(
-      async () => await http().put("/class", classObj)
+      async () => await http().put(`/class/${classObj._id}`, classObj)
     );
 
     return resp.data;

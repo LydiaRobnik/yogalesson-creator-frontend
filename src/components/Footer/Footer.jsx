@@ -55,12 +55,15 @@ export default function Footer() {
 
         // Example for: create a Yoga-Class
         // testCreateClass().catch((error) => setError(error.message));
+        testSaveClass().catch((error) => setError(error.message));
 
         // Example for: create a Yoga-Sequence
         // testCreateSequence().catch((error) => setError(error.message));
+        testSaveSequence().catch((error) => setError(error.message));
 
         // Example for: create a Yoga-Asana
-        testCreateAsana().catch((error) => setError(error.message));
+        // testCreateAsana().catch((error) => setError(error.message));
+        // testSaveAsana().catch((error) => setError(error.message));
       } catch (error) {
         setError(error.message);
       }
@@ -122,6 +125,22 @@ export default function Footer() {
   /**
    * Example for: create a Yoga-Sequence
    */
+  async function testSaveClass() {
+    const classId = "626937304fff0adc4c4b8d85"; //
+    // const userId = lydiaUserId;
+    const userId = user.id;
+
+    const classObj = await asanaService.getClass(classId);
+    classObj.title = "Class of the year";
+    classObj.duration = 87;
+
+    const result = await asanaService.saveClass(classObj);
+    console.log("📒 saveClass", result);
+  }
+
+  /**
+   * Example for: create a Yoga-Sequence
+   */
   async function testCreateSequence() {
     const lydiaUserId = "62601f220295d1ebcf9e0599"; // -> Lydia user-id
     // const userId = lydiaUserId;
@@ -155,6 +174,22 @@ export default function Footer() {
 
     const result = await asanaService.createSequence(seqObj);
     console.log("📒 createSequence", result);
+  }
+
+  /**
+   * Example for: create a Yoga-Sequence
+   */
+  async function testSaveSequence() {
+    const sequenceId = "626bef304ec2a3ded872a630"; //
+    // const userId = lydiaUserId;
+    const userId = user.id;
+
+    const sequenceObj = await asanaService.getSequence(sequenceId);
+    sequenceObj.title = "Sequence of the year";
+    sequenceObj.duration = 8;
+
+    const result = await asanaService.saveSequence(sequenceObj);
+    console.log("📒 saveSequence", result);
   }
 
   /**
@@ -195,6 +230,22 @@ export default function Footer() {
 
     const result = await asanaService.createAsana(asanaObj);
     console.log("📒 createAsana", result);
+  }
+
+  /**
+   * Example for: create a Yoga-Sequence
+   */
+  async function testSaveAsana() {
+    const asanaId = "626bf4a8ed4cf0ae52daf7bd"; //
+    // const userId = lydiaUserId;
+    const userId = user.id;
+
+    const asanaObj = await asanaService.getAsana(asanaId);
+    asanaObj.asana.sanskrit = "Haukasana";
+    asanaObj.asana.name = "The Haukman";
+
+    const result = await asanaService.saveAsana(asanaObj);
+    console.log("📒 saveAsana", result);
   }
 
   async function handleSignup(e) {
