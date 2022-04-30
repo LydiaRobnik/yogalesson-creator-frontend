@@ -6,75 +6,78 @@ import asanaService from "../../api/asanaService";
 import Sequence from "../Sequence/Sequence";
 import NewSequence from "../NewSequence.jsx/NewSequence";
 
-export default function Planner({ loading, setLoading, bool }) {
-  console.log("bool", bool);
+export default function Planner({ loading, setLoading }) {
   const { loggedIn, user } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [showModalStartOption, setShowModalStartOption] = useState(true);
+  const [yogaClass, setYogaClass] = useState({
+    title: "",
+    user: user.id,
+    plan: [],
+    favourite: false
+  });
+  const [sequenceToAdd, setSequenceToAdd] = useState({
+    user: user.id,
+    type: "sequence",
+    duration: 3,
+    description: "",
+    title: "",
+    asanas: []
+  });
   const [currentSequences, setCurrentSequences] = useState([]);
 
-  // fetches
-
   // functions
-  const handleClick = () => {
-    setShowModalStartOption(false);
-  };
-
   const addNewSequence = () => {
     setCurrentSequences(...currentSequences);
   };
 
+  console.log(sequenceToAdd);
+
   return (
     <>
-      {showModalStartOption && (
-        <>
-          <div className="bg-beige flex flex-col items-center text-2xl md:text-3xl object-center mt-20  ">
-            <span className="font-material-symbols modal color-light">
+      <>
+        <div className=" w-screen mx-10">
+          <input
+            type="text"
+            className="color-blue-darkest text-left justify-start w-full px-6 text-4xl"
+            placeholder="draft class - title"
+            value={yogaClass.title}
+            onChange={(e) =>
+              setYogaClass({ ...yogaClass, title: e.target.value })
+            }
+          />
+        </div>
+        {currentSequences &&
+          currentSequences.map((sequence) => (
+            <div key={sequence._id}>
+              <Sequence sequence={sequence} />
+            </div>
+          ))}
+        <NewSequence
+          sequenceToAdd={sequenceToAdd}
+          setSequenceToAdd={setSequenceToAdd}
+        />
+
+        <div className=" w-screen h-screen mx-10 flex flex-row justify-center">
+          <div
+            className="flex flex-row items-start cursor-pointer"
+            onClick={() => addNewSequence()}
+          >
+            <span className="font-material-symbols modal color-blue-darkest text-4xl ">
               add_circle
             </span>
-            <div
-              className="w-60 md:w-80 border-2 border-y-neutral-200 border-x-0"
-              onClick={() => handleClick()}
-            >
-              <p className="modal cursor-pointer">new sequence</p>
-            </div>
-            <div className="w-60 md:w-80" onClick={() => handleClick()}>
-              <p className="modal cursor-pointer">saved sequence</p>
-            </div>
+            <p className="color-blue-darkest pt-5">new sequence</p>
           </div>
-        </>
-      )}
-
-      {!showModalStartOption && (
-        <>
-          <div className=" w-screen mx-10">
-            <h2
-              className="color-blue-darkest text-left justify-start w-full px-6"
-              contenteditable="true"
-            >
-              draft - class title
-            </h2>
+          <div
+            className="flex flex-row items-start cursor-pointer"
+            onClick={() => navigate("/user/sequences")}
+          >
+            <span className="font-material-symbols modal color-blue-darkest text-4xl">
+              add_circle
+            </span>
+            <p className="color-blue-darkest pt-5">my sequence</p>
           </div>
-          <NewSequence />
-          {currentSequences &&
-            currentSequences.map((sequence) => (
-              <div key={sequence._id}>
-                <Sequence sequence={sequence} />
-              </div>
-            ))}
-
-          <div className=" w-screen h-screen mx-10">
-            <div className="px-6 flex flex-row justify-center cursor-pointer">
-              <span
-                className="font-material-symbols color-red text-4xl self-center pt-10 "
-                onClick={() => addNewSequence()}
-              >
-                add_circle
-              </span>
-            </div>
-          </div>
-        </>
-      )}
+        </div>
+      </>
     </>
   );
 }
