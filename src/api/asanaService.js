@@ -1,10 +1,33 @@
 import http from "./http-common";
 
 class AsanaService {
+  async doApiCall(apiCallback) {
+    try {
+      const resp = await apiCallback();
+      return resp;
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        if (error.response.data.errors?.length > 0) {
+          throw new Error(
+            `❌ Input Error: ${error.response.data.errors[0].msg} -
+              ${error.response.data.errors[0].param}`
+          );
+        }
+        console.log("❌", error?.response?.data, error.message);
+        throw new Error(`❌ Input Error: ${error.response.data}`);
+      } else {
+        console.log("❌", error.message);
+        throw new Error(`❌ ${error.message}`);
+      }
+    }
+  }
+
   async getDefaultAsanas() {
-    return await (
-      await http().get(`/asana/?default=true`)
-    ).data;
+    const resp = await this.doApiCall(
+      async () => await http().get(`/asana/?default=true`)
+    );
+
+    return resp.data;
   }
 
   async getRandomAsanas(count = 5) {
@@ -14,77 +37,125 @@ class AsanaService {
   }
 
   async getUserAsanas(userId) {
-    return await (
-      await http().get(`/asana/?user=${userId}`)
-    ).data;
+    const resp = await this.doApiCall(
+      async () => await http().get(`/asana/?user=${userId}`)
+    );
+
+    return resp.data;
   }
 
   async getAsana(id) {
-    return await (
-      await http().get(`/asana/${id}`)
-    ).data;
+    const resp = await this.doApiCall(
+      async () => await http().get(`/asana/${id}`)
+    );
+
+    return resp.data;
+  }
+
+  async createAsana(asanaObj) {
+    const resp = await this.doApiCall(
+      async () => await http().post("/asana", asanaObj)
+    );
+
+    return resp.data;
+  }
+
+  async saveAsana(asanaObj) {
+    if (!asanaObj._id) throw new Error("Asana must have an _id");
+    const resp = await this.doApiCall(
+      async () => await http().put(`/asana/${asanaObj._id}`, asanaObj)
+    );
+
+    return resp.data;
   }
 
   async getUserSequences(userId) {
-    return await (
-      await http().get(`/sequence/?user=${userId}`)
-    ).data.sort((a, b) => new Date(b.modifiedAt) - new Date(a.modifiedAt));
+    const resp = await this.doApiCall(
+      async () => await http().get(`/sequence/?user=${userId}`)
+    );
+
+    return resp.data.sort(
+      (a, b) => new Date(b.modifiedAt) - new Date(a.modifiedAt)
+    );
   }
 
   async getSequence(id) {
-    return await (
-      await http().get(`/sequence/${id}`)
-    ).data;
+    const resp = await this.doApiCall(
+      async () => await http().get(`/sequence/${id}`)
+    );
+
+    return resp.data;
   }
 
   async createSequence(sequenceObj) {
-    const res = await http().post("/sequence", sequenceObj);
-    return res;
+    const resp = await this.doApiCall(
+      async () => await http().post("/sequence", sequenceObj)
+    );
+
+    return resp.data;
   }
 
   async saveSequence(sequenceObj) {
     if (!sequenceObj._id) throw new Error("Sequence must have an _id");
-    const res = await http().put(`/sequence/${sequenceObj._id}`, sequenceObj);
-    return res;
+    const resp = await this.doApiCall(
+      async () => await http().put(`/sequence/${sequenceObj._id}`, sequenceObj)
+    );
+
+    return resp.data;
   }
 
   async deleteSequence(id) {
     if (!id) throw new Error("invalid _id");
-    return await (
-      await http().delete(`/sequence/${id}`)
-    ).data;
+    const resp = await this.doApiCall(
+      async () => await http().delete(`/sequence/${id}`)
+    );
+
+    return resp.data;
   }
 
   async getUserClasses(userId, favouritesOnly = false) {
-    return await (
-      await http().get(
-        `/class/?user=${userId}${favouritesOnly ? "&favourite=true" : ""}`
-      )
-    ).data.sort((a, b) => b.modifiedAt - a.modifiedAt);
+    const resp = await this.doApiCall(
+      async () =>
+        await http().get(
+          `/class/?user=${userId}${favouritesOnly ? "&favourite=true" : ""}`
+        )
+    );
+
+    return resp.data.sort((a, b) => b.modifiedAt - a.modifiedAt);
   }
 
   async getClass(id) {
-    return await (
-      await http().get(`/class/${id}`)
-    ).data;
+    const resp = await this.doApiCall(
+      async () => await http().get(`/class/${id}`)
+    );
+
+    return resp.data;
   }
 
   async createClass(classObj) {
-    const res = await http().post("/class", classObj);
-    return res;
+    const resp = await this.doApiCall(
+      async () => await http().post("/class", classObj)
+    );
+
+    return resp.data;
   }
 
   async saveClass(classObj) {
     if (!classObj._id) throw new Error("Class must have an _id");
-    const res = await http().put("/class", classObj);
-    return res;
+    const resp = await this.doApiCall(
+      async () => await http().put(`/class/${classObj._id}`, classObj)
+    );
+
+    return resp.data;
   }
 
   async deleteClass(id) {
     if (!id) throw new Error("invalid _id");
-    return await (
-      await http().delete(`/class/${id}`)
-    ).data;
+    const resp = await this.doApiCall(
+      async () => await http().delete(`/class/${id}`)
+    );
+
+    return resp.data;
   }
 }
 
