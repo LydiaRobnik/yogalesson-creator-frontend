@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import "./planner.scss";
 import asanaService from "../../api/asanaService";
 import Sequence from "../Sequence/Sequence";
@@ -11,6 +11,8 @@ export default function Planner({ loading, setLoading }) {
   const [showModalStartOption, setShowModalStartOption] = useState(true);
   const [currentSequences, setCurrentSequences] = useState([]);
   const [savedSquences, setSavedSequences] = useState([]);
+
+  const [selectedAsana, setSelectedAsana] = useOutletContext();
 
   // fetches
   useEffect(() => {
