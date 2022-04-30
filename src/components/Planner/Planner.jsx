@@ -6,14 +6,23 @@ import asanaService from "../../api/asanaService";
 import Sequence from "../Sequence/Sequence";
 import NewSequence from "../NewSequence.jsx/NewSequence";
 
-export default function Planner({ loading, setLoading, bool }) {
-  console.log("bool", bool);
-  const { loggedIn, user } = useContext(AuthContext);
+export default function Planner({ loading, setLoading }) {
   const navigate = useNavigate();
+  const { loggedIn, user } = useContext(AuthContext);
+
   const [showModalStartOption, setShowModalStartOption] = useState(true);
   const [currentSequences, setCurrentSequences] = useState([]);
 
-  const [selectedAsana, setSelectedAsana] = useOutletContext();
+  const [selectedAsanas, setSelectedAsanas] = useOutletContext();
+
+  useEffect(() => {
+    console.log("Planner >>> selectedAsana", selectedAsanas);
+    if (!selectedAsanas) return;
+
+    setShowModalStartOption(false);
+
+    return () => {};
+  }, [selectedAsanas]);
 
   // fetches
 
@@ -57,7 +66,7 @@ export default function Planner({ loading, setLoading, bool }) {
               draft - class title
             </h2>
           </div>
-          <NewSequence />
+          <NewSequence asanas={selectedAsanas} />
           {currentSequences &&
             currentSequences.map((sequence) => (
               <div key={sequence._id}>

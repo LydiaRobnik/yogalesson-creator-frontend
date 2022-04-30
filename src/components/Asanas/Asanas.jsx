@@ -9,7 +9,7 @@ const Asanas = ({ loading, setLoading }) => {
   const { loggedIn, user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [asanas, setAsanas] = useState([]);
-  const [selectedAsana, setSelectedAsana] = useOutletContext();
+  const [selectedAsanas, setSelectedAsanas] = useOutletContext();
 
   // fetches
   useEffect(() => {
@@ -34,7 +34,7 @@ const Asanas = ({ loading, setLoading }) => {
       {asanas &&
         asanas.map((asana) => (
           <div key={asana._id}>
-            <AsanaCard asana={asana} />
+            <AsanaCard asana={asana} setSelectedAsanas={setSelectedAsanas} />
           </div>
         ))}
     </div>

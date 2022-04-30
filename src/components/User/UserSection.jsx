@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 export default function UserSection() {
   const { loggedIn, user } = useContext(AuthContext);
 
-  const [selectedAsana, setSelectedAsana] = useState([]);
+  const [selectedAsanas, setSelectedAsanas] = useState([]);
 
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ export default function UserSection() {
       <div className="flex flex-col">
         <main className="flex">
           {loggedIn ? (
-            <Outlet context={[selectedAsana, setSelectedAsana]} />
+            <Outlet context={[selectedAsanas, setSelectedAsanas]} />
           ) : (
             <div>nope</div>
           )}
