@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
+import React, { useContext, useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function UserSection() {
   const { loggedIn, user } = useContext(AuthContext);
@@ -8,7 +8,7 @@ export default function UserSection() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('loggedIn', loggedIn, user);
+    console.log("loggedIn", loggedIn, user);
     // if (!loggedIn) navigate(`/403`);
     // if (!loggedIn) navigate(`/unauthorized`); // todo
 
@@ -18,7 +18,9 @@ export default function UserSection() {
   return (
     <div className="pt-4">
       <div className="flex flex-col">
-        <main className="flex">{loggedIn ? <Outlet /> : <div>nope</div>}</main>
+        <main className="flex">
+          {loggedIn ? <Outlet bool={true} /> : <div>nope</div>}
+        </main>
       </div>
     </div>
   );

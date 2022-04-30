@@ -1,18 +1,25 @@
 import React from "react";
+import AsanaCard from "../AsanaCard/AsanaCard";
 import "./sequence.scss";
 
 const Sequence = ({ sequence }) => {
+  console.log("Sequence:", sequence);
+
   return (
     <>
       <div className="border-2 border-grey-500 w-screen min-h-40 px-6 ">
         <h3 className="color-blue-darkest">{sequence.title}</h3>
-        <input type="text" placeholder="add your description here" />
+        <p className="color-blue-darkest">{sequence.description}</p>
         <div>
-          <div className="flex flex-row items-center">
-            <span className="font-material-symbols modal color-blue-darkest text-4xl self-center">
-              add_circle
-            </span>
-            <p className="color-blue-darkest">add asana</p>
+          <div className="flex flex-row flex-wrap">
+            {sequence &&
+              sequence.asanas.map((asana) => (
+                <>
+                  <div key={asana._id}>
+                    <AsanaCard asana={asana} />
+                  </div>
+                </>
+              ))}
           </div>
         </div>
       </div>

@@ -4,31 +4,16 @@ import { useNavigate } from "react-router-dom";
 import "./planner.scss";
 import asanaService from "../../api/asanaService";
 import Sequence from "../Sequence/Sequence";
+import NewSequence from "../NewSequence.jsx/NewSequence";
 
-export default function Planner({ loading, setLoading }) {
+export default function Planner({ loading, setLoading, bool }) {
+  console.log("bool", bool);
   const { loggedIn, user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [showModalStartOption, setShowModalStartOption] = useState(true);
   const [currentSequences, setCurrentSequences] = useState([]);
-  const [userSequences, setUserSequences] = useState([]);
 
   // fetches
-  useEffect(() => {
-    if (loggedIn) {
-      const fetchData = () => {
-        setLoading(true);
-        asanaService.getUserSequences(user.id).then((data) => {
-          setUserSequences(data);
-        });
-        setLoading(false);
-      };
-      fetchData();
-    }
-
-    return () => {};
-  }, [loggedIn]);
-
-  console.log("data test:", userSequences);
 
   // functions
   const handleClick = () => {
@@ -63,11 +48,14 @@ export default function Planner({ loading, setLoading }) {
       {!showModalStartOption && (
         <>
           <div className=" w-screen mx-10">
-            <h2 className="color-blue-darkest text-left justify-start w-full px-6">
+            <h2
+              className="color-blue-darkest text-left justify-start w-full px-6"
+              contenteditable="true"
+            >
               draft - class title
             </h2>
           </div>
-
+          <NewSequence />
           {currentSequences &&
             currentSequences.map((sequence) => (
               <div key={sequence._id}>
