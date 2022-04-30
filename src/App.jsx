@@ -5,6 +5,7 @@ import UserSection from "./components/User/UserSection";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Planner from "./components/Planner/Planner";
 import Asanas from "./components/Asanas/Asanas";
+import SequenceCollection from "./components/SequenceCollection/SequenceCollection";
 import Page404 from "./components/Error/404";
 import Page403 from "./components/Error/403";
 import "./style/app.scss";
@@ -40,6 +41,15 @@ function App() {
               <Route
                 path="asanas"
                 element={<Asanas loading={loading} setLoading={setLoading} />}
+              />
+              <Route
+                path="sequences"
+                element={
+                  <SequenceCollection
+                    loading={loading}
+                    setLoading={setLoading}
+                  />
+                }
               />
             </Route>
             <Route path={`/403`} element={<Page403 />} />
