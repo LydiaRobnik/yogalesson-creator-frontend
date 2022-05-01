@@ -1,43 +1,50 @@
-import React, { useEffect, useState, useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import React, { useContext } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import "./asanas.scss";
-import asanaService from "../../api/asanaService";
 import AsanaCard from "../AsanaCard/AsanaCard";
 
-const Asanas = ({ loading, setLoading }) => {
-  const { loggedIn, user } = useContext(AuthContext);
+const Asanas = () => {
+  const {
+    selectedAsanas,
+    setSelectedAsanas,
+    userClasses,
+    setUserClasses,
+    asanas,
+    setAsanas,
+    userSequences,
+    setUserSequences,
+    loading,
+    gridResponsibility
+  } = useOutletContext();
   const navigate = useNavigate();
-  const [asanas, setAsanas] = useState([]);
-  const [selectedAsanas, setSelectedAsanas] = useOutletContext();
-
-  // fetches
-  useEffect(() => {
-    if (loggedIn) {
-      const fetchData = () => {
-        setLoading(true);
-        asanaService.getDefaultAsanas(user.id).then((data) => {
-          setAsanas(data);
-        });
-        setLoading(false);
-      };
-      fetchData();
-    }
-
-    return () => {};
-  }, [loggedIn]);
-
-  console.log("fetched asanas:", asanas);
 
   return (
-    <div className="flex flex-row flex-wrap">
-      {asanas &&
-        asanas.map((asana) => (
-          <div key={asana._id}>
-            <AsanaCard asana={asana} setSelectedAsanas={setSelectedAsanas} />
-          </div>
-        ))}
-    </div>
+    <>
+      {loading && (
+        <lottie-player
+          src="https://assets1.lottiefiles.com/packages/lf20_s00z9gco.json"
+          background="transparent"
+          speed="1"
+          style={{ width: "300px", height: "300px" }}
+          loop
+          autoplay
+        ></lottie-player>
+      )}
+
+      {!loading && (
+        <div className={` justify-center grid gap-4 ${gridResponsibility()}`}>
+          {asanas &&
+            asanas.map((asana) => (
+              <div key={asana._id}>
+                <AsanaCard
+                  asana={asana}
+                  setSelectedAsanas={setSelectedAsanas}
+                />
+              </div>
+            ))}
+        </div>
+      )}
+    </>
   );
 };
 
