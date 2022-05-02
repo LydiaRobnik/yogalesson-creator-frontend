@@ -1,4 +1,7 @@
 import http from "./http-common";
+import axios from "axios";
+import domtoimage from "dom-to-image";
+import { dataURItoBlob } from "../custom/utils";
 
 class AsanaService {
   async doApiCall(apiCallback) {
@@ -149,6 +152,25 @@ class AsanaService {
     return resp.data;
   }
 
+  async uploadPreview(classId, image) {
+    let fd = new FormData();
+    fd.append("preview_pic", dataURItoBlob(image), "preview_pic.png");
+
+    const resp = await this.doApiCall(
+      async () =>
+        await axios({
+          method: "post",
+          url: `${process.env.REACT_APP_API_URL}/class/${classId}/upload-preview`,
+          data: fd,
+          headers: {
+            "Content-Type": "multipart/form-data; boundary=MyBoundary"
+          }
+        })
+    );
+
+    return resp.data;
+  }
+
   async deleteClass(id) {
     if (!id) throw new Error("invalid _id");
     const resp = await this.doApiCall(
@@ -156,6 +178,32 @@ class AsanaService {
     );
 
     return resp.data;
+  }
+
+  /**
+   * Saves a Preview Image to the backend
+   *
+   * @param {*} elementRef reference to the element to be captured as image
+   * @param {*} classId mongo _id of the class
+   * @returns
+   */
+  async createClassPreview(elementRef, classId) {
+    console.log("ref", elementRef);
+
+    if (!elementRef || !classId) return;
+
+    domtoimage
+      .toPng(elementRef)
+      .then(function (dataUrl) {
+        new AsanaService().uploadPreview(classId, dataUrl).catch((err) => {
+          throw err;
+        });
+        return true;
+      })
+      .catch(function (error) {
+        console.error("oops, something went wrong!", error);
+        throw error;
+      });
   }
 }
 
