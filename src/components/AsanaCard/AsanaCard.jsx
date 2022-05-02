@@ -1,25 +1,57 @@
 import React from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
-const AsanaCard = ({ asana, setSelectedAsanas }) => {
+const AsanaCard = ({ asana }) => {
   const navigate = useNavigate();
 
+  const {
+    selectedAsanas,
+    setSelectedAsanas,
+    userClasses,
+    setUserClasses,
+    asanas,
+    setAsanas,
+    userSequences,
+    setUserSequences,
+    loading,
+    gridResponsiveness,
+    selectedSequences,
+    setSelectedSequences,
+    yogaClassToAdd,
+    setYogaClassToAdd,
+    sequenceToAdd,
+    setSequenceToAdd
+  } = useOutletContext();
+
+  // function handleSelectAsana() {
+  //   if (setSelectedAsanas) {
+  //     setSelectedAsanas((prev) => [...prev, asana]);
+  //     navigate(`../planner`);
+  //   }
+  // }
+
   function handleSelectAsana() {
-    if (setSelectedAsanas) {
-      setSelectedAsanas((prev) => [...prev, asana]);
-      navigate(`../planner`);
-    }
+    sequenceToAdd.asanas.push(asana);
+    navigate(`../planner`);
   }
+
+  // setSequenceToAdd((prev) => ({ ...prev, asanas: selectedAsanas }))
 
   return (
     <div
       onClick={handleSelectAsana}
-      className="w-32 rounded overflow-hidden shadow-lg m-2 cursor-pointer"
+      className="w-56 rounded overflow-hidden shadow-lg m-2 cursor-pointer bg-white"
     >
-      <img className="w-full" src={asana.img_url} alt="preview class" />
-      <div className="px-6 pt-4 pb-2 bg-light ">
-        <h3 className="color-blue-darkest">{asana.asana.sanskrit}</h3>
-        <h3 className="color-blue-darkest">{asana.asana.name}</h3>
+      <img
+        className="object-scale-down h-48 w-96"
+        src={asana.img_url}
+        alt="preview class"
+      />
+      <div className="px-6 pt-3 pb-3 bg-light h-20">
+        <h3 className="color-blue-darkest font-bold text-xs">
+          {asana.asana.sanskrit}
+        </h3>
+        <h3 className="color-blue-darkest text-xs">{asana.asana.name}</h3>
       </div>
     </div>
   );

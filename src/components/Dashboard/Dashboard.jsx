@@ -1,58 +1,38 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import asanaService from "../../api/asanaService";
-import { AuthContext } from "../../context/AuthContext";
+import React, { useContext, useEffect } from "react";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import "./dashboard.scss";
 import useBreakpoint from "../../custom/useBreakpoint";
 import ClassCard from "../ClassCard/ClassCard.jsx";
 
-export default function Dashboard({ loading, setLoading }) {
+export default function Dashboard() {
   // states
-  const { loggedIn, user } = useContext(AuthContext);
-  const [classes, setClasses] = useState([]);
+  const {
+    selectedAsanas,
+    setSelectedAsanas,
+    userClasses,
+    setUserClasses,
+    asanas,
+    setAsanas,
+    userSequences,
+    setUserSequences,
+    selectedSequences,
+    setSelectedSequences,
+    loading,
+    gridResponsiveness
+  } = useOutletContext();
+
   const point = useBreakpoint();
   const navigate = useNavigate();
 
   // sort classes by date
-  classes.sort((a, b) => {
+  userClasses.sort((a, b) => {
     return new Date(b.modifiedAt) - new Date(a.modifiedAt);
   });
 
-  // fetches
-  useEffect(() => {
-    if (loggedIn) {
-      const fetchData = () => {
-        setLoading(true);
-        asanaService.getUserClasses(user.id).then((data) => {
-          setClasses(data);
-        });
-        setLoading(false);
-      };
-      fetchData();
-    }
-
-    return () => {};
-  }, [loggedIn]);
-
   // filter favorites
-  const favorites = classes.filter((classItem) => classItem.favourite === true);
-  console.log("favorites:", favorites);
-
-  const gridResponsibility = () => {
-    if (point === "sm") {
-      return "grid-cols-2";
-    } else if (point === "md") {
-      return "grid-cols-3";
-    } else if (point === "lg") {
-      return "grid-cols-4";
-    } else if (point === "xl") {
-      return "grid-cols-5";
-    } else if (point === "2xl") {
-      return "grid-cols-6";
-    } else {
-      return "grid-cols-1";
-    }
-  };
+  const favorites = userClasses.filter(
+    (classItem) => classItem.favourite === true
+  );
 
   return (
     <>
@@ -91,7 +71,7 @@ export default function Dashboard({ loading, setLoading }) {
             className={`p-6
         w-full ${point === "xs" ? "justify-center" : "justify-start"}`}
           >
-            {classes.length === 0 && (
+            {userClasses.length === 0 && (
               <>
                 <div className="flex flex-col justify-center">
                   <span className="material-symbols-outlined color-blue-darkest text-center text-4xl p-2">
@@ -106,7 +86,7 @@ export default function Dashboard({ loading, setLoading }) {
                 </div>
               </>
             )}
-            {classes.length > 0 && (
+            {userClasses.length > 0 && (
               <h2
                 className={`${point === "xs" ? "text-center" : "text-start"}`}
               >
@@ -114,10 +94,10 @@ export default function Dashboard({ loading, setLoading }) {
               </h2>
             )}
             <div
-              className={`justify-center grid gap-4 ${gridResponsibility()}`}
+              className={`justify-center grid gap-4 ${gridResponsiveness()}`}
             >
-              {classes &&
-                classes.map((classItem) => (
+              {userClasses &&
+                userClasses.map((classItem) => (
                   <div key={classItem._id}>
                     <ClassCard classItem={classItem} />
                   </div>
@@ -129,7 +109,7 @@ export default function Dashboard({ loading, setLoading }) {
             className={`p-6
        w-full ${point === "xs" ? "justify-center" : "justify-start"}`}
           >
-            {classes.length > 0 ||
+            {userClasses.length > 0 ||
               (favorites.length === 0 && (
                 <>
                   <div className="flex flex-col justify-center">
@@ -160,7 +140,7 @@ export default function Dashboard({ loading, setLoading }) {
               </div>
             )}
             <div
-              className={`justify-center grid gap-4  mb-8 ${gridResponsibility()}`}
+              className={`justify-center grid gap-4  mb-8 ${gridResponsiveness()}`}
             >
               {favorites &&
                 favorites.map((favoritItem) => (
