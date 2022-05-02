@@ -14,39 +14,29 @@ const Sequence = ({ sequence, showMore }) => {
     userSequences,
     setUserSequences,
     loading,
-    currentSequences,
-    setCurrentSequences,
-    gridResponsibility
+    selectedSequences,
+    setSelectedSequences,
+    gridResponsiveness
   } = useOutletContext();
   const navigate = useNavigate();
 
-  const handleSelectSequence = () => {
-    if (currentSequences) {
-      setCurrentSequences((prev) => [...prev, sequence]);
-      navigate(`../planner`);
-    }
-  };
-
   return (
     <>
-      <div className="w-screen min-h-40">
-        <h3
-          className="color-blue-darkest pr-3 pt-3 font-bold text-xl"
-          onClick={() => handleSelectSequence()}
-        >
+      <div className="min-h-40">
+        <h3 className="color-blue-darkest pr-3 pt-3 font-bold text-xl">
           {sequence.title}
         </h3>
       </div>
 
       {showMore && (
         <>
-          <div className="w-screen min-h-40">
+          <div className="min-h-40">
             <p className="color-blue-darkest pr-3 pt-3">
               {sequence.description}
             </p>
           </div>
 
-          <div className={`grid gap-x-52 ${gridResponsibility()}`}>
+          <div className={"flex flex-row"}>
             {sequence &&
               sequence.asanas.map((asana) => (
                 <div key={asana._id}>

@@ -17,8 +17,8 @@ const SequenceCollection = () => {
     setAsanas,
     userSequences,
     setUserSequences,
-    currentSequences,
-    setCurrentSequences,
+    selectedSequences,
+    setSelectedSequences,
     loading
   } = useOutletContext();
   // const [sequences, setSequences] = useState([]);
@@ -30,12 +30,12 @@ const SequenceCollection = () => {
     setShowMore(!showMore);
   };
 
-  // const handleSelectSequence = (choice) => {
-  //   if (currentSequences) {
-  //     setCurrentSequences((prev) => [...prev, choice]);
-  //     navigate(`../planner`);
-  //   }
-  // };
+  const handleSelectSequence = (choice) => {
+    if (selectedSequences) {
+      setSelectedSequences((prev) => [...prev, choice]);
+      navigate(`../planner`);
+    }
+  };
 
   return (
     <>
@@ -51,14 +51,14 @@ const SequenceCollection = () => {
       )}
 
       {!loading && (
-        <div className="flex flex-col justify-start content-start px-6">
+        <div className="w-screen flex flex-col justify-start content-start px-6">
           <h3 className="color-red pl-3 pb-5 text-4xl">
-            click to choose your sequence
+            Click to add one of your sequence to your class
           </h3>
           {userSequences &&
             userSequences.map((sequence) => (
-              <div key={sequence._id} className="grid gap-4 grid-cols-12">
-                <div className="grid-cols-1">
+              <div key={sequence._id} className="flex flex-row mb-3">
+                <div>
                   {!showMore && (
                     <>
                       <span
@@ -77,15 +77,19 @@ const SequenceCollection = () => {
                       expand_less
                     </span>
                   )}
-                  <div className="flex flex-row items-start cursor-pointer px-3">
-                    <span className="font-material-symbols modal color-blue-darkest text-4xl p-l">
-                      add_circle
-                    </span>
-                  </div>
                 </div>
-                <div key={sequence._id} className="grid-cols-11">
+
+                <div key={sequence._id}>
                   <Sequence sequence={sequence} showMore={showMore} />
                 </div>
+
+                <button
+                  className="btn-blue btn-blue:hover mx-2 flex flex-row items-center cursor-pointer p-0 self-center"
+                  onClick={() => handleSelectSequence(sequence)}
+                >
+                  <span className="font-material inline pr-2">add</span>
+                  <p className="inline pt-1 text-lg">add sequence to class</p>
+                </button>
               </div>
             ))}
         </div>

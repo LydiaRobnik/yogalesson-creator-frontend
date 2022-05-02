@@ -14,9 +14,9 @@ const SequencePlanned = ({ sequence }) => {
     userSequences,
     setUserSequences,
     loading,
-    currentSequences,
-    setCurrentSequences,
-    gridResponsibility
+    selectedSequences,
+    setSelectedSequences,
+    gridResponsiveness
   } = useOutletContext();
   const navigate = useNavigate();
 

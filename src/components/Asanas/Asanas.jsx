@@ -13,8 +13,10 @@ const Asanas = () => {
     setAsanas,
     userSequences,
     setUserSequences,
+    selectedSequences,
+    setSelectedSequences,
     loading,
-    gridResponsibility
+    gridResponsiveness
   } = useOutletContext();
   const navigate = useNavigate();
 
@@ -32,7 +34,7 @@ const Asanas = () => {
       )}
 
       {!loading && (
-        <div className={` justify-center grid gap-4 ${gridResponsibility()}`}>
+        <div className={` justify-center grid gap-4 ${gridResponsiveness()}`}>
           {asanas &&
             asanas.map((asana) => (
               <div key={asana._id}>

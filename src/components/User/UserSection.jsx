@@ -5,16 +5,35 @@ import asanaService from "../../api/asanaService";
 import useBreakpoint from "../../custom/useBreakpoint";
 
 export default function UserSection() {
+  // hooks
   const navigate = useNavigate();
+  const point = useBreakpoint();
   const { loggedIn, user } = useContext(AuthContext);
+
+  // states
   const [userClasses, setUserClasses] = useState([]);
   const [userSequences, setUserSequences] = useState([]);
   const [asanas, setAsanas] = useState([]);
   const [selectedAsanas, setSelectedAsanas] = useState([]);
-  const [currentSequences, setCurrentSequences] = useState([]);
+  const [selectedSequences, setSelectedSequences] = useState([]);
   const [loading, setLoading] = useState(false);
-  const point = useBreakpoint();
-  const gridResponsibility = () => {
+  const [yogaClassToAdd, setYogaClassToAdd] = useState({
+    title: "",
+    user: user.id,
+    plan: [],
+    favourite: false
+  });
+  const [sequenceToAdd, setSequenceToAdd] = useState({
+    user: user.id,
+    type: "sequence",
+    duration: 3,
+    description: "",
+    title: "",
+    asanas: []
+  });
+
+  // functions
+  const gridResponsiveness = () => {
     if (point === "sm") {
       return "grid-cols-2";
     } else if (point === "md") {
@@ -69,9 +88,13 @@ export default function UserSection() {
                 userSequences,
                 setUserSequences,
                 loading,
-                gridResponsibility,
-                currentSequences,
-                setCurrentSequences
+                gridResponsiveness,
+                selectedSequences,
+                setSelectedSequences,
+                yogaClassToAdd,
+                setYogaClassToAdd,
+                sequenceToAdd,
+                setSequenceToAdd
               }}
             />
           ) : (

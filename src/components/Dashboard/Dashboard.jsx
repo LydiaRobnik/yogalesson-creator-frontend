@@ -15,8 +15,10 @@ export default function Dashboard() {
     setAsanas,
     userSequences,
     setUserSequences,
+    selectedSequences,
+    setSelectedSequences,
     loading,
-    gridResponsibility
+    gridResponsiveness
   } = useOutletContext();
 
   const point = useBreakpoint();
@@ -92,7 +94,7 @@ export default function Dashboard() {
               </h2>
             )}
             <div
-              className={`justify-center grid gap-4 ${gridResponsibility()}`}
+              className={`justify-center grid gap-4 ${gridResponsiveness()}`}
             >
               {userClasses &&
                 userClasses.map((classItem) => (
@@ -138,7 +140,7 @@ export default function Dashboard() {
               </div>
             )}
             <div
-              className={`justify-center grid gap-4  mb-8 ${gridResponsibility()}`}
+              className={`justify-center grid gap-4  mb-8 ${gridResponsiveness()}`}
             >
               {favorites &&
                 favorites.map((favoritItem) => (

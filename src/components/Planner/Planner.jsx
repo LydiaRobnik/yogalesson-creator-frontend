@@ -17,32 +17,20 @@ export default function Planner() {
     userSequences,
     setUserSequences,
     loading,
-    currentSequences,
-    setCurrentSequences
+    selectedSequences,
+    setSelectedSequences,
+    yogaClassToAdd,
+    setYogaClassToAdd,
+    sequenceToAdd,
+    setSequenceToAdd
   } = useOutletContext();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const [yogaClassToAdd, setYogaClassToAdd] = useState({
-    title: "",
-    user: user.id,
-    plan: [],
-    favourite: false
-  });
-
-  const [sequenceToAdd, setSequenceToAdd] = useState({
-    user: user.id,
-    type: "sequence",
-    duration: 3,
-    description: "",
-    title: "",
-    asanas: []
-  });
-
   // functions
   const addNewSequence = () => {
-    if (currentSequences)
-      setCurrentSequences((prev) => [...prev, sequenceToAdd]);
+    if (selectedSequences)
+      setSelectedSequences((prev) => [...prev, sequenceToAdd]);
   };
 
   return (
@@ -72,8 +60,8 @@ export default function Planner() {
             />
           </div>
           <div className="w-screen mx-10">
-            {currentSequences &&
-              currentSequences.map((sequence) => (
+            {selectedSequences &&
+              selectedSequences.map((sequence) => (
                 <div key={sequence._id} className="rounded bg-light m-10">
                   <SequencePlanned sequence={sequence} />
                 </div>
@@ -81,8 +69,6 @@ export default function Planner() {
           </div>
 
           <NewSequence
-            sequenceToAdd={sequenceToAdd}
-            setSequenceToAdd={setSequenceToAdd}
             addNewSequence={addNewSequence}
             asanas={selectedAsanas}
           />

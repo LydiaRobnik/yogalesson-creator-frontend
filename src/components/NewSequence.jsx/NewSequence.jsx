@@ -1,15 +1,31 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { useNavigate, useOutletContext } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 import AsanaCard from "../AsanaCard/AsanaCard";
 import "./newSequence.scss";
 
-const NewSequence = ({
-  sequenceToAdd,
-  setSequenceToAdd,
-  asanas,
-  addNewSequence
-}) => {
+const NewSequence = ({ addNewSequence }) => {
   const navigate = useNavigate();
+  const { loggedIn, user } = useContext(AuthContext);
+  const {
+    selectedAsanas,
+    setSelectedAsanas,
+    userClasses,
+    setUserClasses,
+    asanas,
+    setAsanas,
+    userSequences,
+    setUserSequences,
+    loading,
+    gridResponsiveness,
+    selectedSequences,
+    setSelectedSequences,
+    yogaClassToAdd,
+    setYogaClassToAdd,
+    sequenceToAdd,
+    setSequenceToAdd
+  } = useOutletContext();
+
   return (
     <>
       <div className="border-2 border-grey-500 w-screen min-h-40 px-6 flex flex-col">
