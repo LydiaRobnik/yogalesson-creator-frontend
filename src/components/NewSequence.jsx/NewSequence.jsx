@@ -1,13 +1,14 @@
-import React, { useState, useContext, useEffect } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
-import AsanaCard from "../AsanaCard/AsanaCard";
-import "./newSequence.scss";
+import React, { useState, useContext, useEffect } from 'react';
+import { useNavigate, useOutletContext } from 'react-router-dom';
+import asanaService from '../../api/asanaService';
+import { AuthContext } from '../../context/AuthContext';
+import AsanaCard from '../AsanaCard/AsanaCard';
+import './newSequence.scss';
 
 const NewSequence = () => {
   const navigate = useNavigate();
   const { loggedIn, user } = useContext(AuthContext);
-  console.log("user", user.id);
+  console.log('user', user.id);
   const {
     selectedAsanas,
     setSelectedAsanas,
@@ -27,46 +28,29 @@ const NewSequence = () => {
     setSequenceToAdd
   } = useOutletContext();
 
-  // useEffect(() => {
-  //   setSequenceToAdd({
-  //     user: user.id,
-  //     type: "sequence",
-  //     duration: 3,
-  //     description: "",
-  //     title: "",
-  //     asanas: []
-  //   });
-  // }, [selectedSequences]);
-
-  useEffect(() => {
-    // sequenceToAdd.asanas = [];
-    console.log("asanas selected:", sequenceToAdd.asanas);
-    console.log("selectedSequences updated to:", selectedSequences);
-  }, [selectedSequences]);
-  // setSelectedSequences({
-  //   user: user.id,
-  //   type: "sequence",
-  //   duration: 3,
-  //   description: "",
-  //   title: "",
-  //   asanas: []
-  // });
-
-  const addSequenceToClass = () => {
+  const addSequenceToClass = async () => {
     const newSequence = { ...sequenceToAdd };
     setSelectedSequences((prev) => [...prev, newSequence]);
-    setSequenceToAdd({
+
+    const result = await asanaService.createSequence(newSequence);
+    console.log('📒 createSequence', result);
+
+    const seqObj = {
       user: user?.id,
-      type: "sequence",
+      type: 'sequence',
       duration: 3,
-      description: "",
-      title: "",
+      description: '',
+      title: `${user.name}'s ${userSequences.length}nd sequence1`,
       asanas: []
-    });
+    };
+    setSequenceToAdd(seqObj);
   };
 
-  console.log("sequenceToAdd", sequenceToAdd);
-  console.log("selectedSequences", selectedSequences);
+  // testCreateSequence().catch((error) => setError(error.message));
+
+  console.log('sequenceToAdd:', sequenceToAdd);
+
+  // functions to create a new class and a new sequence
 
   return (
     <>
@@ -93,26 +77,15 @@ const NewSequence = () => {
         <div className="flex">
           {sequenceToAdd.asanas?.map((asana, index) => (
             <div key={(asana._id, index)}>
-              <AsanaCard
-                asana={asana}
-                // sequenceToAdd={sequenceToAdd}
-                // setSequenceToAdd={setSequenceToAdd}
-              />
+              <AsanaCard asana={asana} />
             </div>
           ))}
         </div>
 
-        {/* <div className="flex">
-          {selectedAsanas?.map((asana, index) => (
-            <div key={(asana._id, index)}>
-              <AsanaCard asana={asana} />
-            </div>
-          ))}
-        </div> */}
         <div className="flex flex-row items-center">
           <div
             className="flex flex-row items-center cursor-pointer"
-            onClick={() => navigate("../asanas")}
+            onClick={() => navigate('../asanas')}
           >
             <span className="font-material-symbols modal color-blue-darkest text-4xl self-center">
               add_circle
