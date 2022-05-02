@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import asanaService from "../../api/asanaService";
 import { AuthContext } from "../../context/AuthContext";
@@ -256,6 +256,17 @@ export default function Footer() {
       setPassword("");
       navigate(`/user/dashboard`);
     }
+  }
+
+  const imgEl = useRef();
+
+  function exportImgNew() {
+    const exampleMongoDBClassId = "5e9f8f8f8f8f8f8f8f8f8f8";
+    asanaService
+      .createClassPreview(imgEl.current, exampleMongoDBClassId)
+      .catch((err) => {
+        console.log("err:", err);
+      });
   }
 
   return (
