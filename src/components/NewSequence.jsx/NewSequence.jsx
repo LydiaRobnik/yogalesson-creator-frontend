@@ -4,7 +4,7 @@ import { AuthContext } from "../../context/AuthContext";
 import AsanaCard from "../AsanaCard/AsanaCard";
 import "./newSequence.scss";
 
-const NewSequence = ({ addNewSequence }) => {
+const NewSequence = () => {
   const navigate = useNavigate();
   const { loggedIn, user } = useContext(AuthContext);
   const {
@@ -25,6 +25,10 @@ const NewSequence = ({ addNewSequence }) => {
     sequenceToAdd,
     setSequenceToAdd
   } = useOutletContext();
+
+  const addSequenceToClass = () => {
+    setSequenceToAdd({ ...sequenceToAdd, asanas: selectedAsanas });
+  };
 
   return (
     <>
@@ -48,7 +52,7 @@ const NewSequence = ({ addNewSequence }) => {
           }
         />
         <div className="flex">
-          {asanas?.map((asana, index) => (
+          {selectedAsanas?.map((asana, index) => (
             <div key={index}>
               <AsanaCard asana={asana} />
             </div>
@@ -66,7 +70,7 @@ const NewSequence = ({ addNewSequence }) => {
           </div>
           <div
             className="flex flex-row items-center cursor-pointer"
-            onClick={() => addNewSequence()}
+            onClick={() => addSequenceToClass()}
           >
             <span className="font-material-symbols modal color-blue-darkest text-4xl self-center">
               save

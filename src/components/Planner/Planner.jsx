@@ -28,10 +28,10 @@ export default function Planner() {
   const navigate = useNavigate();
 
   // functions
-  const addNewSequence = () => {
-    if (selectedSequences)
-      setSelectedSequences((prev) => [...prev, sequenceToAdd]);
-  };
+  const addNewSequence = () => {};
+
+  console.log("selectedAsanas", selectedAsanas);
+  console.log("sequenceToAdd", sequenceToAdd);
 
   return (
     <>
@@ -68,10 +68,7 @@ export default function Planner() {
               ))}
           </div>
 
-          <NewSequence
-            addNewSequence={addNewSequence}
-            asanas={selectedAsanas}
-          />
+          <NewSequence />
 
           <div className=" w-screen h-screen mx-10 flex flex-row justify-center">
             <div

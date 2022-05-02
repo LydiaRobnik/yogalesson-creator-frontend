@@ -29,7 +29,7 @@ export default function UserSection() {
     duration: 3,
     description: "",
     title: "",
-    asanas: []
+    asanas: selectedAsanas
   });
 
   // functions
