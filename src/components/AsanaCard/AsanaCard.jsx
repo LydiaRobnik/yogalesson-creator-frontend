@@ -1,15 +1,41 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
-const AsanaCard = ({ asana, setSelectedAsanas }) => {
+const AsanaCard = ({ asana }) => {
   const navigate = useNavigate();
 
+  const {
+    selectedAsanas,
+    setSelectedAsanas,
+    userClasses,
+    setUserClasses,
+    asanas,
+    setAsanas,
+    userSequences,
+    setUserSequences,
+    loading,
+    gridResponsiveness,
+    selectedSequences,
+    setSelectedSequences,
+    yogaClassToAdd,
+    setYogaClassToAdd,
+    sequenceToAdd,
+    setSequenceToAdd
+  } = useOutletContext();
+
+  // function handleSelectAsana() {
+  //   if (setSelectedAsanas) {
+  //     setSelectedAsanas((prev) => [...prev, asana]);
+  //     navigate(`../planner`);
+  //   }
+  // }
+
   function handleSelectAsana() {
-    if (setSelectedAsanas) {
-      setSelectedAsanas((prev) => [...prev, asana]);
-      navigate(`../planner`);
-    }
+    sequenceToAdd.asanas.push(asana);
+    navigate(`../planner`);
   }
+
+  // setSequenceToAdd((prev) => ({ ...prev, asanas: selectedAsanas }))
 
   return (
     <div

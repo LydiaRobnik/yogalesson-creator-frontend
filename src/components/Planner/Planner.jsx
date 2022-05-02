@@ -27,11 +27,20 @@ export default function Planner() {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // functions
-  const addNewSequence = () => {};
+  // const [sequenceToAdd, setSequenceToAdd] = useState({
+  //   user: user.id,
+  //   type: "sequence",
+  //   duration: 3,
+  //   description: "",
+  //   title: "",
+  //   asanas: []
+  // });
 
-  console.log("selectedAsanas", selectedAsanas);
-  console.log("sequenceToAdd", sequenceToAdd);
+  // functions
+  // const addNewSequence = () => {};
+
+  // console.log("sequenceToAdd", sequenceToAdd);
+  // console.log("selectedSequences", selectedSequences);
 
   return (
     <>
@@ -61,17 +70,23 @@ export default function Planner() {
           </div>
           <div className="w-screen mx-10">
             {selectedSequences &&
-              selectedSequences.map((sequence) => (
-                <div key={sequence._id} className="rounded bg-light m-10">
+              selectedSequences.map((sequence, index) => (
+                <div
+                  key={(sequence._id, index)}
+                  className="rounded bg-light m-10"
+                >
                   <SequencePlanned sequence={sequence} />
                 </div>
               ))}
           </div>
 
-          <NewSequence />
+          <NewSequence
+          // sequenceToAdd={sequenceToAdd}
+          // setSequenceToAdd={setSequenceToAdd}
+          />
 
           <div className=" w-screen h-screen mx-10 flex flex-row justify-center">
-            <div
+            {/* <div
               className="flex flex-row items-start cursor-pointer px-3"
               onClick={() => addNewSequence()}
             >
@@ -79,7 +94,7 @@ export default function Planner() {
                 add_circle
               </span>
               <p className="color-blue-darkest pt-5">new sequence</p>
-            </div>
+            </div> */}
             <div
               className="flex flex-row items-start cursor-pointer px-3"
               onClick={() => navigate("/user/sequences")}

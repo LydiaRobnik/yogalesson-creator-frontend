@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import AsanaCard from "../AsanaCard/AsanaCard";
@@ -7,6 +7,7 @@ import "./newSequence.scss";
 const NewSequence = () => {
   const navigate = useNavigate();
   const { loggedIn, user } = useContext(AuthContext);
+  console.log("user", user.id);
   const {
     selectedAsanas,
     setSelectedAsanas,
@@ -26,9 +27,46 @@ const NewSequence = () => {
     setSequenceToAdd
   } = useOutletContext();
 
+  // useEffect(() => {
+  //   setSequenceToAdd({
+  //     user: user.id,
+  //     type: "sequence",
+  //     duration: 3,
+  //     description: "",
+  //     title: "",
+  //     asanas: []
+  //   });
+  // }, [selectedSequences]);
+
+  useEffect(() => {
+    // sequenceToAdd.asanas = [];
+    console.log("asanas selected:", sequenceToAdd.asanas);
+    console.log("selectedSequences updated to:", selectedSequences);
+  }, [selectedSequences]);
+  // setSelectedSequences({
+  //   user: user.id,
+  //   type: "sequence",
+  //   duration: 3,
+  //   description: "",
+  //   title: "",
+  //   asanas: []
+  // });
+
   const addSequenceToClass = () => {
-    setSequenceToAdd({ ...sequenceToAdd, asanas: selectedAsanas });
+    const newSequence = { ...sequenceToAdd };
+    setSelectedSequences((prev) => [...prev, newSequence]);
+    setSequenceToAdd({
+      user: user?.id,
+      type: "sequence",
+      duration: 3,
+      description: "",
+      title: "",
+      asanas: []
+    });
   };
+
+  console.log("sequenceToAdd", sequenceToAdd);
+  console.log("selectedSequences", selectedSequences);
 
   return (
     <>
@@ -51,13 +89,26 @@ const NewSequence = () => {
             setSequenceToAdd({ ...sequenceToAdd, description: e.target.value })
           }
         />
+
         <div className="flex">
-          {selectedAsanas?.map((asana, index) => (
-            <div key={index}>
-              <AsanaCard asana={asana} />
+          {sequenceToAdd.asanas?.map((asana, index) => (
+            <div key={(asana._id, index)}>
+              <AsanaCard
+                asana={asana}
+                // sequenceToAdd={sequenceToAdd}
+                // setSequenceToAdd={setSequenceToAdd}
+              />
             </div>
           ))}
         </div>
+
+        {/* <div className="flex">
+          {selectedAsanas?.map((asana, index) => (
+            <div key={(asana._id, index)}>
+              <AsanaCard asana={asana} />
+            </div>
+          ))}
+        </div> */}
         <div className="flex flex-row items-center">
           <div
             className="flex flex-row items-center cursor-pointer"
