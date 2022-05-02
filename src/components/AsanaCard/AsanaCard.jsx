@@ -1,5 +1,5 @@
-import React from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import React from 'react';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 
 const AsanaCard = ({ asana }) => {
   const navigate = useNavigate();
@@ -23,19 +23,10 @@ const AsanaCard = ({ asana }) => {
     setSequenceToAdd
   } = useOutletContext();
 
-  // function handleSelectAsana() {
-  //   if (setSelectedAsanas) {
-  //     setSelectedAsanas((prev) => [...prev, asana]);
-  //     navigate(`../planner`);
-  //   }
-  // }
-
   function handleSelectAsana() {
     sequenceToAdd.asanas.push(asana);
     navigate(`../planner`);
   }
-
-  // setSequenceToAdd((prev) => ({ ...prev, asanas: selectedAsanas }))
 
   return (
     <div
