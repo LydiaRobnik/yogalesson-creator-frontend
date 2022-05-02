@@ -101,7 +101,7 @@ const Asanas = ({ loading, setLoading }) => {
           </div>
           {filterLevel &&
             filterLevel.map((level, index) => (
-              <div className="flex gap-1 ml-2">
+              <div key={index} className="flex gap-1 ml-2">
                 <input
                   className="mt-1"
                   type="checkbox"
@@ -128,7 +128,7 @@ const Asanas = ({ loading, setLoading }) => {
           </div>
           {filterTags &&
             filterTags.map((tag, index) => (
-              <div className="flex gap-1 ml-2">
+              <div key={index} className="flex gap-1 ml-2">
                 <input
                   className="mt-1"
                   type="checkbox"
