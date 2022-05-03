@@ -1,28 +1,47 @@
-import React from "react";
-import AsanaCard from "../AsanaCard/AsanaCard";
-import "./sequence.scss";
+import React, { useState } from 'react';
+import AsanaCard from '../AsanaCard/AsanaCard';
+import { useNavigate, useOutletContext } from 'react-router-dom';
+import './sequence.scss';
 
-const Sequence = ({ sequence }) => {
-  console.log("Sequence:", sequence);
+const Sequence = ({ sequence, showMore }) => {
+  const {
+    userClasses,
+    setUserClasses,
+    asanas,
+    setAsanas,
+    userSequences,
+    setUserSequences,
+    loading,
+    gridResponsiveness
+  } = useOutletContext();
+  const navigate = useNavigate();
 
   return (
     <>
-      <div className="border-2 border-grey-500 w-screen min-h-40 px-6 ">
-        <h3 className="color-blue-darkest">{sequence.title}</h3>
-        <p className="color-blue-darkest">{sequence.description}</p>
-        <div>
-          <div className="flex flex-row flex-wrap">
+      <div className="min-h-40">
+        <h3 className="color-blue-darkest pr-3 pt-3 font-bold text-xl">
+          {sequence.title}
+        </h3>
+      </div>
+
+      {showMore && (
+        <>
+          <div className="min-h-40">
+            <p className="color-blue-darkest pr-3 pt-3">
+              {sequence.description}
+            </p>
+          </div>
+
+          <div className={'flex flex-row'}>
             {sequence &&
               sequence.asanas.map((asana) => (
-                <>
-                  <div key={asana._id}>
-                    <AsanaCard asana={asana} />
-                  </div>
-                </>
+                <div key={asana._id}>
+                  <AsanaCard asana={asana} />
+                </div>
               ))}
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </>
   );
 };

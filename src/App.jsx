@@ -9,12 +9,10 @@ import SequenceCollection from "./components/SequenceCollection/SequenceCollecti
 import Page404 from "./components/Error/404";
 import Page403 from "./components/Error/403";
 import "./style/app.scss";
-import { useState } from "react";
 import AuthState from "./context/AuthContext";
 
 function App() {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
 
   return (
     <>
@@ -28,29 +26,10 @@ function App() {
             {/* protected user section */}
             <Route path={`user`} element={<UserSection />}>
               <Route index red element={<Navigate replace to="dashboard" />} />
-              <Route
-                path="dashboard"
-                element={
-                  <Dashboard loading={loading} setLoading={setLoading} />
-                }
-              />
-              <Route
-                path="planner"
-                element={<Planner loading={loading} setLoading={setLoading} />}
-              />
-              <Route
-                path="asanas"
-                element={<Asanas loading={loading} setLoading={setLoading} />}
-              />
-              <Route
-                path="sequences"
-                element={
-                  <SequenceCollection
-                    loading={loading}
-                    setLoading={setLoading}
-                  />
-                }
-              />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="planner" element={<Planner />} />
+              <Route path="asanas" element={<Asanas />} />
+              <Route path="sequences" element={<SequenceCollection />} />
             </Route>
             <Route path={`/403`} element={<Page403 />} />
           </Route>
