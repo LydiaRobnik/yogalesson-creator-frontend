@@ -1,22 +1,18 @@
-import React, { useContext, useEffect } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
-import "./dashboard.scss";
-import useBreakpoint from "../../custom/useBreakpoint";
-import ClassCard from "../ClassCard/ClassCard.jsx";
+import React, { useContext, useEffect } from 'react';
+import { useNavigate, useOutletContext } from 'react-router-dom';
+import './dashboard.scss';
+import useBreakpoint from '../../custom/useBreakpoint';
+import ClassCard from '../ClassCard/ClassCard.jsx';
 
 export default function Dashboard() {
   // states
   const {
-    selectedAsanas,
-    setSelectedAsanas,
     userClasses,
     setUserClasses,
     asanas,
     setAsanas,
     userSequences,
     setUserSequences,
-    selectedSequences,
-    setSelectedSequences,
     loading,
     gridResponsiveness
   } = useOutletContext();
@@ -41,7 +37,7 @@ export default function Dashboard() {
           src="https://assets1.lottiefiles.com/packages/lf20_s00z9gco.json"
           background="transparent"
           speed="1"
-          style={{ width: "300px", height: "300px" }}
+          style={{ width: '300px', height: '300px' }}
           loop
           autoplay
         ></lottie-player>
@@ -51,11 +47,11 @@ export default function Dashboard() {
         <>
           <div
             className={`p-4 w-full flex flex-row ${
-              point === "xs" ? "justify-center" : "justify-start"
+              point === 'xs' ? 'justify-center' : 'justify-start'
             }`}
           >
             <button
-              onClick={() => navigate("/user/planner")}
+              onClick={() => navigate('/user/planner')}
               className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
             >
               <p className="font-material inline pr-2">add</p>
@@ -69,7 +65,7 @@ export default function Dashboard() {
 
           <div
             className={`p-6
-        w-full ${point === "xs" ? "justify-center" : "justify-start"}`}
+        w-full ${point === 'xs' ? 'justify-center' : 'justify-start'}`}
           >
             {userClasses.length === 0 && (
               <>
@@ -88,7 +84,7 @@ export default function Dashboard() {
             )}
             {userClasses.length > 0 && (
               <h2
-                className={`${point === "xs" ? "text-center" : "text-start"}`}
+                className={`${point === 'xs' ? 'text-center' : 'text-start'}`}
               >
                 recently used
               </h2>
@@ -107,7 +103,7 @@ export default function Dashboard() {
 
           <div
             className={`p-6
-       w-full ${point === "xs" ? "justify-center" : "justify-start"}`}
+       w-full ${point === 'xs' ? 'justify-center' : 'justify-start'}`}
           >
             {userClasses.length > 0 ||
               (favorites.length === 0 && (
@@ -129,7 +125,7 @@ export default function Dashboard() {
               <div className="flex flex-row ">
                 <h2
                   className={`inline ${
-                    point === "xs" ? "text-center" : "text-start"
+                    point === 'xs' ? 'text-center' : 'text-start'
                   }`}
                 >
                   favorites

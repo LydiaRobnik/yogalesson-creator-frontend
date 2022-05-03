@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-import AsanaCard from "../AsanaCard/AsanaCard";
-import { useNavigate, useOutletContext } from "react-router-dom";
-import "./sequence.scss";
+import React, { useState } from 'react';
+import AsanaCard from '../AsanaCard/AsanaCard';
+import { useNavigate, useOutletContext } from 'react-router-dom';
+import './sequence.scss';
 
 const Sequence = ({ sequence, showMore }) => {
   const {
-    selectedAsanas,
-    setSelectedAsanas,
     userClasses,
     setUserClasses,
     asanas,
@@ -14,8 +12,6 @@ const Sequence = ({ sequence, showMore }) => {
     userSequences,
     setUserSequences,
     loading,
-    selectedSequences,
-    setSelectedSequences,
     gridResponsiveness
   } = useOutletContext();
   const navigate = useNavigate();
@@ -36,7 +32,7 @@ const Sequence = ({ sequence, showMore }) => {
             </p>
           </div>
 
-          <div className={"flex flex-row"}>
+          <div className={'flex flex-row'}>
             {sequence &&
               sequence.asanas.map((asana) => (
                 <div key={asana._id}>

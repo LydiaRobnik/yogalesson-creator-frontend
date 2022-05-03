@@ -5,8 +5,6 @@ const AsanaCard = ({ asana }) => {
   const navigate = useNavigate();
 
   const {
-    selectedAsanas,
-    setSelectedAsanas,
     userClasses,
     setUserClasses,
     asanas,
@@ -15,18 +13,16 @@ const AsanaCard = ({ asana }) => {
     setUserSequences,
     loading,
     gridResponsiveness,
-    selectedSequences,
-    setSelectedSequences,
     yogaClassToAdd,
     setYogaClassToAdd,
     sequenceToAdd,
     setSequenceToAdd
   } = useOutletContext();
 
-  function handleSelectAsana() {
+  const handleSelectAsana = () => {
     sequenceToAdd.asanas.push(asana);
     navigate(`../planner`);
-  }
+  };
 
   return (
     <div

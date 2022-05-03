@@ -14,8 +14,6 @@ export default function UserSection() {
   const [userClasses, setUserClasses] = useState([]);
   const [userSequences, setUserSequences] = useState([]);
   const [asanas, setAsanas] = useState([]);
-  const [selectedAsanas, setSelectedAsanas] = useState([]);
-  const [selectedSequences, setSelectedSequences] = useState([]);
   const [loading, setLoading] = useState(false);
   const [yogaClassToAdd, setYogaClassToAdd] = useState({
     title: '',
@@ -80,8 +78,6 @@ export default function UserSection() {
           {loggedIn ? (
             <Outlet
               context={{
-                selectedAsanas,
-                setSelectedAsanas,
                 userClasses,
                 setUserClasses,
                 asanas,
@@ -90,8 +86,6 @@ export default function UserSection() {
                 setUserSequences,
                 loading,
                 gridResponsiveness,
-                selectedSequences,
-                setSelectedSequences,
                 yogaClassToAdd,
                 setYogaClassToAdd,
                 sequenceToAdd,
