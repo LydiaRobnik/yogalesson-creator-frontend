@@ -4,22 +4,23 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../style/app.scss";
 
-export default function Example({ ModalOpen, setModalOpen }) {
-  const { loggedIn, login, logout, user } = useContext(AuthContext);
+export default function Example({ SignupModal, setSignupModal }) {
+  const { loggedIn, login, logout, user, signup } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
-  async function handleLogin(e) {
+  async function handleSignup(e) {
     e.preventDefault();
     setError("");
 
-    const result = await login({
-      user: name,
-      type: "username",
-      password: password
+    const result = await signup({
+      email: name,
+      username: name.split("@")[0],
+      password: password,
+      validated: true
     });
 
     if (!result) {
@@ -28,7 +29,7 @@ export default function Example({ ModalOpen, setModalOpen }) {
       setName("");
       setPassword("");
       navigate(`/user/dashboard`);
-      setModalOpen(false);
+      setSignupModal(false);
     }
   }
 
@@ -38,7 +39,7 @@ export default function Example({ ModalOpen, setModalOpen }) {
         <div className="max-w-md w-full space-y-8">
           <div>
             <lottie-player
-              src="https://assets1.lottiefiles.com/packages/lf20_s9dkwhdi.json"
+              src="https://assets3.lottiefiles.com/packages/lf20_13s8e4bb.json"
               background="transparent"
               speed="1"
               style={{ width: "300px", height: "300px" }}
@@ -46,12 +47,12 @@ export default function Example({ ModalOpen, setModalOpen }) {
               autoplay
             ></lottie-player>
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-              Sign in to your account
+              Sign up
             </h2>
           </div>
           <form
             className="mt-8 space-y-6"
-            onSubmit={handleLogin}
+            onSubmit={handleSignup}
             action="#"
             method="POST"
           >
@@ -68,8 +69,8 @@ export default function Example({ ModalOpen, setModalOpen }) {
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Username"
-                  onChange={(e) => setName(e.target.value)}
                   minLength={3}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
               <div>
@@ -90,32 +91,6 @@ export default function Example({ ModalOpen, setModalOpen }) {
               </div>
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                />
-                <label
-                  htmlFor="remember-me"
-                  className="ml-2 block text-sm text-gray-900"
-                >
-                  Remember me
-                </label>
-              </div>
-
-              <div className="text-sm">
-                <a
-                  href="#"
-                  className="font-medium text-indigo-600 hover:text-indigo-500"
-                >
-                  Forgot your password?
-                </a>
-              </div>
-            </div>
-
             <div className="text-center">
               <button
                 type="submit"
@@ -127,7 +102,7 @@ export default function Example({ ModalOpen, setModalOpen }) {
                     aria-hidden="true"
                   />
                 </span>
-                Sign in
+                Create Account
               </button>
               {error && (
                 <div className="text-sm pl-5 pt-2 text-red-500">{error}</div>

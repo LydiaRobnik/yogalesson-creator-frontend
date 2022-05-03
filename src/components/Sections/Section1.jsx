@@ -22,7 +22,7 @@ export default function Section1() {
 
   return (
 <>
- <div className="section-container md:flex">
+ <div className="section-container md:flex h-full">
    
       <div className="sectionTitleColor md:w-1/2 flex-col items-center justify-center text-6xl font-bold">
         <div className="sectionTitle flex items-center justify-center font-light text-10xl leading-relaxed">Beginners Class</div>

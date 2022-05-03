@@ -1,3 +1,4 @@
+import Signupform from "./Signupform";
 import React, {
   useContext,
   useState,
@@ -12,17 +13,17 @@ import Loginform from "./Loginform.jsx";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 
-export default function Example({ ModalOpen, setModalOpen }) {
+export default function SignupModal({ SignupModalOpen, setSignupModalOpen }) {
   const { loggedIn } = useContext(AuthContext);
   const cancelButtonRef = useRef(null);
 
   return (
-    <Transition.Root show={ModalOpen} as={Fragment}>
+    <Transition.Root show={SignupModalOpen} as={Fragment}>
       <Dialog
         as="div"
         className="fixed z-10 inset-0 overflow-y-auto"
         initialFocus={cancelButtonRef}
-        onClose={setModalOpen}
+        onClose={setSignupModalOpen}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
@@ -60,13 +61,13 @@ export default function Example({ ModalOpen, setModalOpen }) {
                     <XIcon
                       className="h-6 w-6 text-red-600 cursor-pointer"
                       aria-hidden="true"
-                      onClick={() => setModalOpen(false)}
+                      onClick={() => setSignupModalOpen(false)}
                     />
                   </div>
                   <div className="mt-3 text-center sm:mt-0 sm:ml-0 sm:text-left">
-                    <Loginform
-                      ModalOpen={ModalOpen}
-                      setModalOpen={setModalOpen}
+                    <Signupform
+                      SignupModalOpen={SignupModalOpen}
+                      setSignupModalOpen={setSignupModalOpen}
                     />
                   </div>
                 </div>
