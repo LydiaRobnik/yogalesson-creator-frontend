@@ -5,11 +5,10 @@ import './planner.scss';
 import Sequence from '../Sequence/Sequence';
 import NewSequence from '../NewSequence.jsx/NewSequence';
 import SequencePlanned from '../SequencePlanned/SequencePlanned';
+import asanaService from '../../api/asanaService';
 
 export default function Planner() {
   const {
-    selectedAsanas,
-    setSelectedAsanas,
     userClasses,
     setUserClasses,
     asanas,
@@ -17,8 +16,6 @@ export default function Planner() {
     userSequences,
     setUserSequences,
     loading,
-    selectedSequences,
-    setSelectedSequences,
     yogaClassToAdd,
     setYogaClassToAdd,
     sequenceToAdd,
@@ -26,6 +23,19 @@ export default function Planner() {
   } = useOutletContext();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const createClass = async () => {
+    const newClass = { ...yogaClassToAdd };
+    const result = await asanaService.createClass(newClass);
+    console.log('📒 createClass', result);
+    const classObj = {
+      title: `${user.name}'s ${userClasses.length + 1}. class`,
+      user: user?.id,
+      plan: [],
+      favourite: false
+    };
+    setYogaClassToAdd(classObj);
+  };
 
   return (
     <>
@@ -56,15 +66,18 @@ export default function Planner() {
               }
             />
 
-            <button className="btn-red btn-blue:hover mx-2 flex flex-row items-center">
+            <button
+              className="btn-red btn-blue:hover mx-2 flex flex-row items-center"
+              onClick={() => createClass()}
+            >
               <p className="font-material-symbols inline pr-2">save</p>
               <p className="inline pt-1 text-lg">save class</p>
             </button>
           </div>
 
           <div className="w-screen mx-10">
-            {selectedSequences &&
-              selectedSequences.map((sequence, index) => (
+            {yogaClassToAdd.plan &&
+              yogaClassToAdd.plan.map((sequence, index) => (
                 <div
                   key={(sequence._id, index)}
                   className="rounded bg-light m-10"

@@ -10,8 +10,6 @@ const NewSequence = () => {
   const { loggedIn, user } = useContext(AuthContext);
   console.log('user', user.id);
   const {
-    selectedAsanas,
-    setSelectedAsanas,
     userClasses,
     setUserClasses,
     asanas,
@@ -20,8 +18,6 @@ const NewSequence = () => {
     setUserSequences,
     loading,
     gridResponsiveness,
-    selectedSequences,
-    setSelectedSequences,
     yogaClassToAdd,
     setYogaClassToAdd,
     sequenceToAdd,
@@ -30,8 +26,7 @@ const NewSequence = () => {
 
   const addSequenceToClass = async () => {
     const newSequence = { ...sequenceToAdd };
-    setSelectedSequences((prev) => [...prev, newSequence]);
-
+    yogaClassToAdd.plan.push(newSequence);
     const result = await asanaService.createSequence(newSequence);
     console.log('📒 createSequence', result);
 
@@ -40,17 +35,13 @@ const NewSequence = () => {
       type: 'sequence',
       duration: 3,
       description: '',
-      title: `${user.name}'s ${userSequences.length}nd sequence1`,
+      title: `${user.name}'s ${userSequences.length + 1}. sequence`,
       asanas: []
     };
     setSequenceToAdd(seqObj);
   };
 
   // testCreateSequence().catch((error) => setError(error.message));
-
-  console.log('sequenceToAdd:', sequenceToAdd);
-
-  // functions to create a new class and a new sequence
 
   return (
     <>
@@ -82,25 +73,30 @@ const NewSequence = () => {
           ))}
         </div>
 
+        {/* <button
+              onClick={() => navigate('/user/planner')}
+              className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
+            >
+              <span className="font-material inline pr-2">add</span>
+              <p className="inline pt-1 text-lg">add asana</p>
+            </button> */}
+
         <div className="flex flex-row items-center">
-          <div
-            className="flex flex-row items-center cursor-pointer"
+          <button
+            className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
             onClick={() => navigate('../asanas')}
           >
-            <span className="font-material-symbols modal color-blue-darkest text-4xl self-center">
-              add_circle
-            </span>
-            <p className="color-blue-darkest ">add asana</p>
-          </div>
-          <div
-            className="flex flex-row items-center cursor-pointer"
+            <span className="font-material inline pr-2">add</span>
+            <p className="inline pt-1 text-lg ">add asana</p>
+          </button>
+
+          <button
+            className="btn-red btn-blue:hover mx-2 flex flex-row items-center"
             onClick={() => addSequenceToClass()}
           >
-            <span className="font-material-symbols modal color-blue-darkest text-4xl self-center">
-              save
-            </span>
-            <p className="color-blue-darkest ">save sequence</p>
-          </div>
+            <span className="font-material-symbols inline pr-2">save</span>
+            <p className="inline pt-1 text-lg">save sequence</p>
+          </button>
         </div>
       </div>
     </>

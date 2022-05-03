@@ -1,12 +1,10 @@
-import React from "react";
-import AsanaCard from "../AsanaCard/AsanaCard";
-import { useNavigate, useOutletContext } from "react-router-dom";
-import "./sequencePlanned.scss";
+import React from 'react';
+import AsanaCard from '../AsanaCard/AsanaCard';
+import { useNavigate, useOutletContext } from 'react-router-dom';
+import './sequencePlanned.scss';
 
 const SequencePlanned = ({ sequence }) => {
   const {
-    selectedAsanas,
-    setSelectedAsanas,
     userClasses,
     setUserClasses,
     asanas,
@@ -14,8 +12,6 @@ const SequencePlanned = ({ sequence }) => {
     userSequences,
     setUserSequences,
     loading,
-    selectedSequences,
-    setSelectedSequences,
     gridResponsiveness
   } = useOutletContext();
   const navigate = useNavigate();

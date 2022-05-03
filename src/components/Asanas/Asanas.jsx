@@ -7,16 +7,12 @@ import AsanaCard from '../AsanaCard/AsanaCard';
 
 const Asanas = () => {
   const {
-    selectedAsanas,
-    setSelectedAsanas,
     userClasses,
     setUserClasses,
     asanas,
     setAsanas,
     userSequences,
     setUserSequences,
-    selectedSequences,
-    setSelectedSequences,
     loading,
     setLoading,
     gridResponsiveness
@@ -203,10 +199,7 @@ const Asanas = () => {
                 )
                 .map((asana) => (
                   <div key={asana._id}>
-                    <AsanaCard
-                      asana={asana}
-                      setSelectedAsanas={setSelectedAsanas}
-                    />
+                    <AsanaCard asana={asana} />
                   </div>
                 ))}
           </div>
