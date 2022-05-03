@@ -28,7 +28,9 @@ function App() {
             <Route path={`user`} element={<UserSection />}>
               <Route index red element={<Navigate replace to="dashboard" />} />
               <Route path="dashboard" element={<Dashboard />} />
-              <Route path="planner" element={<Planner />} />
+              <Route path="planner" element={<Planner />}>
+                <Route path=":classId" element={<Planner />} />
+              </Route>
               <Route path="asanas" element={<Asanas />} />
               <Route path="sequences" element={<SequenceCollection />} />
               <Route path="calendar" element={<Calendar />} />

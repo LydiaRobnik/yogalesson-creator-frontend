@@ -1,8 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 import './dashboard.scss';
 import useBreakpoint from '../../custom/useBreakpoint';
 import ClassCard from '../ClassCard/ClassCard.jsx';
+import asanaService from '../../api/asanaService';
 
 export default function Dashboard() {
   // states
@@ -14,11 +16,14 @@ export default function Dashboard() {
     userSequences,
     setUserSequences,
     loading,
-    gridResponsiveness
+    gridResponsiveness,
+    yogaClassToAdd,
+    setYogaClassToAdd
   } = useOutletContext();
 
   const point = useBreakpoint();
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
   // sort classes by date
   userClasses.sort((a, b) => {
@@ -29,6 +34,21 @@ export default function Dashboard() {
   const favorites = userClasses.filter(
     (classItem) => classItem.favourite === true
   );
+
+  const createClass = async () => {
+    const newClass = {
+      title: `${user.name}'s class no. ${
+        userClasses.length + 1 + Math.random()
+      }`,
+      user: user?.id,
+      plan: [],
+      favourite: false
+    };
+    const result = await asanaService.createClass(newClass);
+    console.log('📒 createClass', result);
+    setYogaClassToAdd(result);
+    navigate(`/user/planner/${yogaClassToAdd._id}`);
+  };
 
   return (
     <>
@@ -51,7 +71,7 @@ export default function Dashboard() {
             }`}
           >
             <button
-              onClick={() => navigate('/user/planner')}
+              onClick={() => createClass()}
               className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
             >
               <p className="font-material inline pr-2">add</p>

@@ -5,7 +5,7 @@ import { AuthContext } from '../../context/AuthContext';
 import AsanaCard from '../AsanaCard/AsanaCard';
 import './newSequence.scss';
 
-const NewSequence = () => {
+const NewSequence = ({ handleFocus, setShow, show }) => {
   const navigate = useNavigate();
   const { loggedIn, user } = useContext(AuthContext);
   console.log('user', user.id);
@@ -24,24 +24,38 @@ const NewSequence = () => {
     setSequenceToAdd
   } = useOutletContext();
 
+  useEffect(() => {
+    const saveSequenceToBackend = async () => {
+      if (sequenceToAdd.title.length === 0)
+        setSequenceToAdd({
+          ...sequenceToAdd,
+          title: `${user.name}'s sequence no. ${
+            userSequences.length + 1 + Math.random()
+          }`
+        });
+      const newSequence = { ...sequenceToAdd };
+      const result = await asanaService.saveSequence(newSequence);
+      console.log('📒 saveSequence', result);
+    };
+    saveSequenceToBackend();
+  }, [sequenceToAdd]);
+
   const addSequenceToClass = async () => {
     const newSequence = { ...sequenceToAdd };
     yogaClassToAdd.plan.push(newSequence);
-    const result = await asanaService.createSequence(newSequence);
-    console.log('📒 createSequence', result);
 
     const seqObj = {
       user: user?.id,
       type: 'sequence',
       duration: 3,
       description: '',
-      title: `${user.name}'s ${userSequences.length + 1}. sequence`,
+      title: '',
       asanas: []
     };
     setSequenceToAdd(seqObj);
+    setShow(false);
+    console.log(show);
   };
-
-  // testCreateSequence().catch((error) => setError(error.message));
 
   return (
     <>
@@ -54,6 +68,7 @@ const NewSequence = () => {
           onChange={(e) =>
             setSequenceToAdd({ ...sequenceToAdd, title: e.target.value })
           }
+          onFocus={handleFocus}
         />
         <input
           type="text"
@@ -63,6 +78,7 @@ const NewSequence = () => {
           onChange={(e) =>
             setSequenceToAdd({ ...sequenceToAdd, description: e.target.value })
           }
+          onFocus={handleFocus}
         />
 
         <div className="flex">
@@ -87,7 +103,7 @@ const NewSequence = () => {
             onClick={() => navigate('../asanas')}
           >
             <span className="font-material inline pr-2">add</span>
-            <p className="inline pt-1 text-lg ">add asana</p>
+            <p className="inline pt-1 text-lg ">asana</p>
           </button>
 
           <button
