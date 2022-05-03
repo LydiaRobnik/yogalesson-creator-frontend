@@ -8,7 +8,7 @@ import Section1 from '../Sections/Section1';
 import Section2 from '../Sections/Section2';
 import Section3 from '../Sections/Section3';
 import TestResponsive from "./TestResponsive";
-import Footer from "../Footer/Footer.jsx";
+import FooterNew from "../FooterNew/FooterNew.jsx";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -60,7 +60,7 @@ export default function Home() {
                   </div>
 
               <div className="section color-primary text-5xl">
-                <Footer />
+                <FooterNew />
               </div>
             
             </ReactFullpage.Wrapper>

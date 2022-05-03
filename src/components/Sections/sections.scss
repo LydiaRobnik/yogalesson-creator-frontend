@@ -3,7 +3,7 @@
 .section-container {
   @apply h-full flex;
   
-  .sectionTitle {
+  /* .sectionTitle {
     font-family: $font-moontime;
     color: $clr-beige-light;
   }
@@ -17,8 +17,27 @@
 .featureText {
   color: $clr-blue-darkest;
   font-family: $font-manjari;
+} */
 }
+
+.sectionTitle {
+  font-family: $font-moontime;
+  color: $clr-beige-light;
 }
+
+.square {
+  width: 100%;
+  height: 100%;
+  }
+
+  .sectionTitleColor {
+    background-color: $clr-blue-darkest;
+  }
+
+  .featureText {
+    color: $clr-blue-darkest;
+    font-family: $font-manjari;
+  }
 
 .cardsHome {
   background-color: $clr-beige;

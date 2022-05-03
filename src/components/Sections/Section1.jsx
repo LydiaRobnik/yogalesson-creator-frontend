@@ -3,48 +3,45 @@ import './sections.scss';
 import flowers from '../../pictures/flowers.jpg';
 import { useState, useEffect, useContext } from 'react';
 import asanaService from "../../api/asanaService";
+import AsanaCard from "../AsanaCard/AsanaCard";
 
 
 export default function Section1() {
 
- const [asanas, setAsanas] = useState([]);
- console.log(asanas);
+ const [randomAsanas, setRandomAsanas] = useState([]);
+ console.log(randomAsanas);
  
  useEffect(() => {
     const fetchData = () => {
       asanaService.getRandomAsanas(3).then((data) => {
-        console.log("getRandomAsanas", data);
-        setAsanas(data);
+        setRandomAsanas(data);
       });
     };
     fetchData();
- })
+ }, ([]))
 
   return (
-    <>
-    <div className="section-container">
-    <div className="md:flex">
-      <div className="sectionTitleColor md:w-1/2 flex-col items-center justify-center text-6xl font-bold md:shrink-0 border-2 border-red-500">
+<>
+ <div className="section-container">
+   
+      <div className="sectionTitleColor md:w-1/2 flex-col items-center justify-center text-6xl font-bold md:shrink-0">
         <div className="sectionTitle flex items-center justify-center font-light text-10xl leading-relaxed">Beginners Class</div>
-        {/* {loading && (
-           <>
-             <div className="max-w-screen-lg mx-auto p-4">
+        <div className="max-w-screen-lg mx-auto p-4">
           <div className="flex flex-wrap">
-           <div className="bg-clip-border m-4 p-16 border-4 bg-white rounded-lg">{asanas[0]}</div>
-           <div className="bg-clip-border m-4 p-16 border-4 bg-white rounded-lg"></div>
-           <div className="bg-clip-border m-4 p-16 border-4 bg-white rounded-lg"></div>
-           <div className="bg-clip-border m-4 p-16 border-4 bg-white rounded-lg"></div>
-           <div className="bg-clip-border m-4 p-16 border-4 bg-white rounded-lg"></div>
-           <div className="bg-clip-border m-4 p-16 border-4 bg-white rounded-lg"></div>
-           <div className="bg-clip-border m-4 p-16 border-4 bg-white rounded-lg"></div>
-           <div className="bg-clip-border m-4 p-16 border-4 bg-white rounded-lg"></div>
-        </div>)
-        </>
-         } */}
-       
+           {/* <div className="bg-clip-border m-4 p-16 border-4 bg-white rounded-lg"> */}
+           {randomAsanas.map((asana) =>     
+                
+                <div key={asana._id} className="width=20% height=20% bg-clip-border border-4 bg-white rounded-lg">
+                <img className="w-full" src={asana.img_url} alt="preview class" asana={asana}/>
+                </div>
+               
+               )}
+           {/* </div> */}
+        </div>
+     
       </div>
     </div>
-    <div className="w-full border-2 border-blue-500 flex items-center justify-center relative md:flex md:w-1/2">
+    <div className="w-full flex items-center justify-center relative md:flex md:w-1/2">
       <img className="object-cover w-full h-full bg-bottom" src={flowers} alt="flowers on white background"/>
       <div className="featureText flex items-center justify-center leading-relaxed p-5 m-12 absolute bottom-50 text-4xl text-left bg-red-500 bg-opacity-20 backdrop-blur-md font-light">
 Use our templates to structure your class. <br></br>
