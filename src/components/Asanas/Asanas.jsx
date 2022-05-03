@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate, useOutletContext } from 'react-router-dom';
-import './asanas.scss';
 import asanaService from '../../api/asanaService';
 import AsanaCard from '../AsanaCard/AsanaCard';
+import './asanas.scss';
 
 const Asanas = () => {
   const {
@@ -54,6 +54,7 @@ const Asanas = () => {
 
     levelAr = [...levelAr]
       .sort((a, b) => a.localeCompare(b))
+      .reverse()
       .map((level) => ({ level, checked: false }));
     tagAr = [...tagAr]
       .sort((a, b) => a.localeCompare(b))
@@ -173,7 +174,12 @@ const Asanas = () => {
                           toggleFilterChecked(setFilterLevel, index)
                         }
                       />
-                      <label htmlFor={level.level}>{level.level}</label>
+                      <label
+                        htmlFor={level.level}
+                        className="md:whitespace-nowrap"
+                      >
+                        {level.level}
+                      </label>
                     </div>
                   ))}
               </div>

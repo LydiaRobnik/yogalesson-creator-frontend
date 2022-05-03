@@ -16,7 +16,7 @@ function App() {
   const navigate = useNavigate();
 
   return (
-    <>
+    <div id="app">
       <AuthState>
         <Routes>
           {/* home without navbar */}
@@ -39,7 +39,7 @@ function App() {
           <Route path="*" element={<Page404 />} />
         </Routes>
       </AuthState>
-    </>
+    </div>
   );
 }
 
