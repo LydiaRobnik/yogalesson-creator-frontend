@@ -86,12 +86,18 @@ export default function Navbar() {
                             key={item.name}
                             href={item.href}
                             to={item.path}
-                            className={classNames(
-                              item.current
-                                ? 'bg-gray-900 text-white'
-                                : 'color-blue-darkest hover:bg-gray-700 hover:text-white',
-                              'px-3 py-2 rounded-md text-sm font-medium'
-                            )}
+                            className={({ isActive }) =>
+                              `${
+                                isActive
+                                  ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
+                                  : classNames(
+                                      item.current
+                                        ? 'bg-gray-900 text-white'
+                                        : 'color-blue-darkest hover:bg-gray-700 hover:text-white',
+                                      'px-3 py-2 rounded-md text-sm font-medium'
+                                    )
+                              }`
+                            }
                             aria-current={item.current ? 'page' : undefined}
                           >
                             {item.name}
