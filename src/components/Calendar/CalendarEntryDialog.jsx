@@ -4,7 +4,7 @@ import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
 import './calendar.scss';
 
-export default function CalendarEntryDialog({ date }) {
+export default function CalendarEntryDialog({ date, saveEvent }) {
   const { loggedIn, user } = useContext(AuthContext);
 
   const [userClasses, setUserClasses] = useState([]);
@@ -38,16 +38,26 @@ export default function CalendarEntryDialog({ date }) {
     setUserClasses([...userClasses]);
   };
 
+  const handleSave = () => {
+    const calendarObj = {
+      date,
+      yogaClass: userClasses.find((c) => c.checked === true)
+    };
+    saveEvent(calendarObj);
+  };
+
   return (
     <div id="CalendarEntryDialog-jsx" className="text-black">
-      <h2 className="text-lg font-bold text-center border-dashed border-b-slate-400 border-b bg-beige color-blue-dark p-4 pb-2 mb-4">
+      <h2 className="text-lg font-bold text-center border-dashed border-b-slate-400 border-b bg-red color-beige-light p-4 pb-2 mb-4">
         Create Calendar Entry
       </h2>
       <div className="flex gap-4 p-0">
         <div className="border-r-slate-400 border-r border-dashed p-3">
           {/* <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2> */}
-          <div>Date:</div>
-          <div>{date?.toLocaleDateString()}</div>
+          {/* <div>Date:</div> */}
+          <div className="font-bold border-dashed border rounded-full p-2 pt-3 bg-blue-light color-blue-dark">
+            {date?.dateObj.toDateString()}
+          </div>
         </div>
         <div className="flex flex-col gap-1">
           <div className="font-bold">Select Yoga-Class:</div>
@@ -88,6 +98,14 @@ export default function CalendarEntryDialog({ date }) {
                 ))}
           </div>
         </div>
+      </div>
+      <div className="w-full color-light text-right pt-1 bg-blue-middle">
+        <button
+          onClick={handleSave}
+          className="w-full flex items-center justify-end text-2xl"
+        >
+          <span className="text-sm">Save</span> ✅
+        </button>
       </div>
     </div>
   );

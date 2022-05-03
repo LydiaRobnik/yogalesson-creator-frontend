@@ -18,17 +18,16 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    padding: '0'
+    padding: '0',
+    borderRadius: '.7rem',
+    border: '2px dotted lightgray'
   }
 };
 Modal.setAppElement('#root');
 
 export default function Calendar() {
   const { loggedIn, login, logout, user, signup } = useContext(AuthContext);
-  const [events, setEvents] = useState([
-    { title: 'event 1 (17-19pm)', date: '2022-05-11' },
-    { title: 'event 2', date: '2022-05-19' }
-  ]);
+  const [events, setEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
 
   let subtitle;
@@ -36,22 +35,6 @@ export default function Calendar() {
   const [error, setError] = useState('');
 
   const navigate = useNavigate();
-  function handleDateClick(arg) {
-    console.log('handleDateClick', arg);
-
-    setSelectedDate(new Date(arg.dateStr));
-
-    openModal();
-    // setEvents((prev) => {
-    //   return [
-    //     ...prev,
-    //     {
-    //       title: 'new event',
-    //       date: arg.dateStr
-    //     }
-    //   ];
-    // });
-  }
 
   useEffect(() => {
     return () => {};
@@ -70,6 +53,43 @@ export default function Calendar() {
     setIsOpen(false);
   }
 
+  function handleDateClick(arg) {
+    console.log('handleDateClick', arg);
+
+    setSelectedDate({ dateStr: arg.dateStr, dateObj: new Date(arg.dateStr) });
+
+    openModal();
+  }
+
+  function handleEventClick(arg) {
+    console.log('handleEventClick', {
+      title: arg.event.title,
+      id: arg.event.id,
+      date: arg.event.start
+    });
+
+    // setSelectedDate({ dateStr: arg.dateStr, dateObj: new Date(arg.dateStr) });
+
+    // openModal();
+  }
+
+  function saveEvent(calendarObj) {
+    if (calendarObj && calendarObj.date && calendarObj.yogaClass) {
+      console.log('saveEvent', calendarObj);
+      setEvents((prev) => {
+        return [
+          ...prev,
+          {
+            title: calendarObj.yogaClass?.title,
+            date: calendarObj.date.dateStr,
+            id: calendarObj.yogaClass?._id
+          }
+        ];
+      });
+    }
+    closeModal();
+  }
+
   return (
     <div
       id="div-calendar"
@@ -84,7 +104,8 @@ export default function Calendar() {
           plugins={[dayGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
           dateClick={handleDateClick}
-          weekends={false}
+          eventClick={handleEventClick}
+          weekends={true}
           events={events}
         />
       </div>
@@ -103,15 +124,7 @@ export default function Calendar() {
             <button onClick={closeModal} className="absolute top-1 right-0">
               ❌
             </button>
-            <CalendarEntryDialog date={selectedDate} />
-            <div className="w-full color-light text-right pt-1 bg-blue-middle">
-              <button
-                onClick={closeModal}
-                className="w-full flex items-center justify-end text-2xl"
-              >
-                <span className="text-sm">save</span> ✅
-              </button>
-            </div>
+            <CalendarEntryDialog saveEvent={saveEvent} date={selectedDate} />
           </div>
         </Modal>
       </div>

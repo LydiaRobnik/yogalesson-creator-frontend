@@ -6,6 +6,11 @@
   th {
     background: $clr-red;
     color: $clr-light;
+
+    .fc-day-sun,
+    .fc-day-sat {
+      background: $clr-blue-middle;
+    }
   }
 
   th div a {
