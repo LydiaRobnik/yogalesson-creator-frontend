@@ -18,7 +18,7 @@
     "@fullcalendar/interaction": "^5.11.0",
     "@fullcalendar/react": "^5.11.1",
     "@fullpage/react-fullpage": "^0.1.23",
-    "@headlessui/react": "^1.5.0",
+    "@headlessui/react": "^1.6.0",
     "@heroicons/react": "^1.0.6",
     "@lottiefiles/lottie-player": "^1.5.7",
     "animate.css": "^4.1.1",

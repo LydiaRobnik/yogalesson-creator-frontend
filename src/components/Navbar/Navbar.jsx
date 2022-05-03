@@ -4,13 +4,14 @@ import { AuthContext } from '../../context/AuthContext';
 import './navbar.scss';
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
+import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import LoginModal from '../Login/LoginModal.jsx';
+import SignupModal from '../Login/SignupModal';
 
 const navigation = [
   { name: 'Dashboard', path: '/user/dashboard', current: false },
   { name: 'Classes', path: '/user/planner', current: false },
-  { name: 'Calendar', path: '/user/calendar', current: false }
+  { name: 'Calendar', path: '/', current: false }
 ];
 
 function classNames(...classes) {
@@ -23,6 +24,8 @@ export default function Navbar() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [open, setOpen] = useState(true);
+  const [ModalOpen, setModalOpen] = useState(false);
+  const [SignupModalOpen, setSignupModalOpen] = useState(false);
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -44,22 +47,32 @@ export default function Navbar() {
 
   return (
     <>
+      <LoginModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
+      <SignupModal
+        SignupModalOpen={SignupModalOpen}
+        setSignupModalOpen={setSignupModalOpen}
+      />
       <Disclosure as="nav" className="bg-light color">
         {({ open }) => (
           <>
             <div className="navbar max-w-7xl mx-auto px-2 sm:px-6">
               <div className="relative flex items-center justify-between h-16 mx-auto">
-                <div className="absolute inset-y-0 left-0 flex items-center sm:hidden mx-auto">
-                  {/* Mobile menu button*/}
-                  <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                    <span className="sr-only">Open main menu</span>
-                    {open ? (
-                      <XIcon className="block h-6 w-6" aria-hidden="true" />
-                    ) : (
-                      <MenuIcon className="block h-6 w-6" aria-hidden="true" />
-                    )}
-                  </Disclosure.Button>
-                </div>
+                {loggedIn && (
+                  <div className="absolute inset-y-0 left-0 flex items-center sm:hidden mx-auto">
+                    {/* Mobile menu button*/}
+                    <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                      <span className="sr-only">Open main menu</span>
+                      {open ? (
+                        <XIcon className="block h-6 w-6" aria-hidden="true" />
+                      ) : (
+                        <MenuIcon
+                          className="block h-6 w-6"
+                          aria-hidden="true"
+                        />
+                      )}
+                    </Disclosure.Button>
+                  </div>
+                )}
                 <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex-shrink-0 flex items-center">
                     <img
@@ -116,33 +129,16 @@ export default function Navbar() {
                       </span>
                     </div>
                   ) : (
-                    <form
-                      onSubmit={handleLogin}
-                      className="flex gap-4 color-primary"
-                    >
-                      <input
-                        className="px-1 rounded-lg w-32"
-                        type="text"
-                        minLength={3}
-                        onChange={(e) => setName(e.target.value)}
-                        placeholder="Username"
-                      />
-                      <input
-                        className="px-1 rounded-lg w-32"
-                        type="password"
-                        minLength={4}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Password"
-                      />
+                    <>
                       <button
-                        type="submit"
-                        className="bg-red-700 hover:bg-red-500 text-white font-bold py-2 px-10"
+                        className="bg-red hover:bg-red-500 text-white font-bold py-3 px-10"
+                        onClick={() => setModalOpen(true)}
                       >
                         login
                       </button>
                       <button
-                        type=""
                         className="hover:underline text-color-blue-darkest py-2 px-10"
+                        onClick={() => setSignupModalOpen(true)}
                       >
                         sign up
                       </button>
@@ -151,18 +147,11 @@ export default function Navbar() {
                           {error}
                         </div>
                       )}
-                    </form>
+                    </>
                   )}
                 </div>
 
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  <button
-                    className="bg-red-700 hover:bg-red-500 text-white font-bold "
-                    onClick={() => setOpen(true)}
-                  >
-                    login
-                  </button>
-                  <p className="text-black">{open ? 'true' : 'false'}</p>
                   {/* Profile dropdown */}
                   {loggedIn && (
                     <Menu as="div" className="ml-3 relative">
@@ -171,7 +160,7 @@ export default function Navbar() {
                           <span className="sr-only">Open user menu</span>
                           <img
                             className="h-8 w-8 rounded-full"
-                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                            src="https://www.kindpng.com/picc/m/21-211456_user-icon-hd-png-download.png"
                             alt=""
                           />
                         </Menu.Button>
@@ -257,7 +246,6 @@ export default function Navbar() {
           </>
         )}
       </Disclosure>
-      {/* <LoginModal data={open}/> */}
     </>
   );
 }
