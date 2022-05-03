@@ -1,0 +1,23 @@
+@import '../../style/variables.scss';
+
+.asanas-jsx {
+  // transition: all 0.3s ease-in-out;
+  .filter-section {
+    transition: all 0.5s ease-in-out;
+
+    .filterblock {
+      transition: all 0.4s ease-in-out;
+    }
+  }
+}
+
+.toggle-checkbox:checked {
+  @apply right-0;
+  border-color: $clr-blue-dark;
+  right: 0;
+}
+
+.toggle-checkbox:checked + .toggle-label {
+  @apply bg-blue-dark;
+  background-color: $clr-blue-dark;
+}

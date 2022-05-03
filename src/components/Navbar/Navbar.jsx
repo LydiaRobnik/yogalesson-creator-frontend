@@ -1,47 +1,47 @@
-import React, { useContext, useState } from "react";
-import { NavLink, Link } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
-import "./navbar.scss";
-import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { MenuIcon, XIcon } from "@heroicons/react/outline";
-import LoginModal from "../Login/LoginModal.jsx";
-import SignupModal from "../Login/SignupModal";
+import React, { useContext, useState } from 'react';
+import { NavLink, Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
+import './navbar.scss';
+import { Fragment } from 'react';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { MenuIcon, XIcon } from '@heroicons/react/outline';
+import LoginModal from '../Login/LoginModal.jsx';
+import SignupModal from '../Login/SignupModal';
 
 const navigation = [
-  { name: "Dashboard", path: "/user/dashboard", current: false },
-  { name: "Classes", path: "/user/planner", current: false },
-  { name: "Calendar", path: "/", current: false }
+  { name: 'Dashboard', path: '/user/dashboard', current: false },
+  { name: 'Classes', path: '/user/planner', current: false },
+  { name: 'Calendar', path: '/', current: false }
 ];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function Navbar() {
   const { loggedIn, login, logout, user } = useContext(AuthContext);
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const [open, setOpen] = useState(true);
   const [ModalOpen, setModalOpen] = useState(false);
   const [SignupModalOpen, setSignupModalOpen] = useState(false);
 
   async function handleLogin(e) {
     e.preventDefault();
-    setError("");
+    setError('');
 
     const result = await login({
       user: name,
-      type: "username",
+      type: 'username',
       password: password
     });
 
     if (!result) {
-      setError("Invalid username or password!");
+      setError('Invalid username or password!');
     } else {
-      setName("");
-      setPassword("");
+      setName('');
+      setPassword('');
     }
   }
 
@@ -101,11 +101,11 @@ export default function Navbar() {
                             to={item.path}
                             className={classNames(
                               item.current
-                                ? "bg-gray-900 text-white"
-                                : "color-blue-darkest hover:bg-gray-700 hover:text-white",
-                              "px-3 py-2 rounded-md text-sm font-medium"
+                                ? 'bg-gray-900 text-white'
+                                : 'color-blue-darkest hover:bg-gray-700 hover:text-white',
+                              'px-3 py-2 rounded-md text-sm font-medium'
                             )}
-                            aria-current={item.current ? "page" : undefined}
+                            aria-current={item.current ? 'page' : undefined}
                           >
                             {item.name}
                           </NavLink>
@@ -174,8 +174,8 @@ export default function Navbar() {
                               <a
                                 href="#"
                                 className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700"
+                                  active ? 'bg-gray-100' : '',
+                                  'block px-4 py-2 text-sm text-gray-700'
                                 )}
                               >
                                 Your Profile
@@ -187,8 +187,8 @@ export default function Navbar() {
                               <a
                                 href="#"
                                 className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700"
+                                  active ? 'bg-gray-100' : '',
+                                  'block px-4 py-2 text-sm text-gray-700'
                                 )}
                               >
                                 Settings
@@ -200,8 +200,8 @@ export default function Navbar() {
                               <a
                                 href="#"
                                 className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700"
+                                  active ? 'bg-gray-100' : '',
+                                  'block px-4 py-2 text-sm text-gray-700'
                                 )}
                                 onClick={() => logout()}
                               >
@@ -226,11 +226,11 @@ export default function Navbar() {
                     href={item.href}
                     className={classNames(
                       item.current
-                        ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                      "block px-3 py-2 rounded-md text-base font-medium"
+                        ? 'bg-gray-900 text-white'
+                        : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                      'block px-3 py-2 rounded-md text-base font-medium'
                     )}
-                    aria-current={item.current ? "page" : undefined}
+                    aria-current={item.current ? 'page' : undefined}
                   >
                     {item.name}
                   </Disclosure.Button>
@@ -240,7 +240,6 @@ export default function Navbar() {
           </>
         )}
       </Disclosure>
-      {/* <LoginModal data={open}/> */}
     </>
   );
 }
