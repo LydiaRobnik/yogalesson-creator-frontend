@@ -3,7 +3,7 @@ import './sections.scss';
 
 const Section = () => {
 	return (
-    <div className="section-container">
+    <div className="cardBenefits3 h-full flex flex-wrap">
     <div className="w-full flex flex-wrap items-center justify-center">
     
     <div className="cardsHome mx-4 rounded-lg flex-col justify-center flex items-center pt-4">

@@ -1,9 +1,8 @@
 @import '../../style/variables.scss';
 
-.section-container {
-  @apply h-full flex;
+/* .section-container {
   
-  /* .sectionTitle {
+  .sectionTitle {
     font-family: $font-moontime;
     color: $clr-beige-light;
   }
@@ -17,8 +16,8 @@
 .featureText {
   color: $clr-blue-darkest;
   font-family: $font-manjari;
-} */
 }
+} */
 
 .sectionTitle {
   font-family: $font-moontime;
@@ -43,6 +42,18 @@
   background-color: $clr-beige;
   height: 40%;
   width: 25%;
+}
+
+.randomAsana {
+  width: 25%;
+}
+
+.cardBenefits {
+  background-color: $clr-light;
+}
+
+.cardBenefits3 {
+  background-color: #fffaf7;
 }
 
 

@@ -21,12 +21,6 @@ export default function Home() {
         render={({ state, fullpageApi }) => {
           return (
             <ReactFullpage.Wrapper>
-              <div className="section color-primary">
-                <div className="h-full">
-                  <TestResponsive />
-                </div>
-              </div>
-
               <div className="top section color-primary h-full w-full">
                 <div className="h-full">
                   <Navbar className="z-1"/>
@@ -49,7 +43,7 @@ export default function Home() {
 
               </div>
 
-              <div className="section color-primary">
+                  <div className="section color-primary">
                     <Section1 />
                   </div>
                   <div className="section color-primary">
@@ -59,7 +53,7 @@ export default function Home() {
                     <Section3 />
                   </div>
 
-              <div className="section color-primary text-5xl">
+              <div className="section color-primary">
                 <FooterNew />
               </div>
             

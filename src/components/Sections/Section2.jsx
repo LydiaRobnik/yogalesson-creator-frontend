@@ -4,7 +4,7 @@ import structure from '../../pictures/structure.avif';
 
 export default function Section1() {
   return (
-    <div className="section-container">
+    <div className="cardBenefits h-full flex">
     <div className="w-1/2 flex-col items-center justify-center hidden md:flex">
         <div className="featureText leading-relaxed p-5 m-12 absolute bottom-50 text-4xl text-left font-light">
         Stucture your course fast and with ease.<br></br>

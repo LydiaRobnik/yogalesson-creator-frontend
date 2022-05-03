@@ -22,16 +22,16 @@ export default function Section1() {
 
   return (
 <>
- <div className="section-container">
+ <div className="section-container md:flex">
    
-      <div className="sectionTitleColor md:w-1/2 flex-col items-center justify-center text-6xl font-bold md:shrink-0">
+      <div className="sectionTitleColor md:w-1/2 flex-col items-center justify-center text-6xl font-bold">
         <div className="sectionTitle flex items-center justify-center font-light text-10xl leading-relaxed">Beginners Class</div>
         <div className="max-w-screen-lg mx-auto p-4">
           <div className="flex flex-wrap">
            {/* <div className="bg-clip-border m-4 p-16 border-4 bg-white rounded-lg"> */}
            {randomAsanas.map((asana) =>     
                 
-                <div key={asana._id} className="width=20% height=20% bg-clip-border border-4 bg-white rounded-lg">
+                <div key={asana._id} className="randomAsana bg-clip-border m-6 border-4 bg-white rounded-lg flex items-center justify-center felx-wrap">
                 <img className="w-full" src={asana.img_url} alt="preview class" asana={asana}/>
                 </div>
                

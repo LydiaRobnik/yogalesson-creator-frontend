@@ -1,9 +1,17 @@
 @import '../../style/variables.scss';
 
-.main {
-  background-color: $clr-beige;
+.footer {
+  background-color: $clr-light;
+  
+  .icon {
+    color: $clr-blue-darkest;
+  }
+  .copyright {
+  font-family: $font-manjari;
 
 }
+}
+
 
 
 
