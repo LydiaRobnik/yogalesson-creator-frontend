@@ -7,16 +7,12 @@ import AsanaCard from '../AsanaCard/AsanaCard';
 
 const Asanas = () => {
   const {
-    selectedAsanas,
-    setSelectedAsanas,
     userClasses,
     setUserClasses,
     asanas,
     setAsanas,
     userSequences,
     setUserSequences,
-    selectedSequences,
-    setSelectedSequences,
     loading,
     setLoading,
     gridResponsiveness
@@ -136,7 +132,6 @@ const Asanas = () => {
               test
             </div>
           </div>
-
           <div className="asanas-jsx flex justify-center gap-4 w-full">
             <div
               className={`filter-section  flex flex-col gap-4 text-black ${
@@ -214,11 +209,7 @@ const Asanas = () => {
                   ))}
               </div>
             </div>
-
             <div className="grow flex flex-row flex-wrap">
-              {/* <div
-              className={` justify-center grid gap-4 ${gridResponsiveness()}`}
-            > */}
               {asanas &&
                 asanas
                   // filter by name
@@ -247,13 +238,9 @@ const Asanas = () => {
                   )
                   .map((asana) => (
                     <div key={asana._id}>
-                      <AsanaCard
-                        asana={asana}
-                        setSelectedAsanas={setSelectedAsanas}
-                      />
+                      <AsanaCard asana={asana} />
                     </div>
                   ))}
-              {/* </div> */}
             </div>
           </div>
         </div>

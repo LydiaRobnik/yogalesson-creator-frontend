@@ -1,15 +1,14 @@
-import React, { useState, useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
-import { useNavigate, useOutletContext } from "react-router-dom";
-import "./planner.scss";
-import Sequence from "../Sequence/Sequence";
-import NewSequence from "../NewSequence.jsx/NewSequence";
-import SequencePlanned from "../SequencePlanned/SequencePlanned";
+import React, { useState, useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import { useNavigate, useOutletContext } from 'react-router-dom';
+import './planner.scss';
+import Sequence from '../Sequence/Sequence';
+import NewSequence from '../NewSequence.jsx/NewSequence';
+import SequencePlanned from '../SequencePlanned/SequencePlanned';
+import asanaService from '../../api/asanaService';
 
 export default function Planner() {
   const {
-    selectedAsanas,
-    setSelectedAsanas,
     userClasses,
     setUserClasses,
     asanas,
@@ -17,8 +16,6 @@ export default function Planner() {
     userSequences,
     setUserSequences,
     loading,
-    selectedSequences,
-    setSelectedSequences,
     yogaClassToAdd,
     setYogaClassToAdd,
     sequenceToAdd,
@@ -27,20 +24,18 @@ export default function Planner() {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // const [sequenceToAdd, setSequenceToAdd] = useState({
-  //   user: user.id,
-  //   type: "sequence",
-  //   duration: 3,
-  //   description: "",
-  //   title: "",
-  //   asanas: []
-  // });
-
-  // functions
-  // const addNewSequence = () => {};
-
-  // console.log("sequenceToAdd", sequenceToAdd);
-  // console.log("selectedSequences", selectedSequences);
+  const createClass = async () => {
+    const newClass = { ...yogaClassToAdd };
+    const result = await asanaService.createClass(newClass);
+    console.log('📒 createClass', result);
+    const classObj = {
+      title: `${user.name}'s ${userClasses.length + 1}. class`,
+      user: user?.id,
+      plan: [],
+      favourite: false
+    };
+    setYogaClassToAdd(classObj);
+  };
 
   return (
     <>
@@ -49,7 +44,7 @@ export default function Planner() {
           src="https://assets1.lottiefiles.com/packages/lf20_s00z9gco.json"
           background="transparent"
           speed="1"
-          style={{ width: "300px", height: "300px" }}
+          style={{ width: '300px', height: '300px' }}
           loop
           autoplay
         ></lottie-player>
@@ -57,20 +52,32 @@ export default function Planner() {
 
       {!loading && (
         <>
-          <div className="w-screen mx-10">
+          <div className="mx-10 flex flex-row">
             <input
               type="text"
-              className="color-blue-darkest text-left justify-start w-full px-10 text-4xl"
+              className="color-blue-darkest text-left px-10 text-4xl"
               placeholder="draft class - title"
               value={yogaClassToAdd.title}
               onChange={(e) =>
-                setYogaClassToAdd({ ...yogaClassToAdd, title: e.target.value })
+                setYogaClassToAdd({
+                  ...yogaClassToAdd,
+                  title: e.target.value
+                })
               }
             />
+
+            <button
+              className="btn-red btn-blue:hover mx-2 flex flex-row items-center"
+              onClick={() => createClass()}
+            >
+              <p className="font-material-symbols inline pr-2">save</p>
+              <p className="inline pt-1 text-lg">save class</p>
+            </button>
           </div>
+
           <div className="w-screen mx-10">
-            {selectedSequences &&
-              selectedSequences.map((sequence, index) => (
+            {yogaClassToAdd.plan &&
+              yogaClassToAdd.plan.map((sequence, index) => (
                 <div
                   key={(sequence._id, index)}
                   className="rounded bg-light m-10"
@@ -80,10 +87,7 @@ export default function Planner() {
               ))}
           </div>
 
-          <NewSequence
-          // sequenceToAdd={sequenceToAdd}
-          // setSequenceToAdd={setSequenceToAdd}
-          />
+          <NewSequence />
 
           <div className=" w-screen h-screen mx-10 flex flex-row justify-center">
             {/* <div
@@ -96,8 +100,8 @@ export default function Planner() {
               <p className="color-blue-darkest pt-5">new sequence</p>
             </div> */}
             <div
-              className="flex flex-row items-start cursor-pointer px-3"
-              onClick={() => navigate("/user/sequences")}
+              className="flex flex-row justify-self-center cursor-pointer px-3"
+              onClick={() => navigate('/user/sequences')}
             >
               <span className="font-material-symbols modal color-blue-darkest text-4xl p-l">
                 add_circle
