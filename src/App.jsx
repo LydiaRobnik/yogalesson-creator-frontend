@@ -1,15 +1,16 @@
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
-import Layout from "./components/Layout/Layout";
-import Home from "./components/Home/Home";
-import UserSection from "./components/User/UserSection";
-import Dashboard from "./components/Dashboard/Dashboard";
-import Planner from "./components/Planner/Planner";
-import Asanas from "./components/Asanas/Asanas";
-import SequenceCollection from "./components/SequenceCollection/SequenceCollection";
-import Page404 from "./components/Error/404";
-import Page403 from "./components/Error/403";
-import "./style/app.scss";
-import AuthState from "./context/AuthContext";
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import Layout from './components/Layout/Layout';
+import Home from './components/Home/Home';
+import UserSection from './components/User/UserSection';
+import Dashboard from './components/Dashboard/Dashboard';
+import Planner from './components/Planner/Planner';
+import Asanas from './components/Asanas/Asanas';
+import SequenceCollection from './components/SequenceCollection/SequenceCollection';
+import Calendar from './components/Calendar/Calendar';
+import Page404 from './components/Error/404';
+import Page403 from './components/Error/403';
+import './style/app.scss';
+import AuthState from './context/AuthContext';
 
 function App() {
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ function App() {
               <Route path="planner" element={<Planner />} />
               <Route path="asanas" element={<Asanas />} />
               <Route path="sequences" element={<SequenceCollection />} />
+              <Route path="calendar" element={<Calendar />} />
             </Route>
             <Route path={`/403`} element={<Page403 />} />
           </Route>

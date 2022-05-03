@@ -1,0 +1,14 @@
+@import '../../style/variables.scss';
+
+#div-calendar {
+  // scss-variablen verwenden
+  // background: $clr-red;
+  th {
+    background: $clr-red;
+    color: $clr-light;
+  }
+
+  th div a {
+    margin-top: 4px;
+  }
+}
