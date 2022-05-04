@@ -5,7 +5,7 @@ import { AuthContext } from '../../context/AuthContext';
 import AsanaCard from '../AsanaCard/AsanaCard';
 import './newSequence.scss';
 
-const NewSequence = ({ handleFocus, showNewSequence }) => {
+const NewSequence = ({ handleFocus }) => {
   const navigate = useNavigate();
   const { loggedIn, user } = useContext(AuthContext);
   console.log('user', user.id);
@@ -21,7 +21,9 @@ const NewSequence = ({ handleFocus, showNewSequence }) => {
     yogaClassToAdd,
     setYogaClassToAdd,
     sequenceToAdd,
-    setSequenceToAdd
+    setSequenceToAdd,
+    showNewSequence,
+    setShowNewSequence
   } = useOutletContext();
 
   useEffect(() => {
@@ -56,7 +58,7 @@ const NewSequence = ({ handleFocus, showNewSequence }) => {
       asanas: []
     };
     setSequenceToAdd(seqObj);
-    showNewSequence.current = false;
+    setShowNewSequence(false);
   };
 
   const handleRemoveAsana = (asana) => {

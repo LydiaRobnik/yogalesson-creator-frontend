@@ -133,6 +133,17 @@
     background-color: $clr-beige;
     @apply text-white;
   }
+  .btn-neutral {
+    background-color: $clr-blue-light;
+    color: $clr-blue-dark;
+  }
+  .btn-neutral:hover {
+    background-color: $clr-beige;
+    color: $clr-blue-darkest;
+  }
+
+
+
 
 }
 

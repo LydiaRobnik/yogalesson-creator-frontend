@@ -1,13 +1,12 @@
 import React, { useContext, useEffect } from 'react';
+import './classCollection.scss';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import './dashboard.scss';
 import useBreakpoint from '../../custom/useBreakpoint';
 import ClassCard from '../ClassCard/ClassCard.jsx';
 import asanaService from '../../api/asanaService';
 
-export default function Dashboard() {
-  // states
+const Class = () => {
   const {
     userClasses,
     setUserClasses,
@@ -29,11 +28,6 @@ export default function Dashboard() {
   userClasses.sort((a, b) => {
     return new Date(b.modifiedAt) - new Date(a.modifiedAt);
   });
-
-  // filter favorites
-  const favorites = userClasses.filter(
-    (classItem) => classItem.favourite === true
-  );
 
   const createClass = async () => {
     const newClass = {
@@ -103,16 +97,11 @@ export default function Dashboard() {
               </>
             )}
             {userClasses.length > 0 && (
-              <div className="flex flex-row items-center">
-                <h2
-                  className={`${point === 'xs' ? 'text-center' : 'text-start'}`}
-                >
-                  recently used
-                </h2>
-                <button className="btn-neutral btn-neutral:hover bg-blue-middle mx-2 ml-5 flex flex-row items-center">
-                  <p className="inline pt-1 text-lg">show all</p>
-                </button>
-              </div>
+              <h2
+                className={`${point === 'xs' ? 'text-center' : 'text-start'}`}
+              >
+                My Classes
+              </h2>
             )}
             <div
               className={`justify-center grid gap-4 ${gridResponsiveness()}`}
@@ -125,54 +114,10 @@ export default function Dashboard() {
                 ))}
             </div>
           </div>
-
-          <div
-            className={`p-6
-       w-full ${point === 'xs' ? 'justify-center' : 'justify-start'}`}
-          >
-            {userClasses.length > 0 ||
-              (favorites.length === 0 && (
-                <>
-                  <div className="flex flex-col justify-center">
-                    <span className="material-symbols-outlined color-blue-darkest text-center text-4xl p-2">
-                      folder_special
-                    </span>
-                    <h3 className="color-blue-darkest text-center font-bold">
-                      No favorites defined
-                    </h3>
-                    <p className="color-blue-darkest text-center">
-                      Get started by marking them.
-                    </p>
-                  </div>
-                </>
-              ))}
-            {favorites.length > 0 && (
-              <div className="flex flex-row ">
-                <h2
-                  className={`inline ${
-                    point === 'xs' ? 'text-center' : 'text-start'
-                  }`}
-                >
-                  favorites
-                </h2>
-                <span className="font-material color-red text-4xl mt-7 mb-5">
-                  star
-                </span>
-              </div>
-            )}
-            <div
-              className={`justify-center grid gap-4  mb-8 ${gridResponsiveness()}`}
-            >
-              {favorites &&
-                favorites.map((favoritItem) => (
-                  <div key={favoritItem._id}>
-                    <ClassCard classItem={favoritItem} />
-                  </div>
-                ))}
-            </div>
-          </div>
         </>
       )}
     </>
   );
-}
+};
+
+export default Class;
