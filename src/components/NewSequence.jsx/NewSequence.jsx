@@ -5,7 +5,7 @@ import { AuthContext } from '../../context/AuthContext';
 import AsanaCard from '../AsanaCard/AsanaCard';
 import './newSequence.scss';
 
-const NewSequence = ({ handleFocus, setShow, show }) => {
+const NewSequence = ({ handleFocus, showNewSequence }) => {
   const navigate = useNavigate();
   const { loggedIn, user } = useContext(AuthContext);
   console.log('user', user.id);
@@ -53,8 +53,7 @@ const NewSequence = ({ handleFocus, setShow, show }) => {
       asanas: []
     };
     setSequenceToAdd(seqObj);
-    setShow(false);
-    console.log(show);
+    showNewSequence.current = false;
   };
 
   return (

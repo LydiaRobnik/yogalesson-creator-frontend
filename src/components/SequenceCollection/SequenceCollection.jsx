@@ -4,6 +4,7 @@ import { AuthContext } from '../../context/AuthContext';
 import './sequenceCollection.scss';
 import useBreakpoint from '../../custom/useBreakpoint';
 import Sequence from '../Sequence/Sequence.jsx';
+import asanaService from '../../api/asanaService';
 
 const SequenceCollection = () => {
   // states
@@ -16,7 +17,8 @@ const SequenceCollection = () => {
     userSequences,
     setUserSequences,
     yogaClassToAdd,
-    loading
+    loading,
+    setSequenceToAdd
   } = useOutletContext();
   const point = useBreakpoint();
   const navigate = useNavigate();
@@ -28,6 +30,21 @@ const SequenceCollection = () => {
 
   const handleSelectSequence = (choice) => {
     yogaClassToAdd.plan.push(choice);
+    navigate(`../planner`);
+  };
+
+  const handleCopySequence = async (sequenceToCopy) => {
+    const copy = {
+      ...sequenceToCopy,
+      title: `${sequenceToCopy.title} (copy)`,
+      _id: ''
+    };
+    console.log('sequenceToCopy', sequenceToCopy);
+    console.log('copy', copy);
+    const result = await asanaService.createSequence(copy);
+    console.log('📒 newSequence', result);
+    setSequenceToAdd(result);
+    // setShow(true);
     navigate(`../planner`);
   };
 
@@ -81,8 +98,14 @@ const SequenceCollection = () => {
                   className="btn-blue btn-blue:hover mx-2 flex flex-row items-center cursor-pointer p-0 self-center"
                   onClick={() => handleSelectSequence(sequence)}
                 >
-                  <span className="font-material inline pr-2">add</span>
-                  <p className="inline pt-1 text-lg">add sequence to class</p>
+                  {/* <span className="font-material inline pr-2">add</span> */}
+                  <p className="inline pt-1 text-lg">add</p>
+                </button>
+                <button
+                  className="btn-blue btn-blue:hover mx-2 flex flex-row items-center cursor-pointer p-0 self-center"
+                  onClick={() => handleCopySequence(sequence)}
+                >
+                  <p className="inline pt-1 text-lg">copy</p>
                 </button>
               </div>
             ))}
