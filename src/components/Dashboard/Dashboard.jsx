@@ -55,7 +55,7 @@ export default function Dashboard() {
   };
 
   const markAsSelected = (classCardToSelect) => {
-    setSelectedCard(classCardToSelect._id);
+    setSelectedCard(classCardToSelect);
     console.log('card is selected', classCardToSelect);
   };
 
@@ -132,14 +132,15 @@ export default function Dashboard() {
                   <div
                     key={classItem._id}
                     onClick={() => {
-                      markAsSelected(classItem);
+                      markAsSelected(classItem._id);
                     }}
+                    className={`rounded overflow-hidden w-72 m-2 ${
+                      selectedCard === classItem._id
+                        ? 'border-solid border-2 border-rose-400 shadow-xl'
+                        : 'shadow-lg'
+                    }`}
                   >
-                    <ClassCard
-                      classItem={classItem}
-                      selectedCard={selectedCard}
-                      setSelectedCard={setSelectedCard}
-                    />
+                    <ClassCard classItem={classItem} />
                   </div>
                 ))}
             </div>
@@ -182,7 +183,17 @@ export default function Dashboard() {
             <div className="flex flex-row flex-wrap">
               {favorites &&
                 favorites.map((favoritItem) => (
-                  <div key={favoritItem._id}>
+                  <div
+                    key={`${favoritItem._id}_favorite`}
+                    onClick={() => {
+                      markAsSelected(`${favoritItem._id}_favorite`);
+                    }}
+                    className={`rounded overflow-hidden w-72 m-2 ${
+                      selectedCard === `${favoritItem._id}_favorite`
+                        ? 'border-solid border-2 border-rose-400 shadow-xl'
+                        : 'shadow-lg'
+                    }`}
+                  >
                     <ClassCard classItem={favoritItem} />
                   </div>
                 ))}

@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import http from '../../api/http-common';
 
-const ClassCard = ({ classItem, selectedCard, setSelectedCard }) => {
+const ClassCard = ({ classItem }) => {
   const { setUserClasses, setYogaClassToAdd } = useOutletContext();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -45,18 +45,10 @@ const ClassCard = ({ classItem, selectedCard, setSelectedCard }) => {
     }
   };
 
-  // const showBorder = (selectedCard, classItem) => {
-  //   if (selectedCard === classItem._id) setShow(true);
-  // };
-
   return (
     <>
       <div
-        className={`rounded overflow-hidden w-72 m-2 ${
-          selectedCard === classItem._id
-            ? 'border-solid border-2 border-rose-400 shadow-xl'
-            : 'shadow-lg'
-        }`}
+        className="rounded overflow-hidden w-72 m-2"
         onDoubleClick={() => {
           openClassInPlanner();
         }}
