@@ -41,7 +41,9 @@
 .cardsHome {
   background-color: $clr-beige;
   height: 40%;
+  min-height: 9em;
   width: 25%;
+  min-width: 10em;
 }
 
 .randomAsana {

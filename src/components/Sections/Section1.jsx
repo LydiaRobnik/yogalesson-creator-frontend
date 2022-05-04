@@ -3,7 +3,7 @@ import './sections.scss';
 import flowers from '../../pictures/flowers.jpg';
 import { useState, useEffect, useContext } from 'react';
 import asanaService from "../../api/asanaService";
-import AsanaCard from "../AsanaCard/AsanaCard";
+
 
 
 export default function Section1() {
