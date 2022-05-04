@@ -37,13 +37,13 @@ const ClassCard = ({ classItem }) => {
   return (
     <>
       <div
-        className="rounded overflow-hidden shadow-lg"
+        className="rounded overflow-hidden shadow-lg w-72 m-2"
         onDoubleClick={() => {
           openClassInPlanner();
         }}
       >
         <img
-          className="w-full"
+          className="w-full h-36 object-cover"
           src={`${classItem.preview}`}
           alt="preview class"
         />
@@ -52,19 +52,22 @@ const ClassCard = ({ classItem }) => {
           <p className="color-blue-darkest text-xs">
             {new Date(classItem.modifiedAt).toLocaleString()}
           </p>
-          <span
-            className="font-material-symbols color-red text-2xl cursor-pointer"
-            onClick={() => handleFavorite()}
-          >
-            {classItem.favourite ? 'star' : 'grade'}
-          </span>
 
-          <button
-            className="btn-red btn-blue:hover m-2 p-0 flex flex-row items-center cursor-pointer"
-            onClick={() => handleDeleteClass(classItem)}
-          >
-            <p className="font-material-symbols p-0">delete</p>
-          </button>
+          <div className="flex flex-row justify-between">
+            <span
+              className="font-material-symbols color-red text-2xl cursor-pointer"
+              onClick={() => handleFavorite()}
+            >
+              {classItem.favourite ? 'star' : 'grade'}
+            </span>
+
+            <button
+              className="btn-red btn-blue:hover m-2 p-0 flex flex-row items-center cursor-pointer"
+              onClick={() => handleDeleteClass(classItem)}
+            >
+              <p className="font-material-symbols p-0">delete</p>
+            </button>
+          </div>
         </div>
       </div>
     </>
