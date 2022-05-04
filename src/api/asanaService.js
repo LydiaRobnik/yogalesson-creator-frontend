@@ -152,6 +152,51 @@ class AsanaService {
     return resp.data;
   }
 
+  //  #########
+
+  async getUserCalendar(userId) {
+    const resp = await this.doApiCall(
+      async () => await http().get(`/calendar/?user=${userId}`)
+    );
+
+    return resp.data.sort((a, b) => b.modifiedAt - a.modifiedAt);
+  }
+
+  async getCalendarEntry(id) {
+    const resp = await this.doApiCall(
+      async () => await http().get(`/calendar/${id}`)
+    );
+
+    return resp.data;
+  }
+
+  async createCalendarEntry(calendarObj) {
+    const resp = await this.doApiCall(
+      async () => await http().post('/calendar', calendarObj)
+    );
+
+    return resp.data;
+  }
+
+  async saveCalendarEntry(calendarObj) {
+    if (!calendarObj._id) throw new Error('Calendar must have an _id');
+    const resp = await this.doApiCall(
+      async () => await http().put(`/calendar/${calendarObj._id}`, calendarObj)
+    );
+
+    return resp.data;
+  }
+
+  async deleteCalendarEntry(id) {
+    if (!id) throw new Error('invalid _id');
+    const resp = await this.doApiCall(
+      async () => await http().delete(`/calendar/${id}`)
+    );
+
+    return resp.data;
+  }
+  //  #########
+
   async uploadPreview(classId, image) {
     let fd = new FormData();
     fd.append('preview_pic', dataURItoBlob(image), 'preview_pic.png');

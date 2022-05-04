@@ -6,6 +6,7 @@
   th {
     background: $clr-red;
     color: $clr-light;
+    font-size: smaller;
 
     .fc-day-sun,
     .fc-day-sat {
@@ -20,12 +21,43 @@
   .cal-infobar {
     min-width: 10rem;
   }
+
+  .btn-modal {
+    padding: 0 !important;
+  }
+}
+
+.btn-modal-close {
+  padding: 0 !important;
+  padding-top: 2px !important;
+  transform: rotate(45deg);
+
+  &:hover {
+    // transform: scale(1.1);
+    transform: rotate(45deg) scale(1.2);
+  }
 }
 
 #CalendarEntryDialog-jsx {
   .cal-entry-userclasses {
     height: 50vh;
     overflow-y: scroll;
+  }
+
+  .green {
+    background-color: rgb(34, 182, 34);
+  }
+
+  .orange {
+    background-color: rgb(206, 137, 9);
+  }
+
+  .blue {
+    background-color: rgb(67, 67, 196);
+  }
+
+  .red {
+    background-color: rgb(141, 23, 141);
   }
 }
 
