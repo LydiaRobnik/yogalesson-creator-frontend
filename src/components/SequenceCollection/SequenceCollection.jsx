@@ -18,7 +18,8 @@ const SequenceCollection = () => {
     setUserSequences,
     yogaClassToAdd,
     loading,
-    setSequenceToAdd
+    setSequenceToAdd,
+    setShowNewSequence
   } = useOutletContext();
   const point = useBreakpoint();
   const navigate = useNavigate();
@@ -39,12 +40,10 @@ const SequenceCollection = () => {
       title: `${sequenceToCopy.title} (copy)`,
       _id: ''
     };
-    console.log('sequenceToCopy', sequenceToCopy);
-    console.log('copy', copy);
     const result = await asanaService.createSequence(copy);
     console.log('📒 newSequence', result);
     setSequenceToAdd(result);
-    // setShow(true);
+    setShowNewSequence(true);
     navigate(`../planner`);
   };
 
