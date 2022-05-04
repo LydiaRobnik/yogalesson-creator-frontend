@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import asanaService from '../../api/asanaService';
+import { AuthContext } from '../../context/AuthContext';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 
 const ClassCard = ({ classItem }) => {
-  const handleFavorite = () => {
-    console.log(classItem.favourite);
+  const { setUserClasses } = useOutletContext();
+  const { user } = useContext(AuthContext);
+
+  const handleFavorite = async () => {
     classItem.favourite = !classItem.favourite;
-    console.log(classItem.favourite);
+    const classToSave = { ...classItem };
+    const result = await asanaService.saveClass(classToSave);
+    console.log('📒 saveClass', result);
+    asanaService.getUserClasses(user.id).then((data) => {
+      setUserClasses(data);
+    });
   };
 
   return (
@@ -17,10 +27,10 @@ const ClassCard = ({ classItem }) => {
             {new Date(classItem.modifiedAt).toLocaleString()}
           </p>
           <span
-            className="font-material color-red text-2xl cursor-pointer"
+            className="font-material-symbols color-red text-2xl cursor-pointer"
             onClick={() => handleFavorite()}
           >
-            star
+            {classItem.favourite ? 'star' : 'grade'}
           </span>
         </div>
       </div>
