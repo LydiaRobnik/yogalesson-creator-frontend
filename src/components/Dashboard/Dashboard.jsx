@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import './dashboard.scss';
@@ -20,6 +20,10 @@ export default function Dashboard() {
     yogaClassToAdd,
     setYogaClassToAdd
   } = useOutletContext();
+  const [selectedCard, setSelectedCard] = useState({
+    border: false,
+    selectedCard: null
+  });
 
   const point = useBreakpoint();
   const navigate = useNavigate();
@@ -48,6 +52,11 @@ export default function Dashboard() {
     console.log('📒 createClass', result);
     setYogaClassToAdd(result);
     navigate(`/user/planner/${yogaClassToAdd._id}`);
+  };
+
+  const markAsSelected = (classCardToSelect) => {
+    setSelectedCard(classCardToSelect._id);
+    console.log('card is selected', classCardToSelect);
   };
 
   return (
@@ -120,8 +129,17 @@ export default function Dashboard() {
             >
               {userClasses &&
                 userClasses.map((classItem) => (
-                  <div key={classItem._id}>
-                    <ClassCard classItem={classItem} />
+                  <div
+                    key={classItem._id}
+                    onClick={() => {
+                      markAsSelected(classItem);
+                    }}
+                  >
+                    <ClassCard
+                      classItem={classItem}
+                      selectedCard={selectedCard}
+                      setSelectedCard={setSelectedCard}
+                    />
                   </div>
                 ))}
             </div>

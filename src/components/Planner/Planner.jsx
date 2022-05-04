@@ -67,6 +67,16 @@ export default function Planner() {
     setShowNewSequence(true);
   };
 
+  const editClass = (e) => {
+    setYogaClassToAdd({
+      ...yogaClassToAdd,
+      title: e.target.value
+    });
+    asanaService.getUserClasses(user.id).then((data) => {
+      setUserClasses(data);
+    });
+  };
+
   return (
     <>
       {loading && (
@@ -81,19 +91,14 @@ export default function Planner() {
       )}
 
       {!loading && (
-        <div ref={imgEl} className="w-screen">
+        <div ref={imgEl} className="w-screen h-screen">
           <div className="mx-10 flex flex-row">
             <input
               type="text"
               className="color-blue-darkest text-left px-10 text-4xl"
               placeholder={`${user.name}'s class no. ${userClasses.length + 1}`}
               value={yogaClassToAdd.title}
-              onChange={(e) =>
-                setYogaClassToAdd({
-                  ...yogaClassToAdd,
-                  title: e.target.value
-                })
-              }
+              onChange={editClass}
               onFocus={handleFocus}
             />
           </div>
