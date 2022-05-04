@@ -103,9 +103,7 @@ const Class = () => {
                 My Classes
               </h2>
             )}
-            <div
-              className={`justify-center grid gap-4 ${gridResponsiveness()}`}
-            >
+            <div className="flex flex-row flex-wrap">
               {userClasses &&
                 userClasses.map((classItem) => (
                   <div key={classItem._id}>

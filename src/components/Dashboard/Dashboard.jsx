@@ -115,7 +115,8 @@ export default function Dashboard() {
               </div>
             )}
             <div
-              className={`justify-center grid gap-4 ${gridResponsiveness()}`}
+              className="flex flex-row flex-wrap"
+              // className={`justify-center grid gap-4 ${gridResponsiveness()}`}
             >
               {userClasses &&
                 userClasses.map((classItem) => (
@@ -160,9 +161,7 @@ export default function Dashboard() {
                 </span>
               </div>
             )}
-            <div
-              className={`justify-center grid gap-4  mb-8 ${gridResponsiveness()}`}
-            >
+            <div className="flex flex-row flex-wrap">
               {favorites &&
                 favorites.map((favoritItem) => (
                   <div key={favoritItem._id}>
