@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 
 const ClassCard = ({ classItem }) => {
-  const { setUserClasses } = useOutletContext();
+  const { setUserClasses, setYogaClassToAdd } = useOutletContext();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -19,6 +19,7 @@ const ClassCard = ({ classItem }) => {
   };
 
   const openClassInPlanner = () => {
+    setYogaClassToAdd(classItem);
     navigate(`/user/planner/${classItem._id}`);
   };
 
