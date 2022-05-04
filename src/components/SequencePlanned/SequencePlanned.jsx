@@ -12,9 +12,19 @@ const SequencePlanned = ({ sequence }) => {
     userSequences,
     setUserSequences,
     loading,
-    gridResponsiveness
+    gridResponsiveness,
+    yogaClassToAdd,
+    setYogaClassToAdd
   } = useOutletContext();
   const navigate = useNavigate();
+
+  const handleRemoveSequence = (sequence) => {
+    const sequenceToRemove = yogaClassToAdd.plan.indexOf(sequence);
+    yogaClassToAdd.plan.splice(sequenceToRemove, 1);
+    setYogaClassToAdd({ ...yogaClassToAdd });
+  };
+
+  const handleDeleteSequence = (sequence) => {};
 
   return (
     <>
@@ -22,6 +32,15 @@ const SequencePlanned = ({ sequence }) => {
         <h3 className="color-blue-darkest pl-3 p-3 font-bold text-xl">
           {sequence.title}
         </h3>
+        <p className="color-blue-darkest">
+          {new Date(sequence.modifiedAt).toLocaleString()}
+        </p>
+        <span
+          className="font-material-symbols color-blue-darkest cursor-pointer"
+          onClick={() => handleRemoveSequence(sequence)}
+        >
+          delete
+        </span>
       </div>
 
       <>

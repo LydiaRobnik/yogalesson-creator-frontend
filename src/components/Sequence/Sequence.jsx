@@ -12,7 +12,9 @@ const Sequence = ({ sequence, showMore }) => {
     userSequences,
     setUserSequences,
     loading,
-    gridResponsiveness
+    gridResponsiveness,
+    yogaClassToAdd,
+    setYogaClassToAdd
   } = useOutletContext();
   const navigate = useNavigate();
 
@@ -22,6 +24,9 @@ const Sequence = ({ sequence, showMore }) => {
         <h3 className="color-blue-darkest pr-3 pt-3 font-bold text-xl">
           {sequence.title}
         </h3>
+        <p className="color-blue-darkest">
+          {new Date(sequence.modifiedAt).toLocaleString()}
+        </p>
       </div>
 
       {showMore && (

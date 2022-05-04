@@ -5,7 +5,7 @@ import { AuthContext } from '../../context/AuthContext';
 import AsanaCard from '../AsanaCard/AsanaCard';
 import './newSequence.scss';
 
-const NewSequence = () => {
+const NewSequence = ({ handleFocus }) => {
   const navigate = useNavigate();
   const { loggedIn, user } = useContext(AuthContext);
   console.log('user', user.id);
@@ -21,27 +21,51 @@ const NewSequence = () => {
     yogaClassToAdd,
     setYogaClassToAdd,
     sequenceToAdd,
-    setSequenceToAdd
+    setSequenceToAdd,
+    showNewSequence,
+    setShowNewSequence
   } = useOutletContext();
+
+  useEffect(() => {
+    const saveSequenceToBackend = async () => {
+      if (sequenceToAdd.title.length === 0)
+        setSequenceToAdd({
+          ...sequenceToAdd,
+          title: `${user.name}'s sequence no. ${
+            userSequences.length + 1 + Math.random()
+          }`
+        });
+      const newSequence = { ...sequenceToAdd };
+      const result = await asanaService.saveSequence(newSequence);
+      console.log('📒 saveSequence', result);
+    };
+    saveSequenceToBackend();
+    asanaService.getUserSequences(user.id).then((data) => {
+      setUserSequences(data);
+    });
+  }, [sequenceToAdd]);
 
   const addSequenceToClass = async () => {
     const newSequence = { ...sequenceToAdd };
     yogaClassToAdd.plan.push(newSequence);
-    const result = await asanaService.createSequence(newSequence);
-    console.log('📒 createSequence', result);
 
     const seqObj = {
       user: user?.id,
       type: 'sequence',
       duration: 3,
       description: '',
-      title: `${user.name}'s ${userSequences.length + 1}. sequence`,
+      title: '',
       asanas: []
     };
     setSequenceToAdd(seqObj);
+    setShowNewSequence(false);
   };
 
-  // testCreateSequence().catch((error) => setError(error.message));
+  const handleRemoveAsana = (asana) => {
+    const asanaToRemove = sequenceToAdd.asanas.indexOf(asana);
+    sequenceToAdd.asanas.splice(asanaToRemove, 1);
+    setSequenceToAdd({ ...sequenceToAdd });
+  };
 
   return (
     <>
@@ -54,6 +78,7 @@ const NewSequence = () => {
           onChange={(e) =>
             setSequenceToAdd({ ...sequenceToAdd, title: e.target.value })
           }
+          onFocus={handleFocus}
         />
         <input
           type="text"
@@ -63,12 +88,22 @@ const NewSequence = () => {
           onChange={(e) =>
             setSequenceToAdd({ ...sequenceToAdd, description: e.target.value })
           }
+          onFocus={handleFocus}
         />
 
         <div className="flex">
           {sequenceToAdd.asanas?.map((asana, index) => (
-            <div key={(asana._id, index)}>
+            <div
+              key={(asana._id, index)}
+              className="flex flex-col items-center"
+            >
               <AsanaCard asana={asana} />
+              <span
+                className="font-material-symbols color-blue-darkest cursor-pointer"
+                onClick={() => handleRemoveAsana(asana)}
+              >
+                delete
+              </span>
             </div>
           ))}
         </div>
@@ -87,7 +122,7 @@ const NewSequence = () => {
             onClick={() => navigate('../asanas')}
           >
             <span className="font-material inline pr-2">add</span>
-            <p className="inline pt-1 text-lg ">add asana</p>
+            <p className="inline pt-1 text-lg ">asana</p>
           </button>
 
           <button

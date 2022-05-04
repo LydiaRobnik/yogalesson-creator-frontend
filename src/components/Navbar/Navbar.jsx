@@ -10,7 +10,8 @@ import SignupModal from '../Login/SignupModal';
 
 const navigation = [
   { name: 'Dashboard', path: '/user/dashboard', current: false },
-  { name: 'Classes', path: '/user/planner', current: false },
+  { name: 'Planner', path: '/user/planner', current: false },
+  { name: 'My Classes', path: '/user/classes', current: false },
   { name: 'Calendar', path: '/user/calendar', current: false }
 ];
 
@@ -55,8 +56,8 @@ export default function Navbar() {
       <Disclosure as="nav" className="bg-light color">
         {({ open }) => (
           <>
-            <div className="navbar max-w-7xl mx-auto px-2 sm:px-6">
-              <div className="relative flex items-center justify-between h-16 mx-auto">
+            <div className="navbar max-w-7xl px-2 sm:px-2">
+              <div className="relative flex items-center justify-between h-16">
                 {loggedIn && (
                   <div className="absolute inset-y-0 left-0 flex items-center sm:hidden mx-auto">
                     {/* Mobile menu button*/}
@@ -92,7 +93,7 @@ export default function Navbar() {
                   </div>
 
                   {loggedIn && (
-                    <div className="hidden sm:block sm:ml-6 ">
+                    <div className="hidden sm:block sm:ml-6 self-center ">
                       <div className="flex space-x-4">
                         {navigation.map((item) => (
                           <NavLink
@@ -151,7 +152,7 @@ export default function Navbar() {
                   )}
                 </div>
 
-                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-0 sm:pr-0">
                   {/* Profile dropdown */}
                   {loggedIn && (
                     <Menu as="div" className="ml-3 relative">
