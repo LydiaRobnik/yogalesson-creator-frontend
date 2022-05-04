@@ -20,10 +20,7 @@ export default function Dashboard() {
     yogaClassToAdd,
     setYogaClassToAdd
   } = useOutletContext();
-  const [selectedCard, setSelectedCard] = useState({
-    border: false,
-    selectedCard: null
-  });
+  const [selectedCard, setSelectedCard] = useState(null);
 
   const point = useBreakpoint();
   const navigate = useNavigate();
@@ -56,7 +53,6 @@ export default function Dashboard() {
 
   const markAsSelected = (classCardToSelect) => {
     setSelectedCard(classCardToSelect);
-    console.log('card is selected', classCardToSelect);
   };
 
   return (
