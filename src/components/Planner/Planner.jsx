@@ -19,12 +19,13 @@ export default function Planner() {
     yogaClassToAdd,
     setYogaClassToAdd,
     sequenceToAdd,
-    setSequenceToAdd
+    setSequenceToAdd,
+    showNewSequence,
+    setShowNewSequence
   } = useOutletContext();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   // const [show, setShow] = useState(false);
-  const showNewSequence = useRef(false);
 
   const imgEl = useRef();
 
@@ -74,8 +75,7 @@ export default function Planner() {
     const result = await asanaService.createSequence(newSequence);
     console.log('📒 newSequence', result);
     setSequenceToAdd(result);
-    // setShow(true);
-    showNewSequence.current = true;
+    setShowNewSequence(true);
   };
 
   return (
@@ -129,7 +129,6 @@ export default function Planner() {
               handleFocus={handleFocus}
               // setShow={setShow}
               // show={show}
-              showNewSequence={showNewSequence}
             />
           )}
 

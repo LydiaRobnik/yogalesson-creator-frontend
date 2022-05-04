@@ -15,6 +15,7 @@ export default function UserSection() {
   const [userSequences, setUserSequences] = useState([]);
   const [asanas, setAsanas] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showNewSequence, setShowNewSequence] = useState(false);
   const [yogaClassToAdd, setYogaClassToAdd] = useState({
     title: '',
     user: user.id,
@@ -90,7 +91,9 @@ export default function UserSection() {
                 setYogaClassToAdd,
                 sequenceToAdd,
                 setSequenceToAdd,
-                setLoading
+                setLoading,
+                showNewSequence,
+                setShowNewSequence
               }}
             />
           ) : (
