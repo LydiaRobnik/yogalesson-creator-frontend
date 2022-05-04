@@ -1,6 +1,12 @@
-import React from "react";
+import React from 'react';
 
 const ClassCard = ({ classItem }) => {
+  const handleFavorite = () => {
+    console.log(classItem.favourite);
+    classItem.favourite = !classItem.favourite;
+    console.log(classItem.favourite);
+  };
+
   return (
     <>
       <div className="rounded overflow-hidden shadow-lg">
@@ -10,6 +16,12 @@ const ClassCard = ({ classItem }) => {
           <p className="color-blue-darkest text-xs">
             {new Date(classItem.modifiedAt).toLocaleString()}
           </p>
+          <span
+            className="font-material color-red text-2xl cursor-pointer"
+            onClick={() => handleFavorite()}
+          >
+            star
+          </span>
         </div>
       </div>
     </>
