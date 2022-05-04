@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import './dashboard.scss';
@@ -20,6 +20,10 @@ export default function Dashboard() {
     yogaClassToAdd,
     setYogaClassToAdd
   } = useOutletContext();
+  const [selectedCard, setSelectedCard] = useState({
+    border: false,
+    selectedCard: null
+  });
 
   const point = useBreakpoint();
   const navigate = useNavigate();
@@ -48,6 +52,11 @@ export default function Dashboard() {
     console.log('📒 createClass', result);
     setYogaClassToAdd(result);
     navigate(`/user/planner/${yogaClassToAdd._id}`);
+  };
+
+  const markAsSelected = (classCardToSelect) => {
+    setSelectedCard(classCardToSelect);
+    console.log('card is selected', classCardToSelect);
   };
 
   return (
@@ -120,7 +129,17 @@ export default function Dashboard() {
             >
               {userClasses &&
                 userClasses.map((classItem) => (
-                  <div key={classItem._id}>
+                  <div
+                    key={classItem._id}
+                    onClick={() => {
+                      markAsSelected(classItem._id);
+                    }}
+                    className={`rounded overflow-hidden w-72 m-2 ${
+                      selectedCard === classItem._id
+                        ? 'border-solid border-2 border-rose-400 shadow-xl'
+                        : 'shadow-lg'
+                    }`}
+                  >
                     <ClassCard classItem={classItem} />
                   </div>
                 ))}
@@ -164,7 +183,17 @@ export default function Dashboard() {
             <div className="flex flex-row flex-wrap">
               {favorites &&
                 favorites.map((favoritItem) => (
-                  <div key={favoritItem._id}>
+                  <div
+                    key={`${favoritItem._id}_favorite`}
+                    onClick={() => {
+                      markAsSelected(`${favoritItem._id}_favorite`);
+                    }}
+                    className={`rounded overflow-hidden w-72 m-2 ${
+                      selectedCard === `${favoritItem._id}_favorite`
+                        ? 'border-solid border-2 border-rose-400 shadow-xl'
+                        : 'shadow-lg'
+                    }`}
+                  >
                     <ClassCard classItem={favoritItem} />
                   </div>
                 ))}
