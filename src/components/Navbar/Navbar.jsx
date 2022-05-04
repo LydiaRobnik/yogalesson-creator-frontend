@@ -10,7 +10,8 @@ import SignupModal from '../Login/SignupModal';
 
 const navigation = [
   { name: 'Dashboard', path: '/user/dashboard', current: false },
-  { name: 'Classes', path: '/user/planner', current: false },
+  { name: 'Planner', path: '/user/planner', current: false },
+  { name: 'My Classes', path: '/user/classes', current: false },
   { name: 'Calendar', path: '/user/calendar', current: false }
 ];
 
