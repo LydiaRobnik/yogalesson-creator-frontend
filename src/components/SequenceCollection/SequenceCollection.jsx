@@ -48,6 +48,15 @@ const SequenceCollection = () => {
     navigate(`../planner`);
   };
 
+  const handleDeleteSequence = async (sequenceToDelete) => {
+    const id = sequenceToDelete._id;
+    const result = await asanaService.deleteSequence(id);
+    console.log('📒 deleteSequence', result);
+    asanaService.getUserSequences(user.id).then((data) => {
+      setUserSequences(data);
+    });
+  };
+
   return (
     <>
       {loading && (
@@ -106,6 +115,12 @@ const SequenceCollection = () => {
                   onClick={() => handleCopySequence(sequence)}
                 >
                   <p className="inline pt-1 text-lg">copy</p>
+                </button>
+                <button
+                  className="btn-red btn-blue:hover m-2 p-0 flex flex-row items-center cursor-pointer"
+                  onClick={() => handleDeleteSequence(sequence)}
+                >
+                  <p className="font-material-symbols p-0">delete</p>
                 </button>
               </div>
             ))}

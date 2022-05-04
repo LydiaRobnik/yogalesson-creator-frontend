@@ -1,7 +1,7 @@
-import http from "./http-common";
-import axios from "axios";
-import domtoimage from "dom-to-image";
-import { dataURItoBlob } from "../custom/utils";
+import http from './http-common';
+import axios from 'axios';
+import domtoimage from 'dom-to-image';
+import { dataURItoBlob } from '../custom/utils';
 
 class AsanaService {
   async doApiCall(apiCallback) {
@@ -16,10 +16,10 @@ class AsanaService {
               ${error.response.data.errors[0].param}`
           );
         }
-        console.log("❌", error?.response?.data, error.message);
+        console.log('❌', error?.response?.data, error.message);
         throw new Error(`❌ Input Error: ${error.response.data}`);
       } else {
-        console.log("❌", error.message);
+        console.log('❌', error.message);
         throw new Error(`❌ ${error.message}`);
       }
     }
@@ -57,14 +57,14 @@ class AsanaService {
 
   async createAsana(asanaObj) {
     const resp = await this.doApiCall(
-      async () => await http().post("/asana", asanaObj)
+      async () => await http().post('/asana', asanaObj)
     );
 
     return resp.data;
   }
 
   async saveAsana(asanaObj) {
-    if (!asanaObj._id) throw new Error("Asana must have an _id");
+    if (!asanaObj._id) throw new Error('Asana must have an _id');
     const resp = await this.doApiCall(
       async () => await http().put(`/asana/${asanaObj._id}`, asanaObj)
     );
@@ -92,14 +92,14 @@ class AsanaService {
 
   async createSequence(sequenceObj) {
     const resp = await this.doApiCall(
-      async () => await http().post("/sequence", sequenceObj)
+      async () => await http().post('/sequence', sequenceObj)
     );
 
     return resp.data;
   }
 
   async saveSequence(sequenceObj) {
-    if (!sequenceObj._id) throw new Error("Sequence must have an _id");
+    if (!sequenceObj._id) throw new Error('Sequence must have an _id');
     const resp = await this.doApiCall(
       async () => await http().put(`/sequence/${sequenceObj._id}`, sequenceObj)
     );
@@ -108,7 +108,7 @@ class AsanaService {
   }
 
   async deleteSequence(id) {
-    if (!id) throw new Error("invalid _id");
+    if (!id) throw new Error('invalid _id');
     const resp = await this.doApiCall(
       async () => await http().delete(`/sequence/${id}`)
     );
@@ -120,7 +120,7 @@ class AsanaService {
     const resp = await this.doApiCall(
       async () =>
         await http().get(
-          `/class/?user=${userId}${favouritesOnly ? "&favourite=true" : ""}`
+          `/class/?user=${userId}${favouritesOnly ? '&favourite=true' : ''}`
         )
     );
 
@@ -137,14 +137,14 @@ class AsanaService {
 
   async createClass(classObj) {
     const resp = await this.doApiCall(
-      async () => await http().post("/class", classObj)
+      async () => await http().post('/class', classObj)
     );
 
     return resp.data;
   }
 
   async saveClass(classObj) {
-    if (!classObj._id) throw new Error("Class must have an _id");
+    if (!classObj._id) throw new Error('Class must have an _id');
     const resp = await this.doApiCall(
       async () => await http().put(`/class/${classObj._id}`, classObj)
     );
@@ -154,16 +154,16 @@ class AsanaService {
 
   async uploadPreview(classId, image) {
     let fd = new FormData();
-    fd.append("preview_pic", dataURItoBlob(image), "preview_pic.png");
+    fd.append('preview_pic', dataURItoBlob(image), 'preview_pic.png');
 
     const resp = await this.doApiCall(
       async () =>
         await axios({
-          method: "post",
+          method: 'post',
           url: `${process.env.REACT_APP_API_URL}/class/${classId}/upload-preview`,
           data: fd,
           headers: {
-            "Content-Type": "multipart/form-data; boundary=MyBoundary"
+            'Content-Type': 'multipart/form-data; boundary=MyBoundary'
           }
         })
     );
@@ -172,7 +172,7 @@ class AsanaService {
   }
 
   async deleteClass(id) {
-    if (!id) throw new Error("invalid _id");
+    if (!id) throw new Error('invalid _id');
     const resp = await this.doApiCall(
       async () => await http().delete(`/class/${id}`)
     );
@@ -188,7 +188,7 @@ class AsanaService {
    * @returns
    */
   async createClassPreview(elementRef, classId) {
-    console.log("ref", elementRef);
+    console.log('ref', elementRef);
 
     if (!elementRef || !classId) return;
 
@@ -201,7 +201,7 @@ class AsanaService {
         return true;
       })
       .catch(function (error) {
-        console.error("oops, something went wrong!", error);
+        console.error('oops, something went wrong!', error);
         throw error;
       });
   }

@@ -56,6 +56,12 @@ const NewSequence = ({ handleFocus, showNewSequence }) => {
     showNewSequence.current = false;
   };
 
+  const handleRemoveAsana = (asana) => {
+    const asanaToRemove = sequenceToAdd.asanas.indexOf(asana);
+    sequenceToAdd.asanas.splice(asanaToRemove, 1);
+    setSequenceToAdd({ ...sequenceToAdd });
+  };
+
   return (
     <>
       <div className="border-2 border-grey-500 w-screen min-h-40 px-6 flex flex-col">
@@ -82,8 +88,17 @@ const NewSequence = ({ handleFocus, showNewSequence }) => {
 
         <div className="flex">
           {sequenceToAdd.asanas?.map((asana, index) => (
-            <div key={(asana._id, index)}>
+            <div
+              key={(asana._id, index)}
+              className="flex flex-col items-center"
+            >
               <AsanaCard asana={asana} />
+              <span
+                className="font-material-symbols color-blue-darkest cursor-pointer"
+                onClick={() => handleRemoveAsana(asana)}
+              >
+                delete
+              </span>
             </div>
           ))}
         </div>
