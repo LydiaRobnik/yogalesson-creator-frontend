@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate, useOutletContext } from 'react-router-dom';
+import http from '../../api/http-common';
 
 const ClassCard = ({ classItem }) => {
   const { setUserClasses, setYogaClassToAdd } = useOutletContext();
@@ -23,11 +24,21 @@ const ClassCard = ({ classItem }) => {
     navigate(`/user/planner/${classItem._id}`);
   };
 
+  const handleDeleteClass = async (classToDelete) => {
+    const id = classToDelete._id;
+    const result = await asanaService.deleteClass(id);
+    console.log('📒 deleteClass', result);
+
+    asanaService.getUserClasses(user.id).then((data) => {
+      setUserClasses(data);
+    });
+  };
+
   return (
     <>
       <div
         className="rounded overflow-hidden shadow-lg"
-        onClick={() => {
+        onDoubleClick={() => {
           openClassInPlanner();
         }}
       >
@@ -47,6 +58,13 @@ const ClassCard = ({ classItem }) => {
           >
             {classItem.favourite ? 'star' : 'grade'}
           </span>
+
+          <button
+            className="btn-red btn-blue:hover m-2 p-0 flex flex-row items-center cursor-pointer"
+            onClick={() => handleDeleteClass(classItem)}
+          >
+            <p className="font-material-symbols p-0">delete</p>
+          </button>
         </div>
       </div>
     </>

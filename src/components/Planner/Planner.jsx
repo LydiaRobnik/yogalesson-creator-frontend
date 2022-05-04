@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect, useRef } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import './planner.scss';
-import Sequence from '../Sequence/Sequence';
 import NewSequence from '../NewSequence.jsx/NewSequence';
 import SequencePlanned from '../SequencePlanned/SequencePlanned';
 import asanaService from '../../api/asanaService';
