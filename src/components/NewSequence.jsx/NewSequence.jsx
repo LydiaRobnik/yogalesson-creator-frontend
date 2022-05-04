@@ -5,7 +5,7 @@ import { AuthContext } from '../../context/AuthContext';
 import AsanaCard from '../AsanaCard/AsanaCard';
 import './newSequence.scss';
 
-const NewSequence = ({ handleFocus, setShow, show }) => {
+const NewSequence = ({ handleFocus, showNewSequence }) => {
   const navigate = useNavigate();
   const { loggedIn, user } = useContext(AuthContext);
   console.log('user', user.id);
@@ -38,6 +38,9 @@ const NewSequence = ({ handleFocus, setShow, show }) => {
       console.log('📒 saveSequence', result);
     };
     saveSequenceToBackend();
+    asanaService.getUserSequences(user.id).then((data) => {
+      setUserSequences(data);
+    });
   }, [sequenceToAdd]);
 
   const addSequenceToClass = async () => {
@@ -53,8 +56,13 @@ const NewSequence = ({ handleFocus, setShow, show }) => {
       asanas: []
     };
     setSequenceToAdd(seqObj);
-    setShow(false);
-    console.log(show);
+    showNewSequence.current = false;
+  };
+
+  const handleRemoveAsana = (asana) => {
+    const asanaToRemove = sequenceToAdd.asanas.indexOf(asana);
+    sequenceToAdd.asanas.splice(asanaToRemove, 1);
+    setSequenceToAdd({ ...sequenceToAdd });
   };
 
   return (
@@ -83,8 +91,17 @@ const NewSequence = ({ handleFocus, setShow, show }) => {
 
         <div className="flex">
           {sequenceToAdd.asanas?.map((asana, index) => (
-            <div key={(asana._id, index)}>
+            <div
+              key={(asana._id, index)}
+              className="flex flex-col items-center"
+            >
               <AsanaCard asana={asana} />
+              <span
+                className="font-material-symbols color-blue-darkest cursor-pointer"
+                onClick={() => handleRemoveAsana(asana)}
+              >
+                delete
+              </span>
             </div>
           ))}
         </div>

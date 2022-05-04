@@ -23,7 +23,8 @@ export default function Planner() {
   } = useOutletContext();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [show, setShow] = useState(true);
+  // const [show, setShow] = useState(false);
+  const showNewSequence = useRef(false);
 
   const imgEl = useRef();
 
@@ -73,7 +74,8 @@ export default function Planner() {
     const result = await asanaService.createSequence(newSequence);
     console.log('📒 newSequence', result);
     setSequenceToAdd(result);
-    setShow(true);
+    // setShow(true);
+    showNewSequence.current = true;
   };
 
   return (
@@ -108,11 +110,6 @@ export default function Planner() {
               }
               onFocus={handleFocus}
             />
-
-            {/* <button className="btn-red btn-blue:hover mx-2 flex flex-row items-center">
-              <span className="font-material-symbols inline pr-2">save</span>
-              <p className="inline pt-1 text-lg">save class</p>
-            </button> */}
           </div>
 
           <div className="w-screen mx-10">
@@ -126,11 +123,13 @@ export default function Planner() {
                 </div>
               ))}
           </div>
-          {show && (
+
+          {showNewSequence && (
             <NewSequence
               handleFocus={handleFocus}
-              setShow={setShow}
-              show={show}
+              // setShow={setShow}
+              // show={show}
+              showNewSequence={showNewSequence}
             />
           )}
 

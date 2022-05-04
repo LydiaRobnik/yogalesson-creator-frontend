@@ -15,7 +15,8 @@ const Asanas = () => {
     setUserSequences,
     loading,
     setLoading,
-    gridResponsiveness
+    gridResponsiveness,
+    sequenceToAdd
   } = useOutletContext();
   const navigate = useNavigate();
   const { loggedIn, user } = useContext(AuthContext);
@@ -86,8 +87,6 @@ const Asanas = () => {
       return [...prev];
     });
   };
-
-  // console.log('fetched asanas:', asanas);
 
   return (
     <>
