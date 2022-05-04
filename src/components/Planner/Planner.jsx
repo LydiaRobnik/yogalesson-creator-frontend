@@ -25,9 +25,8 @@ export default function Planner() {
   } = useOutletContext();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  // const [show, setShow] = useState(false);
 
-  const imgEl = useRef();
+  const imgEl = useRef(null);
 
   useEffect(() => {
     const saveClassToBackend = async () => {
@@ -40,24 +39,15 @@ export default function Planner() {
       const result = await asanaService.saveClass(newClass);
       console.log('📒 saveClass', result);
 
-      // const exampleMongoDBClassId = yogaClassToAdd._id;
-      // asanaService
-      //   .createClassPreview(imgEl.current, exampleMongoDBClassId)
-      //   .catch((err) => {
-      //     console.log('err:', err);
-      //   });
+      const classToShowOnPreviewPic = yogaClassToAdd._id;
+      asanaService
+        .createClassPreview(imgEl.current, classToShowOnPreviewPic)
+        .catch((err) => {
+          console.log('err:', err);
+        });
     };
     saveClassToBackend();
   }, [yogaClassToAdd]);
-
-  const exportImg = () => {
-    const exampleMongoDBClassId = yogaClassToAdd._id;
-    asanaService
-      .createClassPreview(imgEl.current, exampleMongoDBClassId)
-      .catch((err) => {
-        console.log('err:', err);
-      });
-  };
 
   const handleFocus = (event) => event.target.select();
 
@@ -93,9 +83,6 @@ export default function Planner() {
 
       {!loading && (
         <div ref={imgEl} className="w-screen">
-          <button onClick={exportImg} className="color-blue-darkest">
-            create pic
-          </button>
           <div className="mx-10 flex flex-row">
             <input
               type="text"
@@ -124,18 +111,11 @@ export default function Planner() {
               ))}
           </div>
 
-          {showNewSequence && (
-            <NewSequence
-              handleFocus={handleFocus}
-              // setShow={setShow}
-              // show={show}
-            />
-          )}
+          {showNewSequence && <NewSequence handleFocus={handleFocus} />}
 
           <div className=" w-screen mx-10 flex flex-row justify-center">
             <button
               className="btn-blue btn-blue:hover   mx-2 flex flex-row items-center"
-              // data-modal-toggle="defaultModal"
               onClick={() => createSequence()}
             >
               <span className="font-material inline pr-2">add</span>

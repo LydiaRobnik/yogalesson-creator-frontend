@@ -6,6 +6,7 @@ import { useNavigate, useOutletContext } from 'react-router-dom';
 const ClassCard = ({ classItem }) => {
   const { setUserClasses } = useOutletContext();
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleFavorite = async () => {
     classItem.favourite = !classItem.favourite;
@@ -17,10 +18,23 @@ const ClassCard = ({ classItem }) => {
     });
   };
 
+  const openClassInPlanner = () => {
+    navigate(`/user/planner/${classItem._id}`);
+  };
+
   return (
     <>
-      <div className="rounded overflow-hidden shadow-lg">
-        <img className="w-full" src="Logo.png" alt="preview class" />
+      <div
+        className="rounded overflow-hidden shadow-lg"
+        onClick={() => {
+          openClassInPlanner();
+        }}
+      >
+        <img
+          className="w-full"
+          src={`${classItem.preview}`}
+          alt="preview class"
+        />
         <div className="px-6 pt-4 pb-2 bg-light ">
           <h3 className="color-blue-darkest">{classItem.title}</h3>
           <p className="color-blue-darkest text-xs">
