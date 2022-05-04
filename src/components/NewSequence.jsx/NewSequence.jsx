@@ -38,6 +38,9 @@ const NewSequence = ({ handleFocus, showNewSequence }) => {
       console.log('📒 saveSequence', result);
     };
     saveSequenceToBackend();
+    asanaService.getUserSequences(user.id).then((data) => {
+      setUserSequences(data);
+    });
   }, [sequenceToAdd]);
 
   const addSequenceToClass = async () => {

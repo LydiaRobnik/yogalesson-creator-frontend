@@ -27,12 +27,6 @@ const Sequence = ({ sequence, showMore }) => {
         <p className="color-blue-darkest">
           {new Date(sequence.modifiedAt).toLocaleString()}
         </p>
-        {/* <span
-          className="font-material-symbols color-blue-darkest cursor-pointer"
-          onClick={() => handleDeleteSequence(sequence)}
-        >
-          delete
-        </span> */}
       </div>
 
       {showMore && (
