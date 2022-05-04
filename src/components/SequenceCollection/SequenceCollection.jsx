@@ -24,9 +24,14 @@ const SequenceCollection = () => {
   const point = useBreakpoint();
   const navigate = useNavigate();
 
-  const [showMore, setShowMore] = useState(false);
-  const toggleAsanas = () => {
-    setShowMore(!showMore);
+  const [selectedSequence, setSelectedSequence] = useState(null);
+  // const [showMore, setShowMore] = useState(false);
+  // const toggleAsanas = () => {
+  //   setShowMore(!showMore);
+  // };
+
+  const showAsanasOfSequence = (sequenceId) => {
+    setSelectedSequence(sequenceId);
   };
 
   const handleSelectSequence = (choice) => {
@@ -78,20 +83,20 @@ const SequenceCollection = () => {
             userSequences.map((sequence) => (
               <div key={sequence._id} className="flex flex-row mb-3">
                 <div>
-                  {!showMore && (
+                  {selectedSequence !== sequence._id && (
                     <>
                       <span
                         className="font-material-symbols color-blue-darkest text-4xl px-3 cursor-pointer"
-                        onClick={() => toggleAsanas()}
+                        onClick={() => showAsanasOfSequence(sequence._id)}
                       >
                         expand_more
                       </span>
                     </>
                   )}
-                  {showMore && (
+                  {selectedSequence === sequence._id && (
                     <span
                       className="font-material-symbols color-blue-darkest text-4xl px-3 cursor-pointer"
-                      onClick={() => toggleAsanas()}
+                      onClick={() => showAsanasOfSequence(null)}
                     >
                       expand_less
                     </span>
@@ -99,7 +104,10 @@ const SequenceCollection = () => {
                 </div>
 
                 <div key={sequence._id}>
-                  <Sequence sequence={sequence} showMore={showMore} />
+                  <Sequence
+                    sequence={sequence}
+                    selectedSequence={selectedSequence}
+                  />
                 </div>
 
                 <button
@@ -116,7 +124,7 @@ const SequenceCollection = () => {
                   <p className="inline pt-1 text-lg">copy</p>
                 </button>
                 <button
-                  className="btn-red btn-blue:hover m-2 p-0 flex flex-row items-center cursor-pointer"
+                  className="btn-red btn-blue:hover m-2 p-0 flex flex-row items-center cursor-pointer self-center"
                   onClick={() => handleDeleteSequence(sequence)}
                 >
                   <p className="font-material-symbols p-0">delete</p>
