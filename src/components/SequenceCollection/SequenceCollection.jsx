@@ -4,8 +4,10 @@ import { AuthContext } from '../../context/AuthContext';
 import './sequenceCollection.scss';
 import useBreakpoint from '../../custom/useBreakpoint';
 import Sequence from '../Sequence/Sequence.jsx';
+import { forwardRef } from "react";
+import Printout from "./components/Printout/Printout";
 
-const SequenceCollection = () => {
+const SequenceCollection = forwardRef ((ref) => {
   // states
   const { loggedIn, user } = useContext(AuthContext);
   const {
@@ -33,6 +35,7 @@ const SequenceCollection = () => {
 
   return (
     <>
+    <div ref={ref}>
       {loading && (
         <lottie-player
           src="https://assets1.lottiefiles.com/packages/lf20_s00z9gco.json"
@@ -88,8 +91,13 @@ const SequenceCollection = () => {
             ))}
         </div>
       )}
+      <div className="App">
+      <h1>Say hello zum Print</h1>
+      <Printout />
+    </div>
+    </div>
     </>
   );
-};
+});
 
 export default SequenceCollection;

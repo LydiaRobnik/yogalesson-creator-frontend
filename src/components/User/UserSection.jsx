@@ -3,6 +3,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import asanaService from '../../api/asanaService';
 import useBreakpoint from '../../custom/useBreakpoint';
+import Printout from "./components/Printout/Printout";
 
 export default function UserSection() {
   // hooks
@@ -98,6 +99,10 @@ export default function UserSection() {
           )}
         </main>
       </div>
+      <div className="App">
+      <h1>Say hello zum Print</h1>
+      <Printout />
+    </div>
     </div>
   );
 }
