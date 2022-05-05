@@ -1,13 +1,17 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect, useContext } from 'react';
 import AsanaCard from '../AsanaCard/AsanaCard';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import './sequencePlanned.scss';
 import { useDrop } from 'react-dnd';
 import update from 'immutability-helper';
+import asanaService from '../../api/asanaService';
+import { AuthContext } from '../../context/AuthContext';
 
 const SequencePlanned = ({ sequence }) => {
-  const { yogaClassToAdd, setYogaClassToAdd } = useOutletContext();
+  const { yogaClassToAdd, setYogaClassToAdd, setUserSequences } =
+    useOutletContext();
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
   // mein Array mit Asanas: sequence.asanas
   const [cards, setCards] = useState(sequence.asanas);
@@ -21,6 +25,19 @@ const SequencePlanned = ({ sequence }) => {
       })
     );
   }, []);
+
+  useEffect(() => {
+    const saveSequenceToBackend = async () => {
+      const oldSequenceInBackend = { ...sequence };
+      const updatedSequence = { ...sequence, asanas: cards };
+      const result = await asanaService.saveSequence(updatedSequence);
+      console.log('📒 saveSequence', result);
+    };
+    saveSequenceToBackend();
+    asanaService.getUserSequences(user.id).then((data) => {
+      setUserSequences(data);
+    });
+  }, [cards]);
 
   const renderCard = useCallback((card, index) => {
     return (
@@ -62,10 +79,7 @@ const SequencePlanned = ({ sequence }) => {
           <p className="color-blue-darkest pl-3 py-3">{sequence.description}</p>
         </div>
 
-        {/* ref={drop} */}
-
         <div className="flex flex-wrap">
-          {/* {React.cloneElement(children, { isOver })} */}
           {sequence && cards.map((asana, index) => renderCard(asana, index))}
         </div>
       </>
