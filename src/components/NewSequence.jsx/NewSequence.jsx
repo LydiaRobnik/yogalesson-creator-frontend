@@ -45,6 +45,12 @@ const NewSequence = ({ handleFocus }) => {
     });
   }, [sequenceToAdd]);
 
+  const handleRemoveAsana = (asana) => {
+    const asanaToRemove = sequenceToAdd.asanas.indexOf(asana);
+    sequenceToAdd.asanas.splice(asanaToRemove, 1);
+    setSequenceToAdd({ ...sequenceToAdd });
+  };
+
   const addSequenceToClass = async () => {
     const newSequence = { ...sequenceToAdd };
     yogaClassToAdd.plan.push(newSequence);
@@ -61,15 +67,9 @@ const NewSequence = ({ handleFocus }) => {
     setShowNewSequence(false);
   };
 
-  const handleRemoveAsana = (asana) => {
-    const asanaToRemove = sequenceToAdd.asanas.indexOf(asana);
-    sequenceToAdd.asanas.splice(asanaToRemove, 1);
-    setSequenceToAdd({ ...sequenceToAdd });
-  };
-
   return (
     <>
-      <div className="border-2 border-grey-500 w-screen min-h-40 px-6 flex flex-col">
+      <div className="border-2 border-grey-500 w-full min-h-40 px-6 flex flex-col resize">
         <input
           type="text"
           className="color-blue-darkest text-xl"
@@ -82,7 +82,7 @@ const NewSequence = ({ handleFocus }) => {
         />
         <input
           type="text"
-          className="color-blue-darkest "
+          className="color-blue-darkest break-words resize "
           placeholder="add a descrition"
           value={sequenceToAdd.description}
           onChange={(e) =>
@@ -107,14 +107,6 @@ const NewSequence = ({ handleFocus }) => {
             </div>
           ))}
         </div>
-
-        {/* <button
-              onClick={() => navigate('/user/planner')}
-              className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
-            >
-              <span className="font-material inline pr-2">add</span>
-              <p className="inline pt-1 text-lg">add asana</p>
-            </button> */}
 
         <div className="flex flex-row items-center">
           <button
