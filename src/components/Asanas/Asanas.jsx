@@ -50,11 +50,15 @@ const Asanas = () => {
   // fetches
   useEffect(() => {
     if (loggedIn) {
-      const fetchData = () => {
+      const fetchData = async () => {
         setLoading(true);
-        asanaService.getDefaultAsanas(user.id).then((data) => {
-          setAsanas(data);
-        });
+        const data = await asanaService.getDefaultAsanas(user.id);
+        const dataUser = await asanaService.getUserAsanas(user.id);
+
+        console.log('asanas', dataUser.length);
+
+        setAsanas([...dataUser, ...data]);
+
         setLoading(false);
       };
       fetchData();
@@ -342,7 +346,7 @@ const Asanas = () => {
                 >
                   ✖️
                 </button>
-                <AsanaCreateDialog saveAsana={saveAsana} />
+                <AsanaCreateDialog saveAsana={saveAsana} asana={null} />
               </div>
             </Modal>
           </div>

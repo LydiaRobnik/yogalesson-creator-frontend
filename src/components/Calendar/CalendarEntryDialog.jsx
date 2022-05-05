@@ -134,7 +134,7 @@ export default function CalendarEntryDialog({
                     ))}
                   </select>
                   {regular && regular !== regulars[0] && (
-                    <div className="ml-20 flex gap-3">
+                    <div className="ml-20 flex gap-3 px-1">
                       <div>repeat: </div>
                       <input
                         className="w-12 text-right"

@@ -14,15 +14,16 @@ const emptyAsana = {
   default: false
 };
 
-export default function AsanaCreateDialog({}) {
+export default function AsanaCreateDialog({ saveAsana, asana }) {
   const { user, loggedIn } = useContext(AuthContext);
 
-  const [asanaObj, setAsanaObj] = useState(emptyAsana);
+  const [asanaObj, setAsanaObj] = useState(asana ? asana : emptyAsana);
   const [tag, setTag] = useState();
-  const [image, setImage] = useState();
+  const [image, setImage] = useState(asana ? asana.img_url : null);
   const [clickImage, setClickImage] = useState(false);
 
   useEffect(() => {
+    console.log('asanaObj', asana);
     setAsanaObj((prev) => {
       prev.user = user.id;
       return { ...prev };
@@ -41,8 +42,8 @@ export default function AsanaCreateDialog({}) {
   }
 
   function handleAddTag(event) {
-    event.preventDefault();
     console.log('handleAddTag', asanaObj);
+    event.preventDefault();
     setAsanaObj((prev) => {
       prev.tags.push(tag);
       return { ...prev };
@@ -52,7 +53,7 @@ export default function AsanaCreateDialog({}) {
   }
 
   function handleSelectImage(imageUrl) {
-    console.log('handleSelectImage', imageUrl);
+    // console.log('handleSelectImage', imageUrl);
     if (imageUrl) {
       setImage(imageUrl);
       setAsanaObj((prev) => {
@@ -76,7 +77,7 @@ export default function AsanaCreateDialog({}) {
         Create Asana
       </h2>
 
-      <div>
+      <form onSubmit={handleSaveAsana}>
         <div className="flex flex-col gap-2 p-4 pt-1">
           <div className="flex justify-center">
             <div
@@ -90,6 +91,9 @@ export default function AsanaCreateDialog({}) {
                 placeholder="Set Sanskrit Name"
                 data-mdb-toggle="input-toggle-timepicker"
                 minLength="5"
+                required
+                autoFocus
+                defaultValue={asanaObj.asana.sanskrit}
                 onChange={(e) =>
                   setAsanaObj((prev) => {
                     prev.asana.sanskrit = e.target.value;
@@ -115,6 +119,8 @@ export default function AsanaCreateDialog({}) {
                 placeholder="Set Name"
                 data-mdb-toggle="input-toggle-timepicker"
                 minLength="5"
+                required
+                defaultValue={asanaObj.asana.name}
                 onChange={(e) =>
                   setAsanaObj((prev) => {
                     prev.asana.name = e.target.value;
@@ -265,8 +271,12 @@ export default function AsanaCreateDialog({}) {
           </div> */}
           {/* Tags */}
           <div className="flex flex-col justify-center">
-            <form
-              onSubmit={handleAddTag}
+            <div
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleAddTag(e);
+                }
+              }}
               className="timepicker relative form-floating mb-3 xl:w-96"
               data-mdb-with-icon="false"
               id="input-toggle-timepicker"
@@ -283,7 +293,7 @@ export default function AsanaCreateDialog({}) {
               <label forhtml="floatingInput" className="text-gray-500">
                 Tags
               </label>
-            </form>
+            </div>
             <div className="flex flex-wrap gap-1">
               {asanaObj.tags?.map((tag, index) => (
                 <span className="px-1 pl-2 py-1 rounded-full text-gray-500 bg-gray-200 font-semibold text-sm flex align-center w-max cursor-pointer active:bg-gray-300 transition duration-300 ease">
@@ -314,9 +324,10 @@ export default function AsanaCreateDialog({}) {
           </div>
         </div>
         <div className="bg-beige color-blue-dark text-right pt-1">
-          <button onClick={handleSaveAsana}>Save</button>
+          <button>Save</button>
+          {/* <button onClick={handleSaveAsana}>Save</button> */}
         </div>
-      </div>
+      </form>
     </div>
   );
 }

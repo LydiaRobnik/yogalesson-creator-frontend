@@ -216,54 +216,54 @@ export default function Calendar() {
         id="div-calendar"
         className="flex flex-col gap-2 md:gap-4 md:flex-row text-black w-full h-full"
       >
-        <div className="cal-infobar w-60 order-1 self-center border-2 text-black overflow-y-auto whitespace-nowrap">
+        <div className="cal-infobar w-60 order-1 self-center md:self-start border-2 text-black overflow-y-auto whitespace-nowrap">
           <div className="text-lg font-bold text-center border-dashed border-b-slate-400 rounded-t border-b pt-2 mb-4 color-beige-light bg-blue-dark">
             Upcoming Events
           </div>
           <div className="flex flex-col gap-0">
-            {events.map(
-              (event, index) =>
-                new Date(event.date) - new Date() >= 0 && (
-                  <div>
-                    {/* separate months */}
-                    {new Date(event.date).getMonth() !==
-                      new Date(events[index - 1]?.date).getMonth() && (
-                      <div
-                        className={`font-bold text-center opacity-50 ${
-                          index > 0 && 'mt-3'
-                        }`}
-                      >
-                        {new Date(event.date).toLocaleString('en-us', {
-                          month: 'long'
-                        })}
-                      </div>
-                    )}
+            {events
+              .filter((event) => new Date(event.date) - new Date() >= 0)
+              .map((event, index, array) => (
+                <div>
+                  {/* separate months */}
+                  {(index === 0 ||
+                    new Date(event.date).getMonth() !==
+                      new Date(array[index - 1]?.date).getMonth()) && (
                     <div
-                      key={event.id}
-                      onClick={() => setSelectedEvent((prev) => event)}
-                      className={`cursor-pointer p-1 pt-2 hover:bg-beige-light`}
+                      className={`font-bold text-center opacity-50 ${
+                        index > 0 && 'mt-3'
+                      }`}
                     >
-                      <div className="grow border-b border-dashed">
-                        <div className="text-xs">
-                          <span className="font-bold mr-2">Date:</span>
-                          <span
-                            className="underline color-light p-1 rounded"
-                            style={{ backgroundColor: event.backgroundColor }}
-                          >
-                            {new Date(event.date).toDateString()}
-                          </span>
-                          <span className="ml-2 text-sm">
-                            <sup>
-                              {event.startT} - {event.endT}
-                            </sup>
-                          </span>
-                        </div>
-                        <div className="pl-2 pt-1">{event.title}</div>
+                      {new Date(event.date).toLocaleString('en-us', {
+                        month: 'long'
+                      })}
+                    </div>
+                  )}
+                  <div
+                    key={event.id}
+                    onClick={() => setSelectedEvent((prev) => event)}
+                    className={`cursor-pointer p-1 pt-2 hover:bg-beige-light`}
+                  >
+                    <div className="grow border-b border-dashed">
+                      <div className="text-xs">
+                        <span className="font-bold mr-2">Date:</span>
+                        <span
+                          className="underline color-light p-1 rounded"
+                          style={{ backgroundColor: event.backgroundColor }}
+                        >
+                          {new Date(event.date).toDateString()}
+                        </span>
+                        <span className="ml-2 text-sm">
+                          <sup>
+                            {event.startT} - {event.endT}
+                          </sup>
+                        </span>
                       </div>
+                      <div className="pl-2 pt-1">{event.title}</div>
                     </div>
                   </div>
-                )
-            )}
+                </div>
+              ))}
           </div>
         </div>
         {changeCalendarView && (
