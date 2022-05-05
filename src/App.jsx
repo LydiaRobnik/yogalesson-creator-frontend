@@ -13,6 +13,7 @@ import Page403 from './components/Error/403';
 import './style/app.scss';
 import AuthState from './context/AuthContext';
 import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 function App() {
   const navigate = useNavigate();
@@ -20,29 +21,35 @@ function App() {
   return (
     <div id="app">
       <AuthState>
-        <Routes>
-          {/* home without navbar */}
-          <Route path={`/home`} element={<Home />} />
-          {/* standard layout with navbar */}
-          <Route path={`/`} element={<Layout />}>
-            <Route index red element={<Navigate replace to="/home" />} />
-            {/* protected user section */}
-            <Route path={`user`} element={<UserSection />}>
-              <Route index red element={<Navigate replace to="dashboard" />} />
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="planner" element={<Planner />}>
-                <Route path=":classId" element={<Planner />} />
+        <DndProvider backend={HTML5Backend}>
+          <Routes>
+            {/* home without navbar */}
+            <Route path={`/home`} element={<Home />} />
+            {/* standard layout with navbar */}
+            <Route path={`/`} element={<Layout />}>
+              <Route index red element={<Navigate replace to="/home" />} />
+              {/* protected user section */}
+              <Route path={`user`} element={<UserSection />}>
+                <Route
+                  index
+                  red
+                  element={<Navigate replace to="dashboard" />}
+                />
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="planner" element={<Planner />}>
+                  <Route path=":classId" element={<Planner />} />
+                </Route>
+                <Route path="asanas" element={<Asanas />} />
+                <Route path="classes" element={<ClassCollection />} />
+                <Route path="sequences" element={<SequenceCollection />} />
+                <Route path="calendar" element={<Calendar />} />
               </Route>
-              <Route path="asanas" element={<Asanas />} />
-              <Route path="classes" element={<ClassCollection />} />
-              <Route path="sequences" element={<SequenceCollection />} />
-              <Route path="calendar" element={<Calendar />} />
+              <Route path={`/403`} element={<Page403 />} />
             </Route>
             <Route path={`/403`} element={<Page403 />} />
-          </Route>
-          <Route path={`/403`} element={<Page403 />} />
-          <Route path="*" element={<Page404 />} />
-        </Routes>
+            <Route path="*" element={<Page404 />} />
+          </Routes>
+        </DndProvider>
       </AuthState>
     </div>
   );
