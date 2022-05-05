@@ -102,7 +102,7 @@ export default function CalendarEntryDialog({
         <div className="flex flex-col gap-2 border-r-slate-400 border-r border-dashed px-3">
           <div className="h-full flex flex-col justify-between">
             <div className="flex flex-col gap-4">
-              <div className="font-bold">Select Time</div>
+              <div className="font-bold">Select Time & Schedule</div>
               {/* <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2> */}
               {/* <div>Date:</div> */}
               <div
@@ -169,14 +169,33 @@ export default function CalendarEntryDialog({
         </div>
         <div className="flex flex-col gap-1 w-60">
           <div className="font-bold">Select Yoga-Class:</div>
+          <div className="flex justify-center">
+            <div
+              className="timepicker relative form-floating mb-3 mr-2 xl:w-96"
+              data-mdb-with-icon="false"
+              id="input-toggle-timepicker"
+            >
+              <input
+                type="text"
+                className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                value={filterName}
+                placeholder="Filter by name"
+                data-mdb-toggle="input-toggle-timepicker"
+                onChange={(e) => setFilterName(e.target.value)}
+              />
+              <label for="floatingInput" className="text-gray-500">
+                Filter by name
+              </label>
+            </div>
+          </div>
 
-          <input
+          {/* <input
             className={`w-56 grow-0 border-gray-400 border-2 rounded-md p-1`}
             type="text"
             value={filterName}
             placeholder="Filter by name"
             onChange={(e) => setFilterName(e.target.value)}
-          />
+          /> */}
           <div className="cal-entry-userclasses flex flex-col gap-0">
             {userClasses &&
               userClasses
