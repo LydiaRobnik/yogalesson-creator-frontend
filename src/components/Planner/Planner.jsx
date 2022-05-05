@@ -92,7 +92,7 @@ export default function Planner() {
 
       {!loading && (
         <div ref={imgEl} className="w-full h-screen">
-          <div className="mx-10 flex flex-row">
+          <div className="flex flex-row">
             <input
               type="text"
               className="color-blue-darkest text-left px-10 text-4xl"
@@ -103,7 +103,7 @@ export default function Planner() {
             />
           </div>
 
-          <div className="w-full mx-10">
+          <div className="w-full">
             {yogaClassToAdd.plan &&
               yogaClassToAdd.plan.map((sequence, index) => (
                 <div
@@ -117,7 +117,7 @@ export default function Planner() {
 
           {showNewSequence && <NewSequence handleFocus={handleFocus} />}
 
-          <div className=" w-full mx-10 flex flex-row justify-center">
+          <div className=" w-full flex flex-row justify-center">
             <button
               className="btn-blue btn-blue:hover   mx-2 flex flex-row items-center"
               onClick={() => createSequence()}
