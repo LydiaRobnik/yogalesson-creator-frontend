@@ -4,6 +4,7 @@ import Home from './components/Home/Home';
 import UserSection from './components/User/UserSection';
 import Dashboard from './components/Dashboard/Dashboard';
 import Planner from './components/Planner/Planner';
+import Printview from './components/Printview/Printview';
 import Asanas from './components/Asanas/Asanas';
 import SequenceCollection from './components/SequenceCollection/SequenceCollection';
 import ClassCollection from './components/ClassCollection/ClassCollection';
@@ -31,6 +32,9 @@ function App() {
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="planner" element={<Planner />}>
                 <Route path=":classId" element={<Planner />} />
+              </Route>
+              <Route path="print" element={<Printview />}>
+                <Route path=":classId" element={<Printview />} />
               </Route>
               <Route path="asanas" element={<Asanas />} />
               <Route path="classes" element={<ClassCollection />} />
