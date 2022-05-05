@@ -12,6 +12,7 @@ import Page404 from './components/Error/404';
 import Page403 from './components/Error/403';
 import './style/app.scss';
 import AuthState from './context/AuthContext';
+import { DndProvider } from 'react-dnd';
 
 function App() {
   const navigate = useNavigate();
