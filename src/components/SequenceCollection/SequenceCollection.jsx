@@ -75,7 +75,7 @@ const SequenceCollection = () => {
       )}
 
       {!loading && (
-        <div className="w-screen flex flex-col justify-start content-start px-6">
+        <div className="w-full flex flex-col justify-start content-start px-6">
           <h3 className="color-red pl-3 pb-5 text-4xl">
             Click to add one of your sequence to your class
           </h3>
