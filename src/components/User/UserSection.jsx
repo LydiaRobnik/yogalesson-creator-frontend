@@ -73,7 +73,7 @@ export default function UserSection() {
   }, [loggedIn]);
 
   return (
-    <div className="w-full max-w-7xl p-3 pt-4">
+    <div className="w-full p-3 pt-4">
       <div className="flex flex-col">
         <main className="flex">
           {loggedIn ? (
