@@ -20,6 +20,9 @@
 
   .cal-infobar {
     min-width: 10rem;
+    // height: calc(50rem + 10vw);
+    // height: auto;
+    max-height: 150vh;
   }
 
   .btn-modal {

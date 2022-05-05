@@ -33,6 +33,7 @@
     "react-modal": "^3.15.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
+    "react-time-picker": "^4.5.0",
     "sass": "^1.49.11"
   },
   "devDependencies": {

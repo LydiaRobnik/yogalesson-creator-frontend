@@ -2,6 +2,7 @@ import { filter } from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
+import TimePicker from 'react-time-picker';
 import './calendar.scss';
 
 const colors = [
@@ -11,6 +12,8 @@ const colors = [
   'rgb(250, 57, 57)',
   'rgb(141, 23, 141)'
 ];
+
+const regulars = ['once', 'daily', 'weekly', 'monthly'];
 
 export default function CalendarEntryDialog({
   date,
@@ -27,6 +30,10 @@ export default function CalendarEntryDialog({
       ? colors[colors.findIndex((c) => c === event?.backgroundColor)]
       : colors[0]
   );
+  const [valueFrom, onChangeFrom] = useState(event ? event.startT : '10:00');
+  const [valueTo, onChangeTo] = useState(event ? event.endT : '12:00');
+  const [regular, setRegular] = useState(regulars[0]);
+  const [regularCount, setRegularCount] = useState(5);
 
   useEffect(() => {
     if (loggedIn) {
@@ -67,12 +74,16 @@ export default function CalendarEntryDialog({
   const handleSave = () => {
     const yogaClass = userClasses.find((c) => c.checked === true);
     const calendarObj = {
-      // start: +date.dateObj + 60000 * 120,
+      // startT: +date.dateObj + 60000 * 120,
       date: date.dateStr,
       title: yogaClass.title,
       backgroundColor: color,
       borderColor: color,
-      id: event?.id
+      id: event?.id,
+      startT: valueFrom,
+      endT: valueTo,
+      regular: regular,
+      regularCount: regularCount
       // extendedProps: yogaClass
     };
     saveEvent(calendarObj, yogaClass._id);
@@ -89,29 +100,70 @@ export default function CalendarEntryDialog({
       </h2>
       <div className=" grid grid-cols-[1fr_1fr] gap-4 p-0">
         <div className="flex flex-col gap-2 border-r-slate-400 border-r border-dashed px-3">
-          <div className="font-bold">Select Time</div>
-          {/* <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2> */}
-          {/* <div>Date:</div> */}
-          <div
-            className={`font-bold border-dashed border rounded-full text-center p-2 pt-3 color-light`}
-            style={{ backgroundColor: color }}
-          >
-            {date?.dateObj.toDateString()}
-          </div>
-          <div>from - to</div>
-          <div className="border border-dashed p-2">
-            <div className="text-center mb-1">Choose a color</div>
-            <div className="flex justify-between gap-1">
-              {colors.map((color) => (
-                <div
-                  key={color}
-                  onClick={() => setColor(color)}
-                  className={`cursor-pointer rounded-full w-4 h-4`}
-                  style={{ backgroundColor: color }}
-                >
-                  <span className="invisible">a</span>
+          <div className="h-full flex flex-col justify-between">
+            <div className="flex flex-col gap-4">
+              <div className="font-bold">Select Time</div>
+              {/* <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2> */}
+              {/* <div>Date:</div> */}
+              <div
+                className={`font-bold border-dashed border rounded-full text-center p-2 pt-3 color-light`}
+                style={{ backgroundColor: color }}
+              >
+                {date?.dateObj.toDateString()}
+              </div>
+              <div className="flex flex-col gap-3 border border-dashed py-2">
+                <div className="grid grid-cols-[38px_1fr] gap-2">
+                  <div className="text-right mt-1">from</div>
+                  <TimePicker onChange={onChangeFrom} value={valueFrom} />
+                  <div className="text-right mt-1">to</div>
+                  <TimePicker onChange={onChangeTo} value={valueTo} />
                 </div>
-              ))}
+              </div>
+              <div className="flex flex-col gap-3 border border-dashed py-2">
+                <div className="grid grid-cols-[1fr] gap-2">
+                  {/* <div className="text-right mt-1">rule</div> */}
+                  <select
+                    className="w-full"
+                    value={regular}
+                    onChange={(e) => setRegular(e.target.value)}
+                  >
+                    {regulars.map((r) => (
+                      <option key={r} value={r}>
+                        {r}
+                      </option>
+                    ))}
+                  </select>
+                  {regular && regular !== regulars[0] && (
+                    <div className="ml-20 flex gap-3">
+                      <div>repeat: </div>
+                      <input
+                        className="w-12 text-right"
+                        type="number"
+                        min={2}
+                        max={30}
+                        value={regularCount}
+                        onChange={(e) => setRegularCount(e.target.value)}
+                      />
+                      <div>times</div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="border border-dashed p-2 mb-2">
+              <div className="text-center mb-1">Choose a color</div>
+              <div className="flex justify-between gap-1">
+                {colors.map((color) => (
+                  <div
+                    key={color}
+                    onClick={() => setColor(color)}
+                    className={`cursor-pointer rounded-full w-4 h-4`}
+                    style={{ backgroundColor: color }}
+                  >
+                    <span className="invisible">a</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
