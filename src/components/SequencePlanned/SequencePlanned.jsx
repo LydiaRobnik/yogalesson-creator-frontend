@@ -1,65 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import AsanaCard from '../AsanaCard/AsanaCard';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import './sequencePlanned.scss';
 import { useDrop } from 'react-dnd';
+import update from 'immutability-helper';
 
 const SequencePlanned = ({ sequence }) => {
   const { yogaClassToAdd, setYogaClassToAdd } = useOutletContext();
   const navigate = useNavigate();
 
-  const [{ isOver }, drop] = useDrop(() => ({
-    accept: 'divAsanaCard',
-    drop: (id, item, index, monitor) => {
-      // onDrop(id, item, index, monitor);
-    },
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver()
-    })
-  }));
+  // mein Array mit Asanas: sequence.asanas
+  const [cards, setCards] = useState(sequence.asanas);
+  const moveCard = useCallback((dragIndex, hoverIndex) => {
+    setCards((prevCards) =>
+      update(prevCards, {
+        $splice: [
+          [dragIndex, 1],
+          [hoverIndex, 0, prevCards[dragIndex]]
+        ]
+      })
+    );
+  }, []);
 
-  // const [items, setItems] = useState(sequence.asanas);
-  // const [dragIndex, setDragIndex] = useState(null);
-  // const [hoverIndex, setHoverIndex] = useState(null);
-
-  // const onDrop = (id, item, monitor) => {
-  //   const oldItems = [...items];
-  //   const movedItem = oldItems.find((item, index) => index === dragIndex);
-  //   const remainingItems = oldItems.filter(
-  //     (item, index) => index !== dragIndex
-  //   );
-  //   const reorderesItems = [
-  //     ...remainingItems.slice(0, hoverIndex),
-  //     movedItem,
-  //     ...remainingItems.slice(hoverIndex)
-  //   ];
-  //   console.log('reorderesItems:', reorderesItems);
-  //   setItems(reorderesItems);
-  //   return reorderesItems;
-
-  // };
-
-  // insert item back to the array
-  // const moveItem = (dragIndex, hoverIndex) => {
-  //   const oldItems = [...items];
-
-  //   const item = oldItems(dragIndex);
-
-  //   const newItems = items.filter((i, idx) => idx !== dragIndex);
-  //   newItems.splice(hoverIndex, 0, item);
-  //   setItems(newItems);
-
-  // };
-
-  // const [{ isOver }, drop] = useDrop(() => ({
-  //   accept: 'divAsanaCard',
-  //   drop: (item, monitor) => {
-  //     onDrop(item, monitor);
-  //   },
-  //   collect: (monitor) => ({
-  //     isOver: monitor.isOver()
-  //   })
-  // }));
+  const renderCard = useCallback((card, index) => {
+    return (
+      <AsanaCard
+        asana={card}
+        key={card._id + Math.random()}
+        index={index}
+        id={card._id}
+        moveCard={moveCard}
+      />
+    );
+  }, []);
 
   const handleRemoveSequence = (sequence) => {
     const sequenceToRemove = yogaClassToAdd.plan.indexOf(sequence);
@@ -93,19 +66,7 @@ const SequencePlanned = ({ sequence }) => {
 
         <div className="flex flex-wrap">
           {/* {React.cloneElement(children, { isOver })} */}
-          {sequence &&
-            sequence.asanas.map((asana, index) => (
-              <div key={asana._id + Math.random()}>
-                <AsanaCard
-                  asana={asana}
-                  // dragIndex={dragIndex}
-                  // setDragIndex={setDragIndex}
-                  // hoverIndex={hoverIndex}
-                  // setHoverIndex={setHoverIndex}
-                  // moveItem={moveItem}
-                />
-              </div>
-            ))}
+          {sequence && cards.map((asana, index) => renderCard(asana, index))}
         </div>
       </>
     </>

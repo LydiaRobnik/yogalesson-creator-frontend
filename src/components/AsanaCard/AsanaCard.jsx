@@ -3,63 +3,70 @@ import { useNavigate, useOutletContext } from 'react-router-dom';
 import './asanaCard.scss';
 import { useDrag, useDrop } from 'react-dnd';
 
-const AsanaCard = ({
-  asana,
-  key,
-  index,
-  moveItem,
-  dragIndex,
-  setDragIndex,
-  hoverIndex,
-  setHoverIndex
-}) => {
+const AsanaCard = ({ asana, key, index, moveCard }) => {
   const navigate = useNavigate();
   const { sequenceToAdd } = useOutletContext();
 
   // ===== functions, variables and states for draggable start =====
   const ref = useRef(null);
 
-  const [{ isDragging }, drag] = useDrag(() => ({
+  const [{ handlerId }, drop] = useDrop({
+    accept: 'divAsanaCard',
+    collect(monitor) {
+      return {
+        handlerId: monitor.getHandlerId()
+      };
+    },
+    hover(item, monitor) {
+      if (!ref.current) {
+        return;
+      }
+      const dragIndex = item.index;
+      const hoverIndex = index;
+      if (dragIndex === hoverIndex) {
+        return;
+      }
+      // Determine rectangle on screen
+      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+      // Get vertical middle
+      const hoverMiddleY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      // Determine mouse position
+      const clientOffset = monitor.getClientOffset();
+      // Get pixels to the top
+      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      // Only perform the move when the mouse has crossed half of the items height
+      // When dragging downwards, only move when the cursor is below 50%
+      // When dragging upwards, only move when the cursor is above 50%
+      // Dragging downwards
+      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+        return;
+      }
+      // Dragging upwards
+      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+        return;
+      }
+      // Time to actually perform the action
+      moveCard(dragIndex, hoverIndex);
+      // Note: we're mutating the monitor item here!
+      // Generally it's better to avoid mutations,
+      // but it's good here for the sake of performance
+      // to avoid expensive index searches.
+      item.index = hoverIndex;
+    }
+  });
+
+  const [{ isDragging }, drag] = useDrag({
     type: 'divAsanaCard',
-    id: key,
-    item: { ...asana },
-    index: index,
+    item: () => {
+      return { key, index };
+    },
     collect: (monitor) => ({
-      isDragging: !!monitor.isDragging()
+      isDragging: monitor.isDragging()
     })
-  }));
+  });
 
-  // const [, drop] = useDrop({
-  //   accept: 'divAsanaCard',
-  //   hover(item, monitor) {
-  //     if (!ref.current) {
-  //       return;
-  //     }
-
-  //     setDragIndex = item.index;
-  //     setHoverIndex = item;
-
-  //     if (dragIndex === hoverIndex) {
-  //       return;
-  //     }
-
-  //     const hoveredCard = ref.current;
-  //     const hoverMiddleY = (hoveredCard.bottom - hoveredCard.top) / 2;
-  //     const mousePosition = monitor.getClientOffset();
-  //     const hoverClientY = mousePosition.y - hoveredCard.top;
-
-  //     if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-  //       return;
-  //     }
-
-  //     if (dragIndex > hoverIndex && hoverClientY < hoverMiddleY) {
-  //       return;
-  //     }
-
-  //     moveItem(dragIndex, hoverIndex);
-  //     item.index = hoverIndex;
-  //   }
-  // });
+  drag(drop(ref));
 
   // ===== functions for droppable end =====
 
@@ -69,10 +76,11 @@ const AsanaCard = ({
   };
 
   return (
-    <Fragment>
+    <>
       <div
-        ref={drag}
+        ref={ref}
         onClick={handleSelectAsana}
+        data-handler-id={handlerId}
         // className="asanacard-jsx rounded overflow-hidden shadow-lg m-2  bg-white cursor-pointer"
         className={`asanacard-jsx rounded overflow-hidden shadow-lg m-2  cursor-pointer ${
           isDragging ? 'bg-rose-400 opacity-50' : 'bg-white opacity-100'
@@ -87,7 +95,7 @@ const AsanaCard = ({
           <h3 className="color-blue-darkest text-xs">{asana.asana.name}</h3>
         </div>
       </div>
-    </Fragment>
+    </>
   );
 };
 
