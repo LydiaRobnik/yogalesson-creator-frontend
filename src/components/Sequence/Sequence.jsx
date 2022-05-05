@@ -3,7 +3,7 @@ import AsanaCard from '../AsanaCard/AsanaCard';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import './sequence.scss';
 
-const Sequence = ({ sequence, showMore }) => {
+const Sequence = ({ sequence, selectedSequence }) => {
   const {
     userClasses,
     setUserClasses,
@@ -29,7 +29,7 @@ const Sequence = ({ sequence, showMore }) => {
         </p>
       </div>
 
-      {showMore && (
+      {selectedSequence === sequence._id && (
         <>
           <div className="min-h-40">
             <p className="color-blue-darkest pr-3 pt-3">
