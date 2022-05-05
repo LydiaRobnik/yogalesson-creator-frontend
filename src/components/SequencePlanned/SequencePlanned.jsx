@@ -59,23 +59,35 @@ const SequencePlanned = ({ sequence }) => {
 
   return (
     <>
-      <div className="w-screen min-h-40">
-        <h3 className="color-blue-darkest pl-3 p-3 font-bold text-xl">
-          {sequence.title}
-        </h3>
-        <p className="color-blue-darkest">
-          {new Date(sequence.modifiedAt).toLocaleString()}
-        </p>
-        <span
-          className="font-material-symbols color-blue-darkest cursor-pointer"
-          onClick={() => handleRemoveSequence(sequence)}
-        >
-          delete
-        </span>
+      <div className="w-full min-h-40 flex flex-row justify-between">
+        <div className="flex flex-row">
+          <h3 className="color-blue-darkest pl-3 p-3 font-bold text-xl">
+            {sequence.title}
+          </h3>
+          <p className="color-blue-darkest pl-3 pt-3">
+            {new Date(sequence.modifiedAt).toLocaleString()}
+          </p>
+        </div>
+
+        <div>
+          <button
+            className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
+            onClick={() => navigate('../asanas')}
+          >
+            <span className="font-material inline pr-2">add</span>
+            <p className="inline pt-1 text-lg ">asana</p>
+          </button>
+          <span
+            className="font-material-symbols color-blue-darkest cursor-pointer"
+            onClick={() => handleRemoveSequence(sequence)}
+          >
+            delete
+          </span>
+        </div>
       </div>
 
       <>
-        <div className="w-screen min-h-40">
+        <div className="w-full min-h-40">
           <p className="color-blue-darkest pl-3 py-3">{sequence.description}</p>
         </div>
 
