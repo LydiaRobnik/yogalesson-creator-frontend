@@ -183,7 +183,7 @@ export default function CalendarEntryDialog({
                 data-mdb-toggle="input-toggle-timepicker"
                 onChange={(e) => setFilterName(e.target.value)}
               />
-              <label for="floatingInput" className="text-gray-500">
+              <label htmlFor="floatingInput" className="text-gray-500">
                 Filter by name
               </label>
             </div>
