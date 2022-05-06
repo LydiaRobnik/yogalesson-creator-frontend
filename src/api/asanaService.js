@@ -25,6 +25,14 @@ class AsanaService {
     }
   }
 
+  async validateUser(token) {
+    const resp = await this.doApiCall(
+      async () => await http().get(`/auth/validate/${token}`)
+    );
+
+    return resp.data;
+  }
+
   async getDefaultAsanas() {
     const resp = await this.doApiCall(
       async () => await http().get(`/asana/?default=true`)

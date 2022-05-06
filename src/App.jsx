@@ -14,6 +14,8 @@ import './style/app.scss';
 import AuthState from './context/AuthContext';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import SignupInfo from './components/SignupInfo/SignupInfo';
+import Validate from './components/SignupInfo/Validate';
 
 function App() {
   const navigate = useNavigate();
@@ -25,6 +27,8 @@ function App() {
           <Routes>
             {/* home without navbar */}
             <Route path={`/home`} element={<Home />} />
+            <Route path={`/signupInfo`} element={<SignupInfo />} />
+            <Route path={`/validate/:token`} element={<Validate />} />
             {/* standard layout with navbar */}
             <Route path={`/`} element={<Layout />}>
               <Route index red element={<Navigate replace to="/home" />} />

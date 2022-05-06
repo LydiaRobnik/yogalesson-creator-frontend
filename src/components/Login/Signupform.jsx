@@ -1,34 +1,34 @@
-import { LockClosedIcon } from "@heroicons/react/solid";
-import { AuthContext } from "../../context/AuthContext";
-import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "../../style/app.scss";
+import { LockClosedIcon } from '@heroicons/react/solid';
+import { AuthContext } from '../../context/AuthContext';
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../../style/app.scss';
 
 export default function Example({ SignupModal, setSignupModal }) {
   const { loggedIn, login, logout, user, signup } = useContext(AuthContext);
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const navigate = useNavigate();
 
   async function handleSignup(e) {
     e.preventDefault();
-    setError("");
+    setError('');
 
     const result = await signup({
       email: name,
-      username: name.split("@")[0],
+      username: name.split('@')[0],
       password: password,
-      validated: true
+      validated: false
     });
 
     if (!result) {
-      setError("Invalid username or password!");
+      setError('Invalid username or password!');
     } else {
-      setName("");
-      setPassword("");
-      navigate(`/user/dashboard`);
+      setName('');
+      setPassword('');
+      navigate(`/signupInfo`);
       setSignupModal(false);
     }
   }
@@ -42,7 +42,7 @@ export default function Example({ SignupModal, setSignupModal }) {
               src="https://assets3.lottiefiles.com/packages/lf20_13s8e4bb.json"
               background="transparent"
               speed="1"
-              style={{ width: "300px", height: "300px" }}
+              style={{ width: '300px', height: '300px' }}
               loop
               autoplay
             ></lottie-player>

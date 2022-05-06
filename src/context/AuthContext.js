@@ -1,6 +1,6 @@
-import { createContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import http from "../api/http-common";
+import { createContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import http from '../api/http-common';
 
 export const AuthContext = createContext();
 
@@ -11,15 +11,15 @@ const AuthState = ({ children }) => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
 
-    token && token !== "undefined" && getUserdata(token);
+    token && token !== 'undefined' && getUserdata(token);
   }, []);
 
   const login = async (user) => {
     try {
-      const res = await http().post("/auth/login", user);
-      localStorage.setItem("token", res.data.token);
+      const res = await http().post('/auth/login', user);
+      localStorage.setItem('token', res.data.token);
 
       await getUserdata(res.data.token);
       return true;
@@ -31,9 +31,9 @@ const AuthState = ({ children }) => {
 
   const signup = async (user) => {
     try {
-      const res = await http().post("/auth/signup", user);
-      localStorage.setItem("token", res.data.token);
-      await getUserdata(res.data.token);
+      const res = await http().post('/auth/signup', user);
+      // localStorage.setItem("token", res.data.token);
+      // await getUserdata(res.data.token);
       return true;
     } catch (err) {
       console.log(err);
@@ -42,14 +42,14 @@ const AuthState = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem('token');
     setLoggedIn(false);
     setUser({});
     navigate(`/`);
   };
 
   async function getUserdata(token) {
-    const resp = await http(token).get("/auth/verify");
+    const resp = await http(token).get('/auth/verify');
 
     if (resp.status !== 200) {
       logout();

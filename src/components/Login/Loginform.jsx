@@ -1,32 +1,32 @@
-import { LockClosedIcon } from "@heroicons/react/solid";
-import { AuthContext } from "../../context/AuthContext";
-import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "../../style/app.scss";
+import { LockClosedIcon } from '@heroicons/react/solid';
+import { AuthContext } from '../../context/AuthContext';
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../../style/app.scss';
 
 export default function Example({ ModalOpen, setModalOpen }) {
   const { loggedIn, login, logout, user } = useContext(AuthContext);
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const navigate = useNavigate();
 
   async function handleLogin(e) {
     e.preventDefault();
-    setError("");
+    setError('');
 
     const result = await login({
       user: name,
-      type: "username",
+      type: name.includes('@') ? 'email' : 'username',
       password: password
     });
 
     if (!result) {
-      setError("Invalid username or password!");
+      setError('Invalid username or password!');
     } else {
-      setName("");
-      setPassword("");
+      setName('');
+      setPassword('');
       navigate(`/user/dashboard`);
       setModalOpen(false);
     }
@@ -41,7 +41,7 @@ export default function Example({ ModalOpen, setModalOpen }) {
               src="https://assets1.lottiefiles.com/packages/lf20_s9dkwhdi.json"
               background="transparent"
               speed="1"
-              style={{ width: "300px", height: "300px" }}
+              style={{ width: '300px', height: '300px' }}
               loop
               autoplay
             ></lottie-player>
