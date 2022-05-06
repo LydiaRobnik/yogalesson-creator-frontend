@@ -112,14 +112,31 @@ export default function Planner() {
           <div className="w-full">
             {yogaClassToAdd.plan &&
               yogaClassToAdd.plan.map((sequence, index) => (
-                <div
-                  key={(sequence._id, index)}
-                  className="rounded bg-light m-10"
-                >
-                  <SequencePlanned
-                    sequence={sequence}
-                    handleFocus={handleFocus}
-                  />
+                <div className="grid grid-cols-12 gap-4 border-t-2 border-gray-200 mx-4">
+                  <div className=" col-span-1">
+                    <span
+                      className="font-material-symbols color-blue-darkest text-4xl px-3 cursor-pointer"
+                      onClick={() => moveSequenceDown(sequence)}
+                    >
+                      expand_more
+                    </span>
+                    <span
+                      className="font-material-symbols color-blue-darkest text-4xl px-3 cursor-pointer"
+                      onClick={() => moveSequenceUp(sequence)}
+                    >
+                      expand_less
+                    </span>
+                  </div>
+
+                  <div
+                    key={sequence._id}
+                    className="rounded bg-light col-span-11 my-2"
+                  >
+                    <SequencePlanned
+                      sequence={sequence}
+                      handleFocus={handleFocus}
+                    />
+                  </div>
                 </div>
               ))}
           </div>
