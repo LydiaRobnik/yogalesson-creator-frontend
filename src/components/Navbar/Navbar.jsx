@@ -22,30 +22,30 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const { loggedIn, login, logout, user } = useContext(AuthContext);
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [open, setOpen] = useState(true);
+  // const [name, setName] = useState('');
+  // const [password, setPassword] = useState('');
+  // const [error, setError] = useState('');
+  // const [open, setOpen] = useState(true);
   const [ModalOpen, setModalOpen] = useState(false);
   const [SignupModalOpen, setSignupModalOpen] = useState(false);
 
-  async function handleLogin(e) {
-    e.preventDefault();
-    setError('');
+  // async function handleLogin(e) {
+  //   e.preventDefault();
+  //   setError('');
 
-    const result = await login({
-      user: name,
-      type: 'username',
-      password: password
-    });
+  //   const result = await login({
+  //     user: name,
+  //     type: name.includes('@') ? 'email' : 'username',
+  //     password: password
+  //   });
 
-    if (!result) {
-      setError('Invalid username or password!');
-    } else {
-      setName('');
-      setPassword('');
-    }
-  }
+  //   if (!result) {
+  //     setError('Invalid username or password!');
+  //   } else {
+  //     setName('');
+  //     setPassword('');
+  //   }
+  // }
 
   return (
     <>
@@ -144,11 +144,11 @@ export default function Navbar() {
                       >
                         sign up
                       </button>
-                      {error && (
+                      {/* {error && (
                         <div className="text-sm pl-5 pt-2 text-red-500">
                           {error}
                         </div>
-                      )}
+                      )} */}
                     </>
                   )}
                 </div>
