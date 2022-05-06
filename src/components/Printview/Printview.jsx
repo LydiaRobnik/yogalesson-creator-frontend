@@ -3,8 +3,9 @@ import { AuthContext } from '../../context/AuthContext';
 import { useOutletContext } from 'react-router-dom';
 import './printview.scss';
 import SequencePlanned from '../SequencePlanned/SequencePlanned';
+import { forwardRef } from "react";
 
-export default function Planner() {
+const Printview = forwardRef ((props, ref) => {
   const { userClasses } = useOutletContext();
   const { user } = useContext(AuthContext);
 
@@ -19,6 +20,7 @@ export default function Planner() {
 
   return (
     <>
+    <div ref={ref}>
       <div className="w-screen h-screen">
         <div className="mx-10 flex flex-row">
           <h3 className="color-blue-darkest text-bold text-2xl">
@@ -38,6 +40,9 @@ export default function Planner() {
             ))}
         </div>
       </div>
+    </div>
     </>
   );
-}
+});
+
+export default Printview;

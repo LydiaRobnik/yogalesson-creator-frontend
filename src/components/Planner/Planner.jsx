@@ -111,6 +111,7 @@ export default function Planner() {
                   key={(sequence._id, index)}
                   className="rounded bg-light m-10"
                 >
+                  <h1>Say hello zum Print</h1>
                   <Print sequence={sequence} />
                 </div>
               ))}

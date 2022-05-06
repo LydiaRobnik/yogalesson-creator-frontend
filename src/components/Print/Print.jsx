@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
-import SequencePlanned from "../SequencePlanned/SequencePlanned";
+import Printview from "../Printview/Printview";
 
 const Print = () => {
   const componentRef = useRef();
@@ -11,8 +11,8 @@ const Print = () => {
 
   return (
     <>
-      <button onClick={handlePrint}>Print this out!</button>
-      <SequencePlanned ref={componentRef} />
+      <button style={{ 'color': "white", 'backgroundColor': "blue" }} onClick={handlePrint}>Print this out!</button>
+      <Printview ref={componentRef} />
     </>
   );
 };

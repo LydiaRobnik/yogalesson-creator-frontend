@@ -18,6 +18,7 @@ function App() {
   const navigate = useNavigate();
 
   return (
+    <>
     <div id="app">
       <AuthState>
         <Routes>
@@ -33,9 +34,6 @@ function App() {
               <Route path="planner" element={<Planner />}>
                 <Route path=":classId" element={<Planner />} />
               </Route>
-              <Route path="print" element={<Printview />}>
-                <Route path=":classId" element={<Printview />} />
-              </Route>
               <Route path="asanas" element={<Asanas />} />
               <Route path="classes" element={<ClassCollection />} />
               <Route path="sequences" element={<SequenceCollection />} />
@@ -48,6 +46,7 @@ function App() {
         </Routes>
       </AuthState>
     </div>
+    </>
   );
 }
 

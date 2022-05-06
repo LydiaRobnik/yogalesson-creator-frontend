@@ -13,7 +13,6 @@ const navigation = [
   { name: 'Planner', path: '/user/planner', current: false },
   { name: 'My Sequences', path: '/user/sequences', current: false },
   { name: 'Calendar', path: '/user/calendar', current: false },
-  { name: 'Print', path: '/user/print', current: false }
 ];
 
 function classNames(...classes) {
