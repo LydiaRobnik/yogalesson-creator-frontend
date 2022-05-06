@@ -170,7 +170,7 @@ const SequencePlanned = ({
         <div>
           <button
             className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
-            onClick={() => navigate('../asanas')}
+            onClick={() => navigate('../asanas?from=planner')}
           >
             <span className="font-material inline pr-2">add</span>
             <p className="inline pt-1 text-lg ">asana</p>

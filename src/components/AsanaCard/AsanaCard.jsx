@@ -3,7 +3,7 @@ import { useNavigate, useOutletContext } from 'react-router-dom';
 import './asanaCard.scss';
 import { useDrag, useDrop } from 'react-dnd';
 
-const AsanaCard = ({ asana, key, index, moveCard }) => {
+const AsanaCard = ({ asana, handleSelectAsana, key, index, moveCard }) => {
   const navigate = useNavigate();
   const { sequenceToAdd } = useOutletContext();
 
@@ -58,16 +58,11 @@ const AsanaCard = ({ asana, key, index, moveCard }) => {
 
   // ==ende== functions, variables and states for draggable ====
 
-  const handleSelectAsana = () => {
-    sequenceToAdd.asanas.push(asana);
-    navigate(`../planner`);
-  };
-
   return (
     <>
       <div
         ref={ref}
-        onClick={handleSelectAsana}
+        onClick={() => handleSelectAsana(asana)}
         data-handler-id={handlerId}
         // className="asanacard-jsx rounded overflow-hidden shadow-lg m-2  bg-white cursor-pointer"
         className={`asanacard-jsx rounded overflow-hidden shadow-lg m-2  cursor-pointer ${
@@ -76,11 +71,13 @@ const AsanaCard = ({ asana, key, index, moveCard }) => {
         }`}
       >
         <img className="" src={asana.img_url} alt="preview class" />
-        <div className="px-6 pt-3 pb-3 bg-light h-20">
-          <h3 className="color-blue-darkest font-bold text-xs">
-            {asana.asana.sanskrit}
-          </h3>
-          <h3 className="color-blue-darkest text-xs">{asana.asana.name}</h3>
+        <div
+          className={`px-6 pt-3 pb-3 ${
+            asana.default ? 'bg-light color-blue-darkest' : 'bg-red color-light'
+          } h-20`}
+        >
+          <h3 className="font-bold text-xs">{asana.asana.sanskrit}</h3>
+          <h3 className="text-xs">{asana.asana.name}</h3>
         </div>
       </div>
     </>
