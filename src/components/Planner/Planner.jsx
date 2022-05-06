@@ -10,17 +10,12 @@ export default function Planner() {
   const {
     userClasses,
     setUserClasses,
-    asanas,
-    setAsanas,
     userSequences,
-    setUserSequences,
     loading,
     yogaClassToAdd,
     setYogaClassToAdd,
-    // sequenceToAdd,
     setSequenceToAdd,
-    showNewSequence,
-    setShowNewSequence
+    showNewSequence
   } = useOutletContext();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -75,7 +70,6 @@ export default function Planner() {
     };
     setSequenceToAdd(seqObj);
     // setSequenceToAdd(result);
-
     // setShowNewSequence(true);
   };
 

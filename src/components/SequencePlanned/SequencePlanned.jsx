@@ -1,41 +1,38 @@
-import React, { useState, useCallback, useEffect, useContext } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useContext,
+  useRef
+} from 'react';
 import AsanaCard from '../AsanaCard/AsanaCard';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import './sequencePlanned.scss';
-// import { useDrop } from 'react-dnd';
+import { useDrop, useDrag } from 'react-dnd';
 import update from 'immutability-helper';
 import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
 
-const SequencePlanned = ({ sequence, handleFocus }) => {
+const SequencePlanned = ({
+  sequence,
+  handleFocus,
+  index,
+  moveSequence,
+  key
+}) => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-  const {
-    userSequences,
-    setUserSequences,
-    yogaClassToAdd,
-    setYogaClassToAdd,
-    sequenceToAdd,
-    setSequenceToAdd,
-    setShowNewSequence
-  } = useOutletContext();
+  const { setUserSequences, yogaClassToAdd, setYogaClassToAdd } =
+    useOutletContext();
+
+  const ref = useRef(null);
 
   const [title, setTitle] = useState(sequence.title);
   const [description, setDescription] = useState(sequence.description);
-  const [plannedSequence, setPlannedSequence] = useState(sequence);
-  console.log('asanas', plannedSequence.asanas);
+  const [cards, setCards] = useState(sequence.asanas);
 
   // ==Start== moving and updating asana array in sequence / drag and drop function ====
-  const [cards, setCards] = useState(sequence.asanas);
   const moveCard = useCallback((dragIndex, hoverIndex) => {
-    // const cardsBeforMoving = plannedSequence.asanas;
-    // const cardsAfterMoving = cardsBeforMoving.splice([
-    //   [dragIndex, 1],
-    //   [hoverIndex, 0, cardsBeforMoving[dragIndex]]
-    // ]);
-
-    // setPlannedSequence({ ...plannedSequence, asanas: cardsAfterMoving });
-
     setCards((prevCards) =>
       update(prevCards, {
         $splice: [
@@ -48,10 +45,9 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
 
   useEffect(() => {
     const saveSequenceToBackend = async () => {
-      const oldSequenceInBackend = { ...sequence };
       const updatedSequence = {
         ...sequence,
-        asanas: plannedSequence.asanas,
+        asanas: cards,
         title: title,
         description: description
       };
@@ -62,7 +58,7 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
     asanaService.getUserSequences(user.id).then((data) => {
       setUserSequences(data);
     });
-  }, [cards, plannedSequence, title, description]);
+  }, [cards, title, description]);
 
   const renderCard = useCallback((card, index) => {
     return (
@@ -73,8 +69,6 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
           index={index}
           id={card._id}
           moveCard={moveCard}
-          setPlannedSequence={setPlannedSequence}
-          plannedSequence={plannedSequence}
         />
         <span
           className="font-material-symbols color-blue-darkest cursor-pointer"
@@ -88,6 +82,56 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
 
   // ==End== moving and updating asana array in sequence / drag and drop function ====
 
+  //  ==Start=== drag and drop functions for sequences ====
+
+  const [{ handlerId }, drop] = useDrop({
+    accept: 'divSequencePlanned',
+    collect(monitor) {
+      return {
+        handlerId: monitor.getHandlerId()
+      };
+    },
+    hover(item, monitor) {
+      if (!ref.current) {
+        return;
+      }
+      const dragIndex = item.index;
+      const hoverIndex = index;
+      if (dragIndex === hoverIndex) {
+        return;
+      }
+      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+      const hoverMiddleY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const clientOffset = monitor.getClientOffset();
+      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+
+      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+        return;
+      }
+      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+        return;
+      }
+
+      moveSequence(dragIndex, hoverIndex);
+      item.index = hoverIndex;
+    }
+  });
+
+  const [{ isDragging }, drag] = useDrag({
+    type: 'divSequencePlanned',
+    item: () => {
+      return { key, index };
+    },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging()
+    })
+  });
+
+  drag(drop(ref));
+
+  //  ==End=== drag and drop functions for sequences ====
+
   // edit functions
   const handleRemoveSequence = (sequence) => {
     const sequenceToRemove = yogaClassToAdd.plan.indexOf(sequence);
@@ -95,27 +139,15 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
     setYogaClassToAdd({ ...yogaClassToAdd });
   };
 
-  // const vvv = (asana) => {
-  //   const asanaToRemove = sequenceToAdd.asanas.indexOf(asana);
-  //   sequenceToAdd.asanas.splice(asanaToRemove, 1);
-  //   setSequenceToAdd({ ...sequenceToAdd });
-  // };
-
-  // const handleRemoveAsana = (asana) => {
-  //   const removeIndex = cards.indexOf(asana);
-  //   const newCards = cards.splice(removeIndex, 1);
-  //   setCards(newCards);
-  // };
-
   const handleRemoveAsana = (asana) => {
-    const removeIndex = plannedSequence.asanas.indexOf(asana);
-    const newCards = plannedSequence.asanas.splice(removeIndex, 1);
-    setPlannedSequence({ ...plannedSequence, asanas: newCards });
+    const removeIndex = cards.indexOf(asana);
+    cards.splice(removeIndex, 1);
+    setCards(...cards);
   };
 
   return (
     <>
-      <div className="w-full min-h-40 flex flex-row justify-between">
+      <div ref={ref} className="w-full min-h-40 flex flex-row justify-between">
         <div className="flex flex-row">
           <input
             type="text"
@@ -166,10 +198,7 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
         </div>
 
         <div className="flex flex-wrap">
-          {sequence &&
-            plannedSequence.asanas.map((asana, index) =>
-              renderCard(asana, index)
-            )}
+          {sequence && cards.map((asana, index) => renderCard(asana, index))}
         </div>
       </>
     </>
