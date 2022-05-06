@@ -135,53 +135,62 @@ export default function Planner() {
       )}
 
       {!loading && (
-        <div ref={imgEl} className="w-full bg-white">
-          <div className="flex flex-ro">
-            <input
-              type="text"
-              className="color-blue-darkest text-left px-10 text-4xl"
-              placeholder={`${user.name}'s class no. ${userClasses.length + 1}`}
-              value={yogaClassToAdd.title}
-              onChange={editClass}
-              onFocus={handleFocus}
-            />
-          </div>
+        <div className="w-full bg-white">
+          <div ref={imgEl} className="w-full bg-white">
+            <div
+              className={`flex flex-row ${
+                yogaClassToAdd.plan.length === 0
+                  ? 'justify-center'
+                  : 'justify-start'
+              }`}
+            >
+              <input
+                type="text"
+                className={`color-blue-darkest px-10 text-4xl ${
+                  yogaClassToAdd.plan.length === 0 ? 'text-center' : 'text-left'
+                }`}
+                placeholder="draft - class title"
+                value={yogaClassToAdd.title}
+                onChange={editClass}
+                onFocus={handleFocus}
+              />
+            </div>
 
-          <div className="w-full">
-            {yogaClassToAdd.plan &&
-              yogaClassToAdd.plan.map((sequence, index) => (
-                <div className="grid grid-cols-12 gap-4 border-t-2 border-gray-200 mx-4">
-                  <div className=" col-span-1">
-                    <span
-                      className="font-material-symbols color-blue-darkest text-4xl px-3 cursor-pointer"
-                      onClick={() => moveSequenceDown(sequence)}
+            <div className="w-full">
+              {yogaClassToAdd.plan &&
+                yogaClassToAdd.plan.map((sequence, index) => (
+                  <div className="grid grid-cols-12 gap-4 border-t-2 border-gray-200 mx-4">
+                    <div className=" col-span-1">
+                      <span
+                        className="font-material-symbols color-blue-darkest text-4xl px-3 cursor-pointer"
+                        onClick={() => moveSequenceDown(sequence)}
+                      >
+                        expand_more
+                      </span>
+                      <span
+                        className="font-material-symbols color-blue-darkest text-4xl px-3 cursor-pointer"
+                        onClick={() => moveSequenceUp(sequence)}
+                      >
+                        expand_less
+                      </span>
+                    </div>
+
+                    <div
+                      key={sequence._id}
+                      className="rounded bg-light col-span-11 my-2"
                     >
-                      expand_more
-                    </span>
-                    <span
-                      className="font-material-symbols color-blue-darkest text-4xl px-3 cursor-pointer"
-                      onClick={() => moveSequenceUp(sequence)}
-                    >
-                      expand_less
-                    </span>
+                      <SequencePlanned
+                        sequence={sequence}
+                        handleFocus={handleFocus}
+                      />
+                    </div>
                   </div>
-
-                  <div
-                    key={sequence._id}
-                    className="rounded bg-light col-span-11 my-2"
-                  >
-                    <SequencePlanned
-                      sequence={sequence}
-                      handleFocus={handleFocus}
-                    />
-                  </div>
-                </div>
-              ))}
+                ))}
+            </div>
           </div>
-
           {/* {showNewSequence && <NewSequence handleFocus={handleFocus} />} */}
 
-          <div className=" w-full flex flex-row justify-center">
+          <div className=" w-full flex flex-row justify-center mt-4">
             <button
               className="btn-blue btn-blue:hover   mx-2 flex flex-row items-center"
               onClick={() => createSequence()}

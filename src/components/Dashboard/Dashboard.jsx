@@ -38,9 +38,7 @@ export default function Dashboard() {
 
   const createClass = async () => {
     const newClass = {
-      title: `${user.name}'s class no. ${
-        userClasses.length + 1 + Math.random()
-      }`,
+      title: `draft - class title`,
       user: user?.id,
       plan: [],
       favourite: false
@@ -56,7 +54,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="bg-beige w-full rounded">
+    <div className="w-full rounded">
       {loading && (
         <lottie-player
           src="https://assets1.lottiefiles.com/packages/lf20_s00z9gco.json"
@@ -110,7 +108,10 @@ export default function Dashboard() {
                 >
                   recently used
                 </h2>
-                <button className="btn-neutral btn-neutral:hover bg-blue-middle mx-2 ml-5 flex flex-row items-center">
+                <button className="btn-neutral btn-neutral:hover bg-white outline outline-2  pl-1 mx-2 ml-5 flex flex-row items-center">
+                  <span className="font-material-symbols color-blue-darkest text-lg px-2 cursor-pointer">
+                    expand_more
+                  </span>
                   <p className="inline pt-1 text-lg">show all</p>
                 </button>
               </div>
@@ -129,7 +130,7 @@ export default function Dashboard() {
                     className={`rounded overflow-hidden w-full m-2 ${
                       selectedCard === classItem._id
                         ? 'border-solid border-2 border-rose-400 shadow-xl'
-                        : 'shadow-lg'
+                        : ' border-2 border-gray-200'
                     }`}
                   >
                     <ClassCard classItem={classItem} />
@@ -183,7 +184,7 @@ export default function Dashboard() {
                     className={`rounded overflow-hidden w-72 m-2 ${
                       selectedCard === `${favoritItem._id}_favorite`
                         ? 'border-solid border-2 border-rose-400 shadow-xl'
-                        : 'shadow-lg'
+                        : 'border-2 border-gray-200'
                     }`}
                   >
                     <ClassCard classItem={favoritItem} />
