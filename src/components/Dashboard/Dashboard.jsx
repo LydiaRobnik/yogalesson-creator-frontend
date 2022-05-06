@@ -56,7 +56,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="bg-beige rounded">
+    <div className="bg-beige w-full rounded">
       {loading && (
         <lottie-player
           src="https://assets1.lottiefiles.com/packages/lf20_s00z9gco.json"
@@ -81,10 +81,6 @@ export default function Dashboard() {
             >
               <p className="font-material inline pr-2">add</p>
               <p className="inline pt-1 text-lg">new class</p>
-            </button>
-            <button className="btn-red btn-blue:hover mx-2 flex flex-row items-center">
-              <p className="font-material inline pr-2">add</p>
-              <p className="inline pt-1 text-lg">random class</p>
             </button>
           </div>
 
@@ -120,7 +116,7 @@ export default function Dashboard() {
               </div>
             )}
             <div
-              className="flex flex-row flex-wrap"
+              className="grid gap-4 grid-cols-5"
               // className={`justify-center grid gap-4 ${gridResponsiveness()}`}
             >
               {userClasses &&
@@ -130,7 +126,7 @@ export default function Dashboard() {
                     onClick={() => {
                       markAsSelected(classItem._id);
                     }}
-                    className={`rounded overflow-hidden w-72 m-2 ${
+                    className={`rounded overflow-hidden w-full m-2 ${
                       selectedCard === classItem._id
                         ? 'border-solid border-2 border-rose-400 shadow-xl'
                         : 'shadow-lg'

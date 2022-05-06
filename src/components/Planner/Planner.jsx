@@ -83,6 +83,44 @@ export default function Planner() {
     });
   };
 
+  const moveSequenceUp = (sequence) => {
+    const startIndex = yogaClassToAdd.plan.indexOf(sequence);
+
+    if (startIndex === 0) return;
+    else {
+      const endIndex = startIndex - 1;
+
+      yogaClassToAdd.plan.splice(
+        endIndex,
+        0,
+        yogaClassToAdd.plan.splice(startIndex, 1)[0]
+      );
+      setYogaClassToAdd({ ...yogaClassToAdd });
+
+      // console.log('index to move', startIndex);
+      // console.log('index after splice', yogaClassToAdd.plan.indexOf(sequence));
+    }
+  };
+
+  const moveSequenceDown = (sequence) => {
+    const startIndex = yogaClassToAdd.plan.indexOf(sequence);
+
+    if (startIndex === yogaClassToAdd.plan.length - 1) return;
+    else {
+      const endIndex = startIndex + 1;
+
+      yogaClassToAdd.plan.splice(
+        endIndex,
+        0,
+        yogaClassToAdd.plan.splice(startIndex, 1)[0]
+      );
+      setYogaClassToAdd({ ...yogaClassToAdd });
+
+      console.log('index to move', startIndex);
+      console.log('index after splice', yogaClassToAdd.plan.indexOf(sequence));
+    }
+  };
+
   return (
     <div className="w-full">
       {loading && (
@@ -97,8 +135,8 @@ export default function Planner() {
       )}
 
       {!loading && (
-        <div ref={imgEl} className="w-full">
-          <div className="flex flex-row">
+        <div ref={imgEl} className="w-full bg-white">
+          <div className="flex flex-ro">
             <input
               type="text"
               className="color-blue-darkest text-left px-10 text-4xl"
