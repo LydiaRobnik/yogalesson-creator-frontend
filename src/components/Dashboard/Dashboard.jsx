@@ -56,7 +56,7 @@ export default function Dashboard() {
   };
 
   return (
-    <>
+    <div className="bg-beige rounded">
       {loading && (
         <lottie-player
           src="https://assets1.lottiefiles.com/packages/lf20_s00z9gco.json"
@@ -197,6 +197,6 @@ export default function Dashboard() {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 }

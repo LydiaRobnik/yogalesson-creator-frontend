@@ -36,6 +36,7 @@ const SequenceCollection = () => {
 
   const handleSelectSequence = (choice) => {
     yogaClassToAdd.plan.push(choice);
+    console.log('sequence selected');
     navigate(`../planner`);
   };
 

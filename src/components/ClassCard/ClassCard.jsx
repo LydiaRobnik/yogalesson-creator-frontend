@@ -48,7 +48,7 @@ const ClassCard = ({ classItem }) => {
   return (
     <>
       <div
-        className="rounded overflow-hidden w-72 m-2"
+        className="rounded overflow-hidden w-72 m-2 bg-white"
         onDoubleClick={() => {
           openClassInPlanner();
         }}

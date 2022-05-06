@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import './navbar.scss';
 import { Fragment } from 'react';
