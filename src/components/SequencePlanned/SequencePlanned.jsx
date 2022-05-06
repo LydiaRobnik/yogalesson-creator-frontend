@@ -20,7 +20,8 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
     setShowNewSequence
   } = useOutletContext();
 
-  const [sequenceIncoming, setSequenceIncoming] = useState(sequence);
+  // const [title, setTitle] = useState(sequence.title);
+  // const [description, setDescription] = useState(sequence.description);
 
   // ==Start== moving and updating asana array in sequence / drag and drop function ====
   const [cards, setCards] = useState(sequence.asanas);
@@ -38,7 +39,12 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
   useEffect(() => {
     const saveSequenceToBackend = async () => {
       const oldSequenceInBackend = { ...sequence };
-      const updatedSequence = { ...sequence, asanas: cards };
+      const updatedSequence = {
+        ...sequence,
+        asanas: cards,
+        title: sequenceToAdd.title,
+        description: sequenceToAdd.description
+      };
       const result = await asanaService.saveSequence(updatedSequence);
       console.log('📒 saveSequence', result);
     };
@@ -46,7 +52,7 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
     asanaService.getUserSequences(user.id).then((data) => {
       setUserSequences(data);
     });
-  }, [cards]);
+  }, [cards, sequenceToAdd]);
 
   const renderCard = useCallback((card, index) => {
     return (
@@ -83,24 +89,24 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
     setSequenceToAdd({ ...sequenceToAdd });
   };
 
-  useEffect(() => {
-    const saveSequenceToBackend = async () => {
-      if (sequenceToAdd.title.length === 0)
-        setSequenceToAdd({
-          ...sequenceToAdd,
-          title: `${user.name}'s sequence no. ${
-            userSequences.length + 1 + Math.random()
-          }`
-        });
-      const newSequence = { ...sequenceToAdd };
-      const result = await asanaService.saveSequence(newSequence);
-      console.log('📒 saveSequence', result);
-    };
-    saveSequenceToBackend();
-    asanaService.getUserSequences(user.id).then((data) => {
-      setUserSequences(data);
-    });
-  }, [sequenceToAdd]);
+  // useEffect(() => {
+  //   const saveSequenceToBackend = async () => {
+  //     if (sequenceToAdd.title.length === 0)
+  //       setSequenceToAdd({
+  //         ...sequenceToAdd,
+  //         title: `${user.name}'s sequence no. ${
+  //           userSequences.length + 1 + Math.random()
+  //         }`
+  //       });
+  //     const newSequence = { ...sequenceToAdd };
+  //     const result = await asanaService.saveSequence(newSequence);
+  //     console.log('📒 saveSequence', result);
+  //   };
+  //   saveSequenceToBackend();
+  //   asanaService.getUserSequences(user.id).then((data) => {
+  //     setUserSequences(data);
+  //   });
+  // }, [sequenceToAdd]);
 
   return (
     <>
@@ -110,12 +116,9 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
             type="text"
             className="color-blue-darkest text-xl"
             placeholder="draft sequence - title"
-            value={sequenceToAdd.title}
+            value={sequence.title}
             onChange={(e) =>
-              setSequenceToAdd({
-                ...sequenceToAdd,
-                title: e.target.value
-              })
+              setSequenceToAdd({ ...sequenceToAdd, title: e.target.value })
             }
             onFocus={handleFocus}
           />

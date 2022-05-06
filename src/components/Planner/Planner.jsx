@@ -17,8 +17,8 @@ export default function Planner() {
     loading,
     yogaClassToAdd,
     setYogaClassToAdd,
-    sequenceToAdd,
-    setSequenceToAdd,
+    // sequenceToAdd,
+    // setSequenceToAdd,
     showNewSequence,
     setShowNewSequence
   } = useOutletContext();
@@ -63,8 +63,11 @@ export default function Planner() {
     };
     const result = await asanaService.createSequence(newSequence);
     console.log('📒 newSequence', result);
-    setSequenceToAdd(result);
-    setShowNewSequence(true);
+    yogaClassToAdd.plan.push(result);
+    setYogaClassToAdd({ ...yogaClassToAdd });
+    // setSequenceToAdd(result);
+
+    // setShowNewSequence(true);
   };
 
   const editClass = (e) => {
