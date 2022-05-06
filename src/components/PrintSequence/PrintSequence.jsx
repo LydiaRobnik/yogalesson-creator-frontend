@@ -32,6 +32,15 @@ const PrintSequence = ({ sequence }) => {
         <h3 className="color-blue-darkest pl-3 p-3 font-bold text-xl">
           {sequence.title}
         </h3>
+        <p className="color-blue-darkest">
+          {new Date(sequence.modifiedAt).toLocaleString()}
+        </p>
+        <span
+          className="font-material-symbols color-blue-darkest cursor-pointer"
+          onClick={() => handleRemoveSequence(sequence)}
+        >
+          delete
+        </span>
       </div>
 
       <>
