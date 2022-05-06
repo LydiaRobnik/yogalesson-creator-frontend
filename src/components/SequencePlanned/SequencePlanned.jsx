@@ -7,11 +7,30 @@ import React, {
 } from 'react';
 import AsanaCard from '../AsanaCard/AsanaCard';
 import { useNavigate, useOutletContext } from 'react-router-dom';
-import './sequencePlanned.scss';
 import { useDrop, useDrag } from 'react-dnd';
 import update from 'immutability-helper';
 import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
+import Modal from 'react-modal';
+import Asanas from '../Asanas/Asanas';
+import './sequencePlanned.scss';
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    padding: '0',
+    borderRadius: '.7rem',
+    border: '2px dotted lightgray',
+    overflow: 'hidden',
+    width: '80%'
+  }
+};
+Modal.setAppElement('#root');
 
 const SequencePlanned = ({
   sequence,
@@ -30,6 +49,8 @@ const SequencePlanned = ({
   const [title, setTitle] = useState(sequence.title);
   const [description, setDescription] = useState(sequence.description);
   const [cards, setCards] = useState(sequence.asanas);
+
+  const [modalIsOpen, setIsOpen] = React.useState(false);
 
   // ==Start== moving and updating asana array in sequence / drag and drop function ====
   const moveCard = useCallback((dragIndex, hoverIndex) => {
@@ -59,6 +80,29 @@ const SequencePlanned = ({
       setUserSequences(data);
     });
   }, [cards, title, description]);
+
+  /**
+   * add Asana from modal dialog
+   * @param {} asana from Asanas.jsx
+   */
+  function addAsana(asana) {
+    console.log('📒 addAsana', asana);
+    setCards((prev) => [...prev, asana]);
+    closeModal();
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = '#f00';
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   const renderCard = useCallback((card, index) => {
     return (
@@ -170,7 +214,8 @@ const SequencePlanned = ({
         <div>
           <button
             className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
-            onClick={() => navigate('../asanas?from=planner')}
+            // onClick={() => navigate('../asanas?from=planner')}
+            onClick={() => openModal()}
           >
             <span className="font-material inline pr-2">add</span>
             <p className="inline pt-1 text-lg ">asana</p>
@@ -201,6 +246,33 @@ const SequencePlanned = ({
           {sequence && cards.map((asana, index) => renderCard(asana, index))}
         </div>
       </>
+      <div className="text-black">
+        <Modal
+          isOpen={modalIsOpen}
+          onAfterOpen={afterOpenModal}
+          onRequestClose={closeModal}
+          // className="modal"
+          // overlayClassName="overlay"
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+          <div className="text-black relative">
+            <button
+              onClick={closeModal}
+              className="btn-modal-close absolute top-1 right-1"
+            >
+              ✖️
+            </button>
+            <h2 className="text-lg font-bold text-center border-dashed border-b-slate-400 border-b bg-blue-dark color-beige-light p-4 pb-2 mb-4">
+              Select an Asana
+            </h2>
+            {/* <ModalAddAsana /> */}
+            <div className="modalAsana overflow-scroll overflow-x-hidden">
+              <Asanas selection={true} addAsana={addAsana} />
+            </div>
+          </div>
+        </Modal>
+      </div>
     </>
   );
 };

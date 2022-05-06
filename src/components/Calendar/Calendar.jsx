@@ -204,14 +204,14 @@ export default function Calendar() {
 
   return (
     <div className="w-full">
-      <div className="text-center text-2xl md:text-4xl pb-3 md:pb-8 color-blue-dark">
-        Yoga Calendar
+      {/* <div className="text-center text-2xl md:text-4xl pb-3 md:pb-8 color-blue-dark">
+        Your Yoga Calendar
       </div>
       <div className="color-blue-middle text-right">
         <button onClick={() => handleCalendarView(0)}>month</button>
         <button onClick={() => handleCalendarView(1)}>week</button>
         <button onClick={() => handleCalendarView(2)}>day</button>
-      </div>
+      </div> */}
       <div
         id="div-calendar"
         className="flex flex-col gap-2 md:gap-4 md:flex-row text-black w-full h-full"

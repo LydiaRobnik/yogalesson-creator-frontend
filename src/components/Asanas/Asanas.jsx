@@ -38,7 +38,7 @@ const customStyles = {
 };
 Modal.setAppElement('#root');
 
-const Asanas = () => {
+const Asanas = ({ selection = false, addAsana }) => {
   const {
     userClasses,
     setUserClasses,
@@ -71,7 +71,7 @@ const Asanas = () => {
     console.log('📦 from', searchParams.get('from'));
     if (loggedIn) {
       const fetchData = async () => {
-        setLoading(true);
+        if (!selection) setLoading(true);
         const data = await asanaService.getDefaultAsanas(user.id);
         const dataUser = await asanaService.getUserAsanas(user.id);
 
@@ -167,6 +167,7 @@ const Asanas = () => {
   }
 
   function closeModal() {
+    console.log('closeModal');
     setIsOpen(false);
   }
 
@@ -189,6 +190,9 @@ const Asanas = () => {
     if (searchParams.get('from') === 'planner') {
       sequenceToAdd.asanas.push(asana);
       navigate(`../planner`);
+    } else if (selection === true) {
+      // console.log('asana', asana);
+      addAsana(asana);
     } else {
       console.log('asana', asana);
       setEditAsana({ ...asana });
@@ -237,13 +241,15 @@ const Asanas = () => {
             </div>
 
             <div className="grow w-4/6 md:w-5/6 flex flex-row flex-wrap">
-              <button
-                className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
-                onClick={handleOpenCreateAsanaDialog}
-              >
-                <span className="font-material inline pr-2">add</span>
-                <p className="inline pt-1 text-lg ">new</p>
-              </button>
+              {!selection && (
+                <button
+                  className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
+                  onClick={handleOpenCreateAsanaDialog}
+                >
+                  <span className="font-material inline pr-2">add</span>
+                  <p className="inline pt-1 text-lg ">new</p>
+                </button>
+              )}
             </div>
           </div>
           <div className="asanas-jsx flex justify-center gap-4 w-full">

@@ -60,7 +60,7 @@ export default function AsanaCreateDialog({ saveAsana, asana }) {
   return (
     <div id="AsanaCreateDialog-jsx" className="text-black">
       <h2 className="text-lg font-bold text-center border-dashed border-b-slate-400 border-b bg-blue-dark color-beige-light p-4 pb-2 mb-4">
-        Create Asana
+        {asanaObj._id ? 'Update' : 'Create'} Asana
       </h2>
 
       <form onSubmit={handleSaveAsana}>
@@ -312,7 +312,7 @@ export default function AsanaCreateDialog({ saveAsana, asana }) {
         </div>
         <div className="bg-beige color-blue-dark text-right pt-1">
           <button className="btn-blue btn-blue:hover mx-2 mb-1">
-            {asanaObj._id ? 'Update' : 'Save'}
+            {asanaObj._id ? 'Update' : 'Create'}
           </button>
           {/* <button onClick={handleSaveAsana}>Save</button> */}
         </div>
