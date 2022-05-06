@@ -2,18 +2,27 @@ import React, { useState, useCallback, useEffect, useContext } from 'react';
 import AsanaCard from '../AsanaCard/AsanaCard';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import './sequencePlanned.scss';
-import { useDrop } from 'react-dnd';
+// import { useDrop } from 'react-dnd';
 import update from 'immutability-helper';
 import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
 
-const SequencePlanned = ({ sequence }) => {
-  const { yogaClassToAdd, setYogaClassToAdd, setUserSequences } =
-    useOutletContext();
+const SequencePlanned = ({ sequence, handleFocus }) => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
+  const {
+    userSequences,
+    setUserSequences,
+    yogaClassToAdd,
+    setYogaClassToAdd,
+    sequenceToAdd,
+    setSequenceToAdd,
+    setShowNewSequence
+  } = useOutletContext();
 
-  // mein Array mit Asanas: sequence.asanas
+  const [sequenceIncoming, setSequenceIncoming] = useState(sequence);
+
+  // ==Start== moving and updating asana array in sequence / drag and drop function ====
   const [cards, setCards] = useState(sequence.asanas);
   const moveCard = useCallback((dragIndex, hoverIndex) => {
     setCards((prevCards) =>
@@ -41,26 +50,76 @@ const SequencePlanned = ({ sequence }) => {
 
   const renderCard = useCallback((card, index) => {
     return (
-      <AsanaCard
-        asana={card}
-        key={card._id + Math.random()}
-        index={index}
-        id={card._id}
-        moveCard={moveCard}
-      />
+      <>
+        <AsanaCard
+          asana={card}
+          key={card._id + Math.random()}
+          index={index}
+          id={card._id}
+          moveCard={moveCard}
+        />
+        <span
+          className="font-material-symbols color-blue-darkest cursor-pointer"
+          onClick={() => handleRemoveAsana(card)}
+        >
+          delete
+        </span>
+      </>
     );
   }, []);
 
+  // ==End== moving and updating asana array in sequence / drag and drop function ====
+
+  // edit functions
   const handleRemoveSequence = (sequence) => {
     const sequenceToRemove = yogaClassToAdd.plan.indexOf(sequence);
     yogaClassToAdd.plan.splice(sequenceToRemove, 1);
     setYogaClassToAdd({ ...yogaClassToAdd });
   };
 
+  const handleRemoveAsana = (asana) => {
+    const asanaToRemove = sequenceToAdd.asanas.indexOf(asana);
+    sequenceToAdd.asanas.splice(asanaToRemove, 1);
+    setSequenceToAdd({ ...sequenceToAdd });
+  };
+
+  useEffect(() => {
+    const saveSequenceToBackend = async () => {
+      if (sequenceToAdd.title.length === 0)
+        setSequenceToAdd({
+          ...sequenceToAdd,
+          title: `${user.name}'s sequence no. ${
+            userSequences.length + 1 + Math.random()
+          }`
+        });
+      const newSequence = { ...sequenceToAdd };
+      const result = await asanaService.saveSequence(newSequence);
+      console.log('📒 saveSequence', result);
+    };
+    saveSequenceToBackend();
+    asanaService.getUserSequences(user.id).then((data) => {
+      setUserSequences(data);
+    });
+  }, [sequenceToAdd]);
+
   return (
     <>
       <div className="w-full min-h-40 flex flex-row justify-between">
         <div className="flex flex-row">
+          <input
+            type="text"
+            className="color-blue-darkest text-xl"
+            placeholder="draft sequence - title"
+            value={sequenceToAdd.title}
+            onChange={(e) =>
+              setSequenceToAdd({
+                ...sequenceToAdd,
+                title: e.target.value
+              })
+            }
+            onFocus={handleFocus}
+          />
+
           <h3 className="color-blue-darkest pl-3 p-3 font-bold text-xl">
             {sequence.title}
           </h3>

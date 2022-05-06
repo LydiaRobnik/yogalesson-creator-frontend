@@ -7,22 +7,15 @@ import './newSequence.scss';
 
 const NewSequence = ({ handleFocus }) => {
   const navigate = useNavigate();
-  const { loggedIn, user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   console.log('user', user.id);
   const {
-    userClasses,
-    setUserClasses,
-    asanas,
-    setAsanas,
     userSequences,
     setUserSequences,
-    loading,
-    gridResponsiveness,
     yogaClassToAdd,
     setYogaClassToAdd,
     sequenceToAdd,
     setSequenceToAdd,
-    showNewSequence,
     setShowNewSequence
   } = useOutletContext();
 

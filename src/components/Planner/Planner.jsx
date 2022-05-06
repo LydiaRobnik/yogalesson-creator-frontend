@@ -110,7 +110,10 @@ export default function Planner() {
                   key={(sequence._id, index)}
                   className="rounded bg-light m-10"
                 >
-                  <SequencePlanned sequence={sequence} />
+                  <SequencePlanned
+                    sequence={sequence}
+                    handleFocus={handleFocus}
+                  />
                 </div>
               ))}
           </div>
