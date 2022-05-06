@@ -224,7 +224,7 @@ export default function Calendar() {
             {events
               .filter((event) => new Date(event.date) - new Date() >= 0)
               .map((event, index, array) => (
-                <div>
+                <div key={event.id}>
                   {/* separate months */}
                   {(index === 0 ||
                     new Date(event.date).getMonth() !==
@@ -240,7 +240,6 @@ export default function Calendar() {
                     </div>
                   )}
                   <div
-                    key={event.id}
                     onClick={() => setSelectedEvent((prev) => event)}
                     className={`cursor-pointer p-1 pt-2 hover:bg-beige-light`}
                   >

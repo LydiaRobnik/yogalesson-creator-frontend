@@ -3,21 +3,10 @@ import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
 import FileUpload from '../FileUpload/FileUpload';
 
-const emptyAsana = {
-  asana: {
-    sanskrit: '',
-    name: ''
-  },
-  img_url: '',
-  level: 'beginners',
-  tags: [],
-  default: false
-};
-
 export default function AsanaCreateDialog({ saveAsana, asana }) {
   const { user, loggedIn } = useContext(AuthContext);
 
-  const [asanaObj, setAsanaObj] = useState(asana ? asana : emptyAsana);
+  const [asanaObj, setAsanaObj] = useState(asana);
   const [tag, setTag] = useState();
   const [image, setImage] = useState(asana ? asana.img_url : null);
   const [clickImage, setClickImage] = useState(false);
@@ -25,20 +14,17 @@ export default function AsanaCreateDialog({ saveAsana, asana }) {
   useEffect(() => {
     console.log('asanaObj', asana);
     setAsanaObj((prev) => {
-      prev.user = user.id;
-      return { ...prev };
+      if (!asana._id && !asana.default) asana.user = user.id;
+      return asana;
     });
 
     return () => {};
-  }, [user]);
+  }, [asana]);
 
   function handleSaveAsana(event) {
     event.preventDefault();
     console.log('handleFormSubmit', asanaObj);
-
-    asanaService.createAsana(asanaObj).then((asana) => {
-      console.log('createAsana', asana);
-    });
+    saveAsana(asanaObj);
   }
 
   function handleAddTag(event) {
@@ -73,7 +59,7 @@ export default function AsanaCreateDialog({ saveAsana, asana }) {
 
   return (
     <div id="AsanaCreateDialog-jsx" className="text-black">
-      <h2 className="text-lg font-bold text-center border-dashed border-b-slate-400 border-b bg-red color-beige-light p-4 pb-2 mb-4">
+      <h2 className="text-lg font-bold text-center border-dashed border-b-slate-400 border-b bg-blue-dark color-beige-light p-4 pb-2 mb-4">
         Create Asana
       </h2>
 
@@ -299,6 +285,7 @@ export default function AsanaCreateDialog({ saveAsana, asana }) {
                 <span className="px-1 pl-2 py-1 rounded-full text-gray-500 bg-gray-200 font-semibold text-sm flex align-center w-max cursor-pointer active:bg-gray-300 transition duration-300 ease">
                   <div className="mt-1">{tag}</div>
                   <button
+                    type="button"
                     onClick={() => removeTag(tag)}
                     className="bg-transparent hover focus:outline-none"
                   >
@@ -324,7 +311,9 @@ export default function AsanaCreateDialog({ saveAsana, asana }) {
           </div>
         </div>
         <div className="bg-beige color-blue-dark text-right pt-1">
-          <button>Save</button>
+          <button className="btn-blue btn-blue:hover mx-2 mb-1">
+            {asanaObj._id ? 'Update' : 'Save'}
+          </button>
           {/* <button onClick={handleSaveAsana}>Save</button> */}
         </div>
       </form>

@@ -95,7 +95,7 @@ export default function CalendarEntryDialog({
 
   return (
     <div id="CalendarEntryDialog-jsx" className="text-black">
-      <h2 className="text-lg font-bold text-center border-dashed border-b-slate-400 border-b bg-red color-beige-light p-4 pb-2 mb-4">
+      <h2 className="text-lg font-bold text-center border-dashed border-b-slate-400 border-b bg-blue-dark color-beige-light p-4 pb-2 mb-4">
         Create Calendar Entry
       </h2>
       <div className=" grid grid-cols-[1fr_1fr] gap-4 p-0">

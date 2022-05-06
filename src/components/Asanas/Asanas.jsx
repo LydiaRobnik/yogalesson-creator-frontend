@@ -1,11 +1,26 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import { useNavigate, useOutletContext } from 'react-router-dom';
+import {
+  useNavigate,
+  useOutletContext,
+  useSearchParams
+} from 'react-router-dom';
 import asanaService from '../../api/asanaService';
 import AsanaCard from '../AsanaCard/AsanaCard';
 import Modal from 'react-modal';
 import './asanas.scss';
 import AsanaCreateDialog from './AsanaCreateDialog';
+
+const emptyAsanaObj = () => ({
+  asana: {
+    sanskrit: '',
+    name: ''
+  },
+  img_url: '',
+  level: 'beginners',
+  tags: [],
+  default: false
+});
 
 const customStyles = {
   content: {
@@ -37,18 +52,23 @@ const Asanas = () => {
     sequenceToAdd
   } = useOutletContext();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
   const { loggedIn, user } = useContext(AuthContext);
 
   const [filterName, setFilterName] = useState('');
   const [filterLevel, setFilterLevel] = useState([]);
   const [filterTags, setFilterTags] = useState([]);
   const [showFilter, setShowFilter] = useState(true);
+  const [editAsana, setEditAsana] = useState(emptyAsanaObj());
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [error, setError] = useState('');
+  const [doFetch, setDoFetch] = useState(true);
 
   // fetches
   useEffect(() => {
+    console.log('📦 from', searchParams.get('from'));
     if (loggedIn) {
       const fetchData = async () => {
         setLoading(true);
@@ -65,7 +85,7 @@ const Asanas = () => {
     }
 
     return () => {};
-  }, [loggedIn]);
+  }, [loggedIn, doFetch]);
 
   useEffect(() => {
     let levelAr = new Set();
@@ -99,22 +119,42 @@ const Asanas = () => {
   }, [showFilter]);
 
   const handleOpenCreateAsanaDialog = () => {
-    console.log('handleCreateAsana');
+    console.log('handleCreateAsana', emptyAsanaObj());
+    setEditAsana(emptyAsanaObj());
     openModal();
   };
 
   function saveAsana(asanaObj) {
     console.log('createAsana', asanaObj);
-    asanaService
-      .createAsana(asanaObj)
-      .then((data) => {
-        console.log('createAsana', data);
-        setAsanas([data, ...asanas]);
-      })
-      .catch((err) => {
-        console.log('createAsana', err);
-        setError(err);
-      });
+
+    if (!asanaObj._id) {
+      asanaService
+        .createAsana(asanaObj)
+        .then((data) => {
+          console.log('createAsana', data);
+          setAsanas([data, ...asanas]);
+        })
+        .catch((err) => {
+          console.log('createAsana', err);
+          setError(err);
+        });
+    } else {
+      asanaService
+        .saveAsana(asanaObj)
+        .then((data) => {
+          console.log('saveAsana', data);
+          setAsanas((prev) =>
+            prev.map((asana) => (asana._id === data._id ? data : asana))
+          );
+          // setDoFetch(!doFetch);
+        })
+        .catch((err) => {
+          console.log('saveAsana', err);
+          setError(err);
+        });
+    }
+
+    closeModal();
   }
 
   function openModal() {
@@ -143,6 +183,17 @@ const Asanas = () => {
       prev[index].checked = !prev[index].checked;
       return [...prev];
     });
+  };
+
+  const handleSelectAsana = (asana) => {
+    if (searchParams.get('from') === 'planner') {
+      sequenceToAdd.asanas.push(asana);
+      navigate(`../planner`);
+    } else {
+      console.log('asana', asana);
+      setEditAsana({ ...asana });
+      openModal();
+    }
   };
 
   return (
@@ -209,7 +260,11 @@ const Asanas = () => {
                 placeholder="Filter by name"
                 onChange={(e) => setFilterName(e.target.value)}
               /> */}
-              <div className="flex justify-center">
+              <div
+                className={`flex justify-center ${
+                  showFilter ? 'w-24 md:w-40' : 'opacity-0'
+                }`}
+              >
                 <div
                   className="timepicker relative form-floating mb-3 xl:w-96"
                   data-mdb-with-icon="false"
@@ -324,7 +379,10 @@ const Asanas = () => {
                   )
                   .map((asana) => (
                     <div key={asana._id}>
-                      <AsanaCard asana={asana} />
+                      <AsanaCard
+                        asana={asana}
+                        handleSelectAsana={handleSelectAsana}
+                      />
                     </div>
                   ))}
             </div>
@@ -346,7 +404,7 @@ const Asanas = () => {
                 >
                   ✖️
                 </button>
-                <AsanaCreateDialog saveAsana={saveAsana} asana={null} />
+                <AsanaCreateDialog saveAsana={saveAsana} asana={editAsana} />
               </div>
             </Modal>
           </div>
