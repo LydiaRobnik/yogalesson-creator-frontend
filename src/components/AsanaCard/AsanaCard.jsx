@@ -66,7 +66,9 @@ const AsanaCard = ({ asana, handleSelectAsana, key, index, moveCard }) => {
         data-handler-id={handlerId}
         // className="asanacard-jsx rounded overflow-hidden shadow-lg m-2  bg-white cursor-pointer"
         className={`asanacard-jsx rounded overflow-hidden shadow-lg m-2  cursor-pointer ${
-          isDragging ? 'bg-rose-400 opacity-50' : 'bg-white opacity-100'
+          isDragging
+            ? 'border-rose-400 opacity-50'
+            : 'bg-white opacity-100 border-2 border-gray-200'
           // isDragging ? 'opacity-75' : ' opacity-100'
         }`}
       >
