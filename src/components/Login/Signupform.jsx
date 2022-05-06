@@ -35,14 +35,14 @@ export default function Example({ SignupModal, setSignupModal }) {
 
   return (
     <>
-      <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
             <lottie-player
               src="https://assets3.lottiefiles.com/packages/lf20_13s8e4bb.json"
               background="transparent"
               speed="1"
-              style={{ width: '300px', height: '300px' }}
+              style={{ width: '100%', height: '200px', self: 'center' }}
               loop
               autoplay
             ></lottie-player>
@@ -68,7 +68,7 @@ export default function Example({ SignupModal, setSignupModal }) {
                   type="text"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="Username"
+                  placeholder="Email"
                   minLength={3}
                   onChange={(e) => setName(e.target.value)}
                 />
