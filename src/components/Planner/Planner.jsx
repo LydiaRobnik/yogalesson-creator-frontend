@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect, useRef } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import './planner.scss';
-import NewSequence from '../NewSequence.jsx/NewSequence';
+// import NewSequence from '../NewSequence.jsx/NewSequence';
 import SequencePlanned from '../SequencePlanned/SequencePlanned';
 import asanaService from '../../api/asanaService';
 
@@ -10,17 +10,12 @@ export default function Planner() {
   const {
     userClasses,
     setUserClasses,
-    asanas,
-    setAsanas,
     userSequences,
-    setUserSequences,
     loading,
     yogaClassToAdd,
     setYogaClassToAdd,
-    sequenceToAdd,
     setSequenceToAdd,
-    showNewSequence,
-    setShowNewSequence
+    showNewSequence
   } = useOutletContext();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -63,8 +58,19 @@ export default function Planner() {
     };
     const result = await asanaService.createSequence(newSequence);
     console.log('📒 newSequence', result);
-    setSequenceToAdd(result);
-    setShowNewSequence(true);
+    yogaClassToAdd.plan.push(result);
+    setYogaClassToAdd({ ...yogaClassToAdd });
+    const seqObj = {
+      user: user?.id,
+      type: 'sequence',
+      duration: 3,
+      description: '',
+      title: '',
+      asanas: []
+    };
+    setSequenceToAdd(seqObj);
+    // setSequenceToAdd(result);
+    // setShowNewSequence(true);
   };
 
   const editClass = (e) => {
@@ -110,12 +116,15 @@ export default function Planner() {
                   key={(sequence._id, index)}
                   className="rounded bg-light m-10"
                 >
-                  <SequencePlanned sequence={sequence} />
+                  <SequencePlanned
+                    sequence={sequence}
+                    handleFocus={handleFocus}
+                  />
                 </div>
               ))}
           </div>
 
-          {showNewSequence && <NewSequence handleFocus={handleFocus} />}
+          {/* {showNewSequence && <NewSequence handleFocus={handleFocus} />} */}
 
           <div className=" w-full flex flex-row justify-center">
             <button

@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import './asanaCard.scss';
 import { useDrag, useDrop } from 'react-dnd';
@@ -7,7 +7,7 @@ const AsanaCard = ({ asana, handleSelectAsana, key, index, moveCard }) => {
   const navigate = useNavigate();
   const { sequenceToAdd } = useOutletContext();
 
-  // ===== functions, variables and states for draggable start =====
+  // ==start== functions, variables and states for draggable start =====
   const ref = useRef(null);
 
   const [{ handlerId }, drop] = useDrop({
@@ -56,7 +56,7 @@ const AsanaCard = ({ asana, handleSelectAsana, key, index, moveCard }) => {
 
   drag(drop(ref));
 
-  // ===== functions for droppable end =====
+  // ==ende== functions, variables and states for draggable ====
 
   return (
     <>
