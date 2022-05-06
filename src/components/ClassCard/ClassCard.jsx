@@ -36,7 +36,7 @@ const ClassCard = ({ classItem }) => {
   };
 
   const showShortTitle = (title) => {
-    if (title.length > 35) {
+    if (title.length > 25) {
       const longTitle = title;
       const shortTitle = longTitle.substring(0, 20) + ' ...';
       return shortTitle;
@@ -48,7 +48,7 @@ const ClassCard = ({ classItem }) => {
   return (
     <>
       <div
-        className="rounded overflow-hidden w-72 m-2 bg-white"
+        className="rounded overflow-hidden w-full m-2 bg-white"
         onDoubleClick={() => {
           openClassInPlanner();
         }}
@@ -68,17 +68,17 @@ const ClassCard = ({ classItem }) => {
 
           <div className="flex flex-row justify-between">
             <span
-              className="font-material-symbols color-red text-2xl cursor-pointer px-4 pt-2"
+              className="font-material-symbols color-red text-2xl cursor-pointer pr-4 pt-2"
               onClick={() => handleFavorite()}
             >
               {classItem.favourite ? 'star' : 'grade'}
             </span>
 
             <button
-              className="btn-red btn-blue:hover m-2 p-0 flex flex-row items-center cursor-pointer"
+              className="m-2 p-0 text-xl flex flex-row items-center cursor-pointer"
               onClick={() => handleDeleteClass(classItem)}
             >
-              <p className="font-material-symbols p-0">delete</p>
+              <p className="font-material-symbols color-red p-0">delete</p>
             </button>
           </div>
         </div>
