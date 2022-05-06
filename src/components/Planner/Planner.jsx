@@ -97,7 +97,7 @@ export default function Planner() {
       )}
 
       {!loading && (
-        <div ref={imgEl} className="w-full h-screen">
+        <div ref={imgEl} className="w-full">
           <div className="flex flex-row">
             <input
               type="text"
