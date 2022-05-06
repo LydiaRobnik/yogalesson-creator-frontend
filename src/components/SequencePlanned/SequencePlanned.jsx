@@ -2,8 +2,9 @@ import React from 'react';
 import AsanaCard from '../AsanaCard/AsanaCard';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import './sequencePlanned.scss';
+import { forwardRef } from "react";
 
-const SequencePlanned = ({ sequence }) => {
+const SequencePlanned = forwardRef (({ sequence }, props, ref) => {
   const {
     userClasses,
     setUserClasses,
@@ -28,6 +29,7 @@ const SequencePlanned = ({ sequence }) => {
 
   return (
     <>
+    <div ref={ref}>
       <div className="w-screen min-h-40">
         <h3 className="color-blue-darkest pl-3 p-3 font-bold text-xl">
           {sequence.title}
@@ -57,8 +59,9 @@ const SequencePlanned = ({ sequence }) => {
             ))}
         </div>
       </>
+      </div>
     </>
   );
-};
+});
 
 export default SequencePlanned;

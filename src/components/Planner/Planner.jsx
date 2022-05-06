@@ -5,6 +5,7 @@ import './planner.scss';
 import NewSequence from '../NewSequence.jsx/NewSequence';
 import SequencePlanned from '../SequencePlanned/SequencePlanned';
 import asanaService from '../../api/asanaService';
+import Print from '../Print/Print';
 
 export default function Planner() {
   const {
@@ -110,7 +111,7 @@ export default function Planner() {
                   key={(sequence._id, index)}
                   className="rounded bg-light m-10"
                 >
-                  <SequencePlanned sequence={sequence} />
+                  <Print sequence={sequence} />
                 </div>
               ))}
           </div>
