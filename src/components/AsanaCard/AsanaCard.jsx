@@ -1,9 +1,18 @@
-import React, { Fragment, useState, useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import './asanaCard.scss';
 import { useDrag, useDrop } from 'react-dnd';
 
-const AsanaCard = ({ asana, key, index, moveCard }) => {
+const AsanaCard = ({
+  asana,
+  key,
+  index,
+  moveCard,
+  setCards,
+  cards,
+  plannedSequence,
+  setPlannedSequence
+}) => {
   const navigate = useNavigate();
   const { sequenceToAdd } = useOutletContext();
 
@@ -59,9 +68,18 @@ const AsanaCard = ({ asana, key, index, moveCard }) => {
   // ===== functions for droppable end =====
 
   const handleSelectAsana = () => {
-    sequenceToAdd.asanas.push(asana);
+    const newAsanaArray = plannedSequence.asanas.push(asana);
+    console.log(newAsanaArray);
+    // setPlannedSequence({
+    //   ...plannedSequence,
+    //   asanas: [...plannedSequence.asanas, asana]
+    // });
     navigate(`../planner`);
   };
+
+  // useEffect(() => {
+  //   navigate(`../planner`);
+  // }, [cards]);
 
   return (
     <>

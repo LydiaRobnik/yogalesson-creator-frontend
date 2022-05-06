@@ -20,12 +20,22 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
     setShowNewSequence
   } = useOutletContext();
 
-  // const [title, setTitle] = useState(sequence.title);
-  // const [description, setDescription] = useState(sequence.description);
+  const [title, setTitle] = useState(sequence.title);
+  const [description, setDescription] = useState(sequence.description);
+  const [plannedSequence, setPlannedSequence] = useState(sequence);
+  console.log('asanas', plannedSequence.asanas);
 
   // ==Start== moving and updating asana array in sequence / drag and drop function ====
   const [cards, setCards] = useState(sequence.asanas);
   const moveCard = useCallback((dragIndex, hoverIndex) => {
+    // const cardsBeforMoving = plannedSequence.asanas;
+    // const cardsAfterMoving = cardsBeforMoving.splice([
+    //   [dragIndex, 1],
+    //   [hoverIndex, 0, cardsBeforMoving[dragIndex]]
+    // ]);
+
+    // setPlannedSequence({ ...plannedSequence, asanas: cardsAfterMoving });
+
     setCards((prevCards) =>
       update(prevCards, {
         $splice: [
@@ -41,9 +51,9 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
       const oldSequenceInBackend = { ...sequence };
       const updatedSequence = {
         ...sequence,
-        asanas: cards,
-        title: sequenceToAdd.title,
-        description: sequenceToAdd.description
+        asanas: plannedSequence.asanas,
+        title: title,
+        description: description
       };
       const result = await asanaService.saveSequence(updatedSequence);
       console.log('📒 saveSequence', result);
@@ -52,7 +62,7 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
     asanaService.getUserSequences(user.id).then((data) => {
       setUserSequences(data);
     });
-  }, [cards, sequenceToAdd]);
+  }, [cards, plannedSequence, title, description]);
 
   const renderCard = useCallback((card, index) => {
     return (
@@ -63,6 +73,8 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
           index={index}
           id={card._id}
           moveCard={moveCard}
+          setPlannedSequence={setPlannedSequence}
+          plannedSequence={plannedSequence}
         />
         <span
           className="font-material-symbols color-blue-darkest cursor-pointer"
@@ -83,30 +95,23 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
     setYogaClassToAdd({ ...yogaClassToAdd });
   };
 
-  const handleRemoveAsana = (asana) => {
-    const asanaToRemove = sequenceToAdd.asanas.indexOf(asana);
-    sequenceToAdd.asanas.splice(asanaToRemove, 1);
-    setSequenceToAdd({ ...sequenceToAdd });
-  };
+  // const vvv = (asana) => {
+  //   const asanaToRemove = sequenceToAdd.asanas.indexOf(asana);
+  //   sequenceToAdd.asanas.splice(asanaToRemove, 1);
+  //   setSequenceToAdd({ ...sequenceToAdd });
+  // };
 
-  // useEffect(() => {
-  //   const saveSequenceToBackend = async () => {
-  //     if (sequenceToAdd.title.length === 0)
-  //       setSequenceToAdd({
-  //         ...sequenceToAdd,
-  //         title: `${user.name}'s sequence no. ${
-  //           userSequences.length + 1 + Math.random()
-  //         }`
-  //       });
-  //     const newSequence = { ...sequenceToAdd };
-  //     const result = await asanaService.saveSequence(newSequence);
-  //     console.log('📒 saveSequence', result);
-  //   };
-  //   saveSequenceToBackend();
-  //   asanaService.getUserSequences(user.id).then((data) => {
-  //     setUserSequences(data);
-  //   });
-  // }, [sequenceToAdd]);
+  // const handleRemoveAsana = (asana) => {
+  //   const removeIndex = cards.indexOf(asana);
+  //   const newCards = cards.splice(removeIndex, 1);
+  //   setCards(newCards);
+  // };
+
+  const handleRemoveAsana = (asana) => {
+    const removeIndex = plannedSequence.asanas.indexOf(asana);
+    const newCards = plannedSequence.asanas.splice(removeIndex, 1);
+    setPlannedSequence({ ...plannedSequence, asanas: newCards });
+  };
 
   return (
     <>
@@ -116,16 +121,15 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
             type="text"
             className="color-blue-darkest text-xl"
             placeholder="draft sequence - title"
-            value={sequence.title}
-            onChange={(e) =>
-              setSequenceToAdd({ ...sequenceToAdd, title: e.target.value })
-            }
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             onFocus={handleFocus}
           />
 
+          {/* 
           <h3 className="color-blue-darkest pl-3 p-3 font-bold text-xl">
             {sequence.title}
-          </h3>
+          </h3> */}
           <p className="color-blue-darkest pl-3 pt-3">
             {new Date(sequence.modifiedAt).toLocaleString()}
           </p>
@@ -150,11 +154,22 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
 
       <>
         <div className="w-full min-h-40">
-          <p className="color-blue-darkest pl-3 py-3">{sequence.description}</p>
+          <input
+            type="text"
+            className="color-blue-darkest break-words resize w-52 py-4"
+            placeholder="add a descrition"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            onFocus={handleFocus}
+          />
+          {/* <p className="color-blue-darkest pl-3 py-3">{sequence.description}</p> */}
         </div>
 
         <div className="flex flex-wrap">
-          {sequence && cards.map((asana, index) => renderCard(asana, index))}
+          {sequence &&
+            plannedSequence.asanas.map((asana, index) =>
+              renderCard(asana, index)
+            )}
         </div>
       </>
     </>

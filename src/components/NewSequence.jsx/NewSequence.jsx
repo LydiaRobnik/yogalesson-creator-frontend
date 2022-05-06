@@ -81,6 +81,8 @@ const NewSequence = ({ handleFocus }) => {
           onChange={(e) =>
             setSequenceToAdd({ ...sequenceToAdd, description: e.target.value })
           }
+          some
+          text
           onFocus={handleFocus}
         />
 

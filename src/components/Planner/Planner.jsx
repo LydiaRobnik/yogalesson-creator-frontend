@@ -18,7 +18,7 @@ export default function Planner() {
     yogaClassToAdd,
     setYogaClassToAdd,
     // sequenceToAdd,
-    // setSequenceToAdd,
+    setSequenceToAdd,
     showNewSequence,
     setShowNewSequence
   } = useOutletContext();
@@ -65,6 +65,15 @@ export default function Planner() {
     console.log('📒 newSequence', result);
     yogaClassToAdd.plan.push(result);
     setYogaClassToAdd({ ...yogaClassToAdd });
+    const seqObj = {
+      user: user?.id,
+      type: 'sequence',
+      duration: 3,
+      description: '',
+      title: '',
+      asanas: []
+    };
+    setSequenceToAdd(seqObj);
     // setSequenceToAdd(result);
 
     // setShowNewSequence(true);
