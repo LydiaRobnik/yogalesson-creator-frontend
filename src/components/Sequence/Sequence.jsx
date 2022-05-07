@@ -22,17 +22,15 @@ const Sequence = ({ sequence, selectedSequence }) => {
   };
 
   return (
-    <div className="border-b-2 border-gray-200">
-      <div className="min-h-40 flex flex-row">
-        <h3 className="color-blue-darkest pr-3 pt-3 font-bold text-xl">
+    <div>
+      <div className="w-full min-h-40 flex flex-row justify-between">
+        <h3 className="color-blue-darkest pr-3 pt-3 font-bold text-lg">
           {sequence.title}
         </h3>
         <p className="color-blue-darkest pt-3">
           {new Date(sequence.modifiedAt).toLocaleString()}
         </p>
       </div>
-
-      {/*  === sequence._id */}
 
       {selectedSequence && (
         <div className="">

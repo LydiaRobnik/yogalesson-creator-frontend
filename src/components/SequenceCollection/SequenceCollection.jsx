@@ -108,7 +108,6 @@ const SequenceCollection = (ref) => {
 
   return (
     <>
-  
       {loading && (
         <lottie-player
           src="https://assets1.lottiefiles.com/packages/lf20_s00z9gco.json"
@@ -132,7 +131,7 @@ const SequenceCollection = (ref) => {
               cancel={cancelEditSequence}
             />
           ) : (
-            <div className=" w-full flex flex-row justify-center mt-4">
+            <div className=" w-full flex flex-row justify-start mt-4 mb-6">
               <button
                 className="btn-blue btn-blue:hover   mx-2 flex flex-row items-center"
                 onClick={() => handleAddSequence()}
@@ -144,7 +143,7 @@ const SequenceCollection = (ref) => {
                 className="btn-blue btn-blue:hover   mx-2 flex flex-row items-center"
                 onClick={() => handleEditSequence(userSequences[3])}
               >
-                <span className="font-material inline pr-2">add</span>
+                <span className="font-material-symbols inline pr-2">edit</span>
                 <p className="inline pt-1 text-lg ">edit sequence</p>
               </button>
             </div>
@@ -153,28 +152,29 @@ const SequenceCollection = (ref) => {
             userSequences.map((sequence, index) => (
               <div
                 key={`${sequence._id}${index}`}
-                className="grid gap-4 grid-cols-12"
+                className="grid gap-4 grid-cols-12 border-t-2 border-gray-200 mt-4"
               >
-                {/* <div>
-                  {selectedSequence !== sequence._id && (
-                    <>
-                      <span
-                        className="font-material-symbols color-blue-darkest text-4xl px-3 cursor-pointer"
-                        onClick={() => showAsanasOfSequence(sequence._id)}
-                      >
-                        expand_more
-                      </span>
-                    </>
-                  )}
-                  {selectedSequence === sequence._id && (
-                    <span
-                      className="font-material-symbols color-blue-darkest text-4xl px-3 cursor-pointer"
-                      onClick={() => showAsanasOfSequence(null)}
-                    >
-                      expand_less
-                    </span>
-                  )}
-                </div> */}
+                <div className="col-span-1 flex flex-col justify-center">
+                  <button
+                    className="btn-neutral btn-neutral:hover bg-white outline outline-2 flex flex-row self-center mb-3"
+                    onClick={() => handleSelectSequence(sequence)}
+                  >
+                    <span className="font-material-symbols">add_task</span>
+                    {/* <p className="inline pt-1 text-lg">add</p> */}
+                  </button>
+                  {/* <button
+                    className="btn-neutral btn-neutral:hover bg-white outline outline-2  pl-1 mx-2 ml-5 flex flex-row items-center"
+                    onClick={() => handleCopySequence(sequence)}
+                  >
+                    <p className="inline pt-1 text-lg">copy</p>
+                  </button> */}
+                  <button
+                    className="btn-red-outline btn-red-outline:hover cursor-pointer outline outline-2 flex flex-row self-center"
+                    onClick={() => handleDeleteSequence(sequence)}
+                  >
+                    <p className="font-material-symbols py-1 px-4">delete</p>
+                  </button>
+                </div>
 
                 <div className="col-span-11">
                   <Sequence
@@ -182,33 +182,10 @@ const SequenceCollection = (ref) => {
                     selectedSequence={selectedSequence}
                   />
                 </div>
-                <div className="col-span-1">
-                  <button
-                    className="btn-blue btn-blue:hover m-2 p-2 flex flex-row items-center cursor-pointer self-center"
-                    onClick={() => handleSelectSequence(sequence)}
-                  >
-                    {/* <span className="font-material inline pr-2">add</span> */}
-                    <p className="inline pt-1 text-lg">add</p>
-                  </button>
-                  <button
-                    className="btn-blue btn-blue:hover m-2 p-2 flex flex-row items-center cursor-pointer self-center"
-                    onClick={() => handleCopySequence(sequence)}
-                  >
-                    <p className="inline pt-1 text-lg">copy</p>
-                  </button>
-                  <button
-                    className="btn-red btn-blue:hover m-2 p-2 flex flex-row items-center cursor-pointer self-center"
-                    onClick={() => handleDeleteSequence(sequence)}
-                  >
-                    <p className="font-material-symbols p-0">delete</p>
-                  </button>
-                </div>
               </div>
             ))}
         </div>
       )}
-     
-    
     </>
   );
 };
