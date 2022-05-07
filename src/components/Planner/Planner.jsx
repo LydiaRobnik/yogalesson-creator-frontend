@@ -135,37 +135,6 @@ export default function Planner() {
       )}
 
       {!loading && (
-<<<<<<< HEAD
-        <div ref={imgEl} className="w-full">
-          <div className="flex flex-row">
-            <input
-              type="text"
-              className="color-blue-darkest text-left px-10 text-4xl"
-              placeholder={`${user.name}'s class no. ${userClasses.length + 1}`}
-              value={yogaClassToAdd.title}
-              onChange={editClass}
-              onFocus={handleFocus}
-            />
-          </div>
-
-          <div className="w-full">
-            {yogaClassToAdd.plan &&
-              yogaClassToAdd.plan.map((sequence, index) => (
-                <div
-                  key={(sequence._id, index)}
-                  className="rounded bg-light m-10"
-                >
-                  <SequencePlanned
-                    sequence={sequence}
-                    handleFocus={handleFocus}
-                    updateSequence={() => {
-                      setSequenceToAdd(sequence);
-                    }}
-                  />
-                </div>
-              ))}
-          </div>
-=======
         <div className="w-full bg-white">
           <div ref={imgEl} className="w-full bg-white">
             <div
@@ -205,7 +174,6 @@ export default function Planner() {
                         expand_less
                       </span>
                     </div>
->>>>>>> origin/main
 
                     <div
                       key={sequence._id}
