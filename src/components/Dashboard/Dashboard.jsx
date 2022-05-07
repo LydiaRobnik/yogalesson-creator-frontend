@@ -16,7 +16,6 @@ export default function Dashboard() {
     userSequences,
     setUserSequences,
     loading,
-    gridResponsiveness,
     yogaClassToAdd,
     setYogaClassToAdd
   } = useOutletContext();
@@ -51,6 +50,21 @@ export default function Dashboard() {
 
   const markAsSelected = (classCardToSelect) => {
     setSelectedCard(classCardToSelect);
+  };
+
+  // functions
+  const gridResponsiveness = () => {
+    if (point === 'xs') {
+      return 'grid-cols-1';
+    } else if (point === 'sm') {
+      return 'grid-cols-2';
+    } else if (point === 'md') {
+      return 'grid-cols-3';
+    } else if (point === 'lg') {
+      return 'grid-cols-4';
+    } else {
+      return 'grid-cols-5';
+    }
   };
 
   return (
@@ -117,8 +131,7 @@ export default function Dashboard() {
               </div>
             )}
             <div
-              className="grid gap-4 grid-cols-5"
-              // className={`justify-center grid gap-4 ${gridResponsiveness()}`}
+              className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
             >
               {userClasses &&
                 userClasses.map((classItem) => (
@@ -127,7 +140,7 @@ export default function Dashboard() {
                     onClick={() => {
                       markAsSelected(classItem._id);
                     }}
-                    className={`rounded overflow-hidden w-full m-2 ${
+                    className={`rounded overflow-hidden w-full m-3 p-0 ${
                       selectedCard === classItem._id
                         ? 'border-solid border-2 border-rose-400 shadow-xl'
                         : ' border-2 border-gray-200'
@@ -173,7 +186,9 @@ export default function Dashboard() {
                 </span>
               </div>
             )}
-            <div className="flex flex-row flex-wrap">
+            <div
+              className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
+            >
               {favorites &&
                 favorites.map((favoritItem) => (
                   <div
@@ -181,7 +196,7 @@ export default function Dashboard() {
                     onClick={() => {
                       markAsSelected(`${favoritItem._id}_favorite`);
                     }}
-                    className={`rounded overflow-hidden w-72 m-2 ${
+                    className={`rounded overflow-hidden w-full m-2 ${
                       selectedCard === `${favoritItem._id}_favorite`
                         ? 'border-solid border-2 border-rose-400 shadow-xl'
                         : 'border-2 border-gray-200'
