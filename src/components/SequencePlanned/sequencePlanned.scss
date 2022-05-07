@@ -6,12 +6,11 @@
 }
 
 
-// .tooltip {
-//   visibility: hidden;
-
-
+// .hide {
+//   display: none;
 // }
 
-// .tooltip:hover .tooltiptext {
-//   visibility: visible;
+// .toggleHiddenElement:hover + .hide {
+//   display: block;
+//   color: red;
 // }

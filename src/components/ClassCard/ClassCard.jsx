@@ -60,28 +60,30 @@ const ClassCard = ({ classItem }) => {
           alt="preview class"
         />
         <div className="px-2 pt-4 pb-2 bg-light w-full ">
-          <h3 className="color-blue-darkest">
-            {showShortTitle(classItem.title)}
-          </h3>
-          <p className="color-blue-darkest text-xs">
-            {new Date(classItem.modifiedAt).toLocaleString()}
-          </p>
-
-          <div className="flex flex-row justify-between">
+          <div className="grid gap-2 grid-cols-8">
             <span
-              className="font-material-symbols color-red text-2xl cursor-pointer pt-2"
+              className="font-material-symbols color-red text-2xl cursor-pointer mr-1 col-span-1"
               onClick={() => handleFavorite()}
             >
               {classItem.favourite ? 'star' : 'grade'}
             </span>
-
+            <div className="col-span-6">
+              <h3 className="color-blue-darkest">
+                {showShortTitle(classItem.title)}
+              </h3>
+              <p className="color-blue-darkest text-xs">
+                {new Date(classItem.modifiedAt).toLocaleString()}
+              </p>
+            </div>
             <button
-              className="m-2 p-0 text-xl flex flex-row items-center cursor-pointer pt-2"
+              className="m-1 text-xl flex flex-row cursor-pointer col-span-1"
               onClick={() => handleDeleteClass(classItem)}
             >
               <p className="font-material-symbols color-red p-0">delete</p>
             </button>
           </div>
+
+          <div className="flex flex-row justify-between"></div>
         </div>
       </div>
     </>

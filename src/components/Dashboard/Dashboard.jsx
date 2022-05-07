@@ -122,12 +122,6 @@ export default function Dashboard() {
                 >
                   recently used
                 </h2>
-                <button className="btn-neutral btn-neutral:hover bg-white outline outline-2  pl-1 mx-2 ml-5 flex flex-row items-center">
-                  <span className="font-material-symbols color-blue-darkest text-lg px-2 cursor-pointer">
-                    expand_more
-                  </span>
-                  <p className="inline pt-1 text-lg">show all</p>
-                </button>
               </div>
             )}
             <div
@@ -140,7 +134,7 @@ export default function Dashboard() {
                     onClick={() => {
                       markAsSelected(classItem._id);
                     }}
-                    className={`rounded overflow-hidden w-full m-3 p-0 ${
+                    className={`rounded overflow-hidden w-full p-0 ${
                       selectedCard === classItem._id
                         ? 'border-solid border-2 border-rose-400 shadow-xl'
                         : ' border-2 border-gray-200'
@@ -150,6 +144,12 @@ export default function Dashboard() {
                   </div>
                 ))}
             </div>
+            <button className="btn-neutral btn-neutral:hover bg-white outline outline-2  pl-1 mr-2 mt-4 flex flex-row items-center">
+              <span className="font-material-symbols color-blue-darkest text-lg px-2 cursor-pointer">
+                expand_more
+              </span>
+              <p className="inline pt-1 text-lg">show all</p>
+            </button>
           </div>
 
           <div

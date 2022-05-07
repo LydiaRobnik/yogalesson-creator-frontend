@@ -146,7 +146,7 @@ export default function Planner() {
             >
               <input
                 type="text"
-                className={`color-blue-darkest px-10 text-4xl ${
+                className={`color-blue-darkest px-10 text-4xl pb-3 ${
                   yogaClassToAdd.plan.length === 0 ? 'text-center' : 'text-left'
                 }`}
                 placeholder="draft - class title"
@@ -191,20 +191,20 @@ export default function Planner() {
           {/* {showNewSequence && <NewSequence handleFocus={handleFocus} />} */}
 
           <div className=" w-full flex flex-row justify-center mt-4">
-            <button
+            {/* <button
               className="btn-blue btn-blue:hover   mx-2 flex flex-row items-center"
               onClick={() => createSequence()}
             >
               <span className="font-material inline pr-2">add</span>
               <p className="inline pt-1 text-lg ">create new sequence</p>
-            </button>
+            </button> */}
 
             <button
               className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
               onClick={() => navigate('/user/sequences')}
             >
               <span className="font-material inline pr-2">add</span>
-              <p className="inline pt-1 text-lg ">my sequence</p>
+              <p className="inline pt-1 text-lg ">sequence</p>
             </button>
           </div>
         </div>
