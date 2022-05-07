@@ -36,6 +36,7 @@ export default function UserSection() {
       const fetchData = () => {
         setLoading(true);
         asanaService.getUserClasses(user.id).then((data) => {
+          console.log('📒 getUserClasses', data);
           setUserClasses(data);
         });
         asanaService.getUserSequences(user.id).then((data) => {
@@ -46,6 +47,7 @@ export default function UserSection() {
         });
         setLoading(false);
       };
+      console.log('📒 📒 📒 📒 📒 fetchData Dashboard!!!!');
       fetchData();
     }
     console.log('loggedIn', loggedIn, user);
@@ -53,7 +55,7 @@ export default function UserSection() {
     // if (!loggedIn) navigate(`/unauthorized`); // todo
 
     return () => {};
-  }, [loggedIn]);
+  }, [loggedIn, yogaClassToAdd]);
 
   return (
     <div className="w-full h-full p-3 pt-4">

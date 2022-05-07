@@ -20,9 +20,10 @@ const ClassCard = ({ classItem }) => {
     });
   };
 
-  const openClassInPlanner = () => {
-    setYogaClassToAdd(classItem);
-    navigate(`/user/planner/${classItem._id}`);
+  const openClassInPlanner = async () => {
+    const yogaClass = await asanaService.getClass(classItem._id);
+    setYogaClassToAdd(yogaClass);
+    navigate(`/user/planner/${yogaClass._id}`);
   };
 
   const handleDeleteClass = async (classToDelete) => {
