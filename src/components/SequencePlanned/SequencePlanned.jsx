@@ -14,6 +14,7 @@ import { AuthContext } from '../../context/AuthContext';
 import Modal from 'react-modal';
 import Asanas from '../Asanas/Asanas';
 import './sequencePlanned.scss';
+import useBreakpoint from '../../custom/useBreakpoint';
 
 const customStyles = {
   content: {
@@ -41,6 +42,7 @@ const SequencePlanned = ({
 }) => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
+  const point = useBreakpoint();
   const { setUserSequences, yogaClassToAdd, setYogaClassToAdd } =
     useOutletContext();
 
@@ -116,23 +118,42 @@ const SequencePlanned = ({
     setIsOpen(false);
   }
 
+  // // functions
+  const gridResponsiveness = () => {
+    if (point === 'xs') {
+      return 'grid-cols-3';
+    } else if (point === 'sm') {
+      return 'grid-cols-4';
+    } else if (point === 'md') {
+      return 'grid-cols-6';
+    } else if (point === 'lg') {
+      return 'grid-cols-8';
+    } else {
+      return 'grid-cols-10';
+    }
+  };
+
   const renderCard = useCallback((card, index) => {
     return (
-      <>
+      <div>
+        <div className="flex flex-col">
+          <span
+            className="self-center font-material-symbols color-blue-darkest cursor-pointer"
+            onClick={() => handleRemoveAsana(card)}
+          >
+            delete
+          </span>
+        </div>
+
         <AsanaCard
           asana={card}
           key={card._id + Math.random()}
           index={index}
           id={card._id}
           moveCard={moveCard}
+          asanaInPlanner={true}
         />
-        <span
-          className="font-material-symbols color-blue-darkest cursor-pointer"
-          onClick={() => handleRemoveAsana(card)}
-        >
-          delete
-        </span>
-      </>
+      </div>
     );
   }, []);
 
@@ -204,7 +225,7 @@ const SequencePlanned = ({
   return (
     <>
       <div ref={ref} className="w-full min-h-40 flex flex-row justify-between">
-        <div className="flex flex-row">
+        <div className="w-full flex flex-row justify-between">
           <input
             type="text"
             className="color-blue-darkest text-xl"
@@ -214,26 +235,23 @@ const SequencePlanned = ({
             onFocus={handleFocus}
           />
 
-          {/* 
-          <h3 className="color-blue-darkest pl-3 p-3 font-bold text-xl">
-            {sequence.title}
-          </h3> */}
-          <p className="color-blue-darkest pl-3 pt-3">
+          <p className="color-blue-darkest px-3 pt-3">
             {new Date(sequence.modifiedAt).toLocaleString()}
           </p>
         </div>
 
-        <div>
-          <button
-            className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
+        <div className="flex px-3 border-l-2 border-gray-200">
+          {/* button für Modal verschoben nach unten */}
+          {/* <button
+            className="p-10 flex flex-row items-center border-2 border-gray-200"
             // onClick={() => navigate('../asanas?from=planner')}
             onClick={() => openModal()}
           >
             <span className="font-material inline pr-2">add</span>
             <p className="inline pt-1 text-lg ">asana</p>
-          </button>
+          </button> */}
           <span
-            className="font-material-symbols color-blue-darkest cursor-pointer"
+            className="font-material-symbols color-blue-darkest cursor-pointer pt-2"
             onClick={() => handleRemoveSequence(sequence)}
           >
             delete
@@ -245,7 +263,7 @@ const SequencePlanned = ({
         <div className="w-full min-h-40">
           <input
             type="text"
-            className="color-blue-darkest break-words resize w-52 py-4"
+            className="color-blue-darkest break-words resize py-4"
             placeholder="add a descrition"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -254,8 +272,19 @@ const SequencePlanned = ({
           {/* <p className="color-blue-darkest pl-3 py-3">{sequence.description}</p> */}
         </div>
 
-        <div className="flex flex-wrap">
+        <div
+          className={`items-center grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
+        >
           {sequence && cards.map((asana, index) => renderCard(asana, index))}
+          <button
+            className="p-6 flex self-center content-center items-center border-2 border-gray-200 w-24 h-24 mt-4"
+            // onClick={() => navigate('../asanas?from=planner')}
+            onClick={() => openModal()}
+          >
+            <span className="color-blue-darkest font-material-symbols p-4">
+              add_circle
+            </span>
+          </button>
         </div>
       </>
       <div className="text-black">
