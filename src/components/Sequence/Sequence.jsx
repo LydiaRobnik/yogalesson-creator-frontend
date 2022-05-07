@@ -44,8 +44,8 @@ const Sequence = ({ sequence, selectedSequence }) => {
 
           <div className="grid gap-4 grid-cols-12 grid-flow-row-dense">
             {sequence &&
-              sequence.asanas.map((asana) => (
-                <div key={asana._id}>
+              sequence.asanas.map((asana, index) => (
+                <div key={`${asana._id}${index}`}>
                   <AsanaCard asana={asana} showAsanaInMySequences={true} />
                 </div>
               ))}
