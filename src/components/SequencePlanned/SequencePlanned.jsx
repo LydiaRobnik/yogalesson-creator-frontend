@@ -74,6 +74,18 @@ const SequencePlanned = ({
       };
       const result = await asanaService.saveSequence(updatedSequence);
       console.log('📒 saveSequence', result);
+
+      if (yogaClassToAdd._id && yogaClassToAdd.plan?.length > 0) {
+        const updatedSequences = yogaClassToAdd?.plan?.map((s) => {
+          if (s._id === updatedSequence._id) return result;
+          return s;
+        });
+
+        // update seq in yoga-class
+        setYogaClassToAdd((prevClass) => {
+          return { ...prevClass, plan: updatedSequences };
+        });
+      }
     };
     saveSequenceToBackend();
     asanaService.getUserSequences(user.id).then((data) => {

@@ -70,7 +70,7 @@ export default function UserSection() {
     // if (!loggedIn) navigate(`/unauthorized`); // todo
 
     return () => {};
-  }, [loggedIn]);
+  }, [loggedIn, yogaClassToAdd]);
 
   return (
     <div className="w-full h-full p-3 pt-4">
