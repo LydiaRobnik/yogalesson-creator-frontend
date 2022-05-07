@@ -36,6 +36,7 @@ export default function UserSection() {
       const fetchData = () => {
         setLoading(true);
         asanaService.getUserClasses(user.id).then((data) => {
+          console.log('📒 getUserClasses', data);
           setUserClasses(data);
         });
         asanaService.getUserSequences(user.id).then((data) => {
@@ -46,6 +47,7 @@ export default function UserSection() {
         });
         setLoading(false);
       };
+      console.log('📒 📒 📒 📒 📒 fetchData Dashboard!!!!');
       fetchData();
     }
     console.log('loggedIn', loggedIn, user);
