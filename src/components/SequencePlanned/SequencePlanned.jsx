@@ -133,9 +133,19 @@ const SequencePlanned = ({
     }
   };
 
+  const showShortTitle = (title) => {
+    if (title.length > 25) {
+      const longTitle = title;
+      const shortTitle = longTitle.substring(0, 20) + ' ...';
+      return shortTitle;
+    } else {
+      return title;
+    }
+  };
+
   const renderCard = useCallback((card, index) => {
     return (
-      <div>
+      <div className="flex flex-col content-center">
         <div className="flex flex-col">
           <span
             className="self-center font-material-symbols color-blue-darkest cursor-pointer"
@@ -224,38 +234,29 @@ const SequencePlanned = ({
 
   return (
     <>
-      <div ref={ref} className="w-full min-h-40 flex flex-row justify-between">
-        <div className="w-full flex flex-row justify-between">
+      <div ref={ref} className="w-full flex flex-row justify-between">
+        <div className="w-full flex flex-row">
           <input
             type="text"
-            className="color-blue-darkest text-xl"
+            className="color-blue-darkest text-lg w-5/6"
             placeholder="draft sequence - title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             onFocus={handleFocus}
           />
 
-          <p className="color-blue-darkest px-3 pt-3">
+          <p className="color-blue-darkest px-3 pt-3 ">
             {new Date(sequence.modifiedAt).toLocaleString()}
           </p>
         </div>
 
-        <div className="flex px-3 border-l-2 border-gray-200">
-          {/* button für Modal verschoben nach unten */}
-          {/* <button
-            className="p-10 flex flex-row items-center border-2 border-gray-200"
-            // onClick={() => navigate('../asanas?from=planner')}
-            onClick={() => openModal()}
-          >
-            <span className="font-material inline pr-2">add</span>
-            <p className="inline pt-1 text-lg ">asana</p>
-          </button> */}
-          <span
-            className="font-material-symbols color-blue-darkest cursor-pointer pt-2"
+        <div className="flex flex-row content-center justify-center px-3 border-l-2 border-gray-200">
+          <button
+            className="btn-red-outline btn-red-outline:hover cursor-pointer outline outline-2 flex flex-row self-center"
             onClick={() => handleRemoveSequence(sequence)}
           >
-            delete
-          </span>
+            <p className="font-material-symbols py-1 px-4">delete</p>
+          </button>
         </div>
       </div>
 
@@ -277,7 +278,7 @@ const SequencePlanned = ({
         >
           {sequence && cards.map((asana, index) => renderCard(asana, index))}
           <button
-            className="p-6 flex self-center content-center items-center border-2 border-gray-200 w-24 h-24 mt-4"
+            className="p-6 flex flex-row justify-center self-center content-center items-center border-2 border-gray-200 w-24 h-24 mt-4"
             // onClick={() => navigate('../asanas?from=planner')}
             onClick={() => openModal()}
           >
