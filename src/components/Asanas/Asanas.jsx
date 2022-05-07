@@ -10,6 +10,7 @@ import AsanaCard from '../AsanaCard/AsanaCard';
 import Modal from 'react-modal';
 import './asanas.scss';
 import AsanaCreateDialog from './AsanaCreateDialog';
+import useBreakpoint from '../../custom/useBreakpoint';
 
 const emptyAsanaObj = () => ({
   asana: {
@@ -48,11 +49,11 @@ const Asanas = ({ selection = false, addAsana }) => {
     setUserSequences,
     loading,
     setLoading,
-    gridResponsiveness,
     sequenceToAdd
   } = useOutletContext();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const point = useBreakpoint();
 
   const { loggedIn, user } = useContext(AuthContext);
 
@@ -197,6 +198,23 @@ const Asanas = ({ selection = false, addAsana }) => {
       console.log('asana', asana);
       setEditAsana({ ...asana });
       openModal();
+    }
+  };
+
+  // functions
+  const gridResponsiveness = () => {
+    if (point === 'xs') {
+      return 'grid-cols-1';
+    } else if (point === 'sm') {
+      return 'grid-cols-2';
+    } else if (point === 'md') {
+      return 'grid-cols-3';
+    } else if (point === 'lg') {
+      return 'grid-cols-4';
+    } else if (point === 'xl') {
+      return 'grid-cols-5';
+    } else {
+      return 'grid-cols-6';
     }
   };
 
@@ -356,7 +374,9 @@ const Asanas = ({ selection = false, addAsana }) => {
                   ))}
               </div>
             </div>
-            <div className="grow flex flex-row flex-wrap">
+            <div
+              className={`grid gap-4 grid-flow-row-dense ${gridResponsiveness()}`}
+            >
               {asanas &&
                 asanas
                   // filter by name
@@ -388,6 +408,7 @@ const Asanas = ({ selection = false, addAsana }) => {
                       <AsanaCard
                         asana={asana}
                         handleSelectAsana={handleSelectAsana}
+                        sizeAsanaOnSelectModal={true}
                       />
                     </div>
                   ))}

@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
 import AsanaCard from '../AsanaCard/AsanaCard';
-import { useNavigate, useOutletContext } from 'react-router-dom';
+// import useBreakpoint from '../../custom/useBreakpoint';
 import './sequence.scss';
 
 const Sequence = ({ sequence, selectedSequence }) => {
-  const {
-    userClasses,
-    setUserClasses,
-    asanas,
-    setAsanas,
-    userSequences,
-    setUserSequences,
-    loading,
-    gridResponsiveness,
-    yogaClassToAdd,
-    setYogaClassToAdd
-  } = useOutletContext();
-  const navigate = useNavigate();
+  // const point = useBreakpoint();
+
+  // // functions
+  // const gridResponsiveness = () => {
+  //   if (point === 'xs') {
+  //     return 'grid-cols-1';
+  //   } else if (point === 'sm') {
+  //     return 'grid-cols-2';
+  //   } else if (point === 'md') {
+  //     return 'grid-cols-3';
+  //   } else if (point === 'lg') {
+  //     return 'grid-cols-4';
+  //   } else {
+  //     return 'grid-cols-12';
+  //   }
+  // };
 
   return (
     <div className="border-b-2 border-gray-200">
@@ -32,22 +35,22 @@ const Sequence = ({ sequence, selectedSequence }) => {
       {/*  === sequence._id */}
 
       {selectedSequence && (
-        <>
+        <div className="">
           <div className="min-h-40">
             <p className="color-blue-darkest pr-3 pt-3">
               {sequence.description}
             </p>
           </div>
 
-          <div className="grid gap-4 grid-col-12">
+          <div className="grid gap-4 grid-cols-12 grid-flow-row-dense">
             {sequence &&
               sequence.asanas.map((asana) => (
-                <div key={asana._id} className="col-span-1">
-                  <AsanaCard asana={asana} />
+                <div key={asana._id}>
+                  <AsanaCard asana={asana} showAsanaInMySequences={true} />
                 </div>
               ))}
           </div>
-        </>
+        </div>
       )}
     </div>
   );
