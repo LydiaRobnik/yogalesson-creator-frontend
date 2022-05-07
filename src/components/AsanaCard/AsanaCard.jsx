@@ -3,7 +3,15 @@ import { useNavigate, useOutletContext } from 'react-router-dom';
 import './asanaCard.scss';
 import { useDrag, useDrop } from 'react-dnd';
 
-const AsanaCard = ({ asana, handleSelectAsana, key, index, moveCard }) => {
+const AsanaCard = ({
+  asana,
+  handleSelectAsana,
+  key,
+  index,
+  moveCard,
+  sizeAsanaOnSelectModal,
+  showAsanaInMySequences
+}) => {
   const navigate = useNavigate();
   const { sequenceToAdd } = useOutletContext();
 
@@ -65,18 +73,24 @@ const AsanaCard = ({ asana, handleSelectAsana, key, index, moveCard }) => {
         onClick={() => handleSelectAsana(asana)}
         data-handler-id={handlerId}
         // className="asanacard-jsx rounded overflow-hidden shadow-lg m-2  bg-white cursor-pointer"
-        className={`asanacard-jsx rounded overflow-hidden shadow-lg m-2  cursor-pointer ${
+        className={`flex flex-col rounded overflow-hidden shadow-lg  cursor-pointer ${
           isDragging
             ? 'border-rose-400 opacity-50'
             : 'bg-white opacity-100 border-2 border-gray-200'
           // isDragging ? 'opacity-75' : ' opacity-100'
+        } ${sizeAsanaOnSelectModal ? 'w-32' : ''} ${
+          showAsanaInMySequences ? 'w-28' : ''
         }`}
       >
-        <img className="" src={asana.img_url} alt="preview class" />
+        <img
+          className={`self-center ${showAsanaInMySequences ? 'w-12' : ''}`}
+          src={asana.img_url}
+          alt="preview class"
+        />
         <div
-          className={`px-6 pt-3 pb-3 ${
+          className={` p-1 ${
             asana.default ? 'bg-light color-blue-darkest' : 'bg-red color-light'
-          } h-20`}
+          }  ${showAsanaInMySequences ? '' : 'h-20 text-left'}`}
         >
           <h3 className="font-bold text-xs">{asana.asana.sanskrit}</h3>
           <h3 className="text-xs">{asana.asana.name}</h3>
