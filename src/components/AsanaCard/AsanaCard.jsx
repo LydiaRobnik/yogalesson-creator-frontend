@@ -73,13 +73,13 @@ const AsanaCard = ({
         onClick={() => handleSelectAsana(asana)}
         data-handler-id={handlerId}
         // className="asanacard-jsx rounded overflow-hidden shadow-lg m-2  bg-white cursor-pointer"
-        className={`flex flex-col rounded overflow-hidden shadow-lg m-2  cursor-pointer ${
+        className={`flex flex-col rounded overflow-hidden shadow-lg  cursor-pointer ${
           isDragging
             ? 'border-rose-400 opacity-50'
             : 'bg-white opacity-100 border-2 border-gray-200'
           // isDragging ? 'opacity-75' : ' opacity-100'
         } ${sizeAsanaOnSelectModal ? 'w-32' : ''} ${
-          showAsanaInMySequences ? 'w-24' : ''
+          showAsanaInMySequences ? 'w-28' : ''
         }`}
       >
         <img
