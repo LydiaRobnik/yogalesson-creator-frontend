@@ -57,7 +57,7 @@ export default function Navbar() {
       <Disclosure as="nav" className="bg-light color">
         {({ open }) => (
           <>
-            <div className="navbar max-w-7xl px-2 sm:px-2">
+            <div className="navbar px-2 sm:px-2">
               <div className="relative flex items-center justify-between h-16">
                 {loggedIn && (
                   <div className="absolute inset-y-0 left-0 flex items-center sm:hidden mx-auto">
@@ -75,15 +75,15 @@ export default function Navbar() {
                     </Disclosure.Button>
                   </div>
                 )}
-                <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+                <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start pl-5">
                   <div className="flex-shrink-0 flex items-center">
                     <img
-                      className="block lg:hidden h-8 w-auto height"
+                      className="block lg:hidden h-8 w-auto height pr-3"
                       src="https://yogalesson-createor-backend.herokuapp.com/images/Logo_250x250px.png"
                       alt="Workflow"
                     />
                     <img
-                      className="hidden lg:block h-8 w-auto"
+                      className="hidden lg:block h-8 w-auto pr-3"
                       src="https://yogalesson-createor-backend.herokuapp.com/images/Logo_250x250px.png"
                       alt="Workflow"
                     />
@@ -139,7 +139,7 @@ export default function Navbar() {
                         login
                       </button>
                       <button
-                        className="hover:underline text-color-blue-darkest py-2 px-10"
+                        className="hover:underline text-color-blue-darkest py-2 px-10 pr-10"
                         onClick={() => setSignupModalOpen(true)}
                       >
                         sign up
