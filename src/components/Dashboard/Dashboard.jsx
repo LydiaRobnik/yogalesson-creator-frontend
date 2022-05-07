@@ -134,7 +134,7 @@ export default function Dashboard() {
               className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
             >
               {userClasses &&
-                userClasses.map((classItem) => (
+                userClasses.slice(0, 5).map((classItem) => (
                   <div
                     key={classItem._id}
                     onClick={() => {
@@ -190,7 +190,7 @@ export default function Dashboard() {
               className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
             >
               {favorites &&
-                favorites.map((favoritItem) => (
+                favorites.slice(0, 5).map((favoritItem) => (
                   <div
                     key={`${favoritItem._id}_favorite`}
                     onClick={() => {
