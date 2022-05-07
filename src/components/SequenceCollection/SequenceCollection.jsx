@@ -16,7 +16,7 @@ const newSeqObj = (userId) => ({
   asanas: []
 });
 
-const SequenceCollection = () => {
+const SequenceCollection = (ref) => {
   // states
   const { loggedIn, user } = useContext(AuthContext);
   const {
@@ -108,6 +108,7 @@ const SequenceCollection = () => {
 
   return (
     <>
+  
       {loading && (
         <lottie-player
           src="https://assets1.lottiefiles.com/packages/lf20_s00z9gco.json"
@@ -206,6 +207,8 @@ const SequenceCollection = () => {
             ))}
         </div>
       )}
+     
+    
     </>
   );
 };

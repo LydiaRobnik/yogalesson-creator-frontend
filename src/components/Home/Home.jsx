@@ -7,8 +7,7 @@ import "./home.scss";
 import Section1 from "../Sections/Section1";
 import Section2 from "../Sections/Section2";
 import Section3 from "../Sections/Section3";
-import TestResponsive from "./TestResponsive";
-import Footer from "../Footer/Footer.jsx";
+import FooterNew from "../FooterNew/FooterNew.jsx";
 import Hero from "./Hero.jsx";
 
 export default function Home() {
@@ -28,24 +27,21 @@ export default function Home() {
                   <Hero />
                 </div>
               </div>
+                  <div className="section color-primary">
+                    <Section1 />
+                  </div>
+                  <div className="section color-primary">
+                    <Section2 />
+                  </div>
+                  <div className="section color-primary">
+                    <Section3 />
+                  </div>
 
-              <div className="section color-primary">
-                <Section1 />
-              </div>
-              <div className="section color-primary">
-                <Section2 />
-              </div>
-              <div className="section color-primary">
-                <Section3 />
-              </div>
-              <div className="section color-primary">
-                <div className="h-full">
-                  <TestResponsive />
-                </div>
-              </div>
-
-              <div className="section color-primary text-5xl">
-                <Footer />
+             
+              <div className="section color-primary w-full">
+                
+                  <FooterNew className="z-1" />
+                
               </div>
             </ReactFullpage.Wrapper>
           );

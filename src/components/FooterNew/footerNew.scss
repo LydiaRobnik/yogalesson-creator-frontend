@@ -1,0 +1,36 @@
+@import '../../style/variables.scss';
+
+.footer {
+  background-color: $clr-light;
+  
+  .icon {
+    color: $clr-blue-darkest;
+  }
+  .copyright {
+  font-family: $font-manjari;
+
+}
+}
+
+.background {
+  background-image: url("../../pictures/Bottom.jpg");
+  background-size: cover;
+  background-position: center;
+  /* justify-self: baseline;
+  display: flex; */
+}
+
+/* .footer {
+  position: relative;
+  padding-bottom: 0px;
+} */
+
+.centerButton {
+  margin: 0 auto;
+}
+
+
+
+
+
+
