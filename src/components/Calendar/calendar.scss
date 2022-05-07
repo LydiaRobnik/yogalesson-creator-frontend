@@ -6,9 +6,80 @@
   th {
     background: $clr-red;
     color: $clr-light;
+    font-size: smaller;
+
+    .fc-day-sun,
+    .fc-day-sat {
+      background: $clr-blue-middle;
+    }
   }
 
   th div a {
     margin-top: 4px;
   }
+
+  .cal-infobar {
+    min-width: 10rem;
+    // height: calc(50rem + 10vw);
+    // height: auto;
+    max-height: 150vh;
+    min-height: 40rem;
+  }
+
+  .btn-modal {
+    padding: 0 !important;
+  }
 }
+
+.btn-modal-close {
+  padding: 0 !important;
+  padding-top: 2px !important;
+  transform: rotate(45deg);
+
+  &:hover {
+    // transform: scale(1.1);
+    transform: rotate(45deg) scale(1.2);
+  }
+}
+
+#CalendarEntryDialog-jsx {
+  .cal-entry-userclasses {
+    height: 50vh;
+    overflow-y: scroll;
+  }
+
+  .green {
+    background-color: rgb(34, 182, 34);
+  }
+
+  .orange {
+    background-color: rgb(206, 137, 9);
+  }
+
+  .blue {
+    background-color: rgb(67, 67, 196);
+  }
+
+  .red {
+    background-color: rgb(141, 23, 141);
+  }
+}
+
+// .modal {
+//   top: 50%;
+//   left: 50%;
+//   right: auto;
+//   bottom: auto;
+//   margin-right: -50%;
+//   transform: translate(-50%, -50%);
+//   color: black;
+// }
+
+// .overlay {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   // background-color: $clr-beige-light;
+// }

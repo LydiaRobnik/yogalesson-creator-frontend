@@ -1,9 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import './planner.scss';
-import Sequence from '../Sequence/Sequence';
-import NewSequence from '../NewSequence.jsx/NewSequence';
+// import NewSequence from '../NewSequence.jsx/NewSequence';
 import SequencePlanned from '../SequencePlanned/SequencePlanned';
 import asanaService from '../../api/asanaService';
 
@@ -11,34 +10,119 @@ export default function Planner() {
   const {
     userClasses,
     setUserClasses,
-    asanas,
-    setAsanas,
     userSequences,
-    setUserSequences,
     loading,
     yogaClassToAdd,
     setYogaClassToAdd,
-    sequenceToAdd,
-    setSequenceToAdd
+    setSequenceToAdd,
+    showNewSequence
   } = useOutletContext();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const createClass = async () => {
-    const newClass = { ...yogaClassToAdd };
-    const result = await asanaService.createClass(newClass);
-    console.log('📒 createClass', result);
-    const classObj = {
-      title: `${user.name}'s ${userClasses.length + 1}. class`,
-      user: user?.id,
-      plan: [],
-      favourite: false
+  const imgEl = useRef(null);
+
+  useEffect(() => {
+    const saveClassToBackend = async () => {
+      if (yogaClassToAdd.title.length === 0)
+        setYogaClassToAdd({
+          ...yogaClassToAdd,
+          title: `${user.name}'s class no. ${userClasses.length + 1}`
+        });
+      const newClass = { ...yogaClassToAdd };
+      const result = await asanaService.saveClass(newClass);
+      console.log('📒 saveClass', result);
+
+      const classToShowOnPreviewPic = yogaClassToAdd._id;
+      asanaService
+        .createClassPreview(imgEl.current, classToShowOnPreviewPic)
+        .catch((err) => {
+          console.log('err:', err);
+        });
     };
-    setYogaClassToAdd(classObj);
+    saveClassToBackend();
+  }, [yogaClassToAdd]);
+
+  const handleFocus = (event) => event.target.select();
+
+  const createSequence = async () => {
+    const newSequence = {
+      user: user?.id,
+      type: 'sequence',
+      duration: 3,
+      description: '',
+      title: `${user.name}'s draft sequence no. ${
+        userSequences.length + 1 + Math.random()
+      }`,
+      asanas: []
+    };
+    const result = await asanaService.createSequence(newSequence);
+    console.log('📒 newSequence', result);
+    yogaClassToAdd.plan.push(result);
+    setYogaClassToAdd({ ...yogaClassToAdd });
+    const seqObj = {
+      user: user?.id,
+      type: 'sequence',
+      duration: 3,
+      description: '',
+      title: '',
+      asanas: []
+    };
+    setSequenceToAdd(seqObj);
+    // setSequenceToAdd(result);
+    // setShowNewSequence(true);
+  };
+
+  const editClass = (e) => {
+    setYogaClassToAdd({
+      ...yogaClassToAdd,
+      title: e.target.value
+    });
+    asanaService.getUserClasses(user.id).then((data) => {
+      setUserClasses(data);
+    });
+  };
+
+  const moveSequenceUp = (sequence) => {
+    const startIndex = yogaClassToAdd.plan.indexOf(sequence);
+
+    if (startIndex === 0) return;
+    else {
+      const endIndex = startIndex - 1;
+
+      yogaClassToAdd.plan.splice(
+        endIndex,
+        0,
+        yogaClassToAdd.plan.splice(startIndex, 1)[0]
+      );
+      setYogaClassToAdd({ ...yogaClassToAdd });
+
+      // console.log('index to move', startIndex);
+      // console.log('index after splice', yogaClassToAdd.plan.indexOf(sequence));
+    }
+  };
+
+  const moveSequenceDown = (sequence) => {
+    const startIndex = yogaClassToAdd.plan.indexOf(sequence);
+
+    if (startIndex === yogaClassToAdd.plan.length - 1) return;
+    else {
+      const endIndex = startIndex + 1;
+
+      yogaClassToAdd.plan.splice(
+        endIndex,
+        0,
+        yogaClassToAdd.plan.splice(startIndex, 1)[0]
+      );
+      setYogaClassToAdd({ ...yogaClassToAdd });
+
+      console.log('index to move', startIndex);
+      console.log('index after splice', yogaClassToAdd.plan.indexOf(sequence));
+    }
   };
 
   return (
-    <>
+    <div className="w-full">
       {loading && (
         <lottie-player
           src="https://assets1.lottiefiles.com/packages/lf20_s00z9gco.json"
@@ -51,66 +135,80 @@ export default function Planner() {
       )}
 
       {!loading && (
-        <>
-          <div className="mx-10 flex flex-row">
-            <input
-              type="text"
-              className="color-blue-darkest text-left px-10 text-4xl"
-              placeholder="draft class - title"
-              value={yogaClassToAdd.title}
-              onChange={(e) =>
-                setYogaClassToAdd({
-                  ...yogaClassToAdd,
-                  title: e.target.value
-                })
-              }
-            />
-
-            <button
-              className="btn-red btn-blue:hover mx-2 flex flex-row items-center"
-              onClick={() => createClass()}
-            >
-              <p className="font-material-symbols inline pr-2">save</p>
-              <p className="inline pt-1 text-lg">save class</p>
-            </button>
-          </div>
-
-          <div className="w-screen mx-10">
-            {yogaClassToAdd.plan &&
-              yogaClassToAdd.plan.map((sequence, index) => (
-                <div
-                  key={(sequence._id, index)}
-                  className="rounded bg-light m-10"
-                >
-                  <SequencePlanned sequence={sequence} />
-                </div>
-              ))}
-          </div>
-
-          <NewSequence />
-
-          <div className=" w-screen h-screen mx-10 flex flex-row justify-center">
-            {/* <div
-              className="flex flex-row items-start cursor-pointer px-3"
-              onClick={() => addNewSequence()}
-            >
-              <span className="font-material-symbols modal color-blue-darkest text-4xl ">
-                add_circle
-              </span>
-              <p className="color-blue-darkest pt-5">new sequence</p>
-            </div> */}
+        <div className="w-full bg-white">
+          <div ref={imgEl} className="w-full bg-white">
             <div
-              className="flex flex-row justify-self-center cursor-pointer px-3"
-              onClick={() => navigate('/user/sequences')}
+              className={`flex flex-row ${
+                yogaClassToAdd.plan.length === 0
+                  ? 'justify-center'
+                  : 'justify-start'
+              }`}
             >
-              <span className="font-material-symbols modal color-blue-darkest text-4xl p-l">
-                add_circle
-              </span>
-              <p className="color-blue-darkest pt-5">my sequence</p>
+              <input
+                type="text"
+                className={`color-blue-darkest px-10 text-4xl ${
+                  yogaClassToAdd.plan.length === 0 ? 'text-center' : 'text-left'
+                }`}
+                placeholder="draft - class title"
+                value={yogaClassToAdd.title}
+                onChange={editClass}
+                onFocus={handleFocus}
+              />
+            </div>
+
+            <div className="w-full">
+              {yogaClassToAdd.plan &&
+                yogaClassToAdd.plan.map((sequence, index) => (
+                  <div className="grid grid-cols-12 gap-4 border-t-2 border-gray-200 mx-4">
+                    <div className=" col-span-1">
+                      <span
+                        className="font-material-symbols color-blue-darkest text-4xl px-3 cursor-pointer"
+                        onClick={() => moveSequenceDown(sequence)}
+                      >
+                        expand_more
+                      </span>
+                      <span
+                        className="font-material-symbols color-blue-darkest text-4xl px-3 cursor-pointer"
+                        onClick={() => moveSequenceUp(sequence)}
+                      >
+                        expand_less
+                      </span>
+                    </div>
+
+                    <div
+                      key={sequence._id}
+                      className="rounded col-span-11 my-2"
+                    >
+                      <SequencePlanned
+                        sequence={sequence}
+                        handleFocus={handleFocus}
+                      />
+                    </div>
+                  </div>
+                ))}
             </div>
           </div>
-        </>
+          {/* {showNewSequence && <NewSequence handleFocus={handleFocus} />} */}
+
+          <div className=" w-full flex flex-row justify-center mt-4">
+            <button
+              className="btn-blue btn-blue:hover   mx-2 flex flex-row items-center"
+              onClick={() => createSequence()}
+            >
+              <span className="font-material inline pr-2">add</span>
+              <p className="inline pt-1 text-lg ">create new sequence</p>
+            </button>
+
+            <button
+              className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
+              onClick={() => navigate('/user/sequences')}
+            >
+              <span className="font-material inline pr-2">add</span>
+              <p className="inline pt-1 text-lg ">my sequence</p>
+            </button>
+          </div>
+        </div>
       )}
-    </>
+    </div>
   );
 }

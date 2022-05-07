@@ -7,7 +7,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,500;1,600&family=Square+Peg&display=swap');
 @import 'animate.css';
 
-
 @layer base {
   body {
     font-family: $font-manjari;
@@ -16,24 +15,27 @@
     // line-height: 1.5;
     // color: #333;
   }
-  
-  h1{
+
+  h1 {
     font-family: $font-moontime;
     color: $clr-beige;
   }
-  
-  h2, h3, h4, h6, h6, p {
+
+  h2,
+  h3,
+  h4,
+  h6,
+  h6,
+  p {
     font-family: $font-manjari;
   }
 
   button {
     @apply rounded cursor-pointer font-bold;
     font-family: $font-manjari;
-    padding: 0.35rem 0.5rem !important;
+    
   }
-
 }
-
 
 @layer utilities {
   .font-moontime {
@@ -44,13 +46,13 @@
     font-family: $font-manjari;
   }
 
-.font-material{
-  font-family: $font-material;
-}
+  .font-material {
+    font-family: $font-material;
+  }
 
-.font-material-symbols{
-  font-family: $font-material-symbols;
-}
+  .font-material-symbols {
+    font-family: $font-material-symbols;
+  }
 
   .bg-light {
     background: $clr-light;
@@ -77,7 +79,7 @@
   }
 
   .bg-blue-dark {
-    background: $clr-blue-dark ;
+    background: $clr-blue-dark;
   }
 
   .bg-blue-darkest {
@@ -109,7 +111,7 @@
   }
 
   .color-blue-dark {
-    color: $clr-blue-dark ;
+    color: $clr-blue-dark;
   }
 
   .color-blue-darkest {
@@ -118,21 +120,33 @@
 
   .btn-blue {
     background-color: $clr-blue-darkest;
-    color: $clr-light
+    color: $clr-light;
+    padding: 0.5rem 1rem;
   }
   .btn-blue:hover {
     background-color: $clr-blue-dark;
     color: $clr-beige;
+    padding: 0.5rem 1rem;
   }
 
   .btn-red {
     background-color: $clr-red;
     color: $clr-light;
+    padding: 0.5rem 1rem;
   }
   .btn-red:hover {
     background-color: $clr-beige;
+    padding: 0.5rem 1rem;
     @apply text-white;
   }
-
+  .btn-neutral {
+    background-color: $clr-blue-light;
+    color: $clr-blue-dark;
+    padding: 0.5rem 1rem;
+  }
+  .btn-neutral:hover {
+    background-color: $clr-beige;
+    color: $clr-blue-darkest;
+    padding: 0.5rem 1rem 0.5rem 0.25rem;
+  }
 }
-

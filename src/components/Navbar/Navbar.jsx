@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import './navbar.scss';
 import { Fragment } from 'react';
@@ -10,8 +10,10 @@ import SignupModal from '../Login/SignupModal';
 
 const navigation = [
   { name: 'Dashboard', path: '/user/dashboard', current: false },
-  { name: 'Classes', path: '/user/planner', current: false },
-  { name: 'Calendar', path: '/', current: false }
+  { name: 'Planner', path: '/user/planner', current: false },
+  { name: 'My Sequences', path: '/user/sequences', current: false },
+  { name: 'Asanas', path: '/user/asanas', current: false },
+  { name: 'Calendar', path: '/user/calendar', current: false }
 ];
 
 function classNames(...classes) {
@@ -20,30 +22,30 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const { loggedIn, login, logout, user } = useContext(AuthContext);
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [open, setOpen] = useState(true);
+  // const [name, setName] = useState('');
+  // const [password, setPassword] = useState('');
+  // const [error, setError] = useState('');
+  // const [open, setOpen] = useState(true);
   const [ModalOpen, setModalOpen] = useState(false);
   const [SignupModalOpen, setSignupModalOpen] = useState(false);
 
-  async function handleLogin(e) {
-    e.preventDefault();
-    setError('');
+  // async function handleLogin(e) {
+  //   e.preventDefault();
+  //   setError('');
 
-    const result = await login({
-      user: name,
-      type: 'username',
-      password: password
-    });
+  //   const result = await login({
+  //     user: name,
+  //     type: name.includes('@') ? 'email' : 'username',
+  //     password: password
+  //   });
 
-    if (!result) {
-      setError('Invalid username or password!');
-    } else {
-      setName('');
-      setPassword('');
-    }
-  }
+  //   if (!result) {
+  //     setError('Invalid username or password!');
+  //   } else {
+  //     setName('');
+  //     setPassword('');
+  //   }
+  // }
 
   return (
     <>
@@ -55,8 +57,8 @@ export default function Navbar() {
       <Disclosure as="nav" className="bg-light color">
         {({ open }) => (
           <>
-            <div className="navbar max-w-7xl mx-auto px-2 sm:px-6">
-              <div className="relative flex items-center justify-between h-16 mx-auto">
+            <div className="navbar max-w-7xl px-2 sm:px-2">
+              <div className="relative flex items-center justify-between h-16">
                 {loggedIn && (
                   <div className="absolute inset-y-0 left-0 flex items-center sm:hidden mx-auto">
                     {/* Mobile menu button*/}
@@ -92,19 +94,25 @@ export default function Navbar() {
                   </div>
 
                   {loggedIn && (
-                    <div className="hidden sm:block sm:ml-6 ">
+                    <div className="hidden sm:block sm:ml-6 self-center ">
                       <div className="flex space-x-4">
                         {navigation.map((item) => (
                           <NavLink
                             key={item.name}
                             href={item.href}
                             to={item.path}
-                            className={classNames(
-                              item.current
-                                ? 'bg-gray-900 text-white'
-                                : 'color-blue-darkest hover:bg-gray-700 hover:text-white',
-                              'px-3 py-2 rounded-md text-sm font-medium'
-                            )}
+                            className={({ isActive }) =>
+                              `${
+                                isActive
+                                  ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
+                                  : classNames(
+                                      item.current
+                                        ? 'bg-gray-900 text-white'
+                                        : 'color-blue-darkest hover:bg-gray-700 hover:text-white',
+                                      'px-3 py-2 rounded-md text-sm font-medium'
+                                    )
+                              }`
+                            }
                             aria-current={item.current ? 'page' : undefined}
                           >
                             {item.name}
@@ -136,16 +144,16 @@ export default function Navbar() {
                       >
                         sign up
                       </button>
-                      {error && (
+                      {/* {error && (
                         <div className="text-sm pl-5 pt-2 text-red-500">
                           {error}
                         </div>
-                      )}
+                      )} */}
                     </>
                   )}
                 </div>
 
-                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-0 sm:pr-0">
                   {/* Profile dropdown */}
                   {loggedIn && (
                     <Menu as="div" className="ml-3 relative">

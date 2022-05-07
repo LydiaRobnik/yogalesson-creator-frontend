@@ -1,8 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 import './dashboard.scss';
 import useBreakpoint from '../../custom/useBreakpoint';
 import ClassCard from '../ClassCard/ClassCard.jsx';
+import asanaService from '../../api/asanaService';
 
 export default function Dashboard() {
   // states
@@ -14,11 +16,14 @@ export default function Dashboard() {
     userSequences,
     setUserSequences,
     loading,
-    gridResponsiveness
+    yogaClassToAdd,
+    setYogaClassToAdd
   } = useOutletContext();
+  const [selectedCard, setSelectedCard] = useState(null);
 
   const point = useBreakpoint();
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
   // sort classes by date
   userClasses.sort((a, b) => {
@@ -30,8 +35,40 @@ export default function Dashboard() {
     (classItem) => classItem.favourite === true
   );
 
+  const createClass = async () => {
+    const newClass = {
+      title: `draft - class title`,
+      user: user?.id,
+      plan: [],
+      favourite: false
+    };
+    const result = await asanaService.createClass(newClass);
+    console.log('📒 createClass', result);
+    setYogaClassToAdd(result);
+    navigate(`/user/planner/${yogaClassToAdd._id}`);
+  };
+
+  const markAsSelected = (classCardToSelect) => {
+    setSelectedCard(classCardToSelect);
+  };
+
+  // functions
+  const gridResponsiveness = () => {
+    if (point === 'xs') {
+      return 'grid-cols-1';
+    } else if (point === 'sm') {
+      return 'grid-cols-2';
+    } else if (point === 'md') {
+      return 'grid-cols-3';
+    } else if (point === 'lg') {
+      return 'grid-cols-4';
+    } else {
+      return 'grid-cols-5';
+    }
+  };
+
   return (
-    <>
+    <div className="w-full rounded">
       {loading && (
         <lottie-player
           src="https://assets1.lottiefiles.com/packages/lf20_s00z9gco.json"
@@ -51,15 +88,11 @@ export default function Dashboard() {
             }`}
           >
             <button
-              onClick={() => navigate('/user/planner')}
+              onClick={() => createClass()}
               className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
             >
               <p className="font-material inline pr-2">add</p>
               <p className="inline pt-1 text-lg">new class</p>
-            </button>
-            <button className="btn-red btn-blue:hover mx-2 flex flex-row items-center">
-              <p className="font-material inline pr-2">add</p>
-              <p className="inline pt-1 text-lg">random class</p>
             </button>
           </div>
 
@@ -83,18 +116,36 @@ export default function Dashboard() {
               </>
             )}
             {userClasses.length > 0 && (
-              <h2
-                className={`${point === 'xs' ? 'text-center' : 'text-start'}`}
-              >
-                recently used
-              </h2>
+              <div className="flex flex-row items-center">
+                <h2
+                  className={`${point === 'xs' ? 'text-center' : 'text-start'}`}
+                >
+                  recently used
+                </h2>
+                <button className="btn-neutral btn-neutral:hover bg-white outline outline-2  pl-1 mx-2 ml-5 flex flex-row items-center">
+                  <span className="font-material-symbols color-blue-darkest text-lg px-2 cursor-pointer">
+                    expand_more
+                  </span>
+                  <p className="inline pt-1 text-lg">show all</p>
+                </button>
+              </div>
             )}
             <div
-              className={`justify-center grid gap-4 ${gridResponsiveness()}`}
+              className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
             >
               {userClasses &&
                 userClasses.map((classItem) => (
-                  <div key={classItem._id}>
+                  <div
+                    key={classItem._id}
+                    onClick={() => {
+                      markAsSelected(classItem._id);
+                    }}
+                    className={`rounded overflow-hidden w-full m-3 p-0 ${
+                      selectedCard === classItem._id
+                        ? 'border-solid border-2 border-rose-400 shadow-xl'
+                        : ' border-2 border-gray-200'
+                    }`}
+                  >
                     <ClassCard classItem={classItem} />
                   </div>
                 ))}
@@ -136,11 +187,21 @@ export default function Dashboard() {
               </div>
             )}
             <div
-              className={`justify-center grid gap-4  mb-8 ${gridResponsiveness()}`}
+              className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
             >
               {favorites &&
                 favorites.map((favoritItem) => (
-                  <div key={favoritItem._id}>
+                  <div
+                    key={`${favoritItem._id}_favorite`}
+                    onClick={() => {
+                      markAsSelected(`${favoritItem._id}_favorite`);
+                    }}
+                    className={`rounded overflow-hidden w-full m-2 ${
+                      selectedCard === `${favoritItem._id}_favorite`
+                        ? 'border-solid border-2 border-rose-400 shadow-xl'
+                        : 'border-2 border-gray-200'
+                    }`}
+                  >
                     <ClassCard classItem={favoritItem} />
                   </div>
                 ))}
@@ -148,6 +209,6 @@ export default function Dashboard() {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 }

@@ -1,48 +1,60 @@
 import React, { useState } from 'react';
 import AsanaCard from '../AsanaCard/AsanaCard';
-import { useNavigate, useOutletContext } from 'react-router-dom';
+import useBreakpoint from '../../custom/useBreakpoint';
 import './sequence.scss';
 
-const Sequence = ({ sequence, showMore }) => {
-  const {
-    userClasses,
-    setUserClasses,
-    asanas,
-    setAsanas,
-    userSequences,
-    setUserSequences,
-    loading,
-    gridResponsiveness
-  } = useOutletContext();
-  const navigate = useNavigate();
+const Sequence = ({ sequence, selectedSequence }) => {
+  const point = useBreakpoint();
+
+  // // functions
+  const gridResponsiveness = () => {
+    if (point === 'xs') {
+      return 'grid-cols-3';
+    } else if (point === 'sm') {
+      return 'grid-cols-4';
+    } else if (point === 'md') {
+      return 'grid-cols-6';
+    } else if (point === 'lg') {
+      return 'grid-cols-8';
+    } else {
+      return 'grid-cols-10';
+    }
+  };
 
   return (
-    <>
-      <div className="min-h-40">
+    <div className="border-b-2 border-gray-200">
+      <div className="min-h-40 flex flex-row">
         <h3 className="color-blue-darkest pr-3 pt-3 font-bold text-xl">
           {sequence.title}
         </h3>
+        <p className="color-blue-darkest pt-3">
+          {new Date(sequence.modifiedAt).toLocaleString()}
+        </p>
       </div>
 
-      {showMore && (
-        <>
+      {/*  === sequence._id */}
+
+      {selectedSequence && (
+        <div className="">
           <div className="min-h-40">
             <p className="color-blue-darkest pr-3 pt-3">
               {sequence.description}
             </p>
           </div>
 
-          <div className={'flex flex-row'}>
+          <div
+            className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
+          >
             {sequence &&
-              sequence.asanas.map((asana) => (
-                <div key={asana._id}>
-                  <AsanaCard asana={asana} />
+              sequence.asanas.map((asana, index) => (
+                <div key={`${asana._id}${index}`}>
+                  <AsanaCard asana={asana} showAsanaInMySequences={true} />
                 </div>
               ))}
           </div>
-        </>
+        </div>
       )}
-    </>
+    </div>
   );
 };
 

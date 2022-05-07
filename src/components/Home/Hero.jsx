@@ -11,7 +11,7 @@ export default function Hero() {
         </div>
       </div>
       <div className="divdivdiv">
-        <button className="bg-red hover:bg-red-500 text-white font-bold py-2 px-10">
+        <button className="bg-red hover:bg-red-500 text-white font-bold py-2 px-20">
           try it now
         </button>
       </div>

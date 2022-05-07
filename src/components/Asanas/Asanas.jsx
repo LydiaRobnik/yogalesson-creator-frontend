@@ -1,11 +1,45 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import { useNavigate, useOutletContext } from 'react-router-dom';
-import './asanas.scss';
+import {
+  useNavigate,
+  useOutletContext,
+  useSearchParams
+} from 'react-router-dom';
 import asanaService from '../../api/asanaService';
 import AsanaCard from '../AsanaCard/AsanaCard';
+import Modal from 'react-modal';
+import './asanas.scss';
+import AsanaCreateDialog from './AsanaCreateDialog';
+import useBreakpoint from '../../custom/useBreakpoint';
 
-const Asanas = () => {
+const emptyAsanaObj = () => ({
+  asana: {
+    sanskrit: '',
+    name: ''
+  },
+  img_url: '',
+  level: 'beginners',
+  tags: [],
+  default: false
+});
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    padding: '0',
+    borderRadius: '.7rem',
+    border: '2px dotted lightgray',
+    overflow: 'hidden'
+  }
+};
+Modal.setAppElement('#root');
+
+const Asanas = ({ selection = false, addAsana }) => {
   const {
     userClasses,
     setUserClasses,
@@ -15,31 +49,44 @@ const Asanas = () => {
     setUserSequences,
     loading,
     setLoading,
-    gridResponsiveness
+    sequenceToAdd
   } = useOutletContext();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const point = useBreakpoint();
+
   const { loggedIn, user } = useContext(AuthContext);
 
   const [filterName, setFilterName] = useState('');
   const [filterLevel, setFilterLevel] = useState([]);
   const [filterTags, setFilterTags] = useState([]);
   const [showFilter, setShowFilter] = useState(true);
+  const [editAsana, setEditAsana] = useState(emptyAsanaObj());
+
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [error, setError] = useState('');
+  const [doFetch, setDoFetch] = useState(true);
 
   // fetches
   useEffect(() => {
+    console.log('📦 from', searchParams.get('from'));
     if (loggedIn) {
-      const fetchData = () => {
-        setLoading(true);
-        asanaService.getDefaultAsanas(user.id).then((data) => {
-          setAsanas(data);
-        });
+      const fetchData = async () => {
+        if (!selection) setLoading(true);
+        const data = await asanaService.getDefaultAsanas(user.id);
+        const dataUser = await asanaService.getUserAsanas(user.id);
+
+        console.log('asanas', dataUser.length);
+
+        setAsanas([...dataUser, ...data]);
+
         setLoading(false);
       };
       fetchData();
     }
 
     return () => {};
-  }, [loggedIn]);
+  }, [loggedIn, doFetch]);
 
   useEffect(() => {
     let levelAr = new Set();
@@ -54,6 +101,7 @@ const Asanas = () => {
 
     levelAr = [...levelAr]
       .sort((a, b) => a.localeCompare(b))
+      .reverse()
       .map((level) => ({ level, checked: false }));
     tagAr = [...tagAr]
       .sort((a, b) => a.localeCompare(b))
@@ -71,6 +119,59 @@ const Asanas = () => {
     return () => {};
   }, [showFilter]);
 
+  const handleOpenCreateAsanaDialog = () => {
+    console.log('handleCreateAsana', emptyAsanaObj());
+    setEditAsana(emptyAsanaObj());
+    openModal();
+  };
+
+  function saveAsana(asanaObj) {
+    console.log('createAsana', asanaObj);
+
+    if (!asanaObj._id) {
+      asanaService
+        .createAsana(asanaObj)
+        .then((data) => {
+          console.log('createAsana', data);
+          setAsanas([data, ...asanas]);
+        })
+        .catch((err) => {
+          console.log('createAsana', err);
+          setError(err);
+        });
+    } else {
+      asanaService
+        .saveAsana(asanaObj)
+        .then((data) => {
+          console.log('saveAsana', data);
+          setAsanas((prev) =>
+            prev.map((asana) => (asana._id === data._id ? data : asana))
+          );
+          // setDoFetch(!doFetch);
+        })
+        .catch((err) => {
+          console.log('saveAsana', err);
+          setError(err);
+        });
+    }
+
+    closeModal();
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    // subtitle.style.color = '#f00';
+  }
+
+  function closeModal() {
+    console.log('closeModal');
+    setIsOpen(false);
+  }
+
   const toggleFilterAll = (f) => {
     f((prev) => {
       if (prev.some((item) => item.checked))
@@ -86,7 +187,36 @@ const Asanas = () => {
     });
   };
 
-  // console.log('fetched asanas:', asanas);
+  const handleSelectAsana = (asana) => {
+    if (searchParams.get('from') === 'planner') {
+      sequenceToAdd.asanas.push(asana);
+      navigate(`../planner`);
+    } else if (selection === true) {
+      // console.log('asana', asana);
+      addAsana(asana);
+    } else {
+      console.log('asana', asana);
+      setEditAsana({ ...asana });
+      openModal();
+    }
+  };
+
+  // functions
+  const gridResponsiveness = () => {
+    if (point === 'xs') {
+      return 'grid-cols-1';
+    } else if (point === 'sm') {
+      return 'grid-cols-2';
+    } else if (point === 'md') {
+      return 'grid-cols-3';
+    } else if (point === 'lg') {
+      return 'grid-cols-4';
+    } else if (point === 'xl') {
+      return 'grid-cols-5';
+    } else {
+      return 'grid-cols-6';
+    }
+  };
 
   return (
     <>
@@ -111,25 +241,33 @@ const Asanas = () => {
             >
               <div className="flex flex-wrap justify-between border-b border-b-slate-300 border-dashed">
                 <div className="text-lg font-bold">Filter</div>
-                <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
                   <input
                     type="checkbox"
                     name="toggle"
                     id="toggle"
-                    class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+                    className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
                     checked={showFilter}
                     onChange={() => setShowFilter(!showFilter)}
                   />
                   <label
-                    for="toggle"
-                    class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                    htmlFor="toggle"
+                    className="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
                   ></label>
                 </div>
               </div>
             </div>
 
             <div className="grow w-4/6 md:w-5/6 flex flex-row flex-wrap">
-              test
+              {!selection && (
+                <button
+                  className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
+                  onClick={handleOpenCreateAsanaDialog}
+                >
+                  <span className="font-material inline pr-2">add</span>
+                  <p className="inline pt-1 text-lg ">new</p>
+                </button>
+              )}
             </div>
           </div>
           <div className="asanas-jsx flex justify-center gap-4 w-full">
@@ -138,14 +276,36 @@ const Asanas = () => {
                 showFilter ? 'w-2/6 md:w-1/6' : 'w-0'
               }`}
             >
-              <input
+              {/* <input
                 className={`filterblock w-full grow-0 border-gray-400 border-2 rounded-md p-1 ${
                   showFilter ? 'w-24 md:w-40' : 'opacity-0'
                 }`}
                 type="text"
                 placeholder="Filter by name"
                 onChange={(e) => setFilterName(e.target.value)}
-              />
+              /> */}
+              <div
+                className={`flex justify-center ${
+                  showFilter ? 'w-24 md:w-40' : 'opacity-0'
+                }`}
+              >
+                <div
+                  className="timepicker relative form-floating mb-3 xl:w-96"
+                  data-mdb-with-icon="false"
+                  id="input-toggle-timepicker"
+                >
+                  <input
+                    type="text"
+                    className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="Filter by name"
+                    onChange={(e) => setFilterName(e.target.value)}
+                    data-mdb-toggle="input-toggle-timepicker"
+                  />
+                  <label forhtml="floatingInput" className="text-gray-500">
+                    Filter by name
+                  </label>
+                </div>
+              </div>
               <div
                 className={`filterblock ${showFilter ? 'block' : 'opacity-0'}`}
               >
@@ -173,7 +333,12 @@ const Asanas = () => {
                           toggleFilterChecked(setFilterLevel, index)
                         }
                       />
-                      <label htmlFor={level.level}>{level.level}</label>
+                      <label
+                        htmlFor={level.level}
+                        className="md:whitespace-nowrap"
+                      >
+                        {level.level}
+                      </label>
                     </div>
                   ))}
               </div>
@@ -209,7 +374,9 @@ const Asanas = () => {
                   ))}
               </div>
             </div>
-            <div className="grow flex flex-row flex-wrap">
+            <div
+              className={`grid gap-4 grid-flow-row-dense ${gridResponsiveness()}`}
+            >
               {asanas &&
                 asanas
                   // filter by name
@@ -238,10 +405,35 @@ const Asanas = () => {
                   )
                   .map((asana) => (
                     <div key={asana._id}>
-                      <AsanaCard asana={asana} />
+                      <AsanaCard
+                        asana={asana}
+                        handleSelectAsana={handleSelectAsana}
+                        sizeAsanaOnSelectModal={true}
+                      />
                     </div>
                   ))}
             </div>
+          </div>
+          <div className="text-black">
+            <Modal
+              isOpen={modalIsOpen}
+              onAfterOpen={afterOpenModal}
+              onRequestClose={closeModal}
+              // className="modal"
+              // overlayClassName="overlay"
+              style={customStyles}
+              contentLabel="Example Modal"
+            >
+              <div className="text-black relative">
+                <button
+                  onClick={closeModal}
+                  className="btn-modal-close absolute top-1 right-1"
+                >
+                  ✖️
+                </button>
+                <AsanaCreateDialog saveAsana={saveAsana} asana={editAsana} />
+              </div>
+            </Modal>
           </div>
         </div>
       )}

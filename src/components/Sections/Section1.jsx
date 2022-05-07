@@ -5,7 +5,6 @@ import { useState, useEffect, useContext } from 'react';
 import asanaService from "../../api/asanaService";
 
 
-
 export default function Section1() {
 
  const [randomAsanas, setRandomAsanas] = useState([]);
