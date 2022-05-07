@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
 import TimePicker from 'react-time-picker';
+import { BsArrowReturnRight } from 'react-icons/bs';
 import './calendar.scss';
 
 const colors = [
@@ -134,7 +135,8 @@ export default function CalendarEntryDialog({
                     ))}
                   </select>
                   {regular && regular !== regulars[0] && (
-                    <div className="ml-20 flex gap-3 px-1">
+                    <div className="flex justify-end gap-3 px-1">
+                      <BsArrowReturnRight />
                       <div>repeat: </div>
                       <input
                         className="w-12 text-right"
