@@ -10,7 +10,8 @@ const AsanaCard = ({
   index,
   moveCard,
   sizeAsanaOnSelectModal,
-  showAsanaInMySequences
+  showAsanaInMySequences,
+  asanaInPlanner
 }) => {
   const navigate = useNavigate();
   const { sequenceToAdd } = useOutletContext();
@@ -66,6 +67,12 @@ const AsanaCard = ({
 
   // ==ende== functions, variables and states for draggable ====
 
+  const smallName = (name) => {
+    if (name.length > 14) {
+      return 'smallName';
+    } else return 'text-xs';
+  };
+
   return (
     <>
       <div
@@ -79,21 +86,35 @@ const AsanaCard = ({
             : 'bg-white opacity-100 border-2 border-gray-200'
           // isDragging ? 'opacity-75' : ' opacity-100'
         } ${sizeAsanaOnSelectModal ? 'w-32' : ''} ${
-          showAsanaInMySequences ? 'w-28' : ''
+          showAsanaInMySequences || asanaInPlanner ? 'w-28' : ''
         }`}
       >
         <img
-          className={`self-center ${showAsanaInMySequences ? 'w-12' : ''}`}
+          className={`self-center ${
+            showAsanaInMySequences || asanaInPlanner ? 'w-12' : ''
+          }`}
           src={asana.img_url}
           alt="preview class"
         />
         <div
           className={` p-1 ${
             asana.default ? 'bg-light color-blue-darkest' : 'bg-red color-light'
-          }  ${showAsanaInMySequences ? '' : 'h-20 text-left'}`}
+          }  ${
+            showAsanaInMySequences || asanaInPlanner ? '' : 'h-20 text-left'
+          }`}
         >
-          <h3 className="font-bold text-xs">{asana.asana.sanskrit}</h3>
-          <h3 className="text-xs">{asana.asana.name}</h3>
+          <h3 className={`font-bold ${smallName(asana.asana.sanskrit)}`}>
+            {asana.asana.sanskrit}
+          </h3>
+          <h3
+            className={`font-bold ${
+              showAsanaInMySequences || asanaInPlanner
+                ? smallName(asana.asana.sanskrit)
+                : ''
+            }`}
+          >
+            {asana.asana.name}
+          </h3>
         </div>
       </div>
     </>

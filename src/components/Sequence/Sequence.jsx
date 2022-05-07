@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
 import AsanaCard from '../AsanaCard/AsanaCard';
-// import useBreakpoint from '../../custom/useBreakpoint';
+import useBreakpoint from '../../custom/useBreakpoint';
 import './sequence.scss';
 
 const Sequence = ({ sequence, selectedSequence }) => {
-  // const point = useBreakpoint();
+  const point = useBreakpoint();
 
   // // functions
-  // const gridResponsiveness = () => {
-  //   if (point === 'xs') {
-  //     return 'grid-cols-1';
-  //   } else if (point === 'sm') {
-  //     return 'grid-cols-2';
-  //   } else if (point === 'md') {
-  //     return 'grid-cols-3';
-  //   } else if (point === 'lg') {
-  //     return 'grid-cols-4';
-  //   } else {
-  //     return 'grid-cols-12';
-  //   }
-  // };
+  const gridResponsiveness = () => {
+    if (point === 'xs') {
+      return 'grid-cols-3';
+    } else if (point === 'sm') {
+      return 'grid-cols-4';
+    } else if (point === 'md') {
+      return 'grid-cols-6';
+    } else if (point === 'lg') {
+      return 'grid-cols-8';
+    } else {
+      return 'grid-cols-10';
+    }
+  };
 
   return (
     <div className="border-b-2 border-gray-200">
@@ -42,7 +42,9 @@ const Sequence = ({ sequence, selectedSequence }) => {
             </p>
           </div>
 
-          <div className="grid gap-4 grid-cols-12 grid-flow-row-dense">
+          <div
+            className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
+          >
             {sequence &&
               sequence.asanas.map((asana) => (
                 <div key={asana._id}>

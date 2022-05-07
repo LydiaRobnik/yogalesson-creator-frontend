@@ -177,7 +177,7 @@ export default function Planner() {
 
                     <div
                       key={sequence._id}
-                      className="rounded bg-light col-span-11 my-2"
+                      className="rounded col-span-11 my-2"
                     >
                       <SequencePlanned
                         sequence={sequence}
