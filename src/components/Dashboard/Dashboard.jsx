@@ -16,7 +16,6 @@ export default function Dashboard() {
     userSequences,
     setUserSequences,
     loading,
-    gridResponsiveness,
     yogaClassToAdd,
     setYogaClassToAdd
   } = useOutletContext();
@@ -38,9 +37,7 @@ export default function Dashboard() {
 
   const createClass = async () => {
     const newClass = {
-      title: `${user.name}'s class no. ${
-        userClasses.length + 1 + Math.random()
-      }`,
+      title: `draft - class title`,
       user: user?.id,
       plan: [],
       favourite: false
@@ -55,8 +52,23 @@ export default function Dashboard() {
     setSelectedCard(classCardToSelect);
   };
 
+  // functions
+  const gridResponsiveness = () => {
+    if (point === 'xs') {
+      return 'grid-cols-1';
+    } else if (point === 'sm') {
+      return 'grid-cols-2';
+    } else if (point === 'md') {
+      return 'grid-cols-3';
+    } else if (point === 'lg') {
+      return 'grid-cols-4';
+    } else {
+      return 'grid-cols-5';
+    }
+  };
+
   return (
-    <div className="bg-beige rounded">
+    <div className="w-full rounded">
       {loading && (
         <lottie-player
           src="https://assets1.lottiefiles.com/packages/lf20_s00z9gco.json"
@@ -81,10 +93,6 @@ export default function Dashboard() {
             >
               <p className="font-material inline pr-2">add</p>
               <p className="inline pt-1 text-lg">new class</p>
-            </button>
-            <button className="btn-red btn-blue:hover mx-2 flex flex-row items-center">
-              <p className="font-material inline pr-2">add</p>
-              <p className="inline pt-1 text-lg">random class</p>
             </button>
           </div>
 
@@ -114,14 +122,16 @@ export default function Dashboard() {
                 >
                   recently used
                 </h2>
-                <button className="btn-neutral btn-neutral:hover bg-blue-middle mx-2 ml-5 flex flex-row items-center">
+                <button className="btn-neutral btn-neutral:hover bg-white outline outline-2  pl-1 mx-2 ml-5 flex flex-row items-center">
+                  <span className="font-material-symbols color-blue-darkest text-lg px-2 cursor-pointer">
+                    expand_more
+                  </span>
                   <p className="inline pt-1 text-lg">show all</p>
                 </button>
               </div>
             )}
             <div
-              className="flex flex-row flex-wrap"
-              // className={`justify-center grid gap-4 ${gridResponsiveness()}`}
+              className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
             >
               {userClasses &&
                 userClasses.map((classItem) => (
@@ -130,10 +140,10 @@ export default function Dashboard() {
                     onClick={() => {
                       markAsSelected(classItem._id);
                     }}
-                    className={`rounded overflow-hidden w-72 m-2 ${
+                    className={`rounded overflow-hidden w-full m-3 p-0 ${
                       selectedCard === classItem._id
                         ? 'border-solid border-2 border-rose-400 shadow-xl'
-                        : 'shadow-lg'
+                        : ' border-2 border-gray-200'
                     }`}
                   >
                     <ClassCard classItem={classItem} />
@@ -176,7 +186,9 @@ export default function Dashboard() {
                 </span>
               </div>
             )}
-            <div className="flex flex-row flex-wrap">
+            <div
+              className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
+            >
               {favorites &&
                 favorites.map((favoritItem) => (
                   <div
@@ -184,10 +196,10 @@ export default function Dashboard() {
                     onClick={() => {
                       markAsSelected(`${favoritItem._id}_favorite`);
                     }}
-                    className={`rounded overflow-hidden w-72 m-2 ${
+                    className={`rounded overflow-hidden w-full m-2 ${
                       selectedCard === `${favoritItem._id}_favorite`
                         ? 'border-solid border-2 border-rose-400 shadow-xl'
-                        : 'shadow-lg'
+                        : 'border-2 border-gray-200'
                     }`}
                   >
                     <ClassCard classItem={favoritItem} />

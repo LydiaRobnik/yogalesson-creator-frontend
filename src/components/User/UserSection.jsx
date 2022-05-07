@@ -31,23 +31,6 @@ export default function UserSection() {
     asanas: []
   });
 
-  // functions
-  const gridResponsiveness = () => {
-    if (point === 'sm') {
-      return 'grid-cols-2';
-    } else if (point === 'md') {
-      return 'grid-cols-3';
-    } else if (point === 'lg') {
-      return 'grid-cols-4';
-    } else if (point === 'xl') {
-      return 'grid-cols-5';
-    } else if (point === '2xl') {
-      return 'grid-cols-6';
-    } else {
-      return 'grid-cols-1';
-    }
-  };
-
   useEffect(() => {
     if (loggedIn) {
       const fetchData = () => {
@@ -86,7 +69,6 @@ export default function UserSection() {
                 userSequences,
                 setUserSequences,
                 loading,
-                gridResponsiveness,
                 yogaClassToAdd,
                 setYogaClassToAdd,
                 sequenceToAdd,

@@ -33,7 +33,7 @@
   button {
     @apply rounded cursor-pointer font-bold;
     font-family: $font-manjari;
-    padding: 0.35rem 0.5rem !important;
+    
   }
 }
 
@@ -121,26 +121,32 @@
   .btn-blue {
     background-color: $clr-blue-darkest;
     color: $clr-light;
+    padding: 0.5rem 1rem;
   }
   .btn-blue:hover {
     background-color: $clr-blue-dark;
     color: $clr-beige;
+    padding: 0.5rem 1rem;
   }
 
   .btn-red {
     background-color: $clr-red;
     color: $clr-light;
+    padding: 0.5rem 1rem;
   }
   .btn-red:hover {
     background-color: $clr-beige;
+    padding: 0.5rem 1rem;
     @apply text-white;
   }
   .btn-neutral {
     background-color: $clr-blue-light;
     color: $clr-blue-dark;
+    padding: 0.5rem 1rem;
   }
   .btn-neutral:hover {
     background-color: $clr-beige;
     color: $clr-blue-darkest;
+    padding: 0.5rem 1rem 0.5rem 0.25rem;
   }
 }

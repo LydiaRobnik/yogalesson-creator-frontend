@@ -24,15 +24,15 @@ const SequenceCollection = () => {
   const point = useBreakpoint();
   const navigate = useNavigate();
 
-  const [selectedSequence, setSelectedSequence] = useState(null);
+  const [selectedSequence, setSelectedSequence] = useState(true);
   // const [showMore, setShowMore] = useState(false);
   // const toggleAsanas = () => {
   //   setShowMore(!showMore);
   // };
 
-  const showAsanasOfSequence = (sequenceId) => {
-    setSelectedSequence(sequenceId);
-  };
+  // const showAsanasOfSequence = (sequenceId) => {
+  //   setSelectedSequence(sequenceId);
+  // };
 
   const handleSelectSequence = (choice) => {
     yogaClassToAdd.plan.push(choice);
@@ -77,13 +77,13 @@ const SequenceCollection = () => {
 
       {!loading && (
         <div className="w-full flex flex-col justify-start content-start px-6">
-          <h3 className="color-red pl-3 pb-5 text-4xl">
+          {/* <h3 className="color-red pl-3 pb-5 text-4xl">
             Click to add one of your sequence to your class
-          </h3>
+          </h3> */}
           {userSequences &&
             userSequences.map((sequence) => (
-              <div key={sequence._id} className="flex flex-row mb-3">
-                <div>
+              <div key={sequence._id} className="grid gap-4 grid-cols-12">
+                {/* <div>
                   {selectedSequence !== sequence._id && (
                     <>
                       <span
@@ -102,34 +102,35 @@ const SequenceCollection = () => {
                       expand_less
                     </span>
                   )}
-                </div>
+                </div> */}
 
-                <div key={sequence._id}>
+                <div key={sequence._id} className="col-span-11">
                   <Sequence
                     sequence={sequence}
                     selectedSequence={selectedSequence}
                   />
                 </div>
-
-                <button
-                  className="btn-blue btn-blue:hover mx-2 flex flex-row items-center cursor-pointer p-0 self-center"
-                  onClick={() => handleSelectSequence(sequence)}
-                >
-                  {/* <span className="font-material inline pr-2">add</span> */}
-                  <p className="inline pt-1 text-lg">add</p>
-                </button>
-                <button
-                  className="btn-blue btn-blue:hover mx-2 flex flex-row items-center cursor-pointer p-0 self-center"
-                  onClick={() => handleCopySequence(sequence)}
-                >
-                  <p className="inline pt-1 text-lg">copy</p>
-                </button>
-                <button
-                  className="btn-red btn-blue:hover m-2 p-0 flex flex-row items-center cursor-pointer self-center"
-                  onClick={() => handleDeleteSequence(sequence)}
-                >
-                  <p className="font-material-symbols p-0">delete</p>
-                </button>
+                <div className="col-span-1">
+                  <button
+                    className="btn-blue btn-blue:hover m-2 p-2 flex flex-row items-center cursor-pointer self-center"
+                    onClick={() => handleSelectSequence(sequence)}
+                  >
+                    {/* <span className="font-material inline pr-2">add</span> */}
+                    <p className="inline pt-1 text-lg">add</p>
+                  </button>
+                  <button
+                    className="btn-blue btn-blue:hover m-2 p-2 flex flex-row items-center cursor-pointer self-center"
+                    onClick={() => handleCopySequence(sequence)}
+                  >
+                    <p className="inline pt-1 text-lg">copy</p>
+                  </button>
+                  <button
+                    className="btn-red btn-blue:hover m-2 p-2 flex flex-row items-center cursor-pointer self-center"
+                    onClick={() => handleDeleteSequence(sequence)}
+                  >
+                    <p className="font-material-symbols p-0">delete</p>
+                  </button>
+                </div>
               </div>
             ))}
         </div>
