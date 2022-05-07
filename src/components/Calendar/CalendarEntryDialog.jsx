@@ -5,14 +5,9 @@ import { AuthContext } from '../../context/AuthContext';
 import TimePicker from 'react-time-picker';
 import { BsArrowReturnRight } from 'react-icons/bs';
 import './calendar.scss';
+import { calendarColors as colors } from '../../custom/utils';
 
-const colors = [
-  'rgb(34, 182, 34)',
-  'rgb(206, 137, 9)',
-  'rgb(67, 67, 196)',
-  'rgb(250, 57, 57)',
-  'rgb(141, 23, 141)'
-];
+// const colors = calendarColors
 
 const regulars = ['once', 'daily', 'weekly', 'monthly'];
 
@@ -96,7 +91,7 @@ export default function CalendarEntryDialog({
 
   return (
     <div id="CalendarEntryDialog-jsx" className="text-black">
-      <h2 className="text-lg font-bold text-center border-dashed border-b-slate-400 border-b bg-blue-dark color-beige-light p-4 pb-2 mb-4">
+      <h2 className="text-lg font-bold text-center border-dashed border-b-slate-400 border-b bg-blue-dark text-white p-4 pb-2 mb-4">
         Create Calendar Entry
       </h2>
       <div className=" grid grid-cols-[1fr_1fr] gap-4 p-0">
@@ -238,15 +233,29 @@ export default function CalendarEntryDialog({
       </div>
       <div className="flex justify-between w-full color-light text-right pt-1 bg-blue-middle">
         {event?.id ? (
-          <button onClick={handleDelete} className="flex text-2xl">
-            <span className="text-sm">Delete</span> ⛔️
+          <button
+            className="btn-red-outline btn-red-outline:hover cursor-pointer outline outline-2 flex flex-row self-center my-1 mb-2 ml-3"
+            onClick={handleDelete}
+          >
+            <p className="font-material-symbols py-0 px-3">delete</p>
           </button>
         ) : (
+          // <button onClick={handleDelete} className="flex text-2xl">
+          //   <span className="text-sm">Delete</span> ⛔️
+          // </button>
           <div></div>
         )}
-        <button onClick={handleSave} className="flex text-2xl">
-          <span className="text-sm">{event?.id ? 'Update' : 'Create'}</span> ✅
+
+        <button
+          className="btn-neutral btn-neutral:hover bg-white outline outline-2 flex flex-row self-center my-1 mb-2 mr-3"
+          onClick={handleSave}
+        >
+          <span className="font-material-symbols">add_task</span>
+          {/* <p className="inline pt-1 text-lg">add</p> */}
         </button>
+        {/* <button onClick={handleSave} className="flex text-2xl">
+          <span className="text-sm">{event?.id ? 'Update' : 'Create'}</span> ✅
+        </button> */}
       </div>
     </div>
   );

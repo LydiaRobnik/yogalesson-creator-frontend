@@ -71,17 +71,6 @@ const Asanas = ({ selection = false, addAsana }) => {
   useEffect(() => {
     console.log('📦 from', searchParams.get('from'));
     if (loggedIn) {
-      const fetchData = async () => {
-        if (!selection) setLoading(true);
-        const data = await asanaService.getDefaultAsanas(user.id);
-        const dataUser = await asanaService.getUserAsanas(user.id);
-
-        console.log('asanas', dataUser.length);
-
-        setAsanas([...dataUser, ...data]);
-
-        setLoading(false);
-      };
       fetchData();
     }
 
@@ -119,6 +108,18 @@ const Asanas = ({ selection = false, addAsana }) => {
     return () => {};
   }, [showFilter]);
 
+  const fetchData = async () => {
+    if (!selection) setLoading(true);
+    const data = await asanaService.getDefaultAsanas(user.id);
+    const dataUser = await asanaService.getUserAsanas(user.id);
+
+    console.log('asanas', dataUser.length);
+
+    setAsanas([...dataUser, ...data]);
+
+    setLoading(false);
+  };
+
   const handleOpenCreateAsanaDialog = () => {
     console.log('handleCreateAsana', emptyAsanaObj());
     setEditAsana(emptyAsanaObj());
@@ -151,6 +152,22 @@ const Asanas = ({ selection = false, addAsana }) => {
         })
         .catch((err) => {
           console.log('saveAsana', err);
+          setError(err);
+        });
+    }
+
+    closeModal();
+  }
+
+  function deleteAsana(asanaObj) {
+    console.log('deleteAsana', asanaObj);
+
+    if (asanaObj._id) {
+      asanaService
+        .deleteAsana(asanaObj)
+        .then((r) => fetchData())
+        .catch((err) => {
+          console.log('deleteAsana', err);
           setError(err);
         });
     }
@@ -431,7 +448,11 @@ const Asanas = ({ selection = false, addAsana }) => {
                 >
                   ✖️
                 </button>
-                <AsanaCreateDialog saveAsana={saveAsana} asana={editAsana} />
+                <AsanaCreateDialog
+                  saveAsana={saveAsana}
+                  deleteAsana={deleteAsana}
+                  asana={editAsana}
+                />
               </div>
             </Modal>
           </div>
