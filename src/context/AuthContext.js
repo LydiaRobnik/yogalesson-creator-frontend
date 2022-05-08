@@ -57,6 +57,7 @@ const AuthState = ({ children }) => {
 
     setLoggedIn(true);
     resp.data.token = token;
+    console.log('🧑‍💼 user jwt', resp.data);
     setUser(resp.data);
   }
 
