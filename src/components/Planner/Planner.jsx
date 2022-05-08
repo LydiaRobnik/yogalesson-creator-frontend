@@ -21,6 +21,7 @@ export default function Planner() {
   const navigate = useNavigate();
 
   const imgEl = useRef(null);
+  const [totalDuration, setTotalDuration] = useState(0);
 
   useEffect(() => {
     const saveClassToBackend = async () => {
@@ -40,38 +41,11 @@ export default function Planner() {
           console.log('err:', err);
         });
     };
+    getTotalDuration();
     saveClassToBackend();
   }, [yogaClassToAdd]);
 
   const handleFocus = (event) => event.target.select();
-
-  // const createSequence = async () => {
-  //   const newSequence = {
-  //     user: user?.id,
-  //     type: 'sequence',
-  //     duration: 3,
-  //     description: '',
-  //     title: `${user.name}'s draft sequence no. ${
-  //       userSequences.length + 1 + Math.random()
-  //     }`,
-  //     asanas: []
-  //   };
-  //   const result = await asanaService.createSequence(newSequence);
-  //   console.log('📒 newSequence', result);
-  //   yogaClassToAdd.plan.push(result);
-  //   setYogaClassToAdd({ ...yogaClassToAdd });
-  //   const seqObj = {
-  //     user: user?.id,
-  //     type: 'sequence',
-  //     duration: 3,
-  //     description: '',
-  //     title: '',
-  //     asanas: []
-  //   };
-  //   setSequenceToAdd(seqObj);
-  //   // setSequenceToAdd(result);
-  //   // setShowNewSequence(true);
-  // };
 
   const editClass = (e) => {
     setYogaClassToAdd({
@@ -121,6 +95,16 @@ export default function Planner() {
     }
   };
 
+  const getTotalDuration = () => {
+    let sum = 0;
+    yogaClassToAdd.plan.forEach((sequence) => {
+      sum += sequence.duration;
+      return sum;
+    });
+    console.log(sum);
+    setTotalDuration(sum);
+  };
+
   return (
     <div className="w-full">
       {loading && (
@@ -167,25 +151,32 @@ export default function Planner() {
               )}
               {yogaClassToAdd.plan &&
                 yogaClassToAdd.plan.map((sequence, index) => (
-                  <div className="grid grid-cols-12 gap-4 border-t-2 border-gray-200 mx-4">
-                    <div className=" col-span-1 flex flex-row flex-wrap content-start">
-                      <span
-                        className="font-material-symbols color-blue-darkest text-xl px-1 cursor-pointer"
-                        onClick={() => moveSequenceUp(sequence)}
-                      >
-                        expand_less
-                      </span>
-                      <span
-                        className="font-material-symbols color-blue-darkest text-xl px-1 cursor-pointer"
-                        onClick={() => moveSequenceDown(sequence)}
-                      >
-                        expand_more
-                      </span>
+                  <div className="grid grid-cols-12 gap-4 items-start border-t-2 border-gray-200 mx-4">
+                    <div className=" col-span-1">
+                      <div className="flex flex-row flex-wrap">
+                        <span
+                          className="font-material-symbols color-blue-darkest text-xl px-1 cursor-pointer"
+                          onClick={() => moveSequenceUp(sequence)}
+                        >
+                          expand_less
+                        </span>
+                        <span
+                          className="font-material-symbols color-blue-darkest text-xl px-1 cursor-pointer"
+                          onClick={() => moveSequenceDown(sequence)}
+                        >
+                          expand_more
+                        </span>
+                      </div>
+                      <div>
+                        <p className="pl-2 color-blue-darkest">
+                          {sequence.duration}:00
+                        </p>
+                      </div>
                     </div>
 
                     <div
                       key={sequence._id}
-                      className="rounded col-span-11 my-2"
+                      className=" rounded col-span-11 my-2"
                     >
                       <SequencePlanned
                         sequence={sequence}
@@ -195,8 +186,10 @@ export default function Planner() {
                   </div>
                 ))}
             </div>
+            <div>
+              <p className="pl-2 color-blue-darkest">{totalDuration}:00</p>
+            </div>
           </div>
-          {/* {showNewSequence && <NewSequence handleFocus={handleFocus} />} */}
 
           <div className=" w-full flex flex-row justify-center mt-4">
             <button

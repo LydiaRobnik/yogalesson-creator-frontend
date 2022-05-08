@@ -67,21 +67,8 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
 
   const addSequenceToClass = async () => {
     saveSequence({ ...sequenceToAdd });
-
-    // const newSequence = { ...sequenceToAdd };
-    // yogaClassToAdd.plan.push(newSequence);
-
-    // const seqObj = {
-    //   user: user?.id,
-    //   type: 'sequence',
-    //   duration: 3,
-    //   description: '',
-    //   title: '',
-    //   asanas: []
-    // };
-    // setSequenceToAdd(seqObj);
-    // setShowNewSequence(false);
   };
+
   /**
    * add Asana from modal dialog
    * @param {} asana from Asanas.jsx

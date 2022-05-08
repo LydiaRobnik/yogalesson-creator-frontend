@@ -89,6 +89,8 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
     });
   }, [cards, title, description]);
 
+  //  ==End== moving and updating asana array in sequence / drag and drop function ====
+
   /**
    * add Asana from modal dialog
    * @param {} asana from Asanas.jsx
@@ -126,16 +128,6 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
       return 'grid-cols-10';
     }
   };
-
-  // const showShortTitle = (title) => {
-  //   if (title.length > 25) {
-  //     const longTitle = title;
-  //     const shortTitle = longTitle.substring(0, 20) + ' ...';
-  //     return shortTitle;
-  //   } else {
-  //     return title;
-  //   }
-  // };
 
   const renderCard = useCallback((card, index) => {
     return (
