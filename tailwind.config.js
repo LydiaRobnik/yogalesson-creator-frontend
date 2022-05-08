@@ -1,9 +1,7 @@
 module.exports = {
-  content: ['./src/**/*.{html,js,jsx,ts,tsx}', './node_modules/tw-elements/dist/js/**/*.js'],
+  content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {}
   },
-  plugins: [
-    require('tw-elements/dist/plugin')
-  ],
+  plugins: []
 };

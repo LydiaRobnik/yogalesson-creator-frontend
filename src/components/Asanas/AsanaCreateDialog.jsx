@@ -3,7 +3,7 @@ import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
 import FileUpload from '../FileUpload/FileUpload';
 
-export default function AsanaCreateDialog({ saveAsana, asana }) {
+export default function AsanaCreateDialog({ saveAsana, deleteAsana, asana }) {
   const { user, loggedIn } = useContext(AuthContext);
 
   const [asanaObj, setAsanaObj] = useState(asana);
@@ -23,8 +23,14 @@ export default function AsanaCreateDialog({ saveAsana, asana }) {
 
   function handleSaveAsana(event) {
     event.preventDefault();
-    console.log('handleFormSubmit', asanaObj);
+    console.log('handleSaveAsana', asanaObj);
     saveAsana(asanaObj);
+  }
+
+  function handleDeleteAsana(event) {
+    event.preventDefault();
+    console.log('deleteAsana', asanaObj);
+    deleteAsana(asanaObj);
   }
 
   function handleAddTag(event) {
@@ -59,7 +65,7 @@ export default function AsanaCreateDialog({ saveAsana, asana }) {
 
   return (
     <div id="AsanaCreateDialog-jsx" className="text-black">
-      <h2 className="text-lg font-bold text-center border-dashed border-b-slate-400 border-b bg-blue-dark color-beige-light p-4 pb-2 mb-4">
+      <h2 className="text-lg font-bold text-center border-dashed border-b-slate-400 border-b bg-blue-dark text-white p-4 pb-2 mb-4">
         {asanaObj._id ? 'Update' : 'Create'} Asana
       </h2>
 
@@ -149,7 +155,7 @@ export default function AsanaCreateDialog({ saveAsana, asana }) {
             </div>
           </div>
           {/* LEVEL */}
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center mt-2 mx-2">
             <div
               className="inline-flex shadow-md hover:shadow-lg focus:shadow-lg"
               role="group"
@@ -162,7 +168,7 @@ export default function AsanaCreateDialog({ saveAsana, asana }) {
                   })
                 }
                 type="button"
-                className={`rounded-none rounded-l inline-block px-6 py-2.5 ${
+                className={`rounded-none rounded-l inline-block px-4 py-2.5 ${
                   asanaObj.level === 'beginners'
                     ? 'bg-amber-700'
                     : 'bg-slate-600'
@@ -178,7 +184,7 @@ export default function AsanaCreateDialog({ saveAsana, asana }) {
                   })
                 }
                 type="button"
-                className={`rounded-none inline-block px-6 py-2.5 ${
+                className={`rounded-none inline-block px-4 py-2.5 ${
                   asanaObj.level === 'advanced beginners'
                     ? 'bg-amber-700'
                     : 'bg-slate-600'
@@ -194,7 +200,7 @@ export default function AsanaCreateDialog({ saveAsana, asana }) {
                   })
                 }
                 type="button"
-                className={`rounded-none rounded-r inline-block px-6 py-2.5 ${
+                className={`rounded-none rounded-r inline-block px-4 py-2.5 ${
                   asanaObj.level === 'advanced'
                     ? 'bg-amber-700'
                     : 'bg-slate-600'
@@ -310,10 +316,25 @@ export default function AsanaCreateDialog({ saveAsana, asana }) {
             </div>
           </div>
         </div>
-        <div className="bg-beige color-blue-dark text-right pt-1">
-          <button className="btn-blue btn-blue:hover mx-2 mb-1">
-            {asanaObj._id ? 'Update' : 'Create'}
+        <div className="bg-blue-middle color-blue-dark flex justify-between pt-1">
+          {asana?._id && asana.default === false ? (
+            <button
+              type="button"
+              className="btn-red-outline btn-red-outline:hover cursor-pointer bg-white outline outline-2 flex flex-row self-center my-1 mb-2 ml-3"
+              onClick={handleDeleteAsana}
+            >
+              <p className="font-material-symbols py-0 px-3">delete</p>
+            </button>
+          ) : (
+            <div></div>
+          )}
+          <button className="btn-neutral btn-neutral:hover bg-white outline outline-2 flex flex-row self-center my-1 mb-2 mr-3">
+            <span className="font-material-symbols">add_task</span>
+            {/* <p className="inline pt-1 text-lg">add</p> */}
           </button>
+          {/* <button className="btn-blue btn-blue:hover mx-2 mb-1">
+            {asanaObj._id ? 'Update' : 'Create'}
+          </button> */}
           {/* <button onClick={handleSaveAsana}>Save</button> */}
         </div>
       </form>

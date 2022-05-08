@@ -61,6 +61,16 @@ export default function Calendar() {
               .map((entry) => {
                 entry.event.id = entry._id;
                 entry.event.classId = entry.class;
+                // opacity for old events
+                if (new Date(entry.event.date) < new Date()) {
+                  const opacity = entry.event.backgroundColor.replace(
+                    ')',
+                    ', 0.4)'
+                  );
+                  entry.event.backgroundColor = opacity;
+                  entry.event.borderColor = opacity;
+                  // entry.event.textColor = 'black';
+                }
                 return entry.event;
               })
           );
@@ -216,11 +226,11 @@ export default function Calendar() {
         id="div-calendar"
         className="flex flex-col gap-2 md:gap-4 md:flex-row text-black w-full h-full"
       >
-        <div className="cal-infobar w-60 order-1 self-center md:self-start border-2 text-black overflow-y-auto whitespace-nowrap">
-          <div className="text-lg font-bold text-center border-dashed border-b-slate-400 rounded-t border-b pt-2 mb-4 color-beige-light bg-blue-dark">
+        <div className="w-60 order-1 self-center md:self-start border-2 text-black">
+          <div className="text-lg font-bold text-center border-dashed border-b-slate-400 rounded-t border-b pt-2 mb-4 text-white bg-blue-dark">
             Upcoming Events
           </div>
-          <div className="flex flex-col gap-0">
+          <div className="cal-infobar flex flex-col gap-0 overflow-y-auto overflow-x-hidden ">
             {events
               .filter((event) => new Date(event.date) - new Date() >= 0)
               .map((event, index, array) => (
