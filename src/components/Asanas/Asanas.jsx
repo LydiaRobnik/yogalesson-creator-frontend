@@ -211,7 +211,7 @@ const Asanas = ({ selection = false, addAsana }) => {
     } else if (selection === true) {
       // console.log('asana', asana);
       addAsana(asana);
-    } else {
+    } else if (asana.default === false || user.role === 'admin') {
       console.log('asana', asana);
       setEditAsana({ ...asana });
       openModal();
