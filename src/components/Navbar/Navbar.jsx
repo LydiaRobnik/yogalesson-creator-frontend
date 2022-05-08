@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import './navbar.scss';
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import LoginModal from '../Login/LoginModal.jsx';
 import SignupModal from '../Login/SignupModal';
+import './navbar.scss';
 
 const navigation = [
   { name: 'Dashboard', path: '/user/dashboard', current: false },
@@ -57,7 +57,7 @@ export default function Navbar() {
       <Disclosure as="nav" className="bg-light color">
         {({ open }) => (
           <>
-            <div className="navbar max-w-7xl px-2 sm:px-2">
+            <div className="navbar px-2 sm:px-2">
               <div className="relative flex items-center justify-between h-16">
                 {loggedIn && (
                   <div className="absolute inset-y-0 left-0 flex items-center sm:hidden mx-auto">
@@ -75,23 +75,26 @@ export default function Navbar() {
                     </Disclosure.Button>
                   </div>
                 )}
-                <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                  <div className="flex-shrink-0 flex items-center">
-                    <img
-                      className="block lg:hidden h-8 w-auto height"
-                      src="https://yogalesson-createor-backend.herokuapp.com/images/Logo_250x250px.png"
-                      alt="Workflow"
-                    />
-                    <img
-                      className="hidden lg:block h-8 w-auto"
-                      src="https://yogalesson-createor-backend.herokuapp.com/images/Logo_250x250px.png"
-                      alt="Workflow"
-                    />
-                    <p className="color-blue-darkest ml-2">
-                      PlanAsana<br></br>
-                      YOGA OFF THE MAT
-                    </p>
-                  </div>
+
+                <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start pl-5">
+                  <NavLink to={'/'}>
+                    <div className="flex-shrink-0 flex items-center">
+                      <img
+                        className="block lg:hidden h-8 w-auto height pr-3"
+                        src="https://yogalesson-createor-backend.herokuapp.com/images/Logo_250x250px.png"
+                        alt="Workflow"
+                      />
+                      <img
+                        className="hidden lg:block h-8 w-auto pr-3"
+                        src="https://yogalesson-createor-backend.herokuapp.com/images/Logo_250x250px.png"
+                        alt="Workflow"
+                      />
+                      <p className="color-blue-darkest ml-2">
+                        PlanAsana<br></br>
+                        YOGA OFF THE MAT
+                      </p>
+                    </div>
+                  </NavLink>
 
                   {loggedIn && (
                     <div className="hidden sm:block sm:ml-6 self-center ">
@@ -139,7 +142,7 @@ export default function Navbar() {
                         login
                       </button>
                       <button
-                        className="hover:underline text-color-blue-darkest py-2 px-10"
+                        className="hover:underline text-color-blue-darkest py-2 px-10 pr-10"
                         onClick={() => setSignupModalOpen(true)}
                       >
                         sign up
@@ -179,15 +182,15 @@ export default function Navbar() {
                         <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <Menu.Item>
                             {({ active }) => (
-                              <a
-                                href="#"
+                              <NavLink
+                                to={'user/profile'}
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block px-4 py-2 text-sm text-gray-700'
                                 )}
                               >
                                 Your Profile
-                              </a>
+                              </NavLink>
                             )}
                           </Menu.Item>
                           <Menu.Item>

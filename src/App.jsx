@@ -16,6 +16,7 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import SignupInfo from './components/SignupInfo/SignupInfo';
 import Validate from './components/SignupInfo/Validate';
+import Profile from './components/Profile/Profile';
 
 function App() {
   const navigate = useNavigate();
@@ -47,6 +48,7 @@ function App() {
                 <Route path="classes" element={<ClassCollection />} />
                 <Route path="sequences" element={<SequenceCollection />} />
                 <Route path="calendar" element={<Calendar />} />
+                <Route path="profile" element={<Profile />} />
               </Route>
               <Route path={`/403`} element={<Page403 />} />
             </Route>
