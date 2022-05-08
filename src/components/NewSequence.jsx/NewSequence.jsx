@@ -112,6 +112,7 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
       <div className="border-2 border-grey-500 w-full min-h-40 px-6 flex flex-col resize">
         <input
           type="text"
+          maxlength="50"
           className="color-blue-darkest text-xl"
           placeholder="draft sequence - title"
           value={sequenceToAdd.title}
@@ -120,10 +121,13 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
           }
           onFocus={handleFocus}
         />
-        <input
-          type="text"
+        <textarea
+          name="description"
+          id="description"
+          rows="4"
+          cols="50"
           className="color-blue-darkest break-words resize "
-          placeholder="add a descrition"
+          placeholder="Add your text - maybe for Shavasana "
           value={sequenceToAdd.description}
           onChange={(e) =>
             setSequenceToAdd({ ...sequenceToAdd, description: e.target.value })
@@ -150,7 +154,7 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
           ))}
         </div>
 
-        <div className="flex flex-row items-center justify-between">
+        <div className="flex flex-row items-center justify-between my-3">
           <div className="flex flex-row items-center">
             <button
               className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"

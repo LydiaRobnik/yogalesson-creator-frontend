@@ -48,18 +48,18 @@ const SequenceCollection = (ref) => {
     navigate(`../planner`);
   };
 
-  const handleCopySequence = async (sequenceToCopy) => {
-    const copy = {
-      ...sequenceToCopy,
-      title: `${sequenceToCopy.title} (copy)`,
-      _id: ''
-    };
-    const result = await asanaService.createSequence(copy);
-    console.log('📒 newSequence', result);
-    setSequenceToAdd(result);
-    setShowNewSequence(true);
-    navigate(`../planner`);
-  };
+  // const handleCopySequence = async (sequenceToCopy) => {
+  //   const copy = {
+  //     ...sequenceToCopy,
+  //     title: `${sequenceToCopy.title} (copy)`,
+  //     _id: ''
+  //   };
+  //   const result = await asanaService.createSequence(copy);
+  //   console.log('📒 newSequence', result);
+  //   setSequenceToAdd(result);
+  //   setShowNewSequence(true);
+  //   navigate(`../planner`);
+  // };
 
   const handleDeleteSequence = async (sequenceToDelete) => {
     const id = sequenceToDelete._id;
@@ -137,14 +137,9 @@ const SequenceCollection = (ref) => {
                 onClick={() => handleAddSequence()}
               >
                 <span className="font-material inline pr-2">add</span>
-                <p className="inline pt-1 text-lg ">create new sequence</p>
-              </button>
-              <button
-                className="btn-blue btn-blue:hover   mx-2 flex flex-row items-center"
-                onClick={() => handleEditSequence(userSequences[3])}
-              >
-                <span className="font-material-symbols inline pr-2">edit</span>
-                <p className="inline pt-1 text-lg ">edit sequence</p>
+                <p className="inline pt-1 text-sm md:text-lg ">
+                  create new sequence
+                </p>
               </button>
             </div>
           )}
@@ -156,23 +151,27 @@ const SequenceCollection = (ref) => {
               >
                 <div className="col-span-1 flex flex-col justify-center">
                   <button
-                    className="btn-neutral btn-neutral:hover bg-white outline outline-2 flex flex-row self-center mb-3"
+                    className="btn-seqColl-neutral"
                     onClick={() => handleSelectSequence(sequence)}
                   >
-                    <span className="font-material-symbols">add_task</span>
-                    {/* <p className="inline pt-1 text-lg">add</p> */}
+                    <span className="font-material-symbols px-2 py-1">
+                      add_task
+                    </span>
                   </button>
-                  {/* <button
-                    className="btn-neutral btn-neutral:hover bg-white outline outline-2  pl-1 mx-2 ml-5 flex flex-row items-center"
-                    onClick={() => handleCopySequence(sequence)}
-                  >
-                    <p className="inline pt-1 text-lg">copy</p>
-                  </button> */}
                   <button
-                    className="btn-red-outline btn-red-outline:hover cursor-pointer outline outline-2 flex flex-row self-center"
+                    className="btn-seqColl-neutral "
+                    onClick={() => handleEditSequence(sequence)}
+                  >
+                    <span className="font-material-symbols px-2 py-1">
+                      edit
+                    </span>
+                  </button>
+
+                  <button
+                    className="btn-seqColl-red-outline"
                     onClick={() => handleDeleteSequence(sequence)}
                   >
-                    <p className="font-material-symbols py-1 px-4">delete</p>
+                    <p className="font-material-symbols py-1 px-2">delete</p>
                   </button>
                 </div>
 
@@ -180,6 +179,7 @@ const SequenceCollection = (ref) => {
                   <Sequence
                     sequence={sequence}
                     selectedSequence={selectedSequence}
+                    handleEditSequence={handleEditSequence}
                   />
                 </div>
               </div>

@@ -235,7 +235,7 @@ const SequencePlanned = ({
   return (
     <>
       <div ref={ref} className="w-full flex flex-row justify-between">
-        <div className="w-full flex flex-row">
+        <div className="w-full flex flex-row flex-wrap">
           <input
             type="text"
             className="color-blue-darkest text-lg w-5/6"
@@ -262,9 +262,13 @@ const SequencePlanned = ({
 
       <>
         <div className="w-full min-h-40">
-          <input
-            type="text"
-            className="color-blue-darkest break-words resize py-4"
+          <textarea
+            // type="text"
+            name="description"
+            id="description"
+            rows="4"
+            cols="100"
+            className="color-blue-darkest break-words py-4 w-full h-min border-2 border-gray-200 rounded-md mt-3"
             placeholder="add a descrition"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
