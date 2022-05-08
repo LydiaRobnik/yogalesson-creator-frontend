@@ -121,6 +121,7 @@ export default function Profile() {
 
   function handleSelectImage(imageUrl) {
     console.log('📒 handleSelectImage', imageUrl);
+    setClickImage(false);
     if (imageUrl) {
       asanaService
         .getUser(user.id)
@@ -132,12 +133,12 @@ export default function Profile() {
             .then((user) => {
               setProfile(user);
               setImage(imageUrl);
+              setUser((prev) => ({ ...prev, avatar: user.avatar }));
               // setProfile((prev) => {
               //   prev.avatar = imageUrl;
               //   return { ...prev };
               // });
               setIsEditAvatar(false);
-              setClickImage(false);
             })
             .catch((err) => {
               console.log('📒 handleSelectImage err', err);
