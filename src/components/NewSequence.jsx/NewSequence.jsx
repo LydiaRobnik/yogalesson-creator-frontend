@@ -6,6 +6,7 @@ import AsanaCard from '../AsanaCard/AsanaCard';
 import Modal from 'react-modal';
 import './newSequence.scss';
 import Asanas from '../Asanas/Asanas';
+import useBreakpoint from '../../custom/useBreakpoint';
 
 const customStyles = {
   content: {
@@ -27,6 +28,7 @@ Modal.setAppElement('#root');
 const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
+  const point = useBreakpoint();
   console.log('user', user.id);
   const {
     userSequences,
@@ -107,6 +109,21 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
     setIsOpen(false);
   }
 
+  // // functions
+  const gridResponsiveness = () => {
+    if (point === 'xs') {
+      return 'grid-cols-3';
+    } else if (point === 'sm') {
+      return 'grid-cols-4';
+    } else if (point === 'md') {
+      return 'grid-cols-6';
+    } else if (point === 'lg') {
+      return 'grid-cols-8';
+    } else {
+      return 'grid-cols-10';
+    }
+  };
+
   return (
     <>
       <div className="border-2 border-grey-500 w-full min-h-40 px-6 flex flex-col resize">
@@ -137,7 +154,9 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
           onFocus={handleFocus}
         />
 
-        <div className="flex">
+        <div
+          className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
+        >
           {sequenceToAdd.asanas?.map((asana, index) => (
             <div
               key={`${asana._id}${index}`}
@@ -188,8 +207,6 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
-          // className="modal"
-          // overlayClassName="overlay"
           style={customStyles}
           contentLabel="Example Modal"
         >

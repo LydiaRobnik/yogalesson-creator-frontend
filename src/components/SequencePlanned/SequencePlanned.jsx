@@ -161,7 +161,7 @@ const SequencePlanned = ({
           index={index}
           id={card._id}
           moveCard={moveCard}
-          asanaInPlanner={true}
+          // asanaInPlanner={true}
         />
       </div>
     );
@@ -252,10 +252,10 @@ const SequencePlanned = ({
 
         <div className="flex flex-row content-center justify-center px-3 border-l-2 border-gray-200">
           <button
-            className="btn-red-outline btn-red-outline:hover cursor-pointer outline outline-2 flex flex-row self-center"
+            className="btn-seqColl-red-outline cursor-pointer outline outline-2 flex flex-row self-center"
             onClick={() => handleRemoveSequence(sequence)}
           >
-            <p className="font-material-symbols py-1 px-4">delete</p>
+            <p className="font-material-symbols py-1 px-2">delete</p>
           </button>
         </div>
       </div>

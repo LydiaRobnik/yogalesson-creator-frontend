@@ -9,9 +9,7 @@ const AsanaCard = ({
   key,
   index,
   moveCard,
-  sizeAsanaOnSelectModal,
-  showAsanaInMySequences,
-  asanaInPlanner
+  sizeAsanaOnSelectModal
 }) => {
   const navigate = useNavigate();
   const { sequenceToAdd } = useOutletContext();
@@ -39,7 +37,7 @@ const AsanaCard = ({
       const hoverMiddleY =
         (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
       const clientOffset = monitor.getClientOffset();
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      const hoverClientY = clientOffset.x - hoverBoundingRect.left;
 
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return;
@@ -80,39 +78,29 @@ const AsanaCard = ({
         onClick={() => handleSelectAsana(asana)}
         data-handler-id={handlerId}
         // className="asanacard-jsx rounded overflow-hidden shadow-lg m-2  bg-white cursor-pointer"
-        className={`flex flex-col content-center rounded overflow-hidden shadow-lg  cursor-pointer ${
+        className={`flex flex-col content-center justify-between rounded overflow-hidden shadow-lg  cursor-pointer ${
           isDragging
             ? 'border-rose-400 opacity-50'
             : 'bg-white opacity-100 border-2 border-gray-200'
           // isDragging ? 'opacity-75' : ' opacity-100'
-        } ${sizeAsanaOnSelectModal ? 'w-32' : ''} ${
-          showAsanaInMySequences || asanaInPlanner ? 'w-28' : ''
-        }`}
+        } ${sizeAsanaOnSelectModal ? 'w-32 h-48 ' : 'w-28 h-28'} `}
       >
-        <img
-          className={`self-center ${
-            showAsanaInMySequences || asanaInPlanner ? 'w-12' : ''
-          }`}
-          src={asana.img_url}
-          alt="preview class"
-        />
+        <div className="flex flex-row justify-center">
+          <img
+            className={`${sizeAsanaOnSelectModal ? '' : 'w-12 mt-2'}`}
+            src={asana.img_url}
+            alt="preview class"
+          />
+        </div>
         <div
-          className={` p-1 ${
+          className={` p-1 rounded-b ${
             asana.default ? 'bg-light color-blue-darkest' : 'bg-red color-light'
-          }  ${
-            showAsanaInMySequences || asanaInPlanner ? '' : 'h-20 text-left'
-          }`}
+          }  ${sizeAsanaOnSelectModal ? 'h-20 text-left' : ''}`}
         >
           <h3 className={`font-bold ${smallName(asana.asana.sanskrit)}`}>
             {asana.asana.sanskrit}
           </h3>
-          <h3
-            className={`font-bold ${
-              showAsanaInMySequences || asanaInPlanner
-                ? smallName(asana.asana.sanskrit)
-                : ''
-            }`}
-          >
+          <h3 className={`font-bold ${smallName(asana.asana.name)} }`}>
             {asana.asana.name}
           </h3>
         </div>

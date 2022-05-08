@@ -5,12 +5,11 @@
   // width: 65vw;
 }
 
-
-// .hide {
-//   display: none;
-// }
-
-// .toggleHiddenElement:hover + .hide {
-//   display: block;
-//   color: red;
-// }
+  
+  .btn-seqColl-red-outline {
+      @apply cursor-pointer outline outline-2 flex flex-row self-center mr-1;
+      color: $clr-red;
+  }
+  .btn-seqColl-red-outline:hover {
+      background-color: $clr-beige;
+  }

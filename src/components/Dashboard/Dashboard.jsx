@@ -144,7 +144,7 @@ export default function Dashboard() {
                   </div>
                 ))}
             </div>
-            <button className="btn-neutral btn-neutral:hover bg-white outline outline-2  pl-1 mr-2 mt-4 flex flex-row items-center">
+            <button className="btn-dash-neutral bg-white outline outline-2  pl-1 mr-2 mt-4 flex flex-row items-center">
               <span className="font-material-symbols color-blue-darkest text-lg px-2 cursor-pointer">
                 expand_more
               </span>
