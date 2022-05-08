@@ -74,12 +74,12 @@ const SequencePlanned = ({
         title: title,
         description: description
       };
-      const result = await asanaService.saveSequence(updatedSequence);
-      console.log('📒 saveSequence', result);
+      // const result = await asanaService.saveSequence(updatedSequence);
+      // console.log('📒 saveSequence', result);
 
       if (yogaClassToAdd._id && yogaClassToAdd.plan?.length > 0) {
         const updatedSequences = yogaClassToAdd?.plan?.map((s) => {
-          if (s._id === updatedSequence._id) return result;
+          if (s._id === updatedSequence._id) return updatedSequence;
           return s;
         });
 
@@ -229,7 +229,7 @@ const SequencePlanned = ({
   const handleRemoveAsana = (asana) => {
     const removeIndex = cards.indexOf(asana);
     cards.splice(removeIndex, 1);
-    setCards(...cards);
+    setCards([...cards]);
   };
 
   return (
@@ -280,7 +280,7 @@ const SequencePlanned = ({
         <div
           className={`items-center grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
         >
-          {sequence && cards.map((asana, index) => renderCard(asana, index))}
+          {sequence && cards?.map((asana, index) => renderCard(asana, index))}
           <button
             className="p-6 flex flex-row justify-center self-center content-center items-center border-2 border-gray-200 w-24 h-24 mt-4"
             // onClick={() => navigate('../asanas?from=planner')}

@@ -1,3 +1,11 @@
+const calendarColors = [
+  'rgb(34, 182, 34)',
+  'rgb(206, 137, 9)',
+  'rgb(67, 67, 196)',
+  'rgb(250, 57, 57)',
+  'rgb(141, 23, 141)'
+];
+
 function dataURItoBlob(dataURI) {
   // convert base64/URLEncoded data component to raw binary data held in a string
   var byteString;
@@ -31,16 +39,16 @@ function getBase64(file) {
     // reader.readAsArrayBuffer(file);
   });
 
-  var reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = function () {
-    console.log(reader.result);
-    return reader.result;
-  };
-  reader.onerror = function (error) {
-    console.log('Error: ', error);
-    return false;
-  };
+  // var reader = new FileReader();
+  // reader.readAsDataURL(file);
+  // reader.onload = function () {
+  //   console.log(reader.result);
+  //   return reader.result;
+  // };
+  // reader.onerror = function (error) {
+  //   console.log('Error: ', error);
+  //   return false;
+  // };
 }
 
-export { dataURItoBlob, getBase64 };
+export { calendarColors, dataURItoBlob, getBase64 };

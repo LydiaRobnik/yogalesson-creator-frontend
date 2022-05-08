@@ -80,6 +80,15 @@ class AsanaService {
     return resp.data;
   }
 
+  async deleteAsana(asanaObj) {
+    if (!asanaObj._id) throw new Error('Asana must have an _id');
+    const resp = await this.doApiCall(
+      async () => await http().delete(`/asana/${asanaObj._id}`)
+    );
+
+    return resp.data;
+  }
+
   async getUserSequences(userId) {
     const resp = await this.doApiCall(
       async () => await http().get(`/sequence/?user=${userId}`)

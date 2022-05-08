@@ -36,6 +36,7 @@ const SequenceCollection = (ref) => {
 
   const [selectedSequence, setSelectedSequence] = useState(true);
   const [showNew, setShowNew] = useState(false);
+  const [editSequenceId, setEditSequenceId] = useState(-1);
 
   // useEffect(() => {
   //   console.log('useEffect showNew');
@@ -74,12 +75,14 @@ const SequenceCollection = (ref) => {
     console.log('addSequence', sequence);
     setSequenceToAdd(newSeqObj(user?.id));
     setShowNew(true);
+    setEditSequenceId(-1);
   };
 
   const handleEditSequence = (sequence) => {
     console.log('editSequence', sequence);
     setSequenceToAdd(sequence);
-    setShowNew(true);
+    setEditSequenceId(sequence._id);
+    // setShowNew(true);
   };
 
   const saveSequence = async (sequence) => {
@@ -98,10 +101,12 @@ const SequenceCollection = (ref) => {
     });
 
     setShowNew(false);
+    setEditSequenceId(-1);
   };
 
   const cancelEditSequence = () => {
     setShowNew(false);
+    setEditSequenceId(-1);
   };
 
   const handleFocus = (event) => event.target.select();
@@ -176,11 +181,19 @@ const SequenceCollection = (ref) => {
                 </div>
 
                 <div className="col-span-11">
-                  <Sequence
-                    sequence={sequence}
-                    selectedSequence={selectedSequence}
-                    handleEditSequence={handleEditSequence}
-                  />
+                  {sequence._id === editSequenceId ? (
+                    <NewSequence
+                      handleFocus={handleFocus}
+                      saveSequence={saveSequence}
+                      cancel={cancelEditSequence}
+                    />
+                  ) : (
+                    <Sequence
+                      sequence={sequence}
+                      selectedSequence={selectedSequence}
+                      handleEditSequence={handleEditSequence}
+                    />
+                  )}
                 </div>
               </div>
             ))}

@@ -47,9 +47,7 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
       if (sequenceToAdd.title.length === 0)
         setSequenceToAdd({
           ...sequenceToAdd,
-          title: `${user.name}'s sequence no. ${
-            userSequences.length + 1 + Math.random()
-          }`
+          title: `draft - new sequence`
         });
       // const newSequence = { ...sequenceToAdd };
       // const result = await asanaService.saveSequence(newSequence);
