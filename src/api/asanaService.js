@@ -33,6 +33,14 @@ class AsanaService {
     return resp.data;
   }
 
+  async getUser(id) {
+    const resp = await this.doApiCall(
+      async () => await http(localStorage.getItem('token')).get(`/user/${id}`)
+    );
+
+    return resp.data;
+  }
+
   async getDefaultAsanas() {
     const resp = await this.doApiCall(
       async () => await http().get(`/asana/?default=true`)
