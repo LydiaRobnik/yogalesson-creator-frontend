@@ -41,6 +41,45 @@ class AsanaService {
     return resp.data;
   }
 
+  async saveUser(id, user) {
+    console.log('saveUser', id, user);
+    // throw new Error('Not implemented');
+    const resp = await this.doApiCall(
+      async () =>
+        await http(localStorage.getItem('token')).put(`/user/${id}`, user)
+    );
+
+    return resp.data;
+  }
+
+  async changeUsername(id, user) {
+    console.log('changeUsername', id, user);
+    // throw new Error('Not implemented');
+    const resp = await this.doApiCall(
+      async () =>
+        await http(localStorage.getItem('token')).put(
+          `/user/${id}/change-username`,
+          user
+        )
+    );
+
+    return resp.data;
+  }
+
+  async changeUserPassword(id, user) {
+    console.log('changeUserPassword', id, user);
+    // throw new Error('Not implemented');
+    const resp = await this.doApiCall(
+      async () =>
+        await http(localStorage.getItem('token')).put(
+          `/user/${id}/change-password`,
+          user
+        )
+    );
+
+    return resp.data;
+  }
+
   async getDefaultAsanas() {
     const resp = await this.doApiCall(
       async () => await http().get(`/asana/?default=true`)
