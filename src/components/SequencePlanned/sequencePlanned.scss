@@ -13,3 +13,20 @@
   .btn-seqColl-red-outline:hover {
       background-color: $clr-beige;
   }
+
+  .addAsana {
+    @apply p-6 flex flex-row justify-center self-center content-center items-center border-2 border-gray-400 w-24 h-24 mt-4;
+  }
+  
+  .addAsana:hover{
+      background-color: $clr-beige;
+  }
+  
+  
+  .delete{
+    @apply self-center font-material-symbols color-blue-darkest cursor-pointer;
+  }
+
+  .delete:hover{
+    color: $clr-red;
+  }

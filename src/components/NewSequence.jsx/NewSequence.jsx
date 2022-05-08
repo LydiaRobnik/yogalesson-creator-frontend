@@ -124,11 +124,11 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
 
   return (
     <>
-      <div className="border-2 border-grey-500 w-full min-h-40 px-6 flex flex-col resize">
+      <div className="editSequence w-full min-h-40 px-6 flex flex-col bg-light">
         <input
           type="text"
           maxlength="50"
-          className="color-blue-darkest text-xl"
+          className="color-blue-darkest text-xl bg-light"
           placeholder="draft sequence - title"
           value={sequenceToAdd.title}
           onChange={(e) =>
@@ -141,7 +141,7 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
           id="description"
           rows="4"
           cols="50"
-          className="color-blue-darkest break-words resize "
+          className="color-blue-darkest break-words resize bg-light"
           placeholder="Add your text - maybe for Shavasana "
           value={sequenceToAdd.description}
           onChange={(e) =>
@@ -160,30 +160,26 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
               key={`${asana._id}${index}`}
               className="flex flex-col items-center"
             >
-              <AsanaCard asana={asana} />
               <span
                 className="font-material-symbols color-blue-darkest cursor-pointer"
                 onClick={() => handleRemoveAsana(asana)}
               >
                 delete
               </span>
+              <AsanaCard asana={asana} />
             </div>
           ))}
+          <button className="addAsana" onClick={() => openModal()}>
+            <span className="color-blue-darkest font-material-symbols p-4 ">
+              add_circle
+            </span>
+          </button>
         </div>
 
         <div className="flex flex-row items-center justify-between my-3">
           <div className="flex flex-row items-center">
             <button
-              className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
-              // onClick={() => navigate('../asanas?from=planner')}
-              onClick={() => openModal()}
-            >
-              <span className="font-material inline pr-2">add</span>
-              <p className="inline pt-1 text-lg ">asana</p>
-            </button>
-
-            <button
-              className="btn-red btn-blue:hover mx-2 flex flex-row items-center"
+              className="btn-blue flex flex-row items-center"
               onClick={() => addSequenceToClass()}
             >
               <span className="font-material-symbols inline pr-2">save</span>

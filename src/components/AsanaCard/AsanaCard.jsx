@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { useNavigate, useOutletContext } from 'react-router-dom';
+import React, { useRef, useState } from 'react';
+// import { useNavigate, useOutletContext } from 'react-router-dom';
 import './asanaCard.scss';
 import { useDrag, useDrop } from 'react-dnd';
 
@@ -11,11 +11,13 @@ const AsanaCard = ({
   moveCard,
   sizeAsanaOnSelectModal
 }) => {
-  const navigate = useNavigate();
-  const { sequenceToAdd } = useOutletContext();
+  // const navigate = useNavigate();
+  // const { sequenceToAdd } = useOutletContext();
 
   // ==start== functions, variables and states for draggable start =====
   const ref = useRef(null);
+  const [movingAsana, setMovingAsana] = useState(false);
+  const [bottomCard, setBottomCard] = useState(false);
 
   const [{ handlerId }, drop] = useDrop({
     accept: 'divAsanaCard',
@@ -76,14 +78,23 @@ const AsanaCard = ({
       <div
         ref={ref}
         onClick={() => handleSelectAsana(asana)}
+        // onMouseDown={() => setMovingAsana(true)}
+        // onMouseUp={() => setMovingAsana(false)}
+        // onMouseOver={() => {
+        //   !movingAsana && setBottomCard(true);
+        // }}
+        // onMouseOut={() => {
+        //   !movingAsana && setBottomCard(false);
+        // }}
         data-handler-id={handlerId}
-        // className="asanacard-jsx rounded overflow-hidden shadow-lg m-2  bg-white cursor-pointer"
-        className={`flex flex-col content-center justify-between rounded overflow-hidden shadow-lg  cursor-pointer ${
+        className={`flex flex-col content-center self-center justify-between rounded overflow-hidden shadow-lg  cursor-pointer ${
           isDragging
             ? 'border-rose-400 opacity-50'
             : 'bg-white opacity-100 border-2 border-gray-200'
           // isDragging ? 'opacity-75' : ' opacity-100'
-        } ${sizeAsanaOnSelectModal ? 'w-32 h-48 ' : 'w-28 h-28'} `}
+        } ${sizeAsanaOnSelectModal ? 'w-32 h-48 ' : 'w-28 h-28'} ${
+          movingAsana ? 'bg-rose-300' : ''
+        } ${bottomCard && !movingAsana ? 'bg-green-500' : ''} `}
       >
         <div className="flex flex-row justify-center">
           <img

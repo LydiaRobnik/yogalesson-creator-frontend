@@ -33,13 +33,7 @@ const customStyles = {
 };
 Modal.setAppElement('#root');
 
-const SequencePlanned = ({
-  sequence,
-  handleFocus,
-  index,
-  moveSequence,
-  key
-}) => {
+const SequencePlanned = ({ sequence, handleFocus }) => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const point = useBreakpoint();
@@ -133,91 +127,39 @@ const SequencePlanned = ({
     }
   };
 
-  const showShortTitle = (title) => {
-    if (title.length > 25) {
-      const longTitle = title;
-      const shortTitle = longTitle.substring(0, 20) + ' ...';
-      return shortTitle;
-    } else {
-      return title;
-    }
-  };
+  // const showShortTitle = (title) => {
+  //   if (title.length > 25) {
+  //     const longTitle = title;
+  //     const shortTitle = longTitle.substring(0, 20) + ' ...';
+  //     return shortTitle;
+  //   } else {
+  //     return title;
+  //   }
+  // };
 
   const renderCard = useCallback((card, index) => {
     return (
       <div className="flex flex-col content-center">
         <div className="flex flex-col">
-          <span
-            className="self-center font-material-symbols color-blue-darkest cursor-pointer"
-            onClick={() => handleRemoveAsana(card)}
-          >
+          <span className="delete" onClick={() => handleRemoveAsana(card)}>
             delete
           </span>
         </div>
-
-        <AsanaCard
-          asana={card}
-          key={card._id + Math.random()}
-          index={index}
-          id={card._id}
-          moveCard={moveCard}
-          // asanaInPlanner={true}
-        />
+        <div className="flex flex-col">
+          <AsanaCard
+            asana={card}
+            key={card._id + Math.random()}
+            index={index}
+            id={card._id}
+            moveCard={moveCard}
+            // asanaInPlanner={true}
+          />
+        </div>
       </div>
     );
   }, []);
 
   // ==End== moving and updating asana array in sequence / drag and drop function ====
-
-  //  ==Start=== drag and drop functions for sequences ====
-
-  // const [{ handlerId }, drop] = useDrop({
-  //   accept: 'divSequencePlanned',
-  //   collect(monitor) {
-  //     return {
-  //       handlerId: monitor.getHandlerId()
-  //     };
-  //   },
-  //   hover(item, monitor) {
-  //     if (!ref.current) {
-  //       return;
-  //     }
-  //     const dragIndex = item.index;
-  //     const hoverIndex = index;
-  //     if (dragIndex === hoverIndex) {
-  //       return;
-  //     }
-  //     const hoverBoundingRect = ref.current?.getBoundingClientRect();
-  //     const hoverMiddleY =
-  //       (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-  //     const clientOffset = monitor.getClientOffset();
-  //     const hoverClientY = clientOffset.y - hoverBoundingRect.top;
-
-  //     if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-  //       return;
-  //     }
-  //     if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-  //       return;
-  //     }
-
-  //     moveSequence(dragIndex, hoverIndex);
-  //     item.index = hoverIndex;
-  //   }
-  // });
-
-  // const [{ isDragging }, drag] = useDrag({
-  //   type: 'divSequencePlanned',
-  //   item: () => {
-  //     return { key, index };
-  //   },
-  //   collect: (monitor) => ({
-  //     isDragging: monitor.isDragging()
-  //   })
-  // });
-
-  // drag(drop(ref));
-
-  //  ==End=== drag and drop functions for sequences ====
 
   // edit functions
   const handleRemoveSequence = (sequence) => {
@@ -281,11 +223,7 @@ const SequencePlanned = ({
           className={`items-center grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
         >
           {sequence && cards?.map((asana, index) => renderCard(asana, index))}
-          <button
-            className="p-6 flex flex-row justify-center self-center content-center items-center border-2 border-gray-200 w-24 h-24 mt-4"
-            // onClick={() => navigate('../asanas?from=planner')}
-            onClick={() => openModal()}
-          >
+          <button className="addAsana" onClick={() => openModal()}>
             <span className="color-blue-darkest font-material-symbols p-4">
               add_circle
             </span>
