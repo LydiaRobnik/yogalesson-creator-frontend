@@ -1,2 +1,18 @@
 @import '../../style/variables.scss';
 
+
+.btn-seqColl-neutral {
+@apply bg-white outline outline-2 flex flex-row self-center mb-3 mr-1 ;
+color: $clr-blue-darkest;
+}
+.btn-seqColl-neutral:hover {
+    background-color: $clr-beige;
+}
+
+.btn-seqColl-red-outline {
+    @apply cursor-pointer outline outline-2 flex flex-row self-center mr-1;
+    color: $clr-red;
+}
+.btn-seqColl-red-outline:hover {
+    background-color: $clr-beige;
+}
