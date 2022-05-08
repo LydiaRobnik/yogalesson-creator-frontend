@@ -80,6 +80,20 @@ class AsanaService {
     return resp.data;
   }
 
+  async changeUserAvatar(id, user) {
+    console.log('changeUserAvatar', id, user);
+    // throw new Error('Not implemented');
+    const resp = await this.doApiCall(
+      async () =>
+        await http(localStorage.getItem('token')).put(
+          `/user/${id}/change-avatar`,
+          user
+        )
+    );
+
+    return resp.data;
+  }
+
   async getDefaultAsanas() {
     const resp = await this.doApiCall(
       async () => await http().get(`/asana/?default=true`)

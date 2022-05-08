@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
+import FileUpload from '../FileUpload/FileUpload';
 
 export default function Profile() {
   const { loggedIn, login, logout, user, setUser } = useContext(AuthContext);
@@ -15,9 +16,13 @@ export default function Profile() {
   const [isEditPassword, setIsEditPassword] = useState(false);
   const [isEditRole, setIsEditRole] = useState(false);
 
+  const [image, setImage] = useState(null);
+  const [clickImage, setClickImage] = useState(false);
+
   useEffect(() => {
     asanaService.getUser(user.id).then((user) => {
       setProfile(user);
+      setImage(user.avatar);
     });
 
     return () => {
@@ -114,6 +119,36 @@ export default function Profile() {
 
   const handleChangeRole = () => {};
 
+  function handleSelectImage(imageUrl) {
+    console.log('📒 handleSelectImage', imageUrl);
+    if (imageUrl) {
+      asanaService
+        .getUser(user.id)
+        .then((userDb) => {
+          userDb.avatar = imageUrl;
+
+          asanaService
+            .changeUserAvatar(userDb._id, userDb)
+            .then((user) => {
+              setProfile(user);
+              setImage(imageUrl);
+              // setProfile((prev) => {
+              //   prev.avatar = imageUrl;
+              //   return { ...prev };
+              // });
+              setIsEditAvatar(false);
+              setClickImage(false);
+            })
+            .catch((err) => {
+              console.log('📒 handleSelectImage err', err);
+            });
+        })
+        .catch((err) => {
+          console.log('📒 handleSelectImage err', err);
+        });
+    }
+  }
+
   const handleResetEdits = (e) => {
     e.stopPropagation();
     setIsEditAvatar(false);
@@ -133,22 +168,39 @@ export default function Profile() {
           e.stopPropagation();
           setIsEditAvatar(true);
         }}
-        className="flex flex-col justify-center items-center cursor-pointer"
+        className="flex flex-col justify-center items-center cursor-pointer mb-2"
       >
-        {/* <div className="text-2xl">{user.name}'s Profile</div> */}
-
-        <img
-          className="h-36 w-36 rounded-full"
-          src="https://www.kindpng.com/picc/m/21-211456_user-icon-hd-png-download.png"
-          alt=""
+        {image ? (
+          <img
+            onClick={() => setClickImage(true)}
+            className="h-36 w-36 rounded-full hover:scale-110 shadow-lg"
+            // className="h-36 w-36 rounded-full border-4 border-black hover:scale-110 shadow-lg"
+            src={image}
+            alt="bild"
+          ></img>
+        ) : (
+          <div onClick={() => setClickImage(true)} className="p-1">
+            <img
+              className="h-36 w-36 rounded-full hover:scale-110 shadow-lg"
+              src="https://www.kindpng.com/picc/m/21-211456_user-icon-hd-png-download.png"
+              alt=""
+            />
+          </div>
+        )}
+        <FileUpload
+          className={`hidden`}
+          accept={'image/*'}
+          handleUpload={handleSelectImage}
+          click={clickImage}
         />
+
         {/* username */}
         <div className="relative mt-3">
           {isEditName ? (
             <form className="flex justify-center">
               <div className="flex justify-center">
                 <div
-                  className="timepicker relative form-floating mb-3 xl:w-96"
+                  className="timepicker relative form-floating mb-3 w-48 xl:w-96"
                   data-mdb-with-icon="false"
                   id="input-toggle-timepicker"
                 >
@@ -209,7 +261,7 @@ export default function Profile() {
               <form>
                 <div className="flex justify-center">
                   <div
-                    className="timepicker relative form-floating mb-3 xl:w-96"
+                    className="timepicker relative form-floating mb-3 w-48 xl:w-96"
                     data-mdb-with-icon="false"
                     id="input-toggle-timepicker"
                   >
@@ -270,7 +322,7 @@ export default function Profile() {
               >
                 <div className="flex flex-col justify-center">
                   <div
-                    className="timepicker relative form-floating mb-3 xl:w-96"
+                    className="timepicker relative form-floating mb-3 w-48 xl:w-96"
                     data-mdb-with-icon="false"
                     id="input-toggle-timepicker"
                   >
@@ -297,7 +349,7 @@ export default function Profile() {
                     </label>
                   </div>
                   <div
-                    className="timepicker relative form-floating mb-3 xl:w-96"
+                    className="timepicker relative form-floating mb-3 w-48 xl:w-96"
                     data-mdb-with-icon="false"
                     id="input-toggle-timepicker"
                   >
