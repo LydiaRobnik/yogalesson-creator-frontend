@@ -162,7 +162,24 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
             </span>
           </button>
         </div>
-
+        <div className="flex flex-row items-center my-2">
+          <p className="color-blue-darkest pr-2">
+            Enter a duration for your sequence
+          </p>
+          <input
+            type="time"
+            min="00:00"
+            max="01:30"
+            required
+            className="color-blue-darkest text-lg bg-white w-24 text-center border-2 border-gray-200 rounded"
+            placeholder="--:--"
+            value={sequenceToAdd.duration}
+            onChange={(e) =>
+              setSequenceToAdd({ ...sequenceToAdd, duration: e.target.value })
+            }
+            onFocus={handleFocus}
+          />
+        </div>
         <div className="flex flex-row items-center justify-between my-3">
           <div className="flex flex-row items-center">
             <button
@@ -175,7 +192,7 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
           </div>
 
           <button
-            className="btn-red btn-blue:hover mx-2 flex flex-row items-center"
+            className="btn-red btn-blue:hover flex flex-row items-center"
             onClick={() => cancel()}
           >
             <span className="font-material-symbols inline pr-2">cancel</span>

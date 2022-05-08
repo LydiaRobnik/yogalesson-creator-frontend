@@ -5,6 +5,7 @@ import './planner.scss';
 // import NewSequence from '../NewSequence.jsx/NewSequence';
 import SequencePlanned from '../SequencePlanned/SequencePlanned';
 import asanaService from '../../api/asanaService';
+import moment from 'moment';
 
 export default function Planner() {
   const {
@@ -103,6 +104,15 @@ export default function Planner() {
     });
     console.log(sum);
     setTotalDuration(sum);
+
+    // const timeArray = yogaClassToAdd.plan.map((sequence) => sequence.duration);
+
+    // const sum = timeArray.reduce(
+    //   (acc, time) => acc.add(moment.duration(time)),
+    //   moment.duration()
+    // );
+
+    // console.log([Math.floor(sum.asHours()), sum.minutes()].join(':'));
   };
 
   return (
