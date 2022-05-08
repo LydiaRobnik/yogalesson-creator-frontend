@@ -83,6 +83,7 @@ export default function AsanaCreateDialog({ saveAsana, deleteAsana, asana }) {
                 placeholder="Set Sanskrit Name"
                 data-mdb-toggle="input-toggle-timepicker"
                 minLength="5"
+                maxLength={25}
                 required
                 autoFocus
                 defaultValue={asanaObj.asana.sanskrit}
@@ -111,6 +112,7 @@ export default function AsanaCreateDialog({ saveAsana, deleteAsana, asana }) {
                 placeholder="Set Name"
                 data-mdb-toggle="input-toggle-timepicker"
                 minLength="5"
+                maxLength={25}
                 required
                 defaultValue={asanaObj.asana.name}
                 onChange={(e) =>

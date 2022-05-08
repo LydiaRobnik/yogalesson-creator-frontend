@@ -282,7 +282,7 @@ const Asanas = ({ selection = false, addAsana }) => {
                   onClick={handleOpenCreateAsanaDialog}
                 >
                   <span className="font-material inline pr-2">add</span>
-                  <p className="inline pt-1 text-lg ">new</p>
+                  <p className="inline pt-1 text-lg ">create new Asana</p>
                 </button>
               )}
             </div>
