@@ -75,6 +75,7 @@ export default function Navbar() {
                     </Disclosure.Button>
                   </div>
                 )}
+
                 <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start pl-5">
                   <NavLink to={'/'}>
                     <div className="flex-shrink-0 flex items-center">
@@ -88,7 +89,7 @@ export default function Navbar() {
                         src="https://yogalesson-createor-backend.herokuapp.com/images/Logo_250x250px.png"
                         alt="Workflow"
                       />
-                      <p className="color-blue-darkest">
+                      <p className="color-blue-darkest ml-2">
                         PlanAsana<br></br>
                         YOGA OFF THE MAT
                       </p>
@@ -128,7 +129,7 @@ export default function Navbar() {
                 <div className="color-blue-darkest">
                   {loggedIn ? (
                     <div>
-                      <span className="pr-2 text-sm color-5">
+                      <span className="pr-2 text-sm color-5 invisible md:visible">
                         Hi {user.name}!
                       </span>
                     </div>

@@ -146,9 +146,10 @@ export default function Planner() {
             >
               <input
                 type="text"
-                className={`color-blue-darkest px-10 text-4xl pb-3 ${
+                maxlength="70"
+                className={`color-blue-darkest px-10 text-2xl md:text-4xl pb-3 ${
                   yogaClassToAdd.plan.length === 0 ? 'text-center' : 'text-left'
-                }`}
+                } w-full`}
                 placeholder="draft - class title"
                 value={yogaClassToAdd.title}
                 onChange={editClass}
@@ -160,18 +161,18 @@ export default function Planner() {
               {yogaClassToAdd.plan &&
                 yogaClassToAdd.plan.map((sequence, index) => (
                   <div className="grid grid-cols-12 gap-4 border-t-2 border-gray-200 mx-4">
-                    <div className=" col-span-1">
+                    <div className=" col-span-1 flex flex-row flex-wrap content-start">
                       <span
-                        className="font-material-symbols color-blue-darkest text-4xl px-3 cursor-pointer"
-                        onClick={() => moveSequenceDown(sequence)}
-                      >
-                        expand_more
-                      </span>
-                      <span
-                        className="font-material-symbols color-blue-darkest text-4xl px-3 cursor-pointer"
+                        className="font-material-symbols color-blue-darkest text-xl px-3 cursor-pointer"
                         onClick={() => moveSequenceUp(sequence)}
                       >
                         expand_less
+                      </span>
+                      <span
+                        className="font-material-symbols color-blue-darkest text-xl px-3 cursor-pointer"
+                        onClick={() => moveSequenceDown(sequence)}
+                      >
+                        expand_more
                       </span>
                     </div>
 
