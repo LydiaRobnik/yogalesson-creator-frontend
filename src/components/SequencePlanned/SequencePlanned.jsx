@@ -7,7 +7,6 @@ import React, {
 } from 'react';
 import AsanaCard from '../AsanaCard/AsanaCard';
 import { useNavigate, useOutletContext } from 'react-router-dom';
-import { useDrop, useDrag } from 'react-dnd';
 import update from 'immutability-helper';
 import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
@@ -68,8 +67,6 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
         title: title,
         description: description
       };
-      // const result = await asanaService.saveSequence(updatedSequence);
-      // console.log('📒 saveSequence', result);
 
       if (yogaClassToAdd._id && yogaClassToAdd.plan?.length > 0) {
         const updatedSequences = yogaClassToAdd?.plan?.map((s) => {
@@ -197,12 +194,8 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
       <>
         <div className="w-full min-h-40">
           <span
-            // type="text"
-            // name="description"
             role="textbox"
             id="description"
-            // rows="2"
-            // cols="100"
             className="color-blue-darkest break-words py-4 w-full h-min rounded-md mt-3"
             placeholder="add a descrition"
             value={description}
@@ -212,7 +205,6 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
           >
             {description}
           </span>
-          {/* <p className="color-blue-darkest pl-3 py-3">{sequence.description}</p> */}
         </div>
 
         <div

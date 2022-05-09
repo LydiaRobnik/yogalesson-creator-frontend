@@ -164,23 +164,16 @@ const SequenceCollection = (ref) => {
                     </span>
                   </button>
                   <button
-                    className="btn-seqColl-neutral "
+                    className="btn-seqColl-blue "
                     onClick={() => handleEditSequence(sequence)}
                   >
                     <span className="font-material-symbols px-2 py-1">
                       edit
                     </span>
                   </button>
-
-                  <button
-                    className="btn-seqColl-red-outline"
-                    onClick={() => handleDeleteSequence(sequence)}
-                  >
-                    <p className="font-material-symbols py-1 px-2">delete</p>
-                  </button>
                 </div>
 
-                <div className="col-span-11">
+                <div className="col-span-10">
                   {sequence._id === editSequenceId ? (
                     <NewSequence
                       handleFocus={handleFocus}
@@ -194,6 +187,14 @@ const SequenceCollection = (ref) => {
                       handleEditSequence={handleEditSequence}
                     />
                   )}
+                </div>
+                <div className="col-span-1 flex flex-col justify-start mt-3">
+                  <button
+                    className="btn-seqColl-red-outline"
+                    onClick={() => handleDeleteSequence(sequence)}
+                  >
+                    <p className="font-material-symbols py-1 px-2">delete</p>
+                  </button>
                 </div>
               </div>
             ))}

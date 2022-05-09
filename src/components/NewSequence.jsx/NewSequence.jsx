@@ -114,97 +114,104 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
 
   return (
     <>
-      <div className="editSequence w-full min-h-40 px-6 flex flex-col bg-light">
-        <input
-          type="text"
-          maxlength="50"
-          className="color-blue-darkest text-xl bg-light"
-          placeholder="draft sequence - title"
-          value={sequenceToAdd.title}
-          onChange={(e) =>
-            setSequenceToAdd({ ...sequenceToAdd, title: e.target.value })
-          }
-          onFocus={handleFocus}
-        />
-
-        <textarea
-          name="description"
-          id="description"
-          rows="4"
-          cols="50"
-          className="color-blue-darkest break-words resize bg-light"
-          placeholder="Add your text - maybe for Shavasana "
-          value={sequenceToAdd.description}
-          onChange={(e) =>
-            setSequenceToAdd({ ...sequenceToAdd, description: e.target.value })
-          }
-          onFocus={handleFocus}
-        />
-
-        <div
-          className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
-        >
-          {sequenceToAdd.asanas?.map((asana, index) => (
-            <div
-              key={`${asana._id}${index}`}
-              className="flex flex-col items-center"
-            >
-              <span
-                className="font-material-symbols color-blue-darkest cursor-pointer"
-                onClick={() => handleRemoveAsana(asana)}
-              >
-                delete
-              </span>
-              <AsanaCard asana={asana} />
-            </div>
-          ))}
-          <button className="addAsana" onClick={() => openModal()}>
-            <span className="color-blue-darkest font-material-symbols p-4 ">
-              add_circle
-            </span>
-          </button>
-        </div>
-        <div className="flex flex-row items-center my-2">
-          <p className="color-blue-darkest pr-2">
-            Enter a duration for your sequence
-          </p>
+      <div className="editSequence w-full min-h-40 px-6 bg-light flex flex-row justify-between">
+        <div className="flex flex-col">
           <input
             type="text"
-            required
-            className="color-blue-darkest text-lg bg-white w-24 text-center border-2 border-gray-200 rounded"
-            placeholder="minutes"
-            // value={new Date(sequenceToAdd.duration).getTime()}
-            value={timeToConvert}
-            onChange={
-              (e) =>
-                setSequenceToAdd({
-                  ...sequenceToAdd,
-                  duration: +e.target.value
-                })
-
-              // setSequenceToAdd(parseInt(timeToConvert));
+            maxlength="50"
+            className="color-blue-darkest text-xl bg-light"
+            placeholder="draft sequence - title"
+            value={sequenceToAdd.title}
+            onChange={(e) =>
+              setSequenceToAdd({ ...sequenceToAdd, title: e.target.value })
             }
             onFocus={handleFocus}
           />
+
+          <textarea
+            name="description"
+            id="description"
+            rows="4"
+            cols="50"
+            className="color-blue-darkest break-words resize bg-light"
+            placeholder="Add your text - maybe for Shavasana "
+            value={sequenceToAdd.description}
+            onChange={(e) =>
+              setSequenceToAdd({
+                ...sequenceToAdd,
+                description: e.target.value
+              })
+            }
+            onFocus={handleFocus}
+          />
+
+          <div
+            className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
+          >
+            {sequenceToAdd.asanas?.map((asana, index) => (
+              <div
+                key={`${asana._id}${index}`}
+                className="flex flex-col items-center"
+              >
+                <span
+                  className="font-material-symbols color-blue-darkest cursor-pointer"
+                  onClick={() => handleRemoveAsana(asana)}
+                >
+                  delete
+                </span>
+                <AsanaCard asana={asana} />
+              </div>
+            ))}
+            <button className="addAsana" onClick={() => openModal()}>
+              <span className="color-blue-darkest font-material-symbols p-4 ">
+                add_circle
+              </span>
+            </button>
+          </div>
+          <div className="flex flex-row items-center my-2">
+            <p className="color-blue-darkest pr-2">
+              Enter a duration for your sequence
+            </p>
+            <input
+              type="text"
+              required
+              className="color-blue-darkest text-lg bg-white w-24 text-center border-2 border-gray-200 rounded"
+              placeholder="minutes"
+              // value={new Date(sequenceToAdd.duration).getTime()}
+              value={timeToConvert}
+              onChange={
+                (e) =>
+                  setSequenceToAdd({
+                    ...sequenceToAdd,
+                    duration: +e.target.value
+                  })
+
+                // setSequenceToAdd(parseInt(timeToConvert));
+              }
+              onFocus={handleFocus}
+            />
+          </div>
         </div>
-        <div className="flex flex-row items-center justify-between my-3">
+
+        <div className="flex flex-col items-between justify-between my-3">
           <div className="flex flex-row items-center">
             <button
-              className="btn-blue flex flex-row items-center"
+              className="btn-red flex flex-row items-center"
+              onClick={() => cancel()}
+            >
+              <span className="font-material-symbols inline pr-2">cancel</span>
+              <p className="inline pt-1 text-lg">cancel</p>
+            </button>
+          </div>
+          <div className="flex flex-row items-center">
+            <button
+              className="btn-blue flex flex-row items-center px-6"
               onClick={() => addSequenceToClass()}
             >
               <span className="font-material-symbols inline pr-2">save</span>
-              <p className="inline pt-1 text-lg">save sequence</p>
+              <p className="inline pt-1 text-lg">save</p>
             </button>
           </div>
-
-          <button
-            className="btn-red btn-blue:hover flex flex-row items-center"
-            onClick={() => cancel()}
-          >
-            <span className="font-material-symbols inline pr-2">cancel</span>
-            <p className="inline pt-1 text-lg">cancel</p>
-          </button>
         </div>
       </div>
       <div className="text-black">
