@@ -203,7 +203,7 @@ const SequencePlanned = forwardRef((props, ref) => {
             cards?.map((card, index) => (
               <>
                 <div className="flex flex-col content-center">
-                  <div className="flex flex-col">
+                  <div className="flex flex-col trash">
                     <span
                       className="delete"
                       onClick={() => handleRemoveAsana(card)}
