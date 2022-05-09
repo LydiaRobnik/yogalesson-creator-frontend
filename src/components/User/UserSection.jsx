@@ -78,7 +78,9 @@ export default function UserSection() {
                 setSequenceToAdd,
                 setLoading,
                 showNewSequence,
-                setShowNewSequence
+                setShowNewSequence,
+                errors,
+                setErrors
               }}
             />
           ) : (
