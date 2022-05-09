@@ -9,7 +9,8 @@ const AsanaCard = ({
   key,
   index,
   moveCard,
-  sizeAsanaOnSelectModal
+  sizeAsanaOnSelectModal,
+  sequencePlannedStyles
 }) => {
   // const navigate = useNavigate();
   // const { sequenceToAdd } = useOutletContext();
@@ -78,8 +79,8 @@ const AsanaCard = ({
       <div
         ref={ref}
         onClick={() => handleSelectAsana(asana)}
-        // onMouseDown={() => setMovingAsana(true)}
-        // onMouseUp={() => setMovingAsana(false)}
+        onMouseDown={() => setMovingAsana(true)}
+        onMouseUp={() => setMovingAsana(false)}
         // onMouseOver={() => {
         //   !movingAsana && setBottomCard(true);
         // }}
@@ -93,15 +94,19 @@ const AsanaCard = ({
             : 'bg-white opacity-100 border-2 border-gray-200'
           // isDragging ? 'opacity-75' : ' opacity-100'
         } ${sizeAsanaOnSelectModal ? 'w-32 h-48 ' : 'w-28 h-28'} ${
-          movingAsana ? 'bg-rose-300' : ''
+          movingAsana && sequencePlannedStyles ? 'bg-rose-300' : ''
         } ${bottomCard && !movingAsana ? 'bg-green-500' : ''} `}
       >
         <div className="flex flex-row justify-center">
-          <img
-            className={`${sizeAsanaOnSelectModal ? '' : 'w-12 mt-2'}`}
-            src={asana.img_url}
-            alt="preview class"
-          />
+          {movingAsana ? (
+            <div className="bg-green-500"></div>
+          ) : (
+            <img
+              className={`${sizeAsanaOnSelectModal ? '' : 'w-12 mt-2'}`}
+              src={asana.img_url}
+              alt="preview class"
+            />
+          )}
         </div>
         <div
           className={` p-1 rounded-b ${
