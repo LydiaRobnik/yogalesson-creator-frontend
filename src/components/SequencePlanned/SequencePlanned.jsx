@@ -196,18 +196,22 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
 
       <>
         <div className="w-full min-h-40">
-          <textarea
+          <span
             // type="text"
-            name="description"
+            // name="description"
+            role="textbox"
             id="description"
-            rows="3"
-            cols="100"
-            className="color-blue-darkest break-words py-4 w-full h-min border-2 border-gray-200 rounded-md mt-3"
+            // rows="2"
+            // cols="100"
+            className="color-blue-darkest break-words py-4 w-full h-min rounded-md mt-3"
             placeholder="add a descrition"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             onFocus={handleFocus}
-          />
+            contenteditable="true"
+          >
+            {description}
+          </span>
           {/* <p className="color-blue-darkest pl-3 py-3">{sequence.description}</p> */}
         </div>
 

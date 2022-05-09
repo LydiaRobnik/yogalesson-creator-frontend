@@ -126,6 +126,7 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
           }
           onFocus={handleFocus}
         />
+
         <textarea
           name="description"
           id="description"
@@ -137,8 +138,6 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
           onChange={(e) =>
             setSequenceToAdd({ ...sequenceToAdd, description: e.target.value })
           }
-          some
-          text
           onFocus={handleFocus}
         />
 
