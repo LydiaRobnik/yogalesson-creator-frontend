@@ -8,18 +8,10 @@ import asanaService from '../../api/asanaService';
 
 export default function Dashboard() {
   // states
-  const {
-    userClasses,
-    setUserClasses,
-    asanas,
-    setAsanas,
-    userSequences,
-    setUserSequences,
-    loading,
-    yogaClassToAdd,
-    setYogaClassToAdd
-  } = useOutletContext();
+  const { userClasses, loading, yogaClassToAdd, setYogaClassToAdd } =
+    useOutletContext();
   const [selectedCard, setSelectedCard] = useState(null);
+  const [toggleShowAll, setToggleShowAll] = useState(false);
 
   const point = useBreakpoint();
   const navigate = useNavigate();
@@ -34,6 +26,10 @@ export default function Dashboard() {
   const favorites = userClasses.filter(
     (classItem) => classItem.favourite === true
   );
+
+  const showAll = () => {
+    setToggleShowAll(!toggleShowAll);
+  };
 
   const createClass = async () => {
     const newClass = {
@@ -144,7 +140,10 @@ export default function Dashboard() {
                   </div>
                 ))}
             </div>
-            <button className="btn-neutral btn-neutral:hover bg-white outline outline-2  pl-1 mr-2 mt-4 flex flex-row items-center">
+            <button
+              className="btn-dash-neutral bg-white outline outline-2  pl-1 mr-2 mt-4 flex flex-row items-center"
+              onClick={() => showAll()}
+            >
               <span className="font-material-symbols color-blue-darkest text-lg px-2 cursor-pointer">
                 expand_more
               </span>

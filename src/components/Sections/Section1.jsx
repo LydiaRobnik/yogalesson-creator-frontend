@@ -44,16 +44,11 @@ export default function Section1() {
           </div>
         </div>
         <div className="w-full flex items-center justify-center relative md:flex md:w-1/2 Section1right">
-          <div className="featureText flex items-center justify-center leading-relaxed p-5 m-12 absolute bottom-50 text-4xl text-left bg-red-500 bg-opacity-20 backdrop-blur-md font-light">
-            Use our templates to structure your class. <br></br>
-            Select exercises and sort them. Create reusable sequenzes and save
-            your classes.
+          <div className="featureText flex items-center justify-center leading-relaxed p-5 m-24 absolute bottom-50 text-3xl text-left bg-red-500 bg-opacity-20 backdrop-blur-md font-light">
+            Select exercises from our libary or add your own asanas. Prepare
+            reusable text modules for shavasana or meditation sequences.
           </div>
         </div>
-        {/* <div className="md:hidden p-8 absolute text-4xl bottom-5 bg-red-500 bg-opacity-50">
-        <div>some text</div>
-        <div>some text</div>
-    </div> */}
       </div>
     </>
   );
