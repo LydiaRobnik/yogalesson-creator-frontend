@@ -33,7 +33,6 @@
   button {
     @apply rounded cursor-pointer font-bold;
     font-family: $font-manjari;
-    
   }
 }
 
@@ -153,12 +152,14 @@
     background-color: white;
     color: $clr-red;
     padding: 0.5rem 0.15rem;
-}
-.btn-red-outline:hover {
-  background-color: $clr-beige;
+  }
+  .btn-red-outline:hover {
+    background-color: $clr-beige;
     color: $clr-blue-darkest;
     padding: 0.5rem 0.15rem;
-}
+  }
 
-
+  #systemMessage {
+    z-index: 500;
+  }
 }

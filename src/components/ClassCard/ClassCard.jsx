@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import asanaService from '../../api/asanaService';
+// import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import http from '../../api/http-common';
@@ -7,6 +7,14 @@ import http from '../../api/http-common';
 const ClassCard = ({ classItem }) => {
   const { setUserClasses, setYogaClassToAdd } = useOutletContext();
   const { user } = useContext(AuthContext);
+  const {
+    asanaService,
+    addSystemInfo,
+    addSystemSuccess,
+    addSystemError,
+    addSystemMessage,
+    clearSystemMessages
+  } = useOutletContext();
   const navigate = useNavigate();
   // const [show, setShow] = useState(false);
 
@@ -34,6 +42,7 @@ const ClassCard = ({ classItem }) => {
     asanaService.getUserClasses(user.id).then((data) => {
       setUserClasses(data);
     });
+    addSystemSuccess('Yoga-Class deleted');
   };
 
   const showShortTitle = (title) => {

@@ -8,4 +8,14 @@ main{
         @apply color-blue-darkest text-4xl mt-8 mb-4;
 
     };
+
+    .btn-dash-neutral {
+        background-color: white;
+        color: $clr-blue-dark;
+        padding: 0.5rem 1rem 0.5rem 0.5rem;
+    }
+    .btn-dash-neutral:hover {
+        background-color: $clr-beige;
+        color: $clr-blue-darkest;
+    }
 };

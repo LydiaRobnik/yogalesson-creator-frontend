@@ -2,7 +2,7 @@ export default function Hero() {
   return (
     <>
       <div className="bluewindow">
-        <div className="hero">
+        <div className="hero px-5 py-5">
           <h2 className="color-beige-light font-moontime text-7xl mt-5 mb-5 px-5">
             yoga class planning
           </h2>
