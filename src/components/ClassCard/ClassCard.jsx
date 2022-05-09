@@ -42,7 +42,7 @@ const ClassCard = ({ classItem }) => {
     asanaService.getUserClasses(user.id).then((data) => {
       setUserClasses(data);
     });
-    addSystemSuccess('Yoga-Class deleted');
+    addSystemSuccess('Yoga-Class removed');
   };
 
   const showShortTitle = (title) => {

@@ -4,7 +4,7 @@ import { useNavigate, useOutletContext } from 'react-router-dom';
 import './planner.scss';
 // import NewSequence from '../NewSequence/NewSequence';
 import SequencePlanned from '../SequencePlanned/SequencePlanned';
-import asanaService from '../../api/asanaService';
+// import asanaService from '../../api/asanaService';
 import moment from 'moment';
 
 export default function Planner() {
@@ -18,11 +18,18 @@ export default function Planner() {
     setSequenceToAdd,
     showNewSequence
   } = useOutletContext();
+  const { asanaService, addSystemError, clearSystemMessages } =
+    useOutletContext();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const imgEl = useRef(null);
   const [totalDuration, setTotalDuration] = useState(0);
+
+  useEffect(() => {
+    clearSystemMessages();
+    return () => {};
+  }, []);
 
   useEffect(() => {
     const saveClassToBackend = async () => {

@@ -4,12 +4,13 @@ import { AuthContext } from '../../context/AuthContext';
 import './dashboard.scss';
 import useBreakpoint from '../../custom/useBreakpoint';
 import ClassCard from '../ClassCard/ClassCard.jsx';
-import asanaService from '../../api/asanaService';
+// import asanaService from '../../api/asanaService';
 
 export default function Dashboard() {
   // states
   const { userClasses, loading, yogaClassToAdd, setYogaClassToAdd } =
     useOutletContext();
+  const { asanaService, addSystemError } = useOutletContext();
   const [selectedCard, setSelectedCard] = useState(null);
   const [toggleShowAll, setToggleShowAll] = useState(false);
 

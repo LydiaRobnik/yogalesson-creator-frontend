@@ -8,7 +8,7 @@ import React, {
 import AsanaCard from '../AsanaCard/AsanaCard';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import update from 'immutability-helper';
-import asanaService from '../../api/asanaService';
+// import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
 import Modal from 'react-modal';
 import Asanas from '../Asanas/Asanas';
@@ -38,6 +38,7 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
   const point = useBreakpoint();
   const { setUserSequences, yogaClassToAdd, setYogaClassToAdd } =
     useOutletContext();
+  const { asanaService, addSystemError, addSystemSuccess } = useOutletContext();
 
   const ref = useRef(null);
 
@@ -155,6 +156,7 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
     const sequenceToRemove = yogaClassToAdd.plan.indexOf(sequence);
     yogaClassToAdd.plan.splice(sequenceToRemove, 1);
     setYogaClassToAdd({ ...yogaClassToAdd });
+    addSystemSuccess('Sequence removed');
   };
 
   const handleRemoveAsana = (asana) => {

@@ -66,7 +66,7 @@ export default function Profile() {
             setProfile(user);
             setIsEditName(false);
             setUser((prev) => ({ ...prev, name: user.username }));
-            addSystemSuccess('Name changed successfully');
+            addSystemSuccess('Name changed');
           })
           .catch((err) => {
             console.log('📒 handleEditName err', err);
@@ -93,7 +93,7 @@ export default function Profile() {
             setProfile(user);
             setIsEditEmail(false);
             setUser((prev) => ({ ...prev, name: user.username }));
-            addSystemSuccess('Email changed successfully');
+            addSystemSuccess('Email changed');
           })
           .catch((err) => {
             console.log('📒 handleEditName err', err);
@@ -128,7 +128,7 @@ export default function Profile() {
           .then((user) => {
             setProfile(user);
             setIsEditPassword(false);
-            addSystemSuccess('Password changed successfully');
+            addSystemSuccess('Password changed');
           })
           .catch((err) => {
             console.log('📒 handleEditName err', err);
@@ -158,7 +158,7 @@ export default function Profile() {
               setProfile(user);
               setImage(imageUrl);
               setUser((prev) => ({ ...prev, avatar: user.avatar }));
-              addSystemSuccess('Avatar changed successfully');
+              addSystemSuccess('Avatar changed');
               // setProfile((prev) => {
               //   prev.avatar = imageUrl;
               //   return { ...prev };
