@@ -64,10 +64,10 @@ export default function Example({ ModalOpen, setModalOpen }) {
                 <input
                   id="email"
                   name="email"
-                  type="email"
+                  type="text"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-[#738b94] focus:z-10 sm:text-sm"
-                  placeholder="E-Mail"
+                  placeholder="E-Mail or Username"
                   onChange={(e) => setName(e.target.value)}
                   minLength={3}
                 />

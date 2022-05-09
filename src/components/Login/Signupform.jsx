@@ -96,12 +96,13 @@ export default function Example({ SignupModal, setSignupModal }) {
                   id="password"
                   name="password"
                   type="password"
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                   autoComplete="current-password"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-[#738b94] focus:z-10 sm:text-sm"
                   placeholder="Password"
                   onChange={(e) => setPassword(e.target.value)}
-                  minLength={4}
+                  minLength={8}
                 />
               </div>
               <div>
@@ -112,11 +113,12 @@ export default function Example({ SignupModal, setSignupModal }) {
                   id="password"
                   name="password"
                   type="password"
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-[#738b94] focus:z-10 sm:text-sm"
                   placeholder="Confirm Password"
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  minLength={4}
+                  minLength={8}
                 />
               </div>
             </div>
