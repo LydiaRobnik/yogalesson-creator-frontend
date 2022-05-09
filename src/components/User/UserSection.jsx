@@ -57,7 +57,7 @@ export default function UserSection() {
         setLoading(false);
       };
       console.log('📒 📒 📒 📒 📒 fetchData Dashboard!!!!');
-      fetchData();
+      if (asanaService) fetchData();
     }
     console.log('loggedIn', loggedIn, user);
     // if (!loggedIn) navigate(`/403`);
