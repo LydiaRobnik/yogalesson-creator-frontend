@@ -210,7 +210,31 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
         <div
           className={`items-center grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
         >
-          {sequence && cards?.map((asana, index) => renderCard(asana, index))}
+          {sequence &&
+            cards?.map((card, index) => (
+              <>
+                <div className="flex flex-col content-center">
+                  <div className="flex flex-col trash">
+                    <span
+                      className="delete"
+                      onClick={() => handleRemoveAsana(card)}
+                    >
+                      delete
+                    </span>
+                  </div>
+                  <div className="flex flex-col">
+                    <AsanaCard
+                      asana={card}
+                      key={card._id + Math.random()}
+                      index={index}
+                      id={card._id}
+                      moveCard={moveCard}
+                      sequencePlannedStyles={true}
+                    />
+                  </div>
+                </div>
+              </>
+            ))}
           <button className="addAsana" onClick={() => openModal()}>
             <span className="color-blue-darkest font-material-symbols p-4">
               add_circle

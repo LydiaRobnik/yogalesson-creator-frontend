@@ -133,7 +133,7 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
             id="description"
             rows="4"
             cols="50"
-            className="color-blue-darkest break-words resize bg-light"
+            className="color-blue-darkest break-words resize bg-light border-2 border-gray-300 mr-3"
             placeholder="Add your text - maybe for Shavasana "
             value={sequenceToAdd.description}
             onChange={(e) =>
@@ -196,7 +196,7 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
         <div className="flex flex-col items-between justify-between my-3">
           <div className="flex flex-row items-center">
             <button
-              className="btn-red flex flex-row items-center"
+              className="btn-redNew flex flex-row items-center"
               onClick={() => cancel()}
             >
               <span className="font-material-symbols inline pr-2">cancel</span>
@@ -205,7 +205,7 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
           </div>
           <div className="flex flex-row items-center">
             <button
-              className="btn-blue flex flex-row items-center px-6"
+              className="btn-blueNew flex flex-row items-center"
               onClick={() => addSequenceToClass()}
             >
               <span className="font-material-symbols inline pr-2">save</span>

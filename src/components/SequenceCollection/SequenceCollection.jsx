@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/AuthContext';
 import useBreakpoint from '../../custom/useBreakpoint';
 import Sequence from '../Sequence/Sequence.jsx';
 import asanaService from '../../api/asanaService';
-import NewSequence from '../NewSequence.jsx/NewSequence';
+import NewSequence from '../NewSequence/NewSequence';
 import './sequenceCollection.scss';
 
 const newSeqObj = (userId) => ({
