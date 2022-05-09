@@ -104,15 +104,6 @@ export default function Planner() {
     });
     console.log(sum);
     setTotalDuration(sum);
-
-    // const timeArray = yogaClassToAdd.plan.map((sequence) => sequence.duration);
-
-    // const sum = timeArray.reduce(
-    //   (acc, time) => acc.add(moment.duration(time)),
-    //   moment.duration()
-    // );
-
-    // console.log([Math.floor(sum.asHours()), sum.minutes()].join(':'));
   };
 
   return (
@@ -178,8 +169,24 @@ export default function Planner() {
                         </span>
                       </div>
                       <div>
+                        {/* <input
+                          type="time"
+                          min="00:00"
+                          max="01:30"
+                          required
+                          className="color-blue-darkest text-lg bg-white w-24 text-center border-2 border-gray-200 rounded"
+                          placeholder="--:--"
+                          value={new Date(yogaClassToAdd.duration).getTime()}
+                          // onChange={(e) =>
+                          //   setSequenceToAdd({
+                          //     ...sequenceToAdd,
+                          //     duration: Date.parse(e.target.value)
+                          //   })
+                          // }
+                          onFocus={handleFocus}
+                        /> */}
                         <p className="pl-2 color-blue-darkest">
-                          {sequence.duration}:00
+                          {sequence.duration}
                         </p>
                       </div>
                     </div>
@@ -197,7 +204,9 @@ export default function Planner() {
                 ))}
             </div>
             <div>
-              <p className="pl-2 color-blue-darkest">{totalDuration}:00</p>
+              <p className="pl-2 color-blue-darkest">
+                {yogaClassToAdd.plan.length > 0 && totalDuration}
+              </p>
             </div>
           </div>
 

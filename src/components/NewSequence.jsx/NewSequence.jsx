@@ -41,6 +41,7 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
   } = useOutletContext();
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [timeToConvert, setTimeToConvert] = useState();
 
   useEffect(() => {
     const saveSequenceToBackend = async () => {
@@ -109,6 +110,8 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
     }
   };
 
+  console.log('timeToConvert', typeof timeToConvert);
+
   return (
     <>
       <div className="editSequence w-full min-h-40 px-6 flex flex-col bg-light">
@@ -167,15 +170,20 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
             Enter a duration for your sequence
           </p>
           <input
-            type="time"
-            min="00:00"
-            max="01:30"
+            type="text"
             required
             className="color-blue-darkest text-lg bg-white w-24 text-center border-2 border-gray-200 rounded"
-            placeholder="--:--"
-            value={sequenceToAdd.duration}
-            onChange={(e) =>
-              setSequenceToAdd({ ...sequenceToAdd, duration: e.target.value })
+            placeholder="minutes"
+            // value={new Date(sequenceToAdd.duration).getTime()}
+            value={timeToConvert}
+            onChange={
+              (e) =>
+                setSequenceToAdd({
+                  ...sequenceToAdd,
+                  duration: +e.target.value
+                })
+
+              // setSequenceToAdd(parseInt(timeToConvert));
             }
             onFocus={handleFocus}
           />
