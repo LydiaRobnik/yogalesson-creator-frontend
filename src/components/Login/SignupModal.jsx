@@ -54,12 +54,12 @@ export default function SignupModal({ SignupModalOpen, setSignupModalOpen }) {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="relative inline-block align-bottom bg-slate-200 bg-opacity-80 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-              <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div className="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+              <div className="px-1 pt-1 pb-1 sm:p-2 sm:pb-0">
                 <div className="sm:flex sm:items-start">
                   <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-grey-500 sm:mx-0 sm:h-10 sm:w-10 ">
                     <XIcon
-                      className="h-6 w-6 text-red-600 cursor-pointer"
+                      className="h-6 w-6 text-black cursor-pointer"
                       aria-hidden="true"
                       onClick={() => setSignupModalOpen(false)}
                     />
