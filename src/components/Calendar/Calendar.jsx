@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import FullCalendar from '@fullcalendar/react'; // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction'; // needed for dayClick
 import Modal from 'react-modal';
 
-import asanaService from '../../api/asanaService';
+// import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
 import './calendar.scss';
 import CalendarEntryDialog from './CalendarEntryDialog';
@@ -37,13 +37,21 @@ export default function Calendar() {
 
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  const [error, setError] = useState('');
+  const {
+    loading,
+    asanaService,
+    addSystemInfo,
+    addSystemSuccess,
+    addSystemError,
+    addSystemMessage,
+    clearSystemMessages
+  } = useOutletContext();
 
   const navigate = useNavigate();
 
   useEffect(() => {
+    clearSystemMessages();
     if (loggedIn) {
-      // setEvents([]);
     }
     return () => {};
   }, []);
@@ -88,7 +96,7 @@ export default function Calendar() {
       };
       fetchData();
     } else {
-      console.log('🙈 events', events);
+      // console.log('🙈 events', events);
     }
 
     closeModal();
@@ -162,7 +170,10 @@ export default function Calendar() {
 
     asanaService
       .deleteCalendarEntry(calendarId)
-      .then((result) => setEvents([]))
+      .then((result) => {
+        setEvents([]);
+        addSystemSuccess('Event deleted');
+      })
       .catch((err) => {
         // todo handle error
         console.log('err', err);
@@ -193,6 +204,7 @@ export default function Calendar() {
           setEvents((prev) => {
             return [...prev, calendarObj];
           });
+          addSystemSuccess('Event saved');
           closeModal();
           setEvents([]);
         })
@@ -215,6 +227,7 @@ export default function Calendar() {
         setEvents((prev) => {
           return [...prev, calendarObj];
         });
+        addSystemSuccess('Event created');
         closeModal();
         setEvents([]);
       })
@@ -297,7 +310,7 @@ export default function Calendar() {
                     </div>
                   )} */}
                   {(() => {
-                    console.log('index', index, event.date);
+                    // console.log('index', index, event.date);
                     // today
                     if (
                       // index === 0 ||

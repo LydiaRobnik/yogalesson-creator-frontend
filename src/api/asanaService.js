@@ -4,6 +4,15 @@ import domtoimage from 'dom-to-image';
 import { dataURItoBlob } from '../custom/utils';
 
 class AsanaService {
+  constructor() {
+    this.addErrorMessage = () => {};
+  }
+
+  setAddErrorMessage(callback) {
+    console.log('setAddErrorMessage', callback);
+    this.addErrorMessage = callback;
+  }
+
   async doApiCall(apiCallback) {
     try {
       const resp = await apiCallback();
@@ -11,14 +20,17 @@ class AsanaService {
     } catch (error) {
       if (error.response && error.response.status === 400) {
         if (error.response.data.errors?.length > 0) {
+          this.addErrorMessage(error.response.data.errors[0].message);
           throw new Error(
             `❌ Input Error: ${error.response.data.errors[0].msg} -
               ${error.response.data.errors[0].param}`
           );
         }
+        this.addErrorMessage(error.response.data);
         console.log('❌', error?.response?.data, error.message);
         throw new Error(`❌ Input Error: ${error.response.data}`);
       } else {
+        this.addErrorMessage(error.message);
         console.log('❌', error.message);
         throw new Error(`❌ ${error.message}`);
       }
