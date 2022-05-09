@@ -195,12 +195,12 @@ const SequencePlanned = forwardRef ((props, ref) => {
           </p>
         </div>
 
-        <div className="flex flex-row content-center justify-center px-3 border-l-2 border-gray-200">
-          <button
-            className="btn-seqColl-red-outline cursor-pointer outline outline-2 flex flex-row self-center"
+        <div className="trash flex flex-row content-center justify-center px-3 border-l-2 border-gray-200">
+          <button 
+            className="trash btn-seqColl-red-outline cursor-pointer outline outline-2 flex flex-row self-center"
             onClick={() => handleRemoveSequence(sequence)}
           >
-            <p className="font-material-symbols py-1 px-2">delete</p>
+            <p className="trash font-material-symbols py-1 px-2">delete</p>
           </button>
         </div>
       </div>

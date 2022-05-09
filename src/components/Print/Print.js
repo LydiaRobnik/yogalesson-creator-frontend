@@ -13,7 +13,7 @@ const Print = ({sequence, handleFocus}) => {
 
   return (
     <>
-      <button className="btn-blue btn-blue:hover mx-2 flex flex-row items-center" onClick={handlePrint}>Print this out!</button>
+      <button className="btn-blue btn-blue:hover mx-2 flex flex-row items-center" onClick={handlePrint}>Print</button>
       <SequencePlanned sequence={sequence} handleFocus={handleFocus} ref={componentRef} />
     </>
   );

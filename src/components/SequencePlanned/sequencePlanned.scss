@@ -30,3 +30,19 @@
   .delete:hover{
     color: $clr-red;
   }
+
+  @media print {
+    @page {
+      size: landscape;
+    }
+    
+  }
+
+  @media print {
+    .trash {
+      display: none;
+      overflow: hidden;
+      height: 0;
+    }
+    
+  }
