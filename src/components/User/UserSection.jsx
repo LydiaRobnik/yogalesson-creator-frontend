@@ -14,6 +14,7 @@ export default function UserSection() {
   const [userClasses, setUserClasses] = useState([]);
   const [userSequences, setUserSequences] = useState([]);
   const [asanas, setAsanas] = useState([]);
+  const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showNewSequence, setShowNewSequence] = useState(false);
   const [yogaClassToAdd, setYogaClassToAdd] = useState({
