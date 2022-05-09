@@ -11,7 +11,7 @@ import './navbar.scss';
 const navigation = [
   { name: 'Dashboard', path: '/user/dashboard', current: false },
   { name: 'Planner', path: '/user/planner', current: false },
-  { name: 'My Sequences', path: '/user/sequences', current: false },
+  { name: 'Sequences', path: '/user/sequences', current: false },
   { name: 'Asanas', path: '/user/asanas', current: false },
   { name: 'Calendar', path: '/user/calendar', current: false }
 ];
