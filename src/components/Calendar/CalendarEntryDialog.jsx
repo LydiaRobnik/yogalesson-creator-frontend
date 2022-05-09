@@ -1,11 +1,12 @@
 import { filter } from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
-import asanaService from '../../api/asanaService';
+// import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
 import TimePicker from 'react-time-picker';
 import { BsArrowReturnRight } from 'react-icons/bs';
 import './calendar.scss';
 import { calendarColors as colors } from '../../custom/utils';
+import { useOutletContext } from 'react-router-dom';
 
 // const colors = calendarColors
 
@@ -18,6 +19,7 @@ export default function CalendarEntryDialog({
   deleteEvent
 }) {
   const { loggedIn, user } = useContext(AuthContext);
+  const { asanaService, addSystemError } = useOutletContext();
 
   const [userClasses, setUserClasses] = useState([]);
   const [filterName, setFilterName] = useState(event ? event.title : '');
@@ -84,6 +86,10 @@ export default function CalendarEntryDialog({
 
   const handleSave = () => {
     const yogaClass = userClasses.find((c) => c.checked === true);
+    if (!yogaClass) {
+      addSystemError('Please select a class');
+      return;
+    }
     const calendarObj = {
       // startT: +date.dateObj + 60000 * 120,
       date: date.dateStr,

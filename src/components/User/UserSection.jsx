@@ -150,7 +150,7 @@ export default function UserSection() {
           )}
         </main>
       </div>
-      <div className="fixed bottom-3 right-2">
+      <div id="systemMessage" className="fixed bottom-3 right-2">
         {systemMessages &&
           systemMessages.length > 0 &&
           systemMessages.map((msg) => (

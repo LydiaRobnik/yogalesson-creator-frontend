@@ -5,7 +5,7 @@ import {
   useOutletContext,
   useSearchParams
 } from 'react-router-dom';
-import asanaService from '../../api/asanaService';
+// import asanaService from '../../api/asanaService';
 import AsanaCard from '../AsanaCard/AsanaCard';
 import Modal from 'react-modal';
 import './asanas.scss';
@@ -56,6 +56,14 @@ const Asanas = ({ selection = false, addAsana }) => {
   const point = useBreakpoint();
 
   const { loggedIn, user } = useContext(AuthContext);
+  const {
+    asanaService,
+    addSystemInfo,
+    addSystemSuccess,
+    addSystemError,
+    addSystemMessage,
+    clearSystemMessages
+  } = useOutletContext();
 
   const [filterName, setFilterName] = useState('');
   const [filterLevel, setFilterLevel] = useState([]);
@@ -135,6 +143,8 @@ const Asanas = ({ selection = false, addAsana }) => {
         .then((data) => {
           console.log('createAsana', data);
           setAsanas([data, ...asanas]);
+
+          addSystemSuccess('Asana created');
         })
         .catch((err) => {
           console.log('createAsana', err);
@@ -148,6 +158,8 @@ const Asanas = ({ selection = false, addAsana }) => {
           setAsanas((prev) =>
             prev.map((asana) => (asana._id === data._id ? data : asana))
           );
+
+          addSystemSuccess('Asana saved');
           // setDoFetch(!doFetch);
         })
         .catch((err) => {
@@ -165,7 +177,10 @@ const Asanas = ({ selection = false, addAsana }) => {
     if (asanaObj._id) {
       asanaService
         .deleteAsana(asanaObj)
-        .then((r) => fetchData())
+        .then((r) => {
+          fetchData();
+          addSystemSuccess('Asana deleted');
+        })
         .catch((err) => {
           console.log('deleteAsana', err);
           setError(err);
