@@ -22,9 +22,7 @@ export default function CalendarEntryDialog({
   const [userClasses, setUserClasses] = useState([]);
   const [filterName, setFilterName] = useState(event ? event.title : '');
   const [color, setColor] = useState(
-    event
-      ? colors[colors.findIndex((c) => c === event?.backgroundColor)]
-      : colors[0]
+    event ? colors[colors.findIndex((c) => c === event?.color)] : colors[0]
   );
   const [valueFrom, onChangeFrom] = useState(event ? event.startT : '10:00');
   const [valueTo, onChangeTo] = useState(event ? event.endT : '12:00');
@@ -60,6 +58,11 @@ export default function CalendarEntryDialog({
     userClasses.forEach((c) => (c.checked = false));
     return () => {};
   }, [filterName]);
+
+  useEffect(() => {
+    // +`${a.event.startT}${a.event.startT}`
+    return () => {};
+  }, [valueFrom]);
 
   const selectClass = (classId) => {
     userClasses.forEach((c) => (c.checked = false));
