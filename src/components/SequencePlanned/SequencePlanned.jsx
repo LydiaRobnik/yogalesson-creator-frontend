@@ -172,7 +172,7 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
         <div className="w-full flex flex-row flex-wrap">
           <input
             type="text"
-            className="color-blue-darkest text-lg w-5/6"
+            className="color-blue-darkest text-lg w-5/6 resize-y"
             placeholder="draft sequence - title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}

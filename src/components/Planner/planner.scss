@@ -7,4 +7,9 @@ main{
     .modal{
         @apply p-3 color-blue-darkest text-center;
     }
+
+    .totalTime{
+        @apply color-blue-darkest text-lg font-bold text-center pt-2;
+
+    }
 }

@@ -153,7 +153,7 @@ export default function Planner() {
               {yogaClassToAdd.plan &&
                 yogaClassToAdd.plan.map((sequence, index) => (
                   <div className="grid grid-cols-12 gap-4 items-start border-t-2 border-gray-200 mx-4">
-                    <div className=" col-span-1">
+                    <div className=" col-span-1 mt-3">
                       <div className="flex flex-row flex-wrap">
                         <span
                           className="font-material-symbols color-blue-darkest text-xl px-1 cursor-pointer"
@@ -169,25 +169,14 @@ export default function Planner() {
                         </span>
                       </div>
                       <div>
-                        {/* <input
-                          type="time"
-                          min="00:00"
-                          max="01:30"
-                          required
-                          className="color-blue-darkest text-lg bg-white w-24 text-center border-2 border-gray-200 rounded"
-                          placeholder="--:--"
-                          value={new Date(yogaClassToAdd.duration).getTime()}
-                          // onChange={(e) =>
-                          //   setSequenceToAdd({
-                          //     ...sequenceToAdd,
-                          //     duration: Date.parse(e.target.value)
-                          //   })
-                          // }
-                          onFocus={handleFocus}
-                        /> */}
-                        <p className="pl-2 color-blue-darkest">
-                          {sequence.duration}
-                        </p>
+                        <div className="w-16 border-2 border-gray-200 rounded flex flex-row row-wrap items-center">
+                          <span className="font-material-symbols color-blue-darkest text-lg px-1">
+                            schedule
+                          </span>
+                          <p className="pl-2 pt-1 color-blue-darkest">
+                            {sequence.duration}
+                          </p>
+                        </div>
                       </div>
                     </div>
 
@@ -203,11 +192,17 @@ export default function Planner() {
                   </div>
                 ))}
             </div>
-            <div>
-              <p className="pl-2 color-blue-darkest">
-                {yogaClassToAdd.plan.length > 0 && totalDuration}
-              </p>
-            </div>
+            {yogaClassToAdd.plan.length > 0 && (
+              <>
+                <div className=" border-t-2 border-gray-300 mb-2"></div>
+                <div className="w-32 border-4 rounded flex flex-row row-wrap items-center ">
+                  <span className="font-material-symbols color-blue-darkest text-xl font-bold px-1">
+                    schedule
+                  </span>
+                  <h4 className="totalTime">{totalDuration} minutes</h4>
+                </div>
+              </>
+            )}
           </div>
 
           <div className=" w-full flex flex-row justify-center mt-4">
