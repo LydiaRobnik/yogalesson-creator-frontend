@@ -28,7 +28,8 @@ export default function Profile() {
   const [clickImage, setClickImage] = useState(false);
 
   useEffect(() => {
-    asanaService.setAddErrorMessage(addSystemError);
+    console.log('📒 useEffect', asanaService);
+    // asanaService?.setAddErrorMessage(addSystemError);
     clearSystemMessages();
     if (loggedIn) {
     }
@@ -36,7 +37,7 @@ export default function Profile() {
   }, []);
 
   useEffect(() => {
-    asanaService.getUser(user.id).then((user) => {
+    asanaService?.getUser(user.id).then((user) => {
       setProfile(user);
       setImage(user.avatar);
     });
