@@ -167,7 +167,11 @@ export default function Navbar() {
                           <span className="sr-only">Open user menu</span>
                           <img
                             className="h-8 w-8 rounded-full"
-                            src="https://www.kindpng.com/picc/m/21-211456_user-icon-hd-png-download.png"
+                            src={
+                              user.avatar
+                                ? user.avatar
+                                : `https://www.kindpng.com/picc/m/21-211456_user-icon-hd-png-download.png`
+                            }
                             alt=""
                           />
                         </Menu.Button>
