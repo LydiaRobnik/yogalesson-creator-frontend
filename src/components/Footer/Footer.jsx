@@ -270,8 +270,8 @@ export default function Footer() {
   }
 
   return (
-    <footer class="footer p-4 sm:p-6">
-      {/* <div class="submitHome flex flex-wrap justify-center mt-4 pb-4"> */}
+    <footer className="footer p-4 sm:p-6">
+      {/* <div className="submitHome flex flex-wrap justify-center mt-4 pb-4"> */}
       {/* <form onSubmit={handleSignup} className="flex gap-4 text-black">
         <input
           className="px-1 rounded-lg w-42"
@@ -293,16 +293,15 @@ export default function Footer() {
         {error && <div className="text-sm pl-5 pt-2 text-red-500">{error}</div>}
       </form> */}
       {/* </div> */}
-      {/* <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" /> */}
-      <div class="iconsHome flex justify-center mt-9">
-        <div class="flex mt-4 space-x-6 sm:justify-center sm:m-0">
+      {/* <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" /> */}
+      <div className="iconsHome flex justify-center mt-9">
+        <div className="flex mt-4 space-x-6 sm:justify-center sm:m-0">
           <a
             href="#"
-            class="icon"
-            class="text-gray-700 hover:text-gray-900 dark:hover:text-white"
+            className="icon text-gray-700 hover:text-gray-900 dark:hover:text-white"
           >
             <svg
-              class="iconH w-8 h-8"
+              className="iconH w-8 h-8"
               fill="currentColor"
               viewBox="0 0 24 24"
               aria-hidden="true"
@@ -316,11 +315,11 @@ export default function Footer() {
           </a>
           <a
             href="#"
-            class="icon"
-            class="text-gray-700 hover:text-gray-900 dark:hover:text-white"
+            className="icon"
+            className="text-gray-700 hover:text-gray-900 dark:hover:text-white"
           >
             <svg
-              class="iconH w-8 h-8"
+              className="iconH w-8 h-8"
               fill="currentColor"
               viewBox="0 0 24 24"
               aria-hidden="true"
@@ -334,11 +333,11 @@ export default function Footer() {
           </a>
           <a
             href="#"
-            class="icon"
-            class="text-gray-700 hover:text-gray-900 dark:hover:text-white"
+            className="icon"
+            className="text-gray-700 hover:text-gray-900 dark:hover:text-white"
           >
             <svg
-              class="iconH w-8 h-8"
+              className="iconH w-8 h-8"
               fill="currentColor"
               viewBox="0 0 24 24"
               aria-hidden="true"
@@ -348,11 +347,10 @@ export default function Footer() {
           </a>
           <a
             href="#"
-            class="icon"
-            class="text-gray-700 hover:text-gray-900 dark:hover:text-white"
+            className="icon text-gray-700 hover:text-gray-900 dark:hover:text-white"
           >
             <svg
-              class="iconH w-8 h-8"
+              className="iconH w-8 h-8"
               fill="currentColor"
               viewBox="0 0 24 24"
               aria-hidden="true"
@@ -366,10 +364,10 @@ export default function Footer() {
           </a>
         </div>
       </div>
-      <div class="sm:flex sm:items-center sm:justify-center text-center mt-4">
-        <span class="copyright text-sm text-gray-500 sm:text-center">
-          © 2022 <br></br> Copyright: Planasana Lydia Robnik, Vita, Michael,
-          Thomas. <br></br> All Rights Reserved.
+      <div className="sm:flex sm:items-center sm:justify-center text-center mt-4">
+        <span className="copyright text-sm text-gray-500 sm:text-center">
+          © 2022 <br></br> Copyright: Planasana Lydia, Vita, Michael, Thomas.{' '}
+          <br></br> All Rights Reserved.
         </span>
       </div>
     </footer>

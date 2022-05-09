@@ -133,7 +133,7 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
             id="description"
             rows="4"
             cols="50"
-            className="color-blue-darkest break-words resize bg-light"
+            className="color-blue-darkest break-words resize bg-light border-2 border-gray-300 mr-3"
             placeholder="Add your text - maybe for Shavasana "
             value={sequenceToAdd.description}
             onChange={(e) =>

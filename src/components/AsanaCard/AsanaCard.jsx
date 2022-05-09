@@ -79,8 +79,8 @@ const AsanaCard = ({
       <div
         ref={ref}
         onClick={() => handleSelectAsana(asana)}
-        onMouseDown={() => setMovingAsana(true)}
-        onMouseUp={() => setMovingAsana(false)}
+        // onMouseDown={() => setMovingAsana(true)}
+        // onMouseUp={() => setMovingAsana(false)}
         // onMouseOver={() => {
         //   !movingAsana && setBottomCard(true);
         // }}
