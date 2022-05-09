@@ -60,7 +60,19 @@ export default function CalendarEntryDialog({
   }, [filterName]);
 
   useEffect(() => {
-    // +`${a.event.startT}${a.event.startT}`
+    // console.log('valueFrom', valueFrom, 'valueTo', valueTo);
+    const fromNumber = +valueFrom.replaceAll(':', '');
+    const toNumber = +valueTo.replaceAll(':', '');
+
+    // console.log('fromNumber', fromNumber, 'toNumber', toNumber);
+
+    if (toNumber < fromNumber) {
+      const newTo = fromNumber + 100;
+      onChangeTo(
+        newTo.toString().substring(0, 2) + ':' + newTo.toString().substring(2)
+      );
+    }
+
     return () => {};
   }, [valueFrom]);
 
