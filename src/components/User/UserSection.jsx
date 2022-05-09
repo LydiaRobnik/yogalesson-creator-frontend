@@ -31,28 +31,12 @@ export default function UserSection() {
     asanas: []
   });
 
-  // functions
-  const gridResponsiveness = () => {
-    if (point === 'sm') {
-      return 'grid-cols-2';
-    } else if (point === 'md') {
-      return 'grid-cols-3';
-    } else if (point === 'lg') {
-      return 'grid-cols-4';
-    } else if (point === 'xl') {
-      return 'grid-cols-5';
-    } else if (point === '2xl') {
-      return 'grid-cols-6';
-    } else {
-      return 'grid-cols-1';
-    }
-  };
-
   useEffect(() => {
     if (loggedIn) {
       const fetchData = () => {
         setLoading(true);
         asanaService.getUserClasses(user.id).then((data) => {
+          console.log('📒 getUserClasses', data);
           setUserClasses(data);
         });
         asanaService.getUserSequences(user.id).then((data) => {
@@ -63,6 +47,7 @@ export default function UserSection() {
         });
         setLoading(false);
       };
+      console.log('📒 📒 📒 📒 📒 fetchData Dashboard!!!!');
       fetchData();
     }
     console.log('loggedIn', loggedIn, user);
@@ -70,10 +55,10 @@ export default function UserSection() {
     // if (!loggedIn) navigate(`/unauthorized`); // todo
 
     return () => {};
-  }, [loggedIn]);
+  }, [loggedIn, yogaClassToAdd]);
 
   return (
-    <div className="w-full max-w-7xl p-3 pt-4">
+    <div className="w-full h-full p-3 pt-4">
       <div className="flex flex-col">
         <main className="flex">
           {loggedIn ? (
@@ -86,7 +71,6 @@ export default function UserSection() {
                 userSequences,
                 setUserSequences,
                 loading,
-                gridResponsiveness,
                 yogaClassToAdd,
                 setYogaClassToAdd,
                 sequenceToAdd,

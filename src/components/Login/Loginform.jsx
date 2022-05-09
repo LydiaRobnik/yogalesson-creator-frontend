@@ -1,32 +1,32 @@
-import { LockClosedIcon } from "@heroicons/react/solid";
-import { AuthContext } from "../../context/AuthContext";
-import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "../../style/app.scss";
+import { LockClosedIcon } from '@heroicons/react/solid';
+import { AuthContext } from '../../context/AuthContext';
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../../style/app.scss';
 
 export default function Example({ ModalOpen, setModalOpen }) {
   const { loggedIn, login, logout, user } = useContext(AuthContext);
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const navigate = useNavigate();
 
   async function handleLogin(e) {
     e.preventDefault();
-    setError("");
+    setError('');
 
     const result = await login({
       user: name,
-      type: "username",
+      type: name.includes('@') ? 'email' : 'username',
       password: password
     });
 
     if (!result) {
-      setError("Invalid username or password!");
+      setError('Invalid username or password!');
     } else {
-      setName("");
-      setPassword("");
+      setName('');
+      setPassword('');
       navigate(`/user/dashboard`);
       setModalOpen(false);
     }
@@ -34,14 +34,14 @@ export default function Example({ ModalOpen, setModalOpen }) {
 
   return (
     <>
-      <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
-          <div>
+          <div className="flex flex-col justify-center">
             <lottie-player
               src="https://assets1.lottiefiles.com/packages/lf20_s9dkwhdi.json"
               background="transparent"
               speed="1"
-              style={{ width: "300px", height: "300px" }}
+              style={{ width: '100%', height: '200px', self: 'center' }}
               loop
               autoplay
             ></lottie-player>
@@ -67,7 +67,7 @@ export default function Example({ ModalOpen, setModalOpen }) {
                   type="text"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="Username"
+                  placeholder="Email"
                   onChange={(e) => setName(e.target.value)}
                   minLength={3}
                 />

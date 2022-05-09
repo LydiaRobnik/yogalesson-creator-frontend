@@ -53,6 +53,8 @@ export default function Calendar() {
       const fetchData = () => {
         asanaService.getUserCalendar(user.id).then((entries) => {
           console.log('getUserCalendar', entries);
+          if (!entries || entries.length === 0) return;
+
           setEvents(
             entries
               ?.sort((a, b) => new Date(a.event.date) - new Date(b.event.date))
@@ -65,9 +67,9 @@ export default function Calendar() {
         });
       };
       fetchData();
-    } else {
-      closeModal();
     }
+
+    closeModal();
 
     return () => {};
   }, [events]);
@@ -202,31 +204,44 @@ export default function Calendar() {
 
   return (
     <div className="w-full">
-      <div className="text-center text-2xl md:text-4xl pb-3 md:pb-8 color-blue-dark">
-        Yoga Calendar
+      {/* <div className="text-center text-2xl md:text-4xl pb-3 md:pb-8 color-blue-dark">
+        Your Yoga Calendar
       </div>
       <div className="color-blue-middle text-right">
         <button onClick={() => handleCalendarView(0)}>month</button>
         <button onClick={() => handleCalendarView(1)}>week</button>
         <button onClick={() => handleCalendarView(2)}>day</button>
-      </div>
+      </div> */}
       <div
         id="div-calendar"
         className="flex flex-col gap-2 md:gap-4 md:flex-row text-black w-full h-full"
       >
-        <div className="cal-infobar w-1/4 order-1 border-2 text-black">
+        <div className="cal-infobar w-60 order-1 self-center md:self-start border-2 text-black overflow-y-auto whitespace-nowrap">
           <div className="text-lg font-bold text-center border-dashed border-b-slate-400 rounded-t border-b pt-2 mb-4 color-beige-light bg-blue-dark">
             Upcoming Events
           </div>
           <div className="flex flex-col gap-0">
-            {events.map(
-              (event) =>
-                new Date(event.date) - new Date() >= 0 && (
+            {events
+              .filter((event) => new Date(event.date) - new Date() >= 0)
+              .map((event, index, array) => (
+                <div key={event.id}>
+                  {/* separate months */}
+                  {(index === 0 ||
+                    new Date(event.date).getMonth() !==
+                      new Date(array[index - 1]?.date).getMonth()) && (
+                    <div
+                      className={`font-bold text-center opacity-50 ${
+                        index > 0 && 'mt-3'
+                      }`}
+                    >
+                      {new Date(event.date).toLocaleString('en-us', {
+                        month: 'long'
+                      })}
+                    </div>
+                  )}
                   <div
-                    key={event.id}
                     onClick={() => setSelectedEvent((prev) => event)}
                     className={`cursor-pointer p-1 pt-2 hover:bg-beige-light`}
-                    style={{ backgroundColor: event }}
                   >
                     <div className="grow border-b border-dashed">
                       <div className="text-xs">
@@ -237,12 +252,17 @@ export default function Calendar() {
                         >
                           {new Date(event.date).toDateString()}
                         </span>
+                        <span className="ml-2 text-sm">
+                          <sup>
+                            {event.startT} - {event.endT}
+                          </sup>
+                        </span>
                       </div>
-                      <div className="pl-2">{event.title}</div>
+                      <div className="pl-2 pt-1">{event.title}</div>
                     </div>
                   </div>
-                )
-            )}
+                </div>
+              ))}
           </div>
         </div>
         {changeCalendarView && (
