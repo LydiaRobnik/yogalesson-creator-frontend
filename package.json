@@ -34,6 +34,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
     "react-time-picker": "^4.5.0",
+    "react-to-print": "^2.14.7",
     "sass": "^1.49.11"
   },
   "devDependencies": {

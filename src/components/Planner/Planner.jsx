@@ -5,6 +5,7 @@ import './planner.scss';
 // import NewSequence from '../NewSequence.jsx/NewSequence';
 import SequencePlanned from '../SequencePlanned/SequencePlanned';
 import asanaService from '../../api/asanaService';
+import Print from "../Print/Print";
 
 export default function Planner() {
   const {
@@ -180,7 +181,7 @@ export default function Planner() {
                       key={sequence._id}
                       className="rounded col-span-11 my-2"
                     >
-                      <SequencePlanned
+                      <Print
                         sequence={sequence}
                         handleFocus={handleFocus}
                       />
