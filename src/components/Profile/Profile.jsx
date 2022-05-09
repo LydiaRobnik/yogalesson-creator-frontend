@@ -259,7 +259,7 @@ export default function Profile() {
           {/* email */}
           <div className="flex relative mt-3">
             {isEditEmail ? (
-              <form>
+              <form onSubmit={(e) => handleEditEmail(e)}>
                 <div className="flex justify-center">
                   <div
                     className="timepicker relative form-floating mb-3 w-48 xl:w-96"
@@ -267,12 +267,13 @@ export default function Profile() {
                     id="input-toggle-timepicker"
                   >
                     <input
-                      type="text"
+                      type="email"
+                      // pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
                       className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       placeholder="Set Email"
                       data-mdb-toggle="input-toggle-timepicker"
-                      minLength="3"
-                      maxLength={20}
+                      minLength="10"
+                      maxLength={30}
                       required
                       autoFocus
                       defaultValue={profile.email}
@@ -287,10 +288,7 @@ export default function Profile() {
                       Change Email
                     </label>
                   </div>
-                  <button
-                    className="btn-seqColl-neutral ml-3"
-                    onClick={(e) => handleEditEmail(e)}
-                  >
+                  <button className="btn-seqColl-neutral ml-3">
                     <span className="font-material-symbols px-2 py-1">
                       add_task
                     </span>
@@ -328,7 +326,7 @@ export default function Profile() {
                     id="input-toggle-timepicker"
                   >
                     <input
-                      type="text"
+                      type="password"
                       className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       placeholder="Set Password"
                       data-mdb-toggle="input-toggle-timepicker"
@@ -355,7 +353,7 @@ export default function Profile() {
                     id="input-toggle-timepicker"
                   >
                     <input
-                      type="text"
+                      type="password"
                       className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       placeholder="Set Password confirm"
                       data-mdb-toggle="input-toggle-timepicker"
@@ -394,7 +392,7 @@ export default function Profile() {
           </div>
 
           {
-            /* role */ user.role === 'admin' && (
+            /* role */ user.role === 'admino' && (
               <div className="flex relative mt-3">
                 {isEditRole ? (
                   <div>edit name</div>
