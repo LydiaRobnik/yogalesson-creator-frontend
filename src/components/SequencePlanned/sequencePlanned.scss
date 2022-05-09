@@ -5,12 +5,28 @@
   // width: 65vw;
 }
 
+  
+  .btn-seqColl-red-outline {
+      @apply cursor-pointer outline outline-2 flex flex-row self-center mr-1;
+      color: $clr-red;
+  }
+  .btn-seqColl-red-outline:hover {
+      background-color: $clr-beige;
+  }
 
-// .hide {
-//   display: none;
-// }
+  .addAsana {
+    @apply p-6 flex flex-row justify-center self-center content-center items-center border-2 border-gray-400 w-24 h-24 mt-4;
+  }
+  
+  .addAsana:hover{
+      background-color: $clr-beige;
+  }
+  
+  
+  .delete{
+    @apply self-center font-material-symbols color-blue-darkest cursor-pointer;
+  }
 
-// .toggleHiddenElement:hover + .hide {
-//   display: block;
-//   color: red;
-// }
+  .delete:hover{
+    color: $clr-red;
+  }

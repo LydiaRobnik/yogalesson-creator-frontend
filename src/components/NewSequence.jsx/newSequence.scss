@@ -1,2 +1,16 @@
 @import '../../style/variables.scss';
 
+.editSequence {
+  border: 3px $clr-blue-darkest;
+  @apply rounded-md border-dashed;
+}
+
+.addAsana {
+  @apply p-6 flex flex-row justify-center self-center content-center items-center border-2 border-gray-400 w-24 h-24 mt-4;
+}
+
+.addAsana:hover{
+    background-color: $clr-beige;
+}
+
+

@@ -1,11 +1,12 @@
 import { filter } from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
-import asanaService from '../../api/asanaService';
+// import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
 import TimePicker from 'react-time-picker';
 import { BsArrowReturnRight } from 'react-icons/bs';
 import './calendar.scss';
 import { calendarColors as colors } from '../../custom/utils';
+import { useOutletContext } from 'react-router-dom';
 
 // const colors = calendarColors
 
@@ -18,13 +19,12 @@ export default function CalendarEntryDialog({
   deleteEvent
 }) {
   const { loggedIn, user } = useContext(AuthContext);
+  const { asanaService, addSystemError } = useOutletContext();
 
   const [userClasses, setUserClasses] = useState([]);
   const [filterName, setFilterName] = useState(event ? event.title : '');
   const [color, setColor] = useState(
-    event
-      ? colors[colors.findIndex((c) => c === event?.backgroundColor)]
-      : colors[0]
+    event ? colors[colors.findIndex((c) => c === event?.color)] : colors[0]
   );
   const [valueFrom, onChangeFrom] = useState(event ? event.startT : '10:00');
   const [valueTo, onChangeTo] = useState(event ? event.endT : '12:00');
@@ -61,6 +61,23 @@ export default function CalendarEntryDialog({
     return () => {};
   }, [filterName]);
 
+  useEffect(() => {
+    // console.log('valueFrom', valueFrom, 'valueTo', valueTo);
+    const fromNumber = +valueFrom.replaceAll(':', '');
+    const toNumber = +valueTo.replaceAll(':', '');
+
+    // console.log('fromNumber', fromNumber, 'toNumber', toNumber);
+
+    if (toNumber < fromNumber) {
+      const newTo = fromNumber + 100;
+      onChangeTo(
+        newTo.toString().substring(0, 2) + ':' + newTo.toString().substring(2)
+      );
+    }
+
+    return () => {};
+  }, [valueFrom]);
+
   const selectClass = (classId) => {
     userClasses.forEach((c) => (c.checked = false));
     userClasses.find((c) => c._id === classId).checked = true;
@@ -69,6 +86,10 @@ export default function CalendarEntryDialog({
 
   const handleSave = () => {
     const yogaClass = userClasses.find((c) => c.checked === true);
+    if (!yogaClass) {
+      addSystemError('Please select a class');
+      return;
+    }
     const calendarObj = {
       // startT: +date.dateObj + 60000 * 120,
       date: date.dateStr,

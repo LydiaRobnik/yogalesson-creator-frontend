@@ -16,3 +16,12 @@ color: $clr-blue-darkest;
 .btn-seqColl-red-outline:hover {
     background-color: $clr-beige;
 }
+
+.btn-seqColl-blue {
+    @apply bg-white outline outline-2 flex flex-row self-center mb-3 mr-1 ;
+    color: $clr-blue-middle;
+    }
+    .btn-seqColl-blue:hover {
+        background-color: $clr-blue-darkest;
+        color: $clr-beige;
+    }

@@ -1,12 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import asanaService from '../../api/asanaService';
+// import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
 import FileUpload from '../FileUpload/FileUpload';
 
 export default function Profile() {
   const { loggedIn, login, logout, user, setUser } = useContext(AuthContext);
-  const { loading, setErrors, errors } = useOutletContext();
+  const {
+    loading,
+    asanaService,
+    addSystemInfo,
+    addSystemSuccess,
+    addSystemError,
+    addSystemMessage,
+    clearSystemMessages
+  } = useOutletContext();
 
   const [profile, setProfile] = useState({});
   const [passwordConfirm, setPasswordConfirm] = useState('');
@@ -18,6 +26,14 @@ export default function Profile() {
 
   const [image, setImage] = useState(null);
   const [clickImage, setClickImage] = useState(false);
+
+  useEffect(() => {
+    asanaService.setAddErrorMessage(addSystemError);
+    clearSystemMessages();
+    if (loggedIn) {
+    }
+    return () => {};
+  }, []);
 
   useEffect(() => {
     asanaService.getUser(user.id).then((user) => {
@@ -49,6 +65,7 @@ export default function Profile() {
             setProfile(user);
             setIsEditName(false);
             setUser((prev) => ({ ...prev, name: user.username }));
+            addSystemSuccess('Name changed successfully');
           })
           .catch((err) => {
             console.log('📒 handleEditName err', err);
@@ -75,13 +92,16 @@ export default function Profile() {
             setProfile(user);
             setIsEditEmail(false);
             setUser((prev) => ({ ...prev, name: user.username }));
+            addSystemSuccess('Email changed successfully');
           })
           .catch((err) => {
             console.log('📒 handleEditName err', err);
+            // addSystemError(err);
           });
       })
       .catch((err) => {
         console.log('📒 handleEditName err', err);
+        // addSystemError(err);
       });
   };
 
@@ -93,7 +113,7 @@ export default function Profile() {
     // check password confirmation
     if (profile.password !== passwordConfirm) {
       console.log('📒 Password confirmation does not match', passwordConfirm);
-      setErrors((prev) => [...prev, 'Password confirmation does not match']);
+      addSystemError('Password confirmation does not match');
       return;
     }
 
@@ -107,13 +127,16 @@ export default function Profile() {
           .then((user) => {
             setProfile(user);
             setIsEditPassword(false);
+            addSystemSuccess('Password changed successfully');
           })
           .catch((err) => {
             console.log('📒 handleEditName err', err);
+            // addSystemError(err);
           });
       })
       .catch((err) => {
         console.log('📒 handleEditName err', err);
+        // addSystemError(err);
       });
   };
 
@@ -134,6 +157,7 @@ export default function Profile() {
               setProfile(user);
               setImage(imageUrl);
               setUser((prev) => ({ ...prev, avatar: user.avatar }));
+              addSystemSuccess('Avatar changed successfully');
               // setProfile((prev) => {
               //   prev.avatar = imageUrl;
               //   return { ...prev };
@@ -142,10 +166,12 @@ export default function Profile() {
             })
             .catch((err) => {
               console.log('📒 handleSelectImage err', err);
+              // addSystemError(err);
             });
         })
         .catch((err) => {
           console.log('📒 handleSelectImage err', err);
+          // addSystemError(err);
         });
     }
   }
@@ -259,7 +285,7 @@ export default function Profile() {
           {/* email */}
           <div className="flex relative mt-3">
             {isEditEmail ? (
-              <form>
+              <form onSubmit={(e) => handleEditEmail(e)}>
                 <div className="flex justify-center">
                   <div
                     className="timepicker relative form-floating mb-3 w-48 xl:w-96"
@@ -267,12 +293,13 @@ export default function Profile() {
                     id="input-toggle-timepicker"
                   >
                     <input
-                      type="text"
+                      type="email"
+                      // pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
                       className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       placeholder="Set Email"
                       data-mdb-toggle="input-toggle-timepicker"
-                      minLength="3"
-                      maxLength={20}
+                      minLength="10"
+                      maxLength={30}
                       required
                       autoFocus
                       defaultValue={profile.email}
@@ -287,10 +314,7 @@ export default function Profile() {
                       Change Email
                     </label>
                   </div>
-                  <button
-                    className="btn-seqColl-neutral ml-3"
-                    onClick={(e) => handleEditEmail(e)}
-                  >
+                  <button className="btn-seqColl-neutral ml-3">
                     <span className="font-material-symbols px-2 py-1">
                       add_task
                     </span>
@@ -328,7 +352,7 @@ export default function Profile() {
                     id="input-toggle-timepicker"
                   >
                     <input
-                      type="text"
+                      type="password"
                       className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       placeholder="Set Password"
                       data-mdb-toggle="input-toggle-timepicker"
@@ -355,7 +379,7 @@ export default function Profile() {
                     id="input-toggle-timepicker"
                   >
                     <input
-                      type="text"
+                      type="password"
                       className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       placeholder="Set Password confirm"
                       data-mdb-toggle="input-toggle-timepicker"
@@ -394,7 +418,7 @@ export default function Profile() {
           </div>
 
           {
-            /* role */ user.role === 'admin' && (
+            /* role */ user.role === 'admino' && (
               <div className="flex relative mt-3">
                 {isEditRole ? (
                   <div>edit name</div>
