@@ -89,10 +89,12 @@ export default function Navbar() {
                         src="https://yogalesson-createor-backend.herokuapp.com/images/Logo_250x250px.png"
                         alt="Workflow"
                       />
-                      <p className="color-blue-darkest ml-2">
-                        PlanAsana<br></br>
-                        YOGA OFF THE MAT
-                      </p>
+                      <div>
+                        <p className="color-blue-darkest ml-2">
+                          PlanAsana<br></br>
+                          YOGA OFF THE MAT
+                        </p>
+                      </div>
                     </div>
                   </NavLink>
 

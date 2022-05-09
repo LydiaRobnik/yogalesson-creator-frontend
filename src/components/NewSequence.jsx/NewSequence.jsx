@@ -6,6 +6,7 @@ import AsanaCard from '../AsanaCard/AsanaCard';
 import Modal from 'react-modal';
 import './newSequence.scss';
 import Asanas from '../Asanas/Asanas';
+import useBreakpoint from '../../custom/useBreakpoint';
 
 const customStyles = {
   content: {
@@ -27,6 +28,7 @@ Modal.setAppElement('#root');
 const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
+  const point = useBreakpoint();
   console.log('user', user.id);
   const {
     userSequences,
@@ -39,6 +41,7 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
   } = useOutletContext();
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [timeToConvert, setTimeToConvert] = useState();
 
   useEffect(() => {
     const saveSequenceToBackend = async () => {
@@ -65,21 +68,8 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
 
   const addSequenceToClass = async () => {
     saveSequence({ ...sequenceToAdd });
-
-    // const newSequence = { ...sequenceToAdd };
-    // yogaClassToAdd.plan.push(newSequence);
-
-    // const seqObj = {
-    //   user: user?.id,
-    //   type: 'sequence',
-    //   duration: 3,
-    //   description: '',
-    //   title: '',
-    //   asanas: []
-    // };
-    // setSequenceToAdd(seqObj);
-    // setShowNewSequence(false);
   };
+
   /**
    * add Asana from modal dialog
    * @param {} asana from Asanas.jsx
@@ -105,13 +95,30 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
     setIsOpen(false);
   }
 
+  // // functions
+  const gridResponsiveness = () => {
+    if (point === 'xs') {
+      return 'grid-cols-3';
+    } else if (point === 'sm') {
+      return 'grid-cols-4';
+    } else if (point === 'md') {
+      return 'grid-cols-6';
+    } else if (point === 'lg') {
+      return 'grid-cols-8';
+    } else {
+      return 'grid-cols-10';
+    }
+  };
+
+  console.log('timeToConvert', typeof timeToConvert);
+
   return (
     <>
-      <div className="border-2 border-grey-500 w-full min-h-40 px-6 flex flex-col resize">
+      <div className="editSequence w-full min-h-40 px-6 flex flex-col bg-light">
         <input
           type="text"
           maxlength="50"
-          className="color-blue-darkest text-xl"
+          className="color-blue-darkest text-xl bg-light"
           placeholder="draft sequence - title"
           value={sequenceToAdd.title}
           onChange={(e) =>
@@ -119,52 +126,71 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
           }
           onFocus={handleFocus}
         />
+
         <textarea
           name="description"
           id="description"
           rows="4"
           cols="50"
-          className="color-blue-darkest break-words resize "
+          className="color-blue-darkest break-words resize bg-light"
           placeholder="Add your text - maybe for Shavasana "
           value={sequenceToAdd.description}
           onChange={(e) =>
             setSequenceToAdd({ ...sequenceToAdd, description: e.target.value })
           }
-          some
-          text
           onFocus={handleFocus}
         />
 
-        <div className="flex">
+        <div
+          className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
+        >
           {sequenceToAdd.asanas?.map((asana, index) => (
             <div
               key={`${asana._id}${index}`}
               className="flex flex-col items-center"
             >
-              <AsanaCard asana={asana} />
               <span
                 className="font-material-symbols color-blue-darkest cursor-pointer"
                 onClick={() => handleRemoveAsana(asana)}
               >
                 delete
               </span>
+              <AsanaCard asana={asana} />
             </div>
           ))}
+          <button className="addAsana" onClick={() => openModal()}>
+            <span className="color-blue-darkest font-material-symbols p-4 ">
+              add_circle
+            </span>
+          </button>
         </div>
+        <div className="flex flex-row items-center my-2">
+          <p className="color-blue-darkest pr-2">
+            Enter a duration for your sequence
+          </p>
+          <input
+            type="text"
+            required
+            className="color-blue-darkest text-lg bg-white w-24 text-center border-2 border-gray-200 rounded"
+            placeholder="minutes"
+            // value={new Date(sequenceToAdd.duration).getTime()}
+            value={timeToConvert}
+            onChange={
+              (e) =>
+                setSequenceToAdd({
+                  ...sequenceToAdd,
+                  duration: +e.target.value
+                })
 
+              // setSequenceToAdd(parseInt(timeToConvert));
+            }
+            onFocus={handleFocus}
+          />
+        </div>
         <div className="flex flex-row items-center justify-between my-3">
           <div className="flex flex-row items-center">
             <button
-              className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
-              // onClick={() => navigate('../asanas?from=planner')}
-              onClick={() => openModal()}
-            >
-              <span className="font-material inline pr-2">add</span>
-              <p className="inline pt-1 text-lg ">asana</p>
-            </button>
-
-            <button
-              className="btn-red btn-blue:hover mx-2 flex flex-row items-center"
+              className="btn-blue flex flex-row items-center"
               onClick={() => addSequenceToClass()}
             >
               <span className="font-material-symbols inline pr-2">save</span>
@@ -173,7 +199,7 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
           </div>
 
           <button
-            className="btn-red btn-blue:hover mx-2 flex flex-row items-center"
+            className="btn-red btn-blue:hover flex flex-row items-center"
             onClick={() => cancel()}
           >
             <span className="font-material-symbols inline pr-2">cancel</span>
@@ -186,8 +212,6 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
-          // className="modal"
-          // overlayClassName="overlay"
           style={customStyles}
           contentLabel="Example Modal"
         >

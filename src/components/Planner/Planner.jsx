@@ -6,6 +6,7 @@ import './planner.scss';
 import SequencePlanned from '../SequencePlanned/SequencePlanned';
 import asanaService from '../../api/asanaService';
 import Print from "../Print/Print";
+import moment from 'moment';
 
 export default function Planner() {
   const {
@@ -22,6 +23,7 @@ export default function Planner() {
   const navigate = useNavigate();
 
   const imgEl = useRef(null);
+  const [totalDuration, setTotalDuration] = useState(0);
 
   useEffect(() => {
     const saveClassToBackend = async () => {
@@ -41,38 +43,11 @@ export default function Planner() {
           console.log('err:', err);
         });
     };
+    getTotalDuration();
     saveClassToBackend();
   }, [yogaClassToAdd]);
 
   const handleFocus = (event) => event.target.select();
-
-  const createSequence = async () => {
-    const newSequence = {
-      user: user?.id,
-      type: 'sequence',
-      duration: 3,
-      description: '',
-      title: `${user.name}'s draft sequence no. ${
-        userSequences.length + 1 + Math.random()
-      }`,
-      asanas: []
-    };
-    const result = await asanaService.createSequence(newSequence);
-    console.log('📒 newSequence', result);
-    yogaClassToAdd.plan.push(result);
-    setYogaClassToAdd({ ...yogaClassToAdd });
-    const seqObj = {
-      user: user?.id,
-      type: 'sequence',
-      duration: 3,
-      description: '',
-      title: '',
-      asanas: []
-    };
-    setSequenceToAdd(seqObj);
-    // setSequenceToAdd(result);
-    // setShowNewSequence(true);
-  };
 
   const editClass = (e) => {
     setYogaClassToAdd({
@@ -122,6 +97,16 @@ export default function Planner() {
     }
   };
 
+  const getTotalDuration = () => {
+    let sum = 0;
+    yogaClassToAdd.plan.forEach((sequence) => {
+      sum += sequence.duration;
+      return sum;
+    });
+    console.log(sum);
+    setTotalDuration(sum);
+  };
+
   return (
     <div className="w-full">
       {loading && (
@@ -137,7 +122,7 @@ export default function Planner() {
 
       {!loading && (
         <div className="w-full bg-white">
-          <div ref={imgEl} className="w-full bg-white">
+          <div className="w-full bg-white">
             <div
               className={`flex flex-row ${
                 yogaClassToAdd.plan.length === 0
@@ -158,28 +143,47 @@ export default function Planner() {
               />
             </div>
 
-            <div className="w-full">
+            <div ref={imgEl} className="w-full">
+              {yogaClassToAdd.plan.length === 0 && (
+                <div className="grid place-items-center h-28 ">
+                  <p className="color-blue-darkest text-center text-lg">
+                    No sequences yet
+                  </p>
+                </div>
+              )}
               {yogaClassToAdd.plan &&
                 yogaClassToAdd.plan.map((sequence, index) => (
-                  <div className="grid grid-cols-12 gap-4 border-t-2 border-gray-200 mx-4">
-                    <div className=" col-span-1 flex flex-row flex-wrap content-start">
-                      <span
-                        className="font-material-symbols color-blue-darkest text-xl px-3 cursor-pointer"
-                        onClick={() => moveSequenceUp(sequence)}
-                      >
-                        expand_less
-                      </span>
-                      <span
-                        className="font-material-symbols color-blue-darkest text-xl px-3 cursor-pointer"
-                        onClick={() => moveSequenceDown(sequence)}
-                      >
-                        expand_more
-                      </span>
+                  <div className="grid grid-cols-12 gap-4 items-start border-t-2 border-gray-200 mx-4">
+                    <div className=" col-span-1 mt-3">
+                      <div className="flex flex-row flex-wrap">
+                        <span
+                          className="font-material-symbols color-blue-darkest text-xl px-1 cursor-pointer"
+                          onClick={() => moveSequenceUp(sequence)}
+                        >
+                          expand_less
+                        </span>
+                        <span
+                          className="font-material-symbols color-blue-darkest text-xl px-1 cursor-pointer"
+                          onClick={() => moveSequenceDown(sequence)}
+                        >
+                          expand_more
+                        </span>
+                      </div>
+                      <div>
+                        <div className="w-16 border-2 border-gray-200 rounded flex flex-row row-wrap items-center">
+                          <span className="font-material-symbols color-blue-darkest text-lg px-1">
+                            schedule
+                          </span>
+                          <p className="pl-2 pt-1 color-blue-darkest">
+                            {sequence.duration}
+                          </p>
+                        </div>
+                      </div>
                     </div>
 
                     <div
                       key={sequence._id}
-                      className="rounded col-span-11 my-2"
+                      className=" rounded col-span-11 my-2"
                     >
                       <Print
                         sequence={sequence}
@@ -189,18 +193,20 @@ export default function Planner() {
                   </div>
                 ))}
             </div>
+            {yogaClassToAdd.plan.length > 0 && (
+              <>
+                <div className=" border-t-2 border-gray-300 mb-2"></div>
+                <div className="w-32 border-4 rounded flex flex-row row-wrap items-center ">
+                  <span className="font-material-symbols color-blue-darkest text-xl font-bold px-1">
+                    schedule
+                  </span>
+                  <h4 className="totalTime">{totalDuration} minutes</h4>
+                </div>
+              </>
+            )}
           </div>
-          {/* {showNewSequence && <NewSequence handleFocus={handleFocus} />} */}
 
           <div className=" w-full flex flex-row justify-center mt-4">
-            {/* <button
-              className="btn-blue btn-blue:hover   mx-2 flex flex-row items-center"
-              onClick={() => createSequence()}
-            >
-              <span className="font-material inline pr-2">add</span>
-              <p className="inline pt-1 text-lg ">create new sequence</p>
-            </button> */}
-
             <button
               className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
               onClick={() => navigate('/user/sequences')}

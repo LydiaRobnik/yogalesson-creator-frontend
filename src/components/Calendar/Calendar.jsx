@@ -48,6 +48,10 @@ export default function Calendar() {
     return () => {};
   }, []);
 
+  events.displayFirstMonth = false;
+  events.displayToday = false;
+  events.displayTomorrow = false;
+
   useEffect(() => {
     if (!events || events.length === 0) {
       const fetchData = () => {
@@ -57,19 +61,25 @@ export default function Calendar() {
 
           setEvents(
             entries
-              ?.sort((a, b) => new Date(a.event.date) - new Date(b.event.date))
+              .sort(
+                (a, b) =>
+                  getCompleteEventDate(a.event) - getCompleteEventDate(b.event)
+              )
               .map((entry) => {
                 entry.event.id = entry._id;
                 entry.event.classId = entry.class;
+                entry.event.color = entry.event.backgroundColor;
+                // console.log('event', entry.event);
                 // opacity for old events
-                if (new Date(entry.event.date) < new Date()) {
-                  const opacity = entry.event.backgroundColor.replace(
+                if (getCompleteEventDate(entry.event) < new Date()) {
+                  const opacity = entry.event.backgroundColor?.replace(
                     ')',
                     ', 0.4)'
                   );
                   entry.event.backgroundColor = opacity;
                   entry.event.borderColor = opacity;
                   // entry.event.textColor = 'black';
+                } else {
                 }
                 return entry.event;
               })
@@ -77,6 +87,8 @@ export default function Calendar() {
         });
       };
       fetchData();
+    } else {
+      console.log('🙈 events', events);
     }
 
     closeModal();
@@ -212,6 +224,37 @@ export default function Calendar() {
       });
   }
 
+  const getTomorrow = (eventDate) => {
+    const date = new Date(eventDate);
+    date.setDate(date.getDate() + 1);
+
+    // console.log('getTomorrow', date.toDateString(), eventDate);
+    return date.toDateString();
+  };
+
+  const isToday = (eventDate) => {
+    return new Date(eventDate).toDateString() === new Date().toDateString();
+  };
+
+  const isTomorrow = (eventDate) => {
+    return new Date(eventDate).toDateString() === getTomorrow(new Date());
+  };
+
+  const getCompleteEventDate = (event) => {
+    // if (!event.date) return;
+    const date = new Date(event.date);
+    date.setHours(event.startT.split(':')[0]);
+    date.setMinutes(event.startT.split(':')[1]);
+
+    console.log(
+      'getCompleteEventDate',
+      date,
+      event.date,
+      date < new Date() ? 'old' : 'new'
+    );
+    return date;
+  };
+
   return (
     <div className="w-full">
       {/* <div className="text-center text-2xl md:text-4xl pb-3 md:pb-8 color-blue-dark">
@@ -232,11 +275,15 @@ export default function Calendar() {
           </div>
           <div className="cal-infobar flex flex-col gap-0 overflow-y-auto overflow-x-hidden ">
             {events
-              .filter((event) => new Date(event.date) - new Date() >= 0)
+              .filter(
+                (event) =>
+                  new Date(event.date) - new Date(new Date().toDateString()) >=
+                  0
+              )
               .map((event, index, array) => (
                 <div key={event.id}>
                   {/* separate months */}
-                  {(index === 0 ||
+                  {/* {(index === 0 ||
                     new Date(event.date).getMonth() !==
                       new Date(array[index - 1]?.date).getMonth()) && (
                     <div
@@ -248,7 +295,69 @@ export default function Calendar() {
                         month: 'long'
                       })}
                     </div>
-                  )}
+                  )} */}
+                  {(() => {
+                    console.log('index', index, event.date);
+                    // today
+                    if (
+                      // index === 0 ||
+                      !events.displayToday &&
+                      isToday(event.date)
+                    ) {
+                      events.displayToday = true;
+                      // console.log(events);
+                      console.log('today', index, event.date);
+                      return (
+                        <div
+                          className={`font-bold text-center opacity-50 ${
+                            index > 0 && 'mt-3'
+                          }`}
+                        >
+                          Today
+                        </div>
+                      );
+                    } else if (
+                      // tomorrow
+                      // index === 0 ||
+                      !events.displayTomorrow &&
+                      isTomorrow(event.date)
+                    ) {
+                      events.displayTomorrow = true;
+                      // console.log(events);
+                      console.log('tomorrow', index, event.date);
+                      return (
+                        <div
+                          className={`font-bold text-center opacity-50 ${
+                            index > 0 && 'mt-3'
+                          }`}
+                        >
+                          Tomorrow
+                        </div>
+                      );
+                    } else if (
+                      // month
+                      (!events.displayFirstMonth &&
+                        !isToday(event.date) &&
+                        !isTomorrow(event.date)) ||
+                      (events.displayFirstMonth &&
+                        new Date(event.date).getMonth() !==
+                          new Date(array[index - 1]?.date).getMonth())
+                    ) {
+                      events.displayFirstMonth = true;
+                      console.log('displayMonth', index, event.date);
+                      return (
+                        <div
+                          className={`font-bold text-center opacity-50 ${
+                            index > 0 && 'mt-3'
+                          }`}
+                        >
+                          {new Date(event.date).toLocaleString('en-us', {
+                            month: 'long'
+                          })}
+                        </div>
+                      );
+                    }
+                  })()}
                   <div
                     onClick={() => setSelectedEvent((prev) => event)}
                     className={`cursor-pointer p-1 pt-2 hover:bg-beige-light`}

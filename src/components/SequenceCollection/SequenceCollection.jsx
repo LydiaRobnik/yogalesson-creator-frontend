@@ -10,7 +10,7 @@ import './sequenceCollection.scss';
 const newSeqObj = (userId) => ({
   user: userId,
   type: 'sequence',
-  duration: 3,
+  duration: 0,
   description: '',
   title: '',
   asanas: []
