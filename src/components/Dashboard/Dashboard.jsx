@@ -124,31 +124,38 @@ export default function Dashboard() {
               className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
             >
               {userClasses &&
-                userClasses.slice(0, 5).map((classItem) => (
-                  <div
-                    key={classItem._id}
-                    onClick={() => {
-                      markAsSelected(classItem._id);
-                    }}
-                    className={`rounded overflow-hidden w-full p-0 ${
-                      selectedCard === classItem._id
-                        ? 'border-solid border-2 border-rose-400 shadow-xl'
-                        : ' border-2 border-gray-200'
-                    }`}
-                  >
-                    <ClassCard classItem={classItem} />
-                  </div>
-                ))}
+                (toggleShowAll ? userClasses : userClasses.slice(0, 5)).map(
+                  (classItem) => (
+                    <div
+                      key={classItem._id}
+                      onClick={() => {
+                        markAsSelected(classItem._id);
+                      }}
+                      className={`rounded overflow-hidden w-full p-0 ${
+                        selectedCard === classItem._id
+                          ? 'border-solid border-2 border-rose-400 shadow-xl'
+                          : ' border-2 border-gray-200'
+                      }`}
+                    >
+                      <ClassCard classItem={classItem} />
+                    </div>
+                  )
+                )}
             </div>
-            <button
-              className="btn-dash-neutral bg-white outline outline-2  pl-1 mr-2 mt-4 flex flex-row items-center"
-              onClick={() => showAll()}
-            >
-              <span className="font-material-symbols color-blue-darkest text-lg px-2 cursor-pointer">
-                expand_more
-              </span>
-              <p className="inline pt-1 text-lg">show all</p>
-            </button>
+
+            {userClasses.length > 5 && (
+              <button
+                className="btn-dash-neutral bg-white outline outline-2  pl-1 mr-2 mt-4 flex flex-row items-center"
+                onClick={() => showAll()}
+              >
+                <span className="font-material-symbols color-blue-darkest text-lg px-2 cursor-pointer">
+                  {`${toggleShowAll ? 'expand_less' : 'expand_more'}`}
+                </span>
+                <p className="inline pt-1 text-lg">{`${
+                  toggleShowAll ? 'show less' : 'show more'
+                }`}</p>
+              </button>
+            )}
           </div>
 
           <div
