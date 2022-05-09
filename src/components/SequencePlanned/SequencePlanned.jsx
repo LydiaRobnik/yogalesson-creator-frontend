@@ -14,7 +14,7 @@ import Modal from 'react-modal';
 import Asanas from '../Asanas/Asanas';
 import './sequencePlanned.scss';
 import useBreakpoint from '../../custom/useBreakpoint';
-import { forwardRef } from "react";
+import { forwardRef } from 'react';
 
 const customStyles = {
   content: {
@@ -43,13 +43,13 @@ Modal.setAppElement('#root');
 // },
  props, ref) => {
   const { sequence, handleFocus, index, moveSequence} = props */
-const SequencePlanned = forwardRef ((props, ref) => {
+const SequencePlanned = forwardRef((props, ref) => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const point = useBreakpoint();
   const { setUserSequences, yogaClassToAdd, setYogaClassToAdd } =
     useOutletContext();
-    const { sequence, handleFocus} = props
+  const { sequence, handleFocus } = props;
   // const ref = useRef(null);
 
   const [title, setTitle] = useState(sequence.title);
@@ -137,28 +137,6 @@ const SequencePlanned = forwardRef ((props, ref) => {
     }
   };
 
-  const renderCard = useCallback((card, index) => {
-    return (
-      <div className="flex flex-col content-center">
-        <div className="flex flex-col">
-          <span className="delete" onClick={() => handleRemoveAsana(card)}>
-            delete
-          </span>
-        </div>
-        <div className="flex flex-col">
-          <AsanaCard
-            asana={card}
-            key={card._id + Math.random()}
-            index={index}
-            id={card._id}
-            moveCard={moveCard}
-            // asanaInPlanner={true}
-          />
-        </div>
-      </div>
-    );
-  }, []);
-
   // ==End== moving and updating asana array in sequence / drag and drop function ====
 
   // edit functions
@@ -176,7 +154,7 @@ const SequencePlanned = forwardRef ((props, ref) => {
 
   return (
     <div ref={ref}>
-      <div  className="w-full flex flex-row justify-between">
+      <div className="w-full flex flex-row justify-between">
         <div className="w-full flex flex-row flex-wrap">
           <input
             type="text"
@@ -193,7 +171,7 @@ const SequencePlanned = forwardRef ((props, ref) => {
         </div>
 
         <div className="trash flex flex-row content-center justify-center px-3 border-l-2 border-gray-200">
-          <button 
+          <button
             className="trash btn-seqColl-red-outline cursor-pointer outline outline-2 flex flex-row self-center"
             onClick={() => handleRemoveSequence(sequence)}
           >
@@ -221,7 +199,30 @@ const SequencePlanned = forwardRef ((props, ref) => {
         <div
           className={`items-center grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
         >
-          {sequence && cards?.map((asana, index) => renderCard(asana, index))}
+          {sequence &&
+            cards?.map((card, index) => (
+              <>
+                <div className="flex flex-col content-center">
+                  <div className="flex flex-col">
+                    <span
+                      className="delete"
+                      onClick={() => handleRemoveAsana(card)}
+                    >
+                      delete
+                    </span>
+                  </div>
+                  <div className="flex flex-col">
+                    <AsanaCard
+                      asana={card}
+                      key={card._id + Math.random()}
+                      index={index}
+                      id={card._id}
+                      moveCard={moveCard}
+                    />
+                  </div>
+                </div>
+              </>
+            ))}
           <button className="addAsana" onClick={() => openModal()}>
             <span className="color-blue-darkest font-material-symbols p-4">
               add_circle
