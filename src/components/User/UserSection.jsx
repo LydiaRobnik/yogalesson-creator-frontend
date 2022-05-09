@@ -17,7 +17,7 @@ export default function UserSection() {
   const [asanas, setAsanas] = useState([]);
   const [systemMessages, setSystemMessages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [asanaService, setAsanaService] = useState(false);
+  const [asanaService, setAsanaService] = useState(backend);
   const [showNewSequence, setShowNewSequence] = useState(false);
   const [yogaClassToAdd, setYogaClassToAdd] = useState({
     title: '',
@@ -35,8 +35,9 @@ export default function UserSection() {
   });
 
   useEffect(() => {
-    backend.setAddErrorMessage(addSystemError);
-    setAsanaService(backend);
+    asanaService.setAddErrorMessage(addSystemError);
+    // backend.setAddErrorMessage(addSystemError);
+    // setAsanaService({ ...backend });
     return () => {};
   }, []);
 
@@ -56,7 +57,7 @@ export default function UserSection() {
         });
         setLoading(false);
       };
-      console.log('📒 📒 📒 📒 📒 fetchData Dashboard!!!!');
+      console.log('📒 📒 📒 📒 📒 fetchData Dashboard!!!!', asanaService);
       if (asanaService) fetchData();
     }
     console.log('loggedIn', loggedIn, user);
