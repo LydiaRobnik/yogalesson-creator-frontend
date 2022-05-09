@@ -276,7 +276,7 @@ const Asanas = ({ selection = false, addAsana }) => {
             </div>
 
             <div className="grow w-4/6 md:w-5/6 flex flex-row flex-wrap">
-              {!selection && (
+              {(1 === 1 || selection) && (
                 <button
                   className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
                   onClick={handleOpenCreateAsanaDialog}

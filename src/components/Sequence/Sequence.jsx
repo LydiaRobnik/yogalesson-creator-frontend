@@ -46,7 +46,7 @@ const Sequence = ({ sequence, selectedSequence }) => {
             {sequence &&
               sequence.asanas.map((asana, index) => (
                 <div key={`${asana._id}${index}`}>
-                  <AsanaCard asana={asana} showAsanaInMySequences={true} />
+                  <AsanaCard asana={asana} />
                 </div>
               ))}
           </div>
