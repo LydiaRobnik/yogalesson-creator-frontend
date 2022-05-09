@@ -159,7 +159,27 @@
     padding: 0.5rem 0.15rem;
   }
 
-  #systemMessage {
+  #systemMessageDiv {
     z-index: 500;
+  }
+
+  #systemMessage {
+    // transition: all 3s ease;
+    // opacity: 0;
+  }
+
+  .fade-out {
+    animation: fadeOut 4s;
+    animation-delay: 2s;
+    // opacity: 0;
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
   }
 }

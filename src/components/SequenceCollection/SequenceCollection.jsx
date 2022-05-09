@@ -3,7 +3,7 @@ import { useNavigate, useOutletContext } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import useBreakpoint from '../../custom/useBreakpoint';
 import Sequence from '../Sequence/Sequence.jsx';
-import asanaService from '../../api/asanaService';
+// import asanaService from '../../api/asanaService';
 import NewSequence from '../NewSequence/NewSequence';
 import './sequenceCollection.scss';
 
@@ -31,6 +31,15 @@ const SequenceCollection = (ref) => {
     setSequenceToAdd,
     setShowNewSequence
   } = useOutletContext();
+  const {
+    asanaService,
+    addSystemInfo,
+    addSystemSuccess,
+    addSystemError,
+    addSystemMessage,
+    clearSystemMessages
+  } = useOutletContext();
+
   const point = useBreakpoint();
   const navigate = useNavigate();
 
@@ -69,6 +78,7 @@ const SequenceCollection = (ref) => {
     asanaService.getUserSequences(user.id).then((data) => {
       setUserSequences(data);
     });
+    addSystemSuccess('Sequence deleted');
   };
 
   const handleAddSequence = (sequence) => {
@@ -99,6 +109,7 @@ const SequenceCollection = (ref) => {
     await asanaService.getUserSequences(user.id).then((data) => {
       setUserSequences(data);
     });
+    addSystemSuccess('Sequence saved');
 
     setShowNew(false);
     setEditSequenceId(-1);

@@ -151,17 +151,22 @@ export default function UserSection() {
           )}
         </main>
       </div>
-      <div id="systemMessage" className="fixed bottom-3 right-2">
+      <div id="systemMessageDiv" className="fixed bottom-3 right-2">
         {systemMessages &&
           systemMessages.length > 0 &&
           systemMessages.map((msg) => (
-            <div key={msg.id} class="text-center py-4 lg:px-4">
+            <div
+              id="systemMessage"
+              onAnimationEnd={() => handleDeleteMessage(msg.id)}
+              key={msg.id}
+              class="fade-out text-center py-2 lg:px-4"
+            >
               <div
-                class={`p-2 bg-${getMessageColor(
+                class={`flex p-2 bg-${getMessageColor(
                   msg.type
                 )}-800 items-center text-${getMessageColor(
                   msg.type
-                )}-100 leading-none lg:rounded-full flex lg:inline-flex`}
+                )}-100 leading-none rounded-full`}
                 role="alert"
               >
                 <span
@@ -169,14 +174,14 @@ export default function UserSection() {
                     msg.type
                   )}-500 uppercase px-2 py-1 text-xs font-bold mr-3`}
                 >
-                  {msg.type}
+                  <span className={`mt-1`}>{msg.type}</span>
                 </span>
-                <span class="font-semibold mr-2 text-left flex-auto mr-8">
+                <span class="font-semibold text-left flex-auto mt-1 mr-4">
                   {msg.message.toString()}
                 </span>
                 <button
                   onClick={() => handleDeleteMessage(msg.id)}
-                  class="absolute top-0 bottom-0 right-0 px-1 py-0"
+                  class="px-1 py-0"
                 >
                   <svg
                     class={`fill-current h-6 w-6 text-${getMessageColor(

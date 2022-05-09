@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
-import asanaService from '../../api/asanaService';
+// import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
 import AsanaCard from '../AsanaCard/AsanaCard';
 import Modal from 'react-modal';
@@ -39,6 +39,7 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
     setSequenceToAdd,
     setShowNewSequence
   } = useOutletContext();
+  const { asanaService, addSystemError, addSystemSuccess } = useOutletContext();
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [timeToConvert, setTimeToConvert] = useState();
