@@ -126,30 +126,6 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
     }
   };
 
-  const renderCard = useCallback((card, index) => {
-    return (
-      <div className="flex flex-col content-center">
-        <div className="flex flex-col">
-          <span className="delete" onClick={() => handleRemoveAsana(card)}>
-            delete
-          </span>
-        </div>
-        <div className="flex flex-col">
-          <AsanaCard
-            asana={card}
-            key={card._id + Math.random()}
-            index={index}
-            id={card._id}
-            moveCard={moveCard}
-            // asanaInPlanner={true}
-          />
-        </div>
-      </div>
-    );
-  }, []);
-
-  // ==End== moving and updating asana array in sequence / drag and drop function ====
-
   // edit functions
   const handleRemoveSequence = (sequence) => {
     const sequenceToRemove = yogaClassToAdd.plan.indexOf(sequence);

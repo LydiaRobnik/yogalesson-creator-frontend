@@ -23,6 +23,8 @@ export default function Planner() {
 
   const imgEl = useRef(null);
   const [totalDuration, setTotalDuration] = useState(0);
+  const [sequenceToChange, setSequenceToChange] = useState({});
+  const [newDuration, setNewDuration] = useState(0);
 
   useEffect(() => {
     const saveClassToBackend = async () => {
@@ -94,6 +96,22 @@ export default function Planner() {
       console.log('index to move', startIndex);
       console.log('index after splice', yogaClassToAdd.plan.indexOf(sequence));
     }
+  };
+
+  const editDuration = (event, sequence) => {
+    console.log('old duration', sequence.duration);
+    const index = yogaClassToAdd.plan.indexOf(sequence);
+    const newDuration = +event.target.value;
+    sequence.duration = newDuration;
+
+    yogaClassToAdd.plan.splice(index, 1, sequence);
+
+    setYogaClassToAdd({
+      ...yogaClassToAdd
+    });
+    asanaService.getUserClasses(user.id).then((data) => {
+      setUserClasses(data);
+    });
   };
 
   const getTotalDuration = () => {
@@ -173,9 +191,14 @@ export default function Planner() {
                           <span className="font-material-symbols color-blue-darkest text-lg px-1">
                             schedule
                           </span>
-                          <p className="pl-2 pt-1 color-blue-darkest">
-                            {sequence.duration}
-                          </p>
+                          <input
+                            type="text"
+                            className="pl-2 pt-1 color-blue-darkest w-8"
+                            // contenteditable="true"
+                            value={sequence.duration}
+                            onFocus={handleFocus}
+                            onChange={(event) => editDuration(event, sequence)}
+                          />
                         </div>
                       </div>
                     </div>
