@@ -178,16 +178,12 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
               required
               className="color-blue-darkest text-lg bg-white w-24 text-center border-2 border-gray-200 rounded"
               placeholder="minutes"
-              // value={new Date(sequenceToAdd.duration).getTime()}
-              value={timeToConvert}
-              onChange={
-                (e) =>
-                  setSequenceToAdd({
-                    ...sequenceToAdd,
-                    duration: +e.target.value
-                  })
-
-                // setSequenceToAdd(parseInt(timeToConvert));
+              // value={timeToConvert}
+              onChange={(e) =>
+                setSequenceToAdd({
+                  ...sequenceToAdd,
+                  duration: +e.target.value
+                })
               }
               onFocus={handleFocus}
             />
