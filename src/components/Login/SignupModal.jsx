@@ -5,7 +5,11 @@ import '../Navbar/navbar.scss';
 import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
 
-export default function SignupModal({ SignupModalOpen, setSignupModalOpen }) {
+export default function SignupModal({
+  SignupModalOpen,
+  setSignupModalOpen,
+  handleSwitch
+}) {
   const cancelButtonRef = useRef(null);
 
   return (
@@ -73,6 +77,7 @@ export default function SignupModal({ SignupModalOpen, setSignupModalOpen }) {
                     <Signupform
                       SignupModalOpen={SignupModalOpen}
                       setSignupModalOpen={setSignupModalOpen}
+                      handleSwitch={handleSwitch}
                     />
                   </div>
                 </div>
