@@ -1,4 +1,9 @@
+import React, { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+
 export default function Hero() {
+  const { setShowLogin } = useContext(AuthContext);
+
   return (
     <>
       <div className="bluewindow">
@@ -11,7 +16,10 @@ export default function Hero() {
         </div>
       </div>
       <div className="divdivdiv">
-        <button className="bg-red hover:bg-red-500 text-white font-bold pt-3 py-2 px-20">
+        <button
+          onClick={() => setShowLogin(true)}
+          className="bg-red hover:bg-red-500 text-white font-bold pt-3 py-2 px-20"
+        >
           try it now
         </button>
       </div>

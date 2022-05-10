@@ -9,6 +9,7 @@ const AuthState = ({ children }) => {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
+  const [showLogin, setShowLogin] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -64,7 +65,16 @@ const AuthState = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ logout, loggedIn, user, setUser, signup, login }}
+      value={{
+        logout,
+        loggedIn,
+        user,
+        setUser,
+        signup,
+        login,
+        showLogin,
+        setShowLogin
+      }}
     >
       {children}
     </AuthContext.Provider>
