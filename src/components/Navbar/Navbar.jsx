@@ -99,7 +99,7 @@ export default function Navbar() {
                         alt="Workflow"
                       />
                       <p className="color-blue-darkest ml-2 text-2xl mt-1">
-                        Flowting Ananas<br></br>
+                        Monkey Plan<br></br>
                         <p className="text-sm">Smooth Class planning</p>
                       </p>
                     </div>
