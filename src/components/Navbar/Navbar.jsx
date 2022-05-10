@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { Fragment } from 'react';
@@ -21,13 +21,22 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
-  const { loggedIn, login, logout, user } = useContext(AuthContext);
+  const { loggedIn, login, logout, user, showLogin, setShowLogin } =
+    useContext(AuthContext);
   // const [name, setName] = useState('');
   // const [password, setPassword] = useState('');
   // const [error, setError] = useState('');
   // const [open, setOpen] = useState(true);
   const [ModalOpen, setModalOpen] = useState(false);
   const [SignupModalOpen, setSignupModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (showLogin) {
+      setSignupModalOpen(true);
+      setShowLogin(false);
+    }
+    return () => {};
+  }, [showLogin]);
 
   // async function handleLogin(e) {
   //   e.preventDefault();

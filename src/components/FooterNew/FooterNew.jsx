@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 import './footerNew.scss';
 
 const FooterNew = () => {
+  const { setShowLogin } = useContext(AuthContext);
+
   return (
     <>
       <div className="flex background w-full h-full">
         <div className="centerButton flex items-center justify-center mx-auto mb-32">
-          <button className="bg-red hover:bg-red-500 text-white font-bold py-2 pt-3 px-10 mb-20">
+          <button
+            onClick={() => setShowLogin(true)}
+            className="bg-red hover:bg-red-500 text-white font-bold py-2 pt-3 px-10 mb-20"
+          >
             Start creating
           </button>
         </div>
