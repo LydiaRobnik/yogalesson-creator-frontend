@@ -46,7 +46,9 @@
       overflow: hidden;
       height: 0;
     }
-    
+    .space {
+      @apply items-center grid gap-4;
+    }
   }
 
  

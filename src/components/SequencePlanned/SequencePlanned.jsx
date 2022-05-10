@@ -199,7 +199,7 @@ const SequencePlanned = ({ sequence, handleFocus}) => {
         </div>
 
         <div
-          className={`items-center grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
+          className={`space items-center grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
         >
           {sequence &&
             cards?.map((card, index) => (
