@@ -34,10 +34,11 @@ const AuthState = ({ children }) => {
       const res = await http().post('/auth/signup', user);
       // localStorage.setItem("token", res.data.token);
       // await getUserdata(res.data.token);
-      return true;
+      return [true, res.data.user];
     } catch (err) {
       console.log(err);
-      return false;
+      // return false;
+      return [false, err];
     }
   };
 

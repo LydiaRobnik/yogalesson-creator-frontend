@@ -21,7 +21,7 @@ export default function Example({ SignupModal, setSignupModal }) {
     e.preventDefault();
     setError('');
 
-    const result = await signup({
+    const [result, data] = await signup({
       email: name,
       username: name.split('@')[0],
       password: password,
@@ -29,9 +29,17 @@ export default function Example({ SignupModal, setSignupModal }) {
     });
 
     if (!result) {
-      setError('Invalid username or password!');
-    }
-    if (password != confirmPassword) {
+      console.log('🧑‍💼 login result', data.response.data);
+      if (data.response.data.errors?.length > 0) {
+        setError(
+          `${error.response.data.errors[0].msg} - ${error.response.data.errors[0].param}`
+        );
+      } else if (typeof data.response.data === 'string') {
+        setError(data.response.data);
+      } else {
+        setError('Invalid username or password!');
+      }
+    } else if (password != confirmPassword) {
       setError('Passwords do not match');
     } else {
       setName('');
