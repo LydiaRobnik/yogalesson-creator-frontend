@@ -24,6 +24,7 @@ export default function Planner() {
   const navigate = useNavigate();
 
   const imgEl = useRef(null);
+  const [hideGoogleMaterialIcon, setHideGoogleMaterialIcon] = useState(false);
   const [totalDuration, setTotalDuration] = useState(0);
   const [sequenceToChange, setSequenceToChange] = useState({});
   const [newDuration, setNewDuration] = useState(0);
@@ -45,11 +46,15 @@ export default function Planner() {
       console.log('📒 saveClass', result);
 
       const classToShowOnPreviewPic = yogaClassToAdd._id;
+      // setHideGoogleMaterialIcon(!hideGoogleMaterialIcon);
+      console.log('hidden?', hideGoogleMaterialIcon);
       asanaService
         .createClassPreview(imgEl.current, classToShowOnPreviewPic)
         .catch((err) => {
           console.log('err:', err);
         });
+      // setHideGoogleMaterialIcon(!hideGoogleMaterialIcon);
+      console.log('hidden?', hideGoogleMaterialIcon);
     };
     getTotalDuration();
     saveClassToBackend();
@@ -145,94 +150,102 @@ export default function Planner() {
       )}
 
       {!loading && (
-        <div className="w-full bg-white">
-          <div className="w-full bg-white">
-            <div
-              className={`flex flex-row ${
-                yogaClassToAdd.plan.length === 0
-                  ? 'justify-center'
-                  : 'justify-start'
-              }`}
-            >
-              <input
-                type="text"
-                maxlength="70"
-                className={`color-blue-darkest px-10 text-2xl md:text-4xl pb-3 ${
-                  yogaClassToAdd.plan.length === 0 ? 'text-center' : 'text-left'
-                } w-full`}
-                placeholder="draft - class title"
-                value={yogaClassToAdd.title}
-                onChange={editClass}
-                onFocus={handleFocus}
-              />
-            </div>
+        <>
+          <div className="w-11/12 plannerFrame bg-white">
+            <div className="w-full bg-white">
+              <div
+                className={`flex flex-row ${
+                  yogaClassToAdd.plan.length === 0
+                    ? 'justify-center'
+                    : 'justify-start'
+                }`}
+              >
+                <input
+                  type="text"
+                  maxlength="70"
+                  className={`color-blue-darkest px-10 text-2xl md:text-4xl pb-3 ${
+                    yogaClassToAdd.plan.length === 0
+                      ? 'text-center'
+                      : 'text-left'
+                  } w-full`}
+                  placeholder="draft - class title"
+                  value={yogaClassToAdd.title}
+                  onChange={editClass}
+                  onFocus={handleFocus}
+                />
+              </div>
 
-            <div ref={imgEl} className="w-full">
-              {yogaClassToAdd.plan.length === 0 && (
-                <div className="grid place-items-center h-28 ">
-                  <p className="color-blue-darkest text-center text-lg">
-                    No sequences yet
-                  </p>
-                </div>
-              )}
-              {yogaClassToAdd.plan &&
-                yogaClassToAdd.plan.map((sequence, index) => (
-                  <div className="grid grid-cols-12 gap-4 items-start border-t-2 border-gray-200 mx-4">
-                    <div className=" col-span-1 mt-3">
-                      <div className="flex flex-row flex-wrap">
-                        <span
-                          className="font-material-symbols color-blue-darkest text-xl px-1 cursor-pointer"
-                          onClick={() => moveSequenceUp(sequence)}
-                        >
-                          expand_less
-                        </span>
-                        <span
-                          className="font-material-symbols color-blue-darkest text-xl px-1 cursor-pointer"
-                          onClick={() => moveSequenceDown(sequence)}
-                        >
-                          expand_more
-                        </span>
-                      </div>
-                      <div>
-                        <div className="w-16 border-2 border-gray-200 rounded flex flex-row row-wrap items-center">
-                          <span className="font-material-symbols color-blue-darkest text-lg px-1">
-                            schedule
+              <div ref={imgEl} className="w-full">
+                {yogaClassToAdd.plan.length === 0 && (
+                  <div className="grid place-items-center h-28 ">
+                    <p className="color-blue-darkest text-center text-lg">
+                      No sequences yet
+                    </p>
+                  </div>
+                )}
+                {yogaClassToAdd.plan &&
+                  yogaClassToAdd.plan.map((sequence, index) => (
+                    <div className="grid grid-cols-12 gap-4 items-start border-t-2 border-gray-200 mx-4">
+                      <div className=" col-span-1 mt-3">
+                        <div className="flex flex-row flex-wrap">
+                          <span
+                            className="font-material-symbols color-blue-darkest text-xl px-1 cursor-pointer"
+                            onClick={() => moveSequenceUp(sequence)}
+                          >
+                            expand_less
                           </span>
-                          <input
-                            type="text"
-                            className="pl-2 pt-1 color-blue-darkest w-8"
-                            // contenteditable="true"
-                            value={sequence.duration}
-                            onFocus={handleFocus}
-                            onChange={(event) => editDuration(event, sequence)}
-                          />
+                          <span
+                            className="font-material-symbols color-blue-darkest text-xl px-1 cursor-pointer"
+                            onClick={() => moveSequenceDown(sequence)}
+                          >
+                            expand_more
+                          </span>
+                        </div>
+                        <div>
+                          <div className="w-16 border-2 border-gray-200 rounded flex flex-row row-wrap items-center">
+                            <span className="font-material-symbols color-blue-darkest text-lg px-1">
+                              schedule
+                            </span>
+                            <input
+                              type="text"
+                              className="pl-2 pt-1 color-blue-darkest w-8"
+                              // contenteditable="true"
+                              value={sequence.duration}
+                              onFocus={handleFocus}
+                              onChange={(event) =>
+                                editDuration(event, sequence)
+                              }
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div
-                      key={sequence._id}
-                      className=" rounded col-span-11 my-2"
-                    >
-                      <SequencePlanned
-                        sequence={sequence}
-                        handleFocus={handleFocus}
-                      />
+                      <div
+                        key={sequence._id}
+                        className=" rounded col-span-11 my-2"
+                      >
+                        <SequencePlanned
+                          sequence={sequence}
+                          handleFocus={handleFocus}
+                          // hideGoogleMaterialIcon={hideGoogleMaterialIcon}
+                          // setHideGoogleMaterialIcon={setHideGoogleMaterialIcon}
+                        />
+                      </div>
                     </div>
+                  ))}
+              </div>
+              {yogaClassToAdd.plan.length > 0 && (
+                <>
+                  <div className=" border-t-2 border-gray-300 mb-2"></div>
+                  <div className="w-32 border-4 rounded flex flex-row row-wrap items-center ">
+                    <span className="font-material-symbols color-blue-darkest text-xl font-bold px-1">
+                      schedule
+                    </span>
+                    <h4 className="totalTime">{totalDuration} minutes</h4>
                   </div>
-                ))}
+                </>
+              )}
             </div>
-            {yogaClassToAdd.plan.length > 0 && (
-              <>
-                <div className=" border-t-2 border-gray-300 mb-2"></div>
-                <div className="w-32 border-4 rounded flex flex-row row-wrap items-center ">
-                  <span className="font-material-symbols color-blue-darkest text-xl font-bold px-1">
-                    schedule
-                  </span>
-                  <h4 className="totalTime">{totalDuration} minutes</h4>
-                </div>
-              </>
-            )}
           </div>
 
           <div className=" w-full flex flex-row justify-center mt-4">
@@ -244,7 +257,7 @@ export default function Planner() {
               <p className="inline pt-1 text-lg ">sequence</p>
             </button>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

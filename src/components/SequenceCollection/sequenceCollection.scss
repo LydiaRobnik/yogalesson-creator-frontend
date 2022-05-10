@@ -3,10 +3,11 @@
 
 .btn-seqColl-neutral {
 @apply bg-white outline outline-2 flex flex-row self-center mb-3 mr-1 ;
-color: $clr-blue-darkest;
+color: $clr-beige;
 }
 .btn-seqColl-neutral:hover {
     background-color: $clr-beige;
+    color: $clr-red;
 }
 
 .btn-seqColl-red-outline {
@@ -22,6 +23,6 @@ color: $clr-blue-darkest;
     color: $clr-blue-middle;
     }
     .btn-seqColl-blue:hover {
-        background-color: $clr-blue-darkest;
-        color: $clr-beige;
+        background-color: $clr-blue-light;
+        color: $clr-blue-darkest;
     }
