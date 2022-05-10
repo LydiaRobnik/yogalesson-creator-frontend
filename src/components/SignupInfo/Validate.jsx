@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
+import './validate.scss';
 
 export default function Validate() {
   const { login } = useContext(AuthContext);
