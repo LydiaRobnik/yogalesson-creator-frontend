@@ -38,9 +38,9 @@ export default function Example({ ModalOpen, setModalOpen }) {
         <div className="max-w-md w-full space-y-8">
           <div className="flex flex-col justify-center">
             <lottie-player
-              src="https://assets1.lottiefiles.com/packages/lf20_s9dkwhdi.json"
+              src="https://assets9.lottiefiles.com/private_files/lf30_m6j5igxb.json"
               background="transparent"
-              speed="1"
+              speed="0.5"
               style={{ width: '100%', height: '200px', self: 'center' }}
               loop
               autoplay
