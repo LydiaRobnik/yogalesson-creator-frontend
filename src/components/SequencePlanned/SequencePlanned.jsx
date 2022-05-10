@@ -140,30 +140,6 @@ const SequencePlanned = ({ sequence, handleFocus}) => {
     }
   };
 
-  const renderCard = useCallback((card, index) => {
-    return (
-      <div className="flex flex-col content-center">
-        <div className="flex flex-col">
-          <span className="delete" onClick={() => handleRemoveAsana(card)}>
-            delete
-          </span>
-        </div>
-        <div className="flex flex-col">
-          <AsanaCard
-            asana={card}
-            key={card._id + Math.random()}
-            index={index}
-            id={card._id}
-            moveCard={moveCard}
-            // asanaInPlanner={true}
-          />
-        </div>
-      </div>
-    );
-  }, []);
-
-  // ==End== moving and updating asana array in sequence / drag and drop function ====
-
   // edit functions
   const handleRemoveSequence = (sequence) => {
     const sequenceToRemove = yogaClassToAdd.plan.indexOf(sequence);
@@ -274,11 +250,11 @@ const SequencePlanned = ({ sequence, handleFocus}) => {
             >
               ✖️
             </button>
-            <h2 className="text-lg font-bold text-center border-dashed border-b-slate-400 border-b bg-blue-dark color-beige-light p-4 pb-2 mb-4">
+            <h2 className="text-lg font-bold text-center border-dashed border-b-slate-400 border-b bg-blue-dark color-beige-light p-4 pb-2">
               Select an Asana
             </h2>
             {/* <ModalAddAsana /> */}
-            <div className="modalAsana overflow-scroll overflow-x-hidden">
+            <div className="modalAsana overflow-scroll overflow-x-hidden bg-light pt-4">
               <Asanas selection={true} addAsana={addAsana} />
             </div>
           </div>

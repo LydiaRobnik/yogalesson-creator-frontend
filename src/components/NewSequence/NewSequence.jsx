@@ -178,16 +178,12 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
               required
               className="color-blue-darkest text-lg bg-white w-24 text-center border-2 border-gray-200 rounded"
               placeholder="minutes"
-              // value={new Date(sequenceToAdd.duration).getTime()}
-              value={timeToConvert}
-              onChange={
-                (e) =>
-                  setSequenceToAdd({
-                    ...sequenceToAdd,
-                    duration: +e.target.value
-                  })
-
-                // setSequenceToAdd(parseInt(timeToConvert));
+              // value={timeToConvert}
+              onChange={(e) =>
+                setSequenceToAdd({
+                  ...sequenceToAdd,
+                  duration: +e.target.value
+                })
               }
               onFocus={handleFocus}
             />
@@ -230,11 +226,11 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
             >
               ✖️
             </button>
-            <h2 className="text-lg font-bold text-center border-dashed border-b-slate-400 border-b bg-blue-dark color-beige-light p-4 pb-2 mb-4">
+            <h2 className="text-lg font-bold text-center border-dashed border-b-slate-400 border-b bg-blue-dark color-beige-light p-4 pb-2">
               Select an Asana
             </h2>
             {/* <ModalAddAsana /> */}
-            <div className="modalAsana overflow-scroll overflow-x-hidden">
+            <div className="modalAsana overflow-scroll overflow-x-hidden bg-light pt-4">
               <Asanas selection={true} addAsana={addAsana} />
             </div>
           </div>

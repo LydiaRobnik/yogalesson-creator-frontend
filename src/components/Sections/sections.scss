@@ -19,16 +19,12 @@
     color: $clr-blue-darkest;
     font-family: $font-manjari;
     text-align: center;
-    @apply  mb-3 font-light;
+    @apply  mb-2 font-light;
   }
 
 
 .cardsHome {
   background-color: $clr-beige;
-  height: 40%;
-  min-height: 9em;
-  width: 15%;
-  min-width: 10em;
 }
 
 
@@ -45,9 +41,7 @@
   background-color: $clr-light;
 }
 
-.cardBenefits3 {
-  background-color: #fffaf7;
-}
+
 
 .Section1right {
   background-image: url("../../pictures/flowers.jpg");
@@ -63,4 +57,11 @@
   background-size: 100% 100%;
 }
 
+.cardBenefits3 {
+  // background-color: $clr-blue-darkest;
+  background-image: url("../../pictures/Flowers_Section3.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 
+}
