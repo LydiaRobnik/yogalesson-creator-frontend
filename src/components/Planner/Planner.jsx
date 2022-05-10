@@ -2,13 +2,13 @@ import React, { useState, useContext, useEffect, useRef } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import './planner.scss';
-// import NewSequence from '../NewSequence/NewSequence';
+import NewSequence from '../NewSequence/NewSequence';
 import SequencePlanned from '../SequencePlanned/SequencePlanned';
 import asanaService from '../../api/asanaService';
-import Print from "../Print/Print";
 import moment from 'moment';
+import { forwardRef } from "react";
 
-export default function Planner() {
+const Planner = forwardRef ((props, ref) => {
   const {
     userClasses,
     setUserClasses,
@@ -115,6 +115,7 @@ export default function Planner() {
   };
 
   return (
+    <div ref={ref}>
     <div className="w-full">
       {loading && (
         <lottie-player
@@ -192,7 +193,7 @@ export default function Planner() {
                       key={sequence._id}
                       className=" rounded col-span-11 my-2"
                     >
-                      <Print
+                      <SequencePlanned
                         sequence={sequence}
                         handleFocus={handleFocus}
                       />
@@ -225,5 +226,8 @@ export default function Planner() {
         </div>
       )}
     </div>
+    </div>
   );
-}
+});
+
+export default Planner;

@@ -14,7 +14,7 @@ import Modal from 'react-modal';
 import Asanas from '../Asanas/Asanas';
 import './sequencePlanned.scss';
 import useBreakpoint from '../../custom/useBreakpoint';
-import { forwardRef } from "react";
+//import { forwardRef } from "react";
 
 const customStyles = {
   content: {
@@ -43,14 +43,14 @@ Modal.setAppElement('#root');
 // },
  props, ref) => {
   const { sequence, handleFocus, index, moveSequence} = props */
-const SequencePlanned = forwardRef ((props, ref) => {
+const SequencePlanned = ({ sequence, handleFocus}) => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const point = useBreakpoint();
   const { setUserSequences, yogaClassToAdd, setYogaClassToAdd } =
     useOutletContext();
-    const { sequence, handleFocus} = props
-  // const ref = useRef(null);
+    //const { sequence, handleFocus} = props
+  const ref = useRef(null);
   const { asanaService, addSystemError, addSystemSuccess } = useOutletContext();
 
   //const ref = useRef(null);
@@ -179,7 +179,7 @@ const SequencePlanned = forwardRef ((props, ref) => {
   };
 
   return (
-    <div ref={ref}>
+    <>
       <div  className="w-full flex flex-row justify-between">
         <div className="w-full flex flex-row flex-wrap">
           <input
@@ -284,8 +284,8 @@ const SequencePlanned = forwardRef ((props, ref) => {
           </div>
         </Modal>
       </div>
-    </div>
+    </>
   );
-});
+};
 
 export default SequencePlanned;
