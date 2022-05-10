@@ -24,7 +24,11 @@ export default function Example({ ModalOpen, setModalOpen }) {
 
     if (!result) {
       console.log('🧑‍💼 login result', data.response.data);
-      if (data) {
+      if (data.response.data.errors?.length > 0) {
+        setError(
+          `${error.response.data.errors[0].msg} - ${error.response.data.errors[0].param}`
+        );
+      } else if (typeof data.response.data === 'string') {
         setError(data.response.data);
       } else {
         setError('Invalid username or password!');
