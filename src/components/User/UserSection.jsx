@@ -91,7 +91,7 @@ export default function UserSection() {
   const addSystemMessage = (type, message) => {
     console.log('📒 addSystemMessage', systemMessages);
     const newMessage = { id: uuidv4(), type: type, message };
-    setSystemMessages((prev) => [...prev, newMessage]);
+    setSystemMessages((prev) => [newMessage, ...prev]);
   };
 
   const clearSystemMessages = () => {

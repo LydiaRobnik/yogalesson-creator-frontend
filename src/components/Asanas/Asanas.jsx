@@ -338,7 +338,7 @@ const Asanas = ({ selection = false, addAsana }) => {
               /> */}
               <div
                 className={`flex justify-center ${
-                  showFilter ? 'w-24 md:w-40' : 'opacity-0'
+                  showFilter ? '' : 'opacity-0'
                 }`}
               >
                 <div
@@ -354,7 +354,7 @@ const Asanas = ({ selection = false, addAsana }) => {
                     data-mdb-toggle="input-toggle-timepicker"
                   />
                   <label forhtml="floatingInput" className="text-gray-500">
-                    Filter by name
+                    Filter {point === 'xs' || point === 'sm' ? '' : ' by name'}
                   </label>
                 </div>
               </div>
@@ -455,7 +455,7 @@ const Asanas = ({ selection = false, addAsana }) => {
                       )
                   )
                   .map((asana) => (
-                    <div key={asana._id}>
+                    <div key={asana._id} className="">
                       <AsanaCard
                         asana={asana}
                         handleSelectAsana={handleSelectAsana}
@@ -475,7 +475,7 @@ const Asanas = ({ selection = false, addAsana }) => {
               style={customStyles}
               contentLabel="Example Modal"
             >
-              <div className="text-black relative">
+              <div className="text-black relative bg-light">
                 <button
                   onClick={closeModal}
                   className="btn-modal-close absolute top-1 right-1"

@@ -131,9 +131,17 @@ export default function CalendarEntryDialog({
               <div className="flex flex-col gap-3 border border-dashed py-2">
                 <div className="grid grid-cols-[38px_1fr] gap-2">
                   <div className="text-right mt-1">from</div>
-                  <TimePicker onChange={onChangeFrom} value={valueFrom} />
+                  <TimePicker
+                    onChange={onChangeFrom}
+                    value={valueFrom}
+                    className="bg-white"
+                  />
                   <div className="text-right mt-1">to</div>
-                  <TimePicker onChange={onChangeTo} value={valueTo} />
+                  <TimePicker
+                    onChange={onChangeTo}
+                    value={valueTo}
+                    className="bg-white"
+                  />
                 </div>
               </div>
               <div className="flex flex-col gap-3 border border-dashed py-2">
