@@ -20,7 +20,7 @@ export default function Section1() {
     <>
       <div className="section-container md:flex h-full">
         <div className="sectionTitleColor md:w-1/2 flex-col items-center justify-center text-6xl font-bold">
-          <div className="sectionTitle flex items-center justify-center font-light text-10xl leading-relaxed">
+          <div className="sectionTitle pt-4 flex items-center justify-center font-light text-10xl leading-relaxed">
             Beginners Class
           </div>
           <div className="max-w-screen-lg mx-auto p-4">
@@ -45,8 +45,9 @@ export default function Section1() {
         </div>
         <div className="w-full flex items-center justify-center relative md:flex md:w-1/2 Section1right">
           <div className="featureText flex items-center justify-center leading-relaxed p-5 m-24 absolute bottom-50 text-3xl text-left bg-red-500 bg-opacity-20 backdrop-blur-md font-light">
-            Select exercises from our libary or add your own asanas. Prepare
-            reusable text modules for shavasana or meditation sequences.
+            Select exercises from our library or add your own asanas. <br></br>
+            <br></br>
+            Prepare reusable text modules for shavasana or meditation sequences.
           </div>
         </div>
       </div>
