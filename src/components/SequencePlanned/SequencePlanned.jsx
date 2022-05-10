@@ -32,7 +32,12 @@ const customStyles = {
 };
 Modal.setAppElement('#root');
 
-const SequencePlanned = ({ sequence, handleFocus }) => {
+const SequencePlanned = ({
+  sequence,
+  handleFocus,
+  hideGoogleMaterialIcon,
+  setHideGoogleMaterialIcon
+}) => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const point = useBreakpoint();
@@ -213,7 +218,10 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
                 </div>
               </>
             ))}
-          <button className="addAsana" onClick={() => openModal()}>
+          <button
+            className={`addAsana ${hideGoogleMaterialIcon ? 'hidden' : ''}`}
+            onClick={() => openModal()}
+          >
             <span className="color-blue-darkest font-material-symbols p-4">
               add_circle
             </span>
