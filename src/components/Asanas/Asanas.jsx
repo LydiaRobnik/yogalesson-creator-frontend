@@ -307,7 +307,7 @@ const Asanas = ({ selection = false, addAsana }) => {
               </div>
             </div>
 
-            <div className="grow flex flex-row flex-wrap">
+            <div className="grow flex flex-row flex-wrap justify-center sm:justify-end sm:mr-3">
               {(1 === 1 || selection) && (
                 <button
                   className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
