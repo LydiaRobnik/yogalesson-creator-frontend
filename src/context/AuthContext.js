@@ -22,7 +22,7 @@ const AuthState = ({ children }) => {
       localStorage.setItem('token', res.data.token);
 
       await getUserdata(res.data.token);
-      return [true, res.data.user];
+      return [true, res.data.token];
     } catch (err) {
       console.log(err);
       return [false, err];
