@@ -38,17 +38,20 @@ function getBase64(file) {
 
     // reader.readAsArrayBuffer(file);
   });
-
-  // var reader = new FileReader();
-  // reader.readAsDataURL(file);
-  // reader.onload = function () {
-  //   console.log(reader.result);
-  //   return reader.result;
-  // };
-  // reader.onerror = function (error) {
-  //   console.log('Error: ', error);
-  //   return false;
-  // };
 }
 
-export { calendarColors, dataURItoBlob, getBase64 };
+function formatDate(date) {
+  var options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  };
+
+  // console.log('date en-us', date.toLocaleDateString('en-US', options));
+  // console.log('date', date.toLocaleDateString('de-DE', options));
+
+  return date.toLocaleDateString('en-US', options);
+}
+
+export { calendarColors, dataURItoBlob, getBase64, formatDate };
