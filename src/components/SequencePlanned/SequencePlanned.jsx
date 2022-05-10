@@ -7,9 +7,8 @@ import React, {
 } from 'react';
 import AsanaCard from '../AsanaCard/AsanaCard';
 import { useNavigate, useOutletContext } from 'react-router-dom';
-import { useDrop, useDrag } from 'react-dnd';
 import update from 'immutability-helper';
-import asanaService from '../../api/asanaService';
+// import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
 import Modal from 'react-modal';
 import Asanas from '../Asanas/Asanas';
@@ -52,6 +51,9 @@ const SequencePlanned = forwardRef ((props, ref) => {
     useOutletContext();
     const { sequence, handleFocus} = props
   // const ref = useRef(null);
+  const { asanaService, addSystemError, addSystemSuccess } = useOutletContext();
+
+  const ref = useRef(null);
 
   const [title, setTitle] = useState(sequence.title);
   const [description, setDescription] = useState(sequence.description);
@@ -79,8 +81,6 @@ const SequencePlanned = forwardRef ((props, ref) => {
         title: title,
         description: description
       };
-      // const result = await asanaService.saveSequence(updatedSequence);
-      // console.log('📒 saveSequence', result);
 
       if (yogaClassToAdd._id && yogaClassToAdd.plan?.length > 0) {
         const updatedSequences = yogaClassToAdd?.plan?.map((s) => {
@@ -169,6 +169,7 @@ const SequencePlanned = forwardRef ((props, ref) => {
     const sequenceToRemove = yogaClassToAdd.plan.indexOf(sequence);
     yogaClassToAdd.plan.splice(sequenceToRemove, 1);
     setYogaClassToAdd({ ...yogaClassToAdd });
+    addSystemSuccess('Sequence removed');
   };
 
   const handleRemoveAsana = (asana) => {
@@ -208,12 +209,8 @@ const SequencePlanned = forwardRef ((props, ref) => {
       <>
         <div className="w-full min-h-40">
           <span
-            // type="text"
-            // name="description"
             role="textbox"
             id="description"
-            // rows="2"
-            // cols="100"
             className="color-blue-darkest break-words py-4 w-full h-min rounded-md mt-3"
             placeholder="add a descrition"
             value={description}
@@ -223,13 +220,36 @@ const SequencePlanned = forwardRef ((props, ref) => {
           >
             {description}
           </span>
-          {/* <p className="color-blue-darkest pl-3 py-3">{sequence.description}</p> */}
         </div>
 
         <div
           className={`items-center grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
         >
-          {sequence && cards?.map((asana, index) => renderCard(asana, index))}
+          {sequence &&
+            cards?.map((card, index) => (
+              <>
+                <div className="flex flex-col content-center">
+                  <div className="flex flex-col trash">
+                    <span
+                      className="delete"
+                      onClick={() => handleRemoveAsana(card)}
+                    >
+                      delete
+                    </span>
+                  </div>
+                  <div className="flex flex-col">
+                    <AsanaCard
+                      asana={card}
+                      key={card._id + Math.random()}
+                      index={index}
+                      id={card._id}
+                      moveCard={moveCard}
+                      sequencePlannedStyles={true}
+                    />
+                  </div>
+                </div>
+              </>
+            ))}
           <button className="addAsana" onClick={() => openModal()}>
             <span className="color-blue-darkest font-material-symbols p-4">
               add_circle

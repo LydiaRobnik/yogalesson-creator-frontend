@@ -3,8 +3,8 @@ import { useNavigate, useOutletContext } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import useBreakpoint from '../../custom/useBreakpoint';
 import Sequence from '../Sequence/Sequence.jsx';
-import asanaService from '../../api/asanaService';
-import NewSequence from '../NewSequence.jsx/NewSequence';
+// import asanaService from '../../api/asanaService';
+import NewSequence from '../NewSequence/NewSequence';
 import './sequenceCollection.scss';
 
 const newSeqObj = (userId) => ({
@@ -31,6 +31,15 @@ const SequenceCollection = (ref) => {
     setSequenceToAdd,
     setShowNewSequence
   } = useOutletContext();
+  const {
+    asanaService,
+    addSystemInfo,
+    addSystemSuccess,
+    addSystemError,
+    addSystemMessage,
+    clearSystemMessages
+  } = useOutletContext();
+
   const point = useBreakpoint();
   const navigate = useNavigate();
 
@@ -69,6 +78,7 @@ const SequenceCollection = (ref) => {
     asanaService.getUserSequences(user.id).then((data) => {
       setUserSequences(data);
     });
+    addSystemSuccess('Sequence deleted');
   };
 
   const handleAddSequence = (sequence) => {
@@ -99,6 +109,7 @@ const SequenceCollection = (ref) => {
     await asanaService.getUserSequences(user.id).then((data) => {
       setUserSequences(data);
     });
+    addSystemSuccess('Sequence saved');
 
     setShowNew(false);
     setEditSequenceId(-1);
@@ -164,23 +175,16 @@ const SequenceCollection = (ref) => {
                     </span>
                   </button>
                   <button
-                    className="btn-seqColl-neutral "
+                    className="btn-seqColl-blue "
                     onClick={() => handleEditSequence(sequence)}
                   >
                     <span className="font-material-symbols px-2 py-1">
                       edit
                     </span>
                   </button>
-
-                  <button
-                    className="btn-seqColl-red-outline"
-                    onClick={() => handleDeleteSequence(sequence)}
-                  >
-                    <p className="font-material-symbols py-1 px-2">delete</p>
-                  </button>
                 </div>
 
-                <div className="col-span-11">
+                <div className="col-span-10">
                   {sequence._id === editSequenceId ? (
                     <NewSequence
                       handleFocus={handleFocus}
@@ -194,6 +198,14 @@ const SequenceCollection = (ref) => {
                       handleEditSequence={handleEditSequence}
                     />
                   )}
+                </div>
+                <div className="col-span-1 flex flex-col justify-start mt-3">
+                  <button
+                    className="btn-seqColl-red-outline"
+                    onClick={() => handleDeleteSequence(sequence)}
+                  >
+                    <p className="font-material-symbols py-1 px-2">delete</p>
+                  </button>
                 </div>
               </div>
             ))}

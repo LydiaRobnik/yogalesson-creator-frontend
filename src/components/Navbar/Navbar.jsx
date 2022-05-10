@@ -11,7 +11,7 @@ import './navbar.scss';
 const navigation = [
   { name: 'Dashboard', path: '/user/dashboard', current: false },
   { name: 'Planner', path: '/user/planner', current: false },
-  { name: 'My Sequences', path: '/user/sequences', current: false },
+  { name: 'Sequences', path: '/user/sequences', current: false },
   { name: 'Asanas', path: '/user/asanas', current: false },
   { name: 'Calendar', path: '/user/calendar', current: false }
 ];
@@ -57,7 +57,7 @@ export default function Navbar() {
       <Disclosure as="nav" className="bg-light color">
         {({ open }) => (
           <>
-            <div className="navbar px-2 sm:px-2">
+            <div className="navbar px-2 sm:px-5">
               <div className="relative flex items-center justify-between h-16">
                 {loggedIn && (
                   <div className="absolute inset-y-0 left-0 flex items-center sm:hidden mx-auto">
@@ -76,7 +76,7 @@ export default function Navbar() {
                   </div>
                 )}
 
-                <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start pl-5">
+                <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start pl-0">
                   <NavLink to={'/'}>
                     <div className="flex-shrink-0 flex items-center">
                       <img
@@ -89,12 +89,9 @@ export default function Navbar() {
                         src="https://yogalesson-createor-backend.herokuapp.com/images/Logo_250x250px.png"
                         alt="Workflow"
                       />
-                      <div>
-                        <p className="color-blue-darkest ml-2">
-                          PlanAsana<br></br>
-                          YOGA OFF THE MAT
-                        </p>
-                      </div>
+                      <p className="color-blue-darkest ml-2 text-2xl mt-1">
+                        Flowting Ananas
+                      </p>
                     </div>
                   </NavLink>
 
@@ -104,7 +101,6 @@ export default function Navbar() {
                         {navigation.map((item) => (
                           <NavLink
                             key={item.name}
-                            href={item.href}
                             to={item.path}
                             className={({ isActive }) =>
                               `${
@@ -158,7 +154,7 @@ export default function Navbar() {
                   )}
                 </div>
 
-                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-0 sm:pr-0">
+                <div className="absolute inset-y-0 right-0 flex items-center pr-0 sm:static sm:inset-auto sm:ml-0 sm:pr-0">
                   {/* Profile dropdown */}
                   {loggedIn && (
                     <Menu as="div" className="ml-3 relative">
@@ -197,19 +193,6 @@ export default function Navbar() {
                               >
                                 Your Profile
                               </NavLink>
-                            )}
-                          </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <a
-                                href="#"
-                                className={classNames(
-                                  active ? 'bg-gray-100' : '',
-                                  'block px-4 py-2 text-sm text-gray-700'
-                                )}
-                              >
-                                Settings
-                              </a>
                             )}
                           </Menu.Item>
                           <Menu.Item>

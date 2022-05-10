@@ -1,0 +1,40 @@
+@import '../../style/variables.scss';
+
+.editSequence {
+  border: 3px $clr-blue-darkest;
+  @apply rounded-md border-dashed;
+}
+
+.addAsana {
+  @apply p-6 flex flex-row justify-center self-center content-center items-center border-2 border-gray-400 w-24 h-24 mt-4;
+}
+
+.addAsana:hover{
+    background-color: $clr-beige;
+}
+
+
+.btn-blueNew {
+  background-color: $clr-blue-darkest;
+  color: $clr-light;
+  padding: 0.5rem 1rem;
+  @apply px-6;
+}
+.btn-blueNew:hover {
+  background-color: $clr-blue-dark;
+  color: $clr-beige;
+  padding: 0.5rem 1rem;
+  @apply px-6;
+}
+
+.btn-redNew {
+  background-color: $clr-red;
+  color: $clr-light;
+  padding: 0.5rem 1rem;
+
+}
+.btn-redNew:hover {
+  background-color: $clr-beige;
+  padding: 0.5rem 1rem;
+  @apply text-white;
+}

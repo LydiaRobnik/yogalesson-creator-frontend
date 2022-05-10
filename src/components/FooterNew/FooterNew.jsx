@@ -14,15 +14,14 @@ const FooterNew = () => {
         {/* <div className="h-full w-full relative border-4 border-yellow-600 px-0 mx-0"> */}
 
         <footer className="footer p-4 sm:p-6 w-full absolute inset-x-0 bottom-0 h-40">
-          <div class="iconsHome flex justify-center text-center">
+          <div className="iconsHome flex justify-center text-center">
             <div className="flex mt-4 space-x-6 sm:justify-center sm:m-0">
               <a
                 href="#"
-                className="icon"
-                class="text-gray-700 hover:text-gray-900 dark:hover:text-white"
+                className="icon text-gray-700 hover:text-gray-900 dark:hover:text-white"
               >
                 <svg
-                  class="iconH w-8 h-8"
+                  className="iconH w-8 h-8"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   aria-hidden="true"
@@ -36,8 +35,7 @@ const FooterNew = () => {
               </a>
               <a
                 href="#"
-                className="icon"
-                class="text-gray-700 hover:text-gray-900 dark:hover:text-white"
+                className="icon text-gray-700 hover:text-gray-900 dark:hover:text-white"
               >
                 <svg
                   className="iconH w-8 h-8"
@@ -54,11 +52,10 @@ const FooterNew = () => {
               </a>
               <a
                 href="#"
-                className="icon"
-                class="text-gray-700 hover:text-gray-900 dark:hover:text-white"
+                className="icon text-gray-700 hover:text-gray-900 dark:hover:text-white"
               >
                 <svg
-                  class="iconH w-8 h-8"
+                  className="iconH w-8 h-8"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   aria-hidden="true"
@@ -68,8 +65,7 @@ const FooterNew = () => {
               </a>
               <a
                 href="#"
-                className="icon"
-                class="text-gray-700 hover:text-gray-900 dark:hover:text-white"
+                className="icon text-gray-700 hover:text-gray-900 dark:hover:text-white"
               >
                 <svg
                   className="iconH w-8 h-8"
@@ -86,9 +82,9 @@ const FooterNew = () => {
               </a>
             </div>
           </div>
-          <div class="sm:flex sm:items-center sm:justify-center text-center mt-4">
+          <div className="sm:flex sm:items-center sm:justify-center text-center mt-4">
             <span className="copyright text-sm text-gray-500 sm:text-center">
-              © 2022 <br></br> Copyright: Planasana Lydia Robnik, Vita, Michael,
+              © 2022 <br></br> Copyright: Planasana Lydia, Vita, Michael,
               Thomas. <br></br> All Rights Reserved.
             </span>
           </div>

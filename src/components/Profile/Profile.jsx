@@ -1,12 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import asanaService from '../../api/asanaService';
+// import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
 import FileUpload from '../FileUpload/FileUpload';
 
 export default function Profile() {
   const { loggedIn, login, logout, user, setUser } = useContext(AuthContext);
-  const { loading, setErrors, errors } = useOutletContext();
+  const {
+    loading,
+    asanaService,
+    addSystemInfo,
+    addSystemSuccess,
+    addSystemError,
+    addSystemMessage,
+    clearSystemMessages
+  } = useOutletContext();
 
   const [profile, setProfile] = useState({});
   const [passwordConfirm, setPasswordConfirm] = useState('');
@@ -20,7 +28,16 @@ export default function Profile() {
   const [clickImage, setClickImage] = useState(false);
 
   useEffect(() => {
-    asanaService.getUser(user.id).then((user) => {
+    console.log('📒 useEffect', asanaService);
+    // asanaService?.setAddErrorMessage(addSystemError);
+    clearSystemMessages();
+    if (loggedIn) {
+    }
+    return () => {};
+  }, []);
+
+  useEffect(() => {
+    asanaService?.getUser(user.id).then((user) => {
       setProfile(user);
       setImage(user.avatar);
     });
@@ -49,6 +66,7 @@ export default function Profile() {
             setProfile(user);
             setIsEditName(false);
             setUser((prev) => ({ ...prev, name: user.username }));
+            addSystemSuccess('Name changed');
           })
           .catch((err) => {
             console.log('📒 handleEditName err', err);
@@ -75,13 +93,16 @@ export default function Profile() {
             setProfile(user);
             setIsEditEmail(false);
             setUser((prev) => ({ ...prev, name: user.username }));
+            addSystemSuccess('Email changed');
           })
           .catch((err) => {
             console.log('📒 handleEditName err', err);
+            // addSystemError(err);
           });
       })
       .catch((err) => {
         console.log('📒 handleEditName err', err);
+        // addSystemError(err);
       });
   };
 
@@ -93,7 +114,7 @@ export default function Profile() {
     // check password confirmation
     if (profile.password !== passwordConfirm) {
       console.log('📒 Password confirmation does not match', passwordConfirm);
-      setErrors((prev) => [...prev, 'Password confirmation does not match']);
+      addSystemError('Password confirmation does not match');
       return;
     }
 
@@ -107,13 +128,16 @@ export default function Profile() {
           .then((user) => {
             setProfile(user);
             setIsEditPassword(false);
+            addSystemSuccess('Password changed');
           })
           .catch((err) => {
             console.log('📒 handleEditName err', err);
+            // addSystemError(err);
           });
       })
       .catch((err) => {
         console.log('📒 handleEditName err', err);
+        // addSystemError(err);
       });
   };
 
@@ -134,6 +158,7 @@ export default function Profile() {
               setProfile(user);
               setImage(imageUrl);
               setUser((prev) => ({ ...prev, avatar: user.avatar }));
+              addSystemSuccess('Avatar changed');
               // setProfile((prev) => {
               //   prev.avatar = imageUrl;
               //   return { ...prev };
@@ -142,10 +167,12 @@ export default function Profile() {
             })
             .catch((err) => {
               console.log('📒 handleSelectImage err', err);
+              // addSystemError(err);
             });
         })
         .catch((err) => {
           console.log('📒 handleSelectImage err', err);
+          // addSystemError(err);
         });
     }
   }

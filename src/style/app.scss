@@ -33,7 +33,6 @@
   button {
     @apply rounded cursor-pointer font-bold;
     font-family: $font-manjari;
-    
   }
 }
 
@@ -153,12 +152,34 @@
     background-color: white;
     color: $clr-red;
     padding: 0.5rem 0.15rem;
-}
-.btn-red-outline:hover {
-  background-color: $clr-beige;
+  }
+  .btn-red-outline:hover {
+    background-color: $clr-beige;
     color: $clr-blue-darkest;
     padding: 0.5rem 0.15rem;
-}
+  }
 
+  #systemMessageDiv {
+    z-index: 500;
+  }
 
+  #systemMessage {
+    // transition: all 3s ease;
+    // opacity: 0;
+  }
+
+  .fade-out {
+    animation: fadeOut 4s;
+    animation-delay: 2s;
+    // opacity: 0;
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
 }

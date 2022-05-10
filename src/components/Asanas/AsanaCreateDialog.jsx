@@ -1,10 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
-import asanaService from '../../api/asanaService';
+import { useOutletContext } from 'react-router-dom';
+// import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
 import FileUpload from '../FileUpload/FileUpload';
 
 export default function AsanaCreateDialog({ saveAsana, deleteAsana, asana }) {
   const { user, loggedIn } = useContext(AuthContext);
+
+  const { asanaService, addSystemError } = useOutletContext();
 
   const [asanaObj, setAsanaObj] = useState(asana);
   const [tag, setTag] = useState();
