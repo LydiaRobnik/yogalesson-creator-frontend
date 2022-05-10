@@ -20,7 +20,9 @@ class AsanaService {
     } catch (error) {
       if (error.response && error.response.status === 400) {
         if (error.response.data.errors?.length > 0) {
-          this.addErrorMessage(error.response.data.errors[0].message);
+          this.addErrorMessage(
+            `${error.response.data.errors[0].msg} - ${error.response.data.errors[0].param}`
+          );
           throw new Error(
             `❌ Input Error: ${error.response.data.errors[0].msg} -
               ${error.response.data.errors[0].param}`
@@ -85,6 +87,20 @@ class AsanaService {
       async () =>
         await http(localStorage.getItem('token')).put(
           `/user/${id}/change-password`,
+          user
+        )
+    );
+
+    return resp.data;
+  }
+
+  async changeUserEmail(id, user) {
+    console.log('changeUserEmail', id, user);
+    // throw new Error('Not implemented');
+    const resp = await this.doApiCall(
+      async () =>
+        await http(localStorage.getItem('token')).put(
+          `/auth/${id}/change-email`,
           user
         )
     );
