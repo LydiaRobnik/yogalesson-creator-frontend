@@ -4,6 +4,7 @@ import { useNavigate, useOutletContext } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import useBreakpoint from '../../custom/useBreakpoint';
 import ClassCard from '../ClassCard/ClassCard.jsx';
+//import Print from '../Print/Print';
 import asanaService from '../../api/asanaService';
 
 const Class = () => {

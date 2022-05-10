@@ -14,6 +14,7 @@ import Modal from 'react-modal';
 import Asanas from '../Asanas/Asanas';
 import './sequencePlanned.scss';
 import useBreakpoint from '../../custom/useBreakpoint';
+//import { forwardRef } from "react";
 
 const customStyles = {
   content: {
@@ -32,20 +33,27 @@ const customStyles = {
 };
 Modal.setAppElement('#root');
 
-const SequencePlanned = ({
-  sequence,
-  handleFocus,
-  hideGoogleMaterialIcon,
-  setHideGoogleMaterialIcon
-}) => {
+/* const SequencePlanned = forwardRef ((
+//   {
+  // sequence,
+  // handleFocus,
+  // index,
+  // moveSequence,
+//   key
+// },
+ props, ref) => {
+  const { sequence, handleFocus, index, moveSequence} = props */
+const SequencePlanned = ({ sequence, handleFocus }) => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const point = useBreakpoint();
   const { setUserSequences, yogaClassToAdd, setYogaClassToAdd } =
     useOutletContext();
+  //const { sequence, handleFocus} = props
+  const ref = useRef(null);
   const { asanaService, addSystemError, addSystemSuccess } = useOutletContext();
 
-  const ref = useRef(null);
+  //const ref = useRef(null);
 
   const [title, setTitle] = useState(sequence.title);
   const [description, setDescription] = useState(sequence.description);
@@ -148,7 +156,7 @@ const SequencePlanned = ({
 
   return (
     <>
-      <div ref={ref} className="w-full flex flex-row justify-between">
+      <div className="w-full flex flex-row justify-between">
         <div className="w-full flex flex-row flex-wrap">
           <input
             type="text"
@@ -164,12 +172,12 @@ const SequencePlanned = ({
           </p>
         </div>
 
-        <div className="flex flex-row content-center justify-center px-3 border-l-2 border-gray-200">
+        <div className="trash flex flex-row content-center justify-center px-3 border-l-2 border-gray-200">
           <button
-            className="btn-seqColl-red-outline cursor-pointer outline outline-2 flex flex-row self-center"
+            className="trash btn-seqColl-red-outline cursor-pointer outline outline-2 flex flex-row self-center"
             onClick={() => handleRemoveSequence(sequence)}
           >
-            <p className="font-material-symbols py-1 px-2">delete</p>
+            <p className="trash font-material-symbols py-1 px-2">delete</p>
           </button>
         </div>
       </div>
@@ -218,11 +226,8 @@ const SequencePlanned = ({
                 </div>
               </>
             ))}
-          <button
-            className={`addAsana ${hideGoogleMaterialIcon ? 'hidden' : ''}`}
-            onClick={() => openModal()}
-          >
-            <span className="color-blue-darkest font-material-symbols p-4">
+          <button className="trash addAsana" onClick={() => openModal()}>
+            <span className="trash color-blue-darkest font-material-symbols p-4">
               add_circle
             </span>
           </button>

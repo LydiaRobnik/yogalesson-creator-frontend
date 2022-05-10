@@ -5,7 +5,8 @@ main{
 
 
     h2{
-        @apply color-blue-darkest text-4xl mt-8 mb-4;
+        @apply text-4xl mt-8 mb-4;
+        color: $clr-blue-darkest;
 
     };
 
