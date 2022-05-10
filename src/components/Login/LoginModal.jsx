@@ -5,7 +5,7 @@ import Loginform from './Loginform.jsx';
 import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
 
-export default function Example({ ModalOpen, setModalOpen }) {
+export default function Example({ ModalOpen, setModalOpen, handleSwitch }) {
   const cancelButtonRef = useRef(null);
 
   return (
@@ -73,6 +73,7 @@ export default function Example({ ModalOpen, setModalOpen }) {
                     <Loginform
                       ModalOpen={ModalOpen}
                       setModalOpen={setModalOpen}
+                      handleSwitch={handleSwitch}
                     />
                   </div>
                 </div>

@@ -38,6 +38,16 @@ export default function Navbar() {
     return () => {};
   }, [showLogin]);
 
+  const handleSwitch = (toLogin = true) => {
+    if (toLogin) {
+      setModalOpen(true);
+      setSignupModalOpen(false);
+    } else {
+      setSignupModalOpen(true);
+      setModalOpen(false);
+    }
+  };
+
   // async function handleLogin(e) {
   //   e.preventDefault();
   //   setError('');
@@ -58,10 +68,15 @@ export default function Navbar() {
 
   return (
     <>
-      <LoginModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
+      <LoginModal
+        ModalOpen={ModalOpen}
+        setModalOpen={setModalOpen}
+        handleSwitch={handleSwitch}
+      />
       <SignupModal
         SignupModalOpen={SignupModalOpen}
         setSignupModalOpen={setSignupModalOpen}
+        handleSwitch={handleSwitch}
       />
       <Disclosure as="nav" className="bg-light color">
         {({ open }) => (

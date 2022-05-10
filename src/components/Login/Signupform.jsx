@@ -4,7 +4,8 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../style/app.scss';
 
-export default function Example({ SignupModal, setSignupModal }) {
+export default function Example({ SignupModal, setSignupModal, handleSwitch }) {
+  console.log('handleSwitch', handleSwitch);
   const { loggedIn, login, logout, user, signup } = useContext(AuthContext);
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -92,6 +93,15 @@ export default function Example({ SignupModal, setSignupModal }) {
             <h2 className="mt-6 text-center text-3xl font-extrabold text-[#001a29]">
               Sign up
             </h2>
+            <div className="text-black text-center text-xs">
+              already signed up? Click{' '}
+              <button
+                onClick={() => handleSwitch(true)}
+                className="text-blue-700"
+              >
+                here to login
+              </button>
+            </div>
           </div>
           <form
             className="mt-8 space-y-6"
