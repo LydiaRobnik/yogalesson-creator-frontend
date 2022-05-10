@@ -53,7 +53,7 @@ const SequencePlanned = forwardRef ((props, ref) => {
   // const ref = useRef(null);
   const { asanaService, addSystemError, addSystemSuccess } = useOutletContext();
 
-  const ref = useRef(null);
+  //const ref = useRef(null);
 
   const [title, setTitle] = useState(sequence.title);
   const [description, setDescription] = useState(sequence.description);
