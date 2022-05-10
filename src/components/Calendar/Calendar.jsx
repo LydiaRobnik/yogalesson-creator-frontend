@@ -426,12 +426,14 @@ export default function Calendar() {
               >
                 ✖️
               </button>
-              <CalendarEntryDialog
-                saveEvent={saveEvent}
-                deleteEvent={deleteEvent}
-                event={selectedEvent}
-                date={selectedDate}
-              />
+              <div className="bg-light">
+                <CalendarEntryDialog
+                  saveEvent={saveEvent}
+                  deleteEvent={deleteEvent}
+                  event={selectedEvent}
+                  date={selectedDate}
+                />
+              </div>
             </div>
           </Modal>
         </div>

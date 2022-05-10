@@ -455,7 +455,7 @@ const Asanas = ({ selection = false, addAsana }) => {
                       )
                   )
                   .map((asana) => (
-                    <div key={asana._id} className="z-10">
+                    <div key={asana._id} className="">
                       <AsanaCard
                         asana={asana}
                         handleSelectAsana={handleSelectAsana}
