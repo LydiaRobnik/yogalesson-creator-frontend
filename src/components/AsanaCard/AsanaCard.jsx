@@ -17,8 +17,7 @@ const AsanaCard = ({
 
   // ==start== functions, variables and states for draggable start =====
   const ref = useRef(null);
-  const [movingAsana, setMovingAsana] = useState(false);
-  const [bottomCard, setBottomCard] = useState(false);
+  const dragItem = useRef({});
 
   const [{ handlerId }, drop] = useDrop({
     accept: 'divAsanaCard',
@@ -79,34 +78,21 @@ const AsanaCard = ({
       <div
         ref={ref}
         onClick={() => handleSelectAsana(asana)}
-        // onMouseDown={() => setMovingAsana(true)}
-        // onMouseUp={() => setMovingAsana(false)}
-        // onMouseOver={() => {
-        //   !movingAsana && setBottomCard(true);
-        // }}
-        // onMouseOut={() => {
-        //   !movingAsana && setBottomCard(false);
-        // }}
         data-handler-id={handlerId}
-        className={`flex flex-col content-center self-center justify-between rounded overflow-hidden shadow-lg  cursor-pointer ${
+        className={`flex flex-col content-center self-center justify-between rounded overflow-hidden shadow-lg cursor-pointer ${
           isDragging
-            ? 'border-rose-400 opacity-50'
+            ? 'border-4 border-rose-400 opacity-50'
             : 'bg-white opacity-100 border-2 border-gray-200'
-          // isDragging ? 'opacity-75' : ' opacity-100'
-        } ${sizeAsanaOnSelectModal ? 'w-32 h-48 ' : 'w-28 h-28'} ${
-          movingAsana && sequencePlannedStyles ? 'bg-rose-300' : ''
-        } ${bottomCard && !movingAsana ? 'bg-green-500' : ''} `}
+        } 
+        ${sizeAsanaOnSelectModal ? 'w-32 h-48 ' : 'w-28 h-28'} 
+        `}
       >
         <div className="flex flex-row justify-center">
-          {movingAsana ? (
-            <div className="bg-green-500"></div>
-          ) : (
-            <img
-              className={`${sizeAsanaOnSelectModal ? '' : 'w-12 mt-2'}`}
-              src={asana.img_url}
-              alt="preview class"
-            />
-          )}
+          <img
+            className={`${sizeAsanaOnSelectModal ? '' : 'w-12 mt-2'}`}
+            src={asana.img_url}
+            alt="preview class"
+          />
         </div>
         <div
           className={` p-1 rounded-b ${
