@@ -9,6 +9,7 @@ import Modal from 'react-modal';
 import { AuthContext } from '../../context/AuthContext';
 import './calendar.scss';
 import CalendarEntryDialog from './CalendarEntryDialog';
+import { formatDate } from '../../custom/utils';
 
 const calendarViews = ['dayGridMonth', 'dayGridWeek', 'dayGridDay'];
 const customStyles = {
@@ -295,20 +296,6 @@ export default function Calendar() {
               )
               .map((event, index, array) => (
                 <div key={event.id}>
-                  {/* separate months */}
-                  {/* {(index === 0 ||
-                    new Date(event.date).getMonth() !==
-                      new Date(array[index - 1]?.date).getMonth()) && (
-                    <div
-                      className={`font-bold text-center opacity-50 ${
-                        index > 0 && 'mt-3'
-                      }`}
-                    >
-                      {new Date(event.date).toLocaleString('en-us', {
-                        month: 'long'
-                      })}
-                    </div>
-                  )} */}
                   {(() => {
                     // console.log('index', index, event.date);
                     // today
@@ -383,6 +370,7 @@ export default function Calendar() {
                           style={{ backgroundColor: event.backgroundColor }}
                         >
                           {new Date(event.date).toDateString()}
+                          {/* {formatDate(new Date(event.date))} */}
                         </span>
                         <span className="ml-2 text-sm">
                           <sup>

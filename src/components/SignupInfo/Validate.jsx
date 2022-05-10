@@ -15,7 +15,7 @@ export default function Validate() {
       .then((user) => {
         console.log('user', user);
         // todo autologin
-        const result = login({
+        const [result, data] = login({
           user: user.email,
           type: 'email',
           password: '5555' // todo
