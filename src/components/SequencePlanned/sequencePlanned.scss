@@ -23,8 +23,10 @@
   }
   
   
-  .delete{
-    @apply self-center font-material-symbols color-blue-darkest cursor-pointer;
+  .delete {
+    @apply self-center cursor-pointer;
+    color: $clr-blue-darkest;
+    font-family: $font-material-symbols;
   }
 
   .delete:hover{

@@ -5,11 +5,12 @@ main{
     @apply flex flex-col py-6;
 
     .modal{
-        @apply p-3 color-blue-darkest text-center;
+        @apply p-3 text-center;
+        color: $clr-blue-darkest;
     }
 
     .totalTime{
-        @apply color-blue-darkest text-lg font-bold text-center pt-2;
-
+        @apply text-lg font-bold text-center pt-2;
+        color: $clr-blue-darkest;
     }
 }

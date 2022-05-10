@@ -22,6 +22,6 @@
 }
 
 .toggle-checkbox:checked + .toggle-label {
-  @apply bg-blue-dark;
+ /*  @apply bg-blue-dark; */
   background-color: $clr-blue-dark;
 }
