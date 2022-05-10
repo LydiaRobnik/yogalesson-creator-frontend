@@ -6,7 +6,7 @@ const FooterNew = () => {
     <>
       <div className="flex background w-full h-full">
         <div className="centerButton flex items-center justify-center mx-auto mb-32">
-          <button className="bg-red hover:bg-red-500 text-white font-bold py-2 px-10 mb-20">
+          <button className="bg-red hover:bg-red-500 text-white font-bold py-2 pt-3 px-10 mb-20">
             Start creating
           </button>
         </div>

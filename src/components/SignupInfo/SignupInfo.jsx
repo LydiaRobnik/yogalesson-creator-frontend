@@ -6,21 +6,14 @@ export default function SignupInfo() {
   // console.log('🔥', 'SignupInfo');
 
   return (
-    <div className="text-black p-4">
-      <div className="text-2xl">
-        An Email has been sent to you, please verify your email by clicking the
-        Verification-Link shown in the mail.
-      </div>
-
-      <div className="grow w-4/6 md:w-5/6 flex flex-row flex-wrap">
-        <button
-          className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
-          onClick={() => navigate('/home')}
-        >
-          {/* <span className="font-material inline pr-2">add</span> */}
-          <p className="inline pt-1 text-lg ">Home</p>
-        </button>
-      </div>
+    <div className="text-black flex justify-center">
+      <p className="text-2xl">
+        An E-Mail has been sent to you, please verify your E-Mail by clicking on
+        the Verification-Link shown in the E-Mail.
+      </p>
+      <button className="btn-neutra mx-2" onClick={() => navigate('/home')}>
+        go back to home
+      </button>
     </div>
   );
 }

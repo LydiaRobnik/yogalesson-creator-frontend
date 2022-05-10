@@ -135,7 +135,7 @@ export default function Navbar() {
                   ) : (
                     <>
                       <button
-                        className="bg-red hover:bg-red-500 text-white font-bold py-3 px-10"
+                        className="bg-red hover:bg-red-500 text-white font-bold py-2 px-10"
                         onClick={() => setModalOpen(true)}
                       >
                         login
