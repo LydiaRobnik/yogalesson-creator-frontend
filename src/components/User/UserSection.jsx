@@ -68,6 +68,9 @@ export default function UserSection() {
   }, [loggedIn, yogaClassToAdd]);
 
   const handleDeleteMessage = (id) => {
+    // hide before delete
+    document.getElementById(id).style.display = 'none';
+
     const newMessages = systemMessages.filter((message) => message.id !== id);
     setSystemMessages(newMessages);
   };
@@ -156,7 +159,7 @@ export default function UserSection() {
           systemMessages.length > 0 &&
           systemMessages.map((msg) => (
             <div
-              id="systemMessage"
+              id={msg.id}
               onAnimationEnd={() => handleDeleteMessage(msg.id)}
               key={msg.id}
               class="fade-out text-center py-2 lg:px-4"
