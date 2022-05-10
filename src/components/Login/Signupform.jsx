@@ -81,7 +81,7 @@ export default function Example({ SignupModal, setSignupModal }) {
               loop
               autoplay
             ></lottie-player>
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-[#001a29]">
               Sign up
             </h2>
           </div>
