@@ -5,7 +5,7 @@ import { AuthContext } from '../../context/AuthContext';
 import TimePicker from 'react-time-picker';
 import { BsArrowReturnRight } from 'react-icons/bs';
 import './calendar.scss';
-import { calendarColors as colors } from '../../custom/utils';
+import { calendarColors as colors, formatDate } from '../../custom/utils';
 import { useOutletContext } from 'react-router-dom';
 
 // const colors = calendarColors
@@ -126,7 +126,7 @@ export default function CalendarEntryDialog({
                 className={`font-bold border-dashed border rounded-full text-center p-2 pt-3 color-light`}
                 style={{ backgroundColor: color }}
               >
-                {date?.dateObj.toDateString()}
+                {formatDate(date?.dateObj)}
               </div>
               <div className="flex flex-col gap-3 border border-dashed py-2">
                 <div className="grid grid-cols-[38px_1fr] gap-2">

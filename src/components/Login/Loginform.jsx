@@ -16,14 +16,23 @@ export default function Example({ ModalOpen, setModalOpen }) {
     e.preventDefault();
     setError('');
 
-    const result = await login({
+    const [result, data] = await login({
       user: name,
       type: name.includes('@') ? 'email' : 'username',
       password: password
     });
 
     if (!result) {
-      setError('Invalid username or password!');
+      console.log('🧑‍💼 login result', data.response.data);
+      if (data.response.data.errors?.length > 0) {
+        setError(
+          `${error.response.data.errors[0].msg} - ${error.response.data.errors[0].param}`
+        );
+      } else if (typeof data.response.data === 'string') {
+        setError(data.response.data);
+      } else {
+        setError('Invalid username or password!');
+      }
     } else {
       setName('');
       setPassword('');
