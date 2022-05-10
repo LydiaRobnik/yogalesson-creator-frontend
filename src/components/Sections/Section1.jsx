@@ -1,6 +1,6 @@
 import React from 'react';
 import './sections.scss';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import asanaService from '../../api/asanaService';
 
 export default function Section1() {
