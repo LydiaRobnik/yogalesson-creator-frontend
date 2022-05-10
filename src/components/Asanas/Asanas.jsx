@@ -116,6 +116,22 @@ const Asanas = ({ selection = false, addAsana }) => {
     return () => {};
   }, [showFilter]);
 
+  useEffect(() => {
+    console.log('>>> point', point, showFilter);
+    if (!showFilter) return;
+
+    if (point === 'xs') {
+      return setShowFilter(false);
+    } else if (point === 'sm') {
+      return setShowFilter(false);
+    } else if (point === 'md') {
+    } else if (point === 'lg') {
+    } else if (point === 'xl') {
+    } else {
+    }
+    return () => {};
+  }, [point]);
+
   const fetchData = async () => {
     if (!selection) setLoading(true);
     const data = await asanaService.getDefaultAsanas(user.id);
@@ -264,15 +280,16 @@ const Asanas = ({ selection = false, addAsana }) => {
       )}
 
       {!loading && (
-        <div className="asanas-jsx flex flex-col justify-center gap-4 w-full">
+        <div className="asanas-jsx flex flex-col justify-center gap-4 w-full px-2 sm:px-4 md:px-6 lg:px-10">
           <div className="asanas-jsx  flex justify-center gap-4 w-full">
             <div
-              className={`filter-section  flex flex-col gap-4 text-black mr-20 lg:mr-48 ${
-                showFilter ? 'w-2/6 md:w-1/6' : 'mr-0 w-2/6 sm:w-1/6'
+              className={`filter-section flex flex-col gap-4 text-black  lg:mr-48 ${
+                // showFilter ? 'w-2/6 md:w-1/6' : 'mr-0 w-2/6 sm:w-1/6'
+                ''
               }`}
             >
-              <div className="flex flex-wrap justify-between border-b border-b-slate-300 border-dashed">
-                <div className="text-lg font-bold">Filter</div>
+              <div className="flex border-b border-b-slate-300 border-dashed">
+                <div className="text-lg font-bold mr-6 sm:mr-12">Filter</div>
                 <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
                   <input
                     type="checkbox"
@@ -290,14 +307,17 @@ const Asanas = ({ selection = false, addAsana }) => {
               </div>
             </div>
 
-            <div className="grow w-4/6 md:w-5/6 flex flex-row flex-wrap">
+            <div className="grow flex flex-row flex-wrap">
               {(1 === 1 || selection) && (
                 <button
                   className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
                   onClick={handleOpenCreateAsanaDialog}
                 >
                   <span className="font-material inline pr-2">add</span>
-                  <p className="inline pt-1 text-lg ">create new Asana</p>
+                  <p className="inline pt-1 text-lg ">
+                    create{' '}
+                    {point === 'xs' || point === 'sm' ? '' : ' new Asana'}
+                  </p>
                 </button>
               )}
             </div>
@@ -406,9 +426,8 @@ const Asanas = ({ selection = false, addAsana }) => {
                   ))}
               </div>
             </div>
-            <div
-              className={`grid gap-4 grid-flow-row-dense ${gridResponsiveness()}`}
-            >
+            {/* <div className={`w-full grid grid-flow-row auto-rows-max`}> */}
+            <div className={`w-full flex flex-wrap gap-2`}>
               {asanas &&
                 asanas
                   // filter by name
