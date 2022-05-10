@@ -160,14 +160,14 @@ const SequencePlanned = ({ sequence, handleFocus}) => {
         <div className="w-full flex flex-row flex-wrap">
           <input
             type="text"
-            className="color-blue-darkest text-lg w-5/6 resize-y"
+            className="center color-blue-darkest text-lg w-5/6 resize-y"
             placeholder="draft sequence - title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             onFocus={handleFocus}
           />
 
-          <p className="color-blue-darkest px-3 pt-3 ">
+          <p className="trash color-blue-darkest px-3 pt-3 ">
             {new Date(sequence.modifiedAt).toLocaleString()}
           </p>
         </div>
@@ -199,7 +199,7 @@ const SequencePlanned = ({ sequence, handleFocus}) => {
         </div>
 
         <div
-          className={`space items-center grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
+          className={`items-center grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
         >
           {sequence &&
             cards?.map((card, index) => (

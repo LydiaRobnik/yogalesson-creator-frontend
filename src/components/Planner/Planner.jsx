@@ -148,7 +148,7 @@ const Planner = forwardRef ((props, ref) => {
 
       {!loading && (
         <div className="w-full bg-white">
-          <div className="w-full bg-white">
+          <div className="center w-full bg-white">
             <div
               className={`flex flex-row ${
                 yogaClassToAdd.plan.length === 0
@@ -181,15 +181,15 @@ const Planner = forwardRef ((props, ref) => {
                 yogaClassToAdd.plan.map((sequence, index) => (
                   <div className="grid grid-cols-12 gap-4 items-start border-t-2 border-gray-200 mx-4">
                     <div className=" col-span-1 mt-3">
-                      <div className="flex flex-row flex-wrap">
+                      <div className="trash flex flex-row flex-wrap">
                         <span
-                          className="font-material-symbols color-blue-darkest text-xl px-1 cursor-pointer"
+                          className="trash font-material-symbols color-blue-darkest text-xl px-1 cursor-pointer"
                           onClick={() => moveSequenceUp(sequence)}
                         >
                           expand_less
                         </span>
                         <span
-                          className="font-material-symbols color-blue-darkest text-xl px-1 cursor-pointer"
+                          className="trash font-material-symbols color-blue-darkest text-xl px-1 cursor-pointer"
                           onClick={() => moveSequenceDown(sequence)}
                         >
                           expand_more

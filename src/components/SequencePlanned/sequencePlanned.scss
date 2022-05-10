@@ -36,8 +36,9 @@
   @media print {
     @page {
       size: landscape;
+      margin-top: 9vh;
+      margin: 5vh;
     }
-    
   }
 
   @media print {
@@ -46,8 +47,11 @@
       overflow: hidden;
       height: 0;
     }
-    .space {
-      @apply items-center grid gap-4;
+  }
+
+  @media print {
+    .center {
+      text-align: center;
     }
   }
 
