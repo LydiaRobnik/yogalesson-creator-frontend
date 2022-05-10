@@ -12,6 +12,8 @@ export default function Example({ SignupModal, setSignupModal }) {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [checkuppercase, setCheckuppercase] = useState(false);
   const [checkpwlength, setCheckpwlength] = useState(false);
+  const [checknumber, Setchecknumber] = useState(false);
+  const [checklowercase, Setchecklowercase] = useState(false);
 
   const navigate = useNavigate();
 
@@ -45,6 +47,24 @@ export default function Example({ SignupModal, setSignupModal }) {
     }
     if (password.length < 8) {
       setCheckpwlength(false);
+    }
+    if (/[A-Z]/.test(password)) {
+      setCheckuppercase(true);
+    }
+    if (!/[A-Z]/.test(password)) {
+      setCheckuppercase(false);
+    }
+    if (/[0-9]/.test(password)) {
+      Setchecknumber(true);
+    }
+    if (!/[0-9]/.test(password)) {
+      Setchecknumber(false);
+    }
+    if (/[a-z]/.test(password)) {
+      Setchecklowercase(true);
+    }
+    if (!/[a-z]/.test(password)) {
+      Setchecklowercase(false);
     }
   }, [password]);
 
@@ -81,10 +101,11 @@ export default function Example({ SignupModal, setSignupModal }) {
                   id="email"
                   name="email"
                   type="email"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-_]+\.[a-z]{2,}$"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-[#738b94] focus:z-10 sm:text-sm"
                   placeholder="E-Mail"
-                  minLength={3}
+                  minLength={4}
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
@@ -133,7 +154,7 @@ export default function Example({ SignupModal, setSignupModal }) {
                 <p className="inline-flex">an uppercase letter</p>
               </div>
               <div className="flex">
-                {checkpwlength ? (
+                {checklowercase ? (
                   <CheckIcon className="h-5 w-5 text-green-500 inline-flex" />
                 ) : (
                   <XIcon className="h-5 w-5 text-red-600 inline-flex" />
@@ -141,7 +162,7 @@ export default function Example({ SignupModal, setSignupModal }) {
                 <p>a lowercase letter</p>
               </div>
               <div className="flex">
-                {checkpwlength ? (
+                {checknumber ? (
                   <CheckIcon className="h-5 w-5 text-green-500 inline-flex" />
                 ) : (
                   <XIcon className="h-5 w-5 text-red-600 inline-flex" />

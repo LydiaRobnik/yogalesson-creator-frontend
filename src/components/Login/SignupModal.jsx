@@ -1,20 +1,11 @@
 import Signupform from './Signupform';
-import React, {
-  useContext,
-  useState,
-  Fragment,
-  useRef,
-  useEffect
-} from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import React, { useContext, Fragment, useRef } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import '../Navbar/navbar.scss';
-import Loginform from './Loginform.jsx';
 import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
 
 export default function SignupModal({ SignupModalOpen, setSignupModalOpen }) {
-  const { loggedIn } = useContext(AuthContext);
   const cancelButtonRef = useRef(null);
 
   return (

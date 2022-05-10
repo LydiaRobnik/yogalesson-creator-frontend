@@ -1,6 +1,5 @@
 import React from 'react';
 import './sections.scss';
-import yogapose from '../../pictures/yoga-pose.jpeg';
 
 export default function Section1() {
   return (
