@@ -12,4 +12,12 @@ main{
         @apply color-blue-darkest text-lg font-bold text-center pt-2;
 
     }
+
+    .plannerFrame {
+        border: 3px $clr-blue-darkest;
+        margin: 3rem;
+        padding: 2rem;
+        @apply rounded-md border-dashed;
+      }
+      
 }

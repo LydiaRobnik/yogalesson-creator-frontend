@@ -12,7 +12,7 @@ export default function Hero() {
             yoga class planning
           </h1>
           <h3 className="font-bold">easy and quick</h3>
-          <h4 className="pb-2">create well structured yoga classes</h4>
+          <h4 className="pb-5">create well structured yoga classes</h4>
         </div>
       </div>
       <div className="divdivdiv">

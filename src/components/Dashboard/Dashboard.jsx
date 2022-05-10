@@ -81,7 +81,9 @@ export default function Dashboard() {
         <>
           <div
             className={`p-4 w-full flex flex-row ${
-              point === 'xs' ? 'justify-center' : 'justify-start'
+              point === 'xs' || userClasses.length === 0
+                ? 'justify-center'
+                : 'justify-start'
             }`}
           >
             <button
@@ -163,22 +165,21 @@ export default function Dashboard() {
             className={`p-6
        w-full ${point === 'xs' ? 'justify-center' : 'justify-start'}`}
           >
-            {userClasses.length > 0 ||
-              (favorites.length === 0 && (
-                <>
-                  <div className="flex flex-col justify-center">
-                    <span className="material-symbols-outlined color-blue-darkest text-center text-4xl p-2">
-                      folder_special
-                    </span>
-                    <h3 className="color-blue-darkest text-center font-bold">
-                      No favorites defined
-                    </h3>
-                    <p className="color-blue-darkest text-center">
-                      Get started by marking them.
-                    </p>
-                  </div>
-                </>
-              ))}
+            {userClasses.length > 5 && favorites.length === 0 && (
+              <>
+                <div className="flex flex-col justify-center">
+                  <span className="material-symbols-outlined color-blue-darkest text-center text-4xl p-2">
+                    folder_special
+                  </span>
+                  <h3 className="color-blue-darkest text-center font-bold">
+                    No favorites defined
+                  </h3>
+                  <p className="color-blue-darkest text-center">
+                    Get started by marking them.
+                  </p>
+                </div>
+              </>
+            )}
             {favorites.length > 0 && (
               <div className="flex flex-row ">
                 <h2

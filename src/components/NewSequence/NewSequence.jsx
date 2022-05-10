@@ -190,7 +190,7 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
           </div>
         </div>
 
-        <div className="flex flex-col items-between justify-between my-3">
+        <div className="flex flex-col justify-between my-3">
           <div className="flex flex-row items-center">
             <button
               className="btn-redNew flex flex-row items-center"
