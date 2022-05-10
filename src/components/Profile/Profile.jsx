@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 // import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
 import FileUpload from '../FileUpload/FileUpload';
 
 export default function Profile() {
+  const navigate = useNavigate();
+
   const { loggedIn, login, logout, user, setUser } = useContext(AuthContext);
   const {
     loading,
@@ -88,12 +90,13 @@ export default function Profile() {
         userDb.email = profile.email;
 
         asanaService
-          .saveUser(userDb._id, userDb)
+          .changeUserEmail(userDb._id, userDb)
           .then((user) => {
             setProfile(user);
             setIsEditEmail(false);
-            setUser((prev) => ({ ...prev, name: user.username }));
             addSystemSuccess('Email changed');
+            logout(false);
+            navigate(`/signupInfo`);
           })
           .catch((err) => {
             console.log('📒 handleEditName err', err);
@@ -184,6 +187,8 @@ export default function Profile() {
     setIsEditEmail(false);
     setIsEditPassword(false);
     setIsEditRole(false);
+
+    setUser((prev) => ({ ...prev, refresh: !prev.refresh }));
   };
 
   return (
