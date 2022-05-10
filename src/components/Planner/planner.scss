@@ -14,3 +14,15 @@ main{
         color: $clr-blue-darkest;
     }
 }
+
+@media print {
+    .totalTime {
+        @apply text-lg font-bold text-center pt-2;
+        color: $clr-blue-darkest;
+  }
+  .trash {
+    display: none;
+    overflow: hidden;
+    height: 0;
+  }
+}

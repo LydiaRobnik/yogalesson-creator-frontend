@@ -250,8 +250,8 @@ const SequencePlanned = ({ sequence, handleFocus}) => {
                 </div>
               </>
             ))}
-          <button className="addAsana" onClick={() => openModal()}>
-            <span className="color-blue-darkest font-material-symbols p-4">
+          <button className="trash addAsana" onClick={() => openModal()}>
+            <span className="trash color-blue-darkest font-material-symbols p-4">
               add_circle
             </span>
           </button>

@@ -214,13 +214,13 @@ const Planner = forwardRef ((props, ref) => {
             )}
           </div>
 
-          <div className=" w-full flex flex-row justify-center mt-4">
+          <div className="trash w-full flex flex-row justify-center mt-4">
             <button
-              className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
+              className="trash btn-blue btn-blue:hover mx-2 flex flex-row items-center"
               onClick={() => navigate('/user/sequences')}
             >
-              <span className="font-material inline pr-2">add</span>
-              <p className="inline pt-1 text-lg ">sequence</p>
+              <span className="trash font-material inline pr-2">add</span>
+              <p className="trash inline pt-1 text-lg ">sequence</p>
             </button>
           </div>
         </div>
