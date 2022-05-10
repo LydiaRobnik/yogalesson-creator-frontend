@@ -17,6 +17,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import SignupInfo from './components/SignupInfo/SignupInfo';
 import Validate from './components/SignupInfo/Validate';
 import Profile from './components/Profile/Profile';
+import Print from './components/Print/Print';
 
 function App() {
   const navigate = useNavigate();
@@ -41,8 +42,8 @@ function App() {
                   element={<Navigate replace to="dashboard" />}
                 />
                 <Route path="dashboard" element={<Dashboard />} />
-                <Route path="planner" element={<Planner />}>
-                  <Route path=":classId" element={<Planner />} />
+                <Route path="planner" element={<Print />}>
+                  <Route path=":classId" element={<Print />} />
                 </Route>
                 <Route path="asanas" element={<Asanas />} />
                 <Route path="classes" element={<ClassCollection />} />
