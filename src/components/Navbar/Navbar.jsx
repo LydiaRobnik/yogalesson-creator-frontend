@@ -113,10 +113,13 @@ export default function Navbar() {
                         src="https://yogalesson-createor-backend.herokuapp.com/images/Logo_250x250px.png"
                         alt="Workflow"
                       />
-                      <p className="color-blue-darkest ml-2 text-2xl mt-1">
-                        Monkey Plan<br></br>
-                        <p className="text-sm">Smooth Class planning</p>
-                      </p>
+                      <div className="ml-2">
+                        <p className="color-blue-darkest text-2xl mt-1 tracking-[.16em]">
+                          Monkey Plan
+                        </p>
+
+                        <p className="text-sm">Create Structured Classes</p>
+                      </div>
                     </div>
                   </NavLink>
 

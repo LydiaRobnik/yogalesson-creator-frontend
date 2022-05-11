@@ -97,13 +97,13 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
     } else if (point === 'md') {
       return 'grid-cols-4';
     } else if (point === 'lg') {
-      return 'grid-cols-6';
+      return 'grid-cols-5';
     } else if (point === 'xl') {
-      return 'grid-cols-8';
+      return 'grid-cols-7';
     } else if (point === '2xl') {
-      return 'grid-cols-10';
+      return 'grid-cols-8';
     } else {
-      return 'grid-cols-12';
+      return 'grid-cols-10';
     }
   };
 
@@ -143,7 +143,7 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
           />
 
           <div
-            className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense w-5/6 sm:11/12`}
+            className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense  sm:w-11/12 md:w-5/6`}
           >
             {sequenceToAdd.asanas?.map((asana, index) => (
               <div
@@ -186,23 +186,27 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
           </div>
         </div>
 
-        <div className="flex flex-col justify-between my-3">
+        <div className="flex flex-col justify-between my-3 w-12 md:w-32">
           <div className="flex flex-row">
             <button
-              className="btn-redNew flex flex-row items-center"
+              className="btn-redNew flex flex-row items-center w-12 md:w-32"
               onClick={() => cancel()}
             >
               <span className="font-material-symbols inline pr-2">cancel</span>
-              <p className="inline pt-1 text-lg">cancel</p>
+              <p className="inline pt-1 text-lg invisible md:visible">cancel</p>
             </button>
           </div>
-          <div className="flex flex-row items-center">
+          <div className="flex flex-row ">
             <button
-              className="btn-blueNew flex flex-row items-center"
+              className="btn-blueNew flex flex-row items-center md:px-6 py-2 w-12 md:w-32"
               onClick={() => addSequenceToClass()}
             >
-              <span className="font-material-symbols inline pr-2">save</span>
-              <p className="inline pt-1 text-lg">save</p>
+              <span className="font-material-symbols inline px-4 md:pr-2">
+                save
+              </span>
+              <p className="inline p-0 md:pt-1 text-lg invisible md:visible">
+                save
+              </p>
             </button>
           </div>
         </div>

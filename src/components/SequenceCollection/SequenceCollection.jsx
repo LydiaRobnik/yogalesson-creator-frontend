@@ -146,7 +146,7 @@ const SequenceCollection = (ref) => {
           ) : (
             <div className=" w-full flex flex-row justify-between mt-4 mb-6">
               <h3 className="color-beige font-moontime  p-2 text-7xl ">
-                Add Sequence to your class
+                Add a Sequence to your class
               </h3>
               <button
                 className="btn-blue btn-blue:hover mx-2 flex flex-row items-center self-center"
