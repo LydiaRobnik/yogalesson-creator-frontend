@@ -114,11 +114,11 @@ export default function Navbar() {
                         alt="Workflow"
                       />
                       <div className="ml-2">
-                        <p className="color-blue-darkest text-2xl mt-1 tracking-[.16em]">
+                        <p className="color-blue-darkest text-xl mt-1 tracking-[.18em] ">
                           Monkey Plan
                         </p>
 
-                        <p className="text-sm">Create Structured Classes</p>
+                        <p className="text-xs">Create Structured Classes</p>
                       </div>
                     </div>
                   </NavLink>
