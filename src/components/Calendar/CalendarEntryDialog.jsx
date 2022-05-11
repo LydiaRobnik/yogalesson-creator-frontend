@@ -129,18 +129,18 @@ export default function CalendarEntryDialog({
                 {formatDate(date?.dateObj)}
               </div>
               <div className="flex flex-col gap-3 border border-dashed py-2">
-                <div className="grid grid-cols-[38px_1fr] gap-2">
-                  <div className="text-right mt-1">from</div>
+                <div className="grid grid-cols-1 md:grid-cols-[38px_1fr] gap-2 place-items-center">
+                  <div className="text-center md:text-right mt-1">from</div>
                   <TimePicker
                     onChange={onChangeFrom}
                     value={valueFrom}
-                    className="bg-white"
+                    className="bg-white w-36 self-center"
                   />
-                  <div className="text-right mt-1">to</div>
+                  <div className="md:text-right mt-1">to</div>
                   <TimePicker
                     onChange={onChangeTo}
                     value={valueTo}
-                    className="bg-white"
+                    className="bg-white w-36"
                   />
                 </div>
               </div>
@@ -193,7 +193,7 @@ export default function CalendarEntryDialog({
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-1 w-60">
+        <div className="flex flex-col gap-1 ">
           <div className="font-bold">Select Yoga-Class:</div>
           <div className="flex justify-center">
             <div
