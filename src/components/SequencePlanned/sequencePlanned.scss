@@ -47,12 +47,11 @@
       overflow: hidden;
       height: 0;
     }
-  }
+    
+    .printAsanas{
+      @apply grid gap-4 grid-cols-6;
 
-  @media print {
-    .center {
-      text-align: center;
     }
+
   }
 
- 

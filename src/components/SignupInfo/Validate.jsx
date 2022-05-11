@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
+import './validate.scss';
 
 export default function Validate() {
   const { login } = useContext(AuthContext);
@@ -42,21 +43,16 @@ export default function Validate() {
       {error ? (
         <div className="text-red-500">{error}</div>
       ) : (
-        <div>
-          {/* <div>Validate: {token}</div> */}
-          <div className="text-2xl">
+        <div className="cont1 text-black flex-col py-5 mt-5">
+          <p className="text-2xl">
             Success! Thank you for validating your email!
-          </div>
-
-          <div className="grow w-4/6 md:w-5/6 flex flex-row flex-wrap">
-            <button
-              className="btn-blue btn-blue:hover mx-2 flex flex-row items-center"
-              onClick={() => navigate('/user')}
-            >
-              {/* <span className="font-material inline pr-2">add</span> */}
-              <p className="inline pt-1 text-lg ">Dashboard</p>
-            </button>
-          </div>
+          </p>
+          <button
+            className="btn-bb bg-blue-light hover:bg-blue-middle p-2 mt-5"
+            onClick={() => navigate('/user')}
+          >
+            Start creating your first class
+          </button>
         </div>
       )}
     </div>

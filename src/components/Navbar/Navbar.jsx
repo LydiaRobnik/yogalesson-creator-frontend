@@ -113,10 +113,13 @@ export default function Navbar() {
                         src="https://yogalesson-createor-backend.herokuapp.com/images/Logo_250x250px.png"
                         alt="Workflow"
                       />
-                      <p className="color-blue-darkest ml-2 text-2xl mt-1">
-                        Monkey Plan<br></br>
-                        <p className="text-sm">Smooth Class planning</p>
-                      </p>
+                      <div className="ml-2">
+                        <p className="color-blue-darkest text-xl mt-1 tracking-[.18em] ">
+                          Monkey Plan
+                        </p>
+
+                        <p className="text-xs">Create Structured Classes</p>
+                      </div>
                     </div>
                   </NavLink>
 
@@ -170,11 +173,6 @@ export default function Navbar() {
                       >
                         sign up
                       </button>
-                      {/* {error && (
-                        <div className="text-sm pl-5 pt-2 text-red-500">
-                          {error}
-                        </div>
-                      )} */}
                     </>
                   )}
                 </div>
@@ -245,10 +243,10 @@ export default function Navbar() {
             <Disclosure.Panel className="sm:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1">
                 {navigation.map((item) => (
-                  <Disclosure.Button
+                  <NavLink
+                    to={item.path}
                     key={item.name}
                     as="a"
-                    href={item.href}
                     className={classNames(
                       item.current
                         ? 'bg-gray-900 text-white'
@@ -258,7 +256,7 @@ export default function Navbar() {
                     aria-current={item.current ? 'page' : undefined}
                   >
                     {item.name}
-                  </Disclosure.Button>
+                  </NavLink>
                 ))}
               </div>
             </Disclosure.Panel>

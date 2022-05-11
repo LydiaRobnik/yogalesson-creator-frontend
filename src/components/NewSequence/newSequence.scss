@@ -17,8 +17,7 @@
 .btn-blueNew {
   background-color: $clr-blue-darkest;
   color: $clr-light;
-  padding: 0.5rem 1rem;
-  @apply px-6;
+
 }
 .btn-blueNew:hover {
   background-color: $clr-blue-dark;
@@ -31,7 +30,6 @@
   background-color: $clr-red;
   color: $clr-light;
   padding: 0.5rem 1.1rem;
-
 }
 .btn-redNew:hover {
   background-color: $clr-beige;
