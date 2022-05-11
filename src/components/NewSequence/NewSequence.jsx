@@ -30,15 +30,7 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
   const { user } = useContext(AuthContext);
   const point = useBreakpoint();
   console.log('user', user.id);
-  const {
-    userSequences,
-    setUserSequences,
-    yogaClassToAdd,
-    setYogaClassToAdd,
-    sequenceToAdd,
-    setSequenceToAdd,
-    setShowNewSequence
-  } = useOutletContext();
+  const { sequenceToAdd, setSequenceToAdd } = useOutletContext();
   const { asanaService, addSystemError, addSystemSuccess } = useOutletContext();
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -99,15 +91,19 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
   // // functions
   const gridResponsiveness = () => {
     if (point === 'xs') {
-      return 'grid-cols-3';
+      return 'grid-cols-2';
     } else if (point === 'sm') {
-      return 'grid-cols-4';
+      return 'grid-cols-3';
     } else if (point === 'md') {
-      return 'grid-cols-6';
+      return 'grid-cols-4';
     } else if (point === 'lg') {
+      return 'grid-cols-6';
+    } else if (point === 'xl') {
       return 'grid-cols-8';
-    } else {
+    } else if (point === '2xl') {
       return 'grid-cols-10';
+    } else {
+      return 'grid-cols-12';
     }
   };
 
@@ -116,7 +112,7 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
   return (
     <>
       <div className="editSequence w-full min-h-40 px-6 bg-light flex flex-row justify-between">
-        <div className="flex flex-col">
+        <div className="flex flex-col w-2/3 sm:w-3/4 md:w-full">
           <input
             type="text"
             maxlength="50"
@@ -147,12 +143,12 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
           />
 
           <div
-            className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
+            className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense w-5/6 sm:11/12`}
           >
             {sequenceToAdd.asanas?.map((asana, index) => (
               <div
                 key={`${asana._id}${index}`}
-                className="flex flex-col items-center"
+                className="flex flex-col items-center md:w-4/5 lg:w-full"
               >
                 <span
                   className="font-material-symbols color-blue-darkest cursor-pointer"
@@ -190,8 +186,8 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
           </div>
         </div>
 
-        <div className="flex flex-col items-between justify-between my-3">
-          <div className="flex flex-row items-center">
+        <div className="flex flex-col justify-between my-3">
+          <div className="flex flex-row">
             <button
               className="btn-redNew flex flex-row items-center"
               onClick={() => cancel()}

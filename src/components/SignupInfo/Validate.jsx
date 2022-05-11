@@ -15,11 +15,20 @@ export default function Validate() {
       .then((user) => {
         console.log('user', user);
         // todo autologin
-        const [result, data] = login({
+        login({
           user: user.email,
           type: 'email',
           password: '5555' // todo
-        });
+        })
+          .then(([result, data]) => {
+            if (!result) {
+              setError(data.message);
+            }
+            console.log('result', result);
+          })
+          .catch((err) => {
+            setError(err.message);
+          });
       })
       .catch((err) => {
         setError(err.message);

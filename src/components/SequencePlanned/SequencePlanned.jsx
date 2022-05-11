@@ -43,13 +43,13 @@ Modal.setAppElement('#root');
 // },
  props, ref) => {
   const { sequence, handleFocus, index, moveSequence} = props */
-const SequencePlanned = ({ sequence, handleFocus}) => {
+const SequencePlanned = ({ sequence, handleFocus }) => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const point = useBreakpoint();
   const { setUserSequences, yogaClassToAdd, setYogaClassToAdd } =
     useOutletContext();
-    //const { sequence, handleFocus} = props
+  //const { sequence, handleFocus} = props
   const ref = useRef(null);
   const { asanaService, addSystemError, addSystemSuccess } = useOutletContext();
 
@@ -156,7 +156,7 @@ const SequencePlanned = ({ sequence, handleFocus}) => {
 
   return (
     <>
-      <div  className="w-full flex flex-row justify-between">
+      <div className="w-full flex flex-row justify-between">
         <div className="w-full flex flex-row flex-wrap">
           <input
             type="text"
@@ -173,7 +173,7 @@ const SequencePlanned = ({ sequence, handleFocus}) => {
         </div>
 
         <div className="trash flex flex-row content-center justify-center px-3 border-l-2 border-gray-200">
-          <button 
+          <button
             className="trash btn-seqColl-red-outline cursor-pointer outline outline-2 flex flex-row self-center"
             onClick={() => handleRemoveSequence(sequence)}
           >

@@ -13,6 +13,14 @@ main{
         @apply text-lg font-bold text-center pt-2;
         color: $clr-blue-darkest;
     }
+
+    .plannerFrame {
+        border: 3px $clr-blue-darkest;
+        margin: 3rem;
+        padding: 2rem;
+        @apply rounded-md border-dashed;
+      }
+      
 }
 
 @media print {

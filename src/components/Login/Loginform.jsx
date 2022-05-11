@@ -4,7 +4,7 @@ import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../style/app.scss';
 
-export default function Example({ ModalOpen, setModalOpen }) {
+export default function Example({ ModalOpen, setModalOpen, handleSwitch }) {
   const { loggedIn, login, logout, user } = useContext(AuthContext);
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -57,6 +57,15 @@ export default function Example({ ModalOpen, setModalOpen }) {
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
               Sign in to your account
             </h2>
+            <div className="text-black text-center text-xs">
+              not signed up yet? Click{' '}
+              <button
+                onClick={() => handleSwitch(false)}
+                className="text-blue-700"
+              >
+                here to sign up
+              </button>
+            </div>
           </div>
           <form
             className="mt-8 space-y-6"
