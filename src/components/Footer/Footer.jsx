@@ -315,8 +315,7 @@ export default function Footer() {
           </a>
           <a
             href="#"
-            className="icon"
-            className="text-gray-700 hover:text-gray-900 dark:hover:text-white"
+            className=" icon text-gray-700 hover:text-gray-900 dark:hover:text-white"
           >
             <svg
               className="iconH w-8 h-8"
@@ -333,8 +332,7 @@ export default function Footer() {
           </a>
           <a
             href="#"
-            className="icon"
-            className="text-gray-700 hover:text-gray-900 dark:hover:text-white"
+            className=" icon text-gray-700 hover:text-gray-900 dark:hover:text-white"
           >
             <svg
               className="iconH w-8 h-8"
