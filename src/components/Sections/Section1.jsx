@@ -43,8 +43,8 @@ export default function Section1() {
             </div>
           </div>
         </div>
-        <div className="w-full flex items-center justify-center relative md:flex md:w-1/2 Section1right">
-          <div className="featureText flex items-center justify-center leading-relaxed p-5 m-24 absolute bottom-50 text-3xl text-left bg-red-500 bg-opacity-20 backdrop-blur-md font-light">
+        <div className="w-full flex md:items-center justify-center relative md:flex md:w-1/2 Section1right">
+          <div className="featureText flex items-center justify-center leading-relaxed p-5 m-16 sm:m-32  md:m-24 absolute bottom-50 text-xl md:text-3xl text-left bg-red-500 bg-opacity-20 backdrop-blur-md font-light">
             Select exercises from our library or add your own asanas. <br></br>
             <br></br>
             Prepare reusable text modules for shavasana or meditation sequences.
