@@ -197,7 +197,7 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
         </div>
 
         <div
-          className={`printAsanas items-center grid gap-4 ${gridResponsiveness()} grid-flow-row-dense  `}
+          className={`printAsanas items-center grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
         >
           {sequence &&
             cards?.map((card, index) => (

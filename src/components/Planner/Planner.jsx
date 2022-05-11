@@ -152,13 +152,8 @@ const Planner = forwardRef((props, ref) => {
 
         {!loading && (
           <>
-<<<<<<< HEAD
-            <div className="w-11/12 plannerFrame bg-white">
-              <div className="center w-full bg-white">
-=======
             <div className="w-11/12 plannerFrame bg-white printframe ">
               <div className="w-full bg-white ">
->>>>>>> main
                 <div
                   className={`flex flex-row ${
                     yogaClassToAdd.plan.length === 0
