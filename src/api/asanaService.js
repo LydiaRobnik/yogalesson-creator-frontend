@@ -154,7 +154,8 @@ class AsanaService {
 
   async createAsana(asanaObj) {
     const resp = await this.doApiCall(
-      async () => await http().post('/asana', asanaObj)
+      async () =>
+        await http(localStorage.getItem('token')).post('/asana', asanaObj)
     );
 
     return resp.data;
@@ -163,7 +164,11 @@ class AsanaService {
   async saveAsana(asanaObj) {
     if (!asanaObj._id) throw new Error('Asana must have an _id');
     const resp = await this.doApiCall(
-      async () => await http().put(`/asana/${asanaObj._id}`, asanaObj)
+      async () =>
+        await http(localStorage.getItem('token')).put(
+          `/asana/${asanaObj._id}`,
+          asanaObj
+        )
     );
 
     return resp.data;
@@ -172,7 +177,10 @@ class AsanaService {
   async deleteAsana(asanaObj) {
     if (!asanaObj._id) throw new Error('Asana must have an _id');
     const resp = await this.doApiCall(
-      async () => await http().delete(`/asana/${asanaObj._id}`)
+      async () =>
+        await http(localStorage.getItem('token')).delete(
+          `/asana/${asanaObj._id}`
+        )
     );
 
     return resp.data;
@@ -198,7 +206,8 @@ class AsanaService {
 
   async createSequence(sequenceObj) {
     const resp = await this.doApiCall(
-      async () => await http().post('/sequence', sequenceObj)
+      async () =>
+        await http(localStorage.getItem('token')).post('/sequence', sequenceObj)
     );
 
     return resp.data;
@@ -207,7 +216,11 @@ class AsanaService {
   async saveSequence(sequenceObj) {
     if (!sequenceObj._id) throw new Error('Sequence must have an _id');
     const resp = await this.doApiCall(
-      async () => await http().put(`/sequence/${sequenceObj._id}`, sequenceObj)
+      async () =>
+        await http(localStorage.getItem('token')).put(
+          `/sequence/${sequenceObj._id}`,
+          sequenceObj
+        )
     );
 
     return resp.data;
@@ -216,7 +229,8 @@ class AsanaService {
   async deleteSequence(id) {
     if (!id) throw new Error('invalid _id');
     const resp = await this.doApiCall(
-      async () => await http().delete(`/sequence/${id}`)
+      async () =>
+        await http(localStorage.getItem('token')).delete(`/sequence/${id}`)
     );
 
     return resp.data;
@@ -243,7 +257,8 @@ class AsanaService {
 
   async createClass(classObj) {
     const resp = await this.doApiCall(
-      async () => await http().post('/class', classObj)
+      async () =>
+        await http(localStorage.getItem('token')).post('/class', classObj)
     );
 
     return resp.data;
@@ -252,7 +267,11 @@ class AsanaService {
   async saveClass(classObj) {
     if (!classObj._id) throw new Error('Class must have an _id');
     const resp = await this.doApiCall(
-      async () => await http().put(`/class/${classObj._id}`, classObj)
+      async () =>
+        await http(localStorage.getItem('token')).put(
+          `/class/${classObj._id}`,
+          classObj
+        )
     );
 
     return resp.data;
@@ -278,7 +297,8 @@ class AsanaService {
 
   async createCalendarEntry(calendarObj) {
     const resp = await this.doApiCall(
-      async () => await http().post('/calendar', calendarObj)
+      async () =>
+        await http(localStorage.getItem('token')).post('/calendar', calendarObj)
     );
 
     return resp.data;
@@ -287,7 +307,11 @@ class AsanaService {
   async saveCalendarEntry(calendarObj) {
     if (!calendarObj._id) throw new Error('Calendar must have an _id');
     const resp = await this.doApiCall(
-      async () => await http().put(`/calendar/${calendarObj._id}`, calendarObj)
+      async () =>
+        await http(localStorage.getItem('token')).put(
+          `/calendar/${calendarObj._id}`,
+          calendarObj
+        )
     );
 
     return resp.data;
@@ -296,7 +320,8 @@ class AsanaService {
   async deleteCalendarEntry(id) {
     if (!id) throw new Error('invalid _id');
     const resp = await this.doApiCall(
-      async () => await http().delete(`/calendar/${id}`)
+      async () =>
+        await http(localStorage.getItem('token')).delete(`/calendar/${id}`)
     );
 
     return resp.data;
@@ -325,7 +350,8 @@ class AsanaService {
   async deleteClass(id) {
     if (!id) throw new Error('invalid _id');
     const resp = await this.doApiCall(
-      async () => await http().delete(`/class/${id}`)
+      async () =>
+        await http(localStorage.getItem('token')).delete(`/class/${id}`)
     );
 
     return resp.data;

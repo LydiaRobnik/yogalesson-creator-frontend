@@ -137,9 +137,6 @@ const SequenceCollection = (ref) => {
 
       {!loading && (
         <div className="w-full flex flex-col justify-start content-start px-6">
-          {/* <h3 className="color-red pl-3 pb-5 text-4xl">
-            Click to add one of your sequence to your class
-          </h3> */}
           {showNew ? (
             <NewSequence
               handleFocus={handleFocus}
@@ -147,9 +144,12 @@ const SequenceCollection = (ref) => {
               cancel={cancelEditSequence}
             />
           ) : (
-            <div className=" w-full flex flex-row justify-start mt-4 mb-6">
+            <div className=" w-full flex flex-row justify-between mt-4 mb-6">
+              <h3 className="color-beige font-moontime  p-2 text-7xl ">
+                Add a Sequence to your class
+              </h3>
               <button
-                className="btn-blue btn-blue:hover   mx-2 flex flex-row items-center"
+                className="btn-blue btn-blue:hover mx-2 flex flex-row items-center self-center"
                 onClick={() => handleAddSequence()}
               >
                 <span className="font-material inline pr-2">add</span>
@@ -166,6 +166,15 @@ const SequenceCollection = (ref) => {
                 className="grid gap-4 grid-cols-12 border-t-2 border-gray-200 mt-4"
               >
                 <div className="col-span-1 flex flex-col justify-center">
+                  <div className="w-16 border-2 border-gray-200 rounded flex flex-row row-wrap items-center self-center mb-6">
+                    <span className="font-material-symbols color-blue-darkest text-lg px-1">
+                      schedule
+                    </span>
+                    <p className="pl-2 pt-1 color-blue-darkest w-8">
+                      {sequence.duration}
+                    </p>
+                  </div>
+
                   <button
                     className="btn-seqColl-neutral"
                     onClick={() => handleSelectSequence(sequence)}

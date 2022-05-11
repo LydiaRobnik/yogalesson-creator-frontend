@@ -19,12 +19,12 @@ export default function Section1() {
   return (
     <>
       <div className="section-container md:flex h-full">
-        <div className="sectionTitleColor md:w-1/2 flex-col items-center justify-center text-6xl font-bold">
-          <div className="sectionTitle flex items-center justify-center font-light text-10xl leading-relaxed">
+        <div className="sectionTitleColor md:w-1/2 flex-col justify-center font-bold ">
+          <div className="sectionTitle md:mt-32 pt-4 flex items-center justify-center font-light text-5xl md:text-6xl lg:text-7xl xl:text-9xl leading-relaxed">
             Beginners Class
           </div>
           <div className="max-w-screen-lg mx-auto p-4">
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap justify-center">
               {/* <div className="bg-clip-border m-4 p-16 border-4 bg-white rounded-lg"> */}
               {randomAsanas.map((asana) => (
                 <div
@@ -43,10 +43,11 @@ export default function Section1() {
             </div>
           </div>
         </div>
-        <div className="w-full flex items-center justify-center relative md:flex md:w-1/2 Section1right">
-          <div className="featureText flex items-center justify-center leading-relaxed p-5 m-24 absolute bottom-50 text-3xl text-left bg-red-500 bg-opacity-20 backdrop-blur-md font-light">
-            Select exercises from our libary or add your own asanas. Prepare
-            reusable text modules for shavasana or meditation sequences.
+        <div className="w-full flex md:items-center justify-center relative md:flex md:w-1/2 Section1right">
+          <div className="featureText flex items-center justify-center leading-relaxed p-5 m-16 sm:m-32  md:m-24 absolute bottom-50 text-xl md:text-3xl text-left bg-red-500 bg-opacity-20 backdrop-blur-md font-light">
+            Select exercises from our library or add your own asanas. <br></br>
+            <br></br>
+            Prepare reusable text modules for shavasana or meditation sequences.
           </div>
         </div>
       </div>

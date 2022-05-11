@@ -11,7 +11,7 @@ const Section = () => {
           schedule
         </span>
         <div className="p-2">
-          <p className="featureText text-xs sm:text-sm md:text-lg lg:text-xl">
+          <p className="featureText text-sm md:text-lg lg:text-xl">
             Save time when creating your yoga classes
           </p>
         </div>
@@ -22,7 +22,7 @@ const Section = () => {
           restart_alt
         </span>
         <div className="p-2">
-          <p className="featureText text-xs sm:text-sm md:text-lg lg:text-xl">
+          <p className="featureText text-sm md:text-lg lg:text-xl">
             Create reusable sequences and classes
           </p>
         </div>
@@ -33,7 +33,7 @@ const Section = () => {
           calendar_month
         </span>
         <div className="p-2">
-          <p className="featureText text-xs sm:text-sm md:text-lg lg:text-xl">
+          <p className="featureText text-sm md:text-lg lg:text-xl">
             Use our calendar to schedule your classes
           </p>
         </div>

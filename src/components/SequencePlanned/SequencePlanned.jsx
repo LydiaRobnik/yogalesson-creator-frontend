@@ -43,13 +43,13 @@ Modal.setAppElement('#root');
 // },
  props, ref) => {
   const { sequence, handleFocus, index, moveSequence} = props */
-const SequencePlanned = ({ sequence, handleFocus}) => {
+const SequencePlanned = ({ sequence, handleFocus }) => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const point = useBreakpoint();
   const { setUserSequences, yogaClassToAdd, setYogaClassToAdd } =
     useOutletContext();
-    //const { sequence, handleFocus} = props
+  //const { sequence, handleFocus} = props
   const ref = useRef(null);
   const { asanaService, addSystemError, addSystemSuccess } = useOutletContext();
 
@@ -128,16 +128,14 @@ const SequencePlanned = ({ sequence, handleFocus}) => {
   // // functions
   const gridResponsiveness = () => {
     if (point === 'xs') {
-      return 'grid-cols-3';
+      return 'grid-cols-2';
     } else if (point === 'sm') {
       return 'grid-cols-4';
     } else if (point === 'md') {
-      return 'grid-cols-6';
+      return 'grid-cols-5';
     } else if (point === 'lg') {
-      return 'grid-cols-8';
-    } else {
-      return 'grid-cols-10';
-    }
+      return 'grid-cols-7';
+    } else return 'grid-cols-8';
   };
 
   // edit functions
@@ -156,7 +154,7 @@ const SequencePlanned = ({ sequence, handleFocus}) => {
 
   return (
     <>
-      <div  className="w-full flex flex-row justify-between">
+      <div className="w-full flex flex-row justify-between">
         <div className="w-full flex flex-row flex-wrap">
           <input
             type="text"
@@ -173,7 +171,7 @@ const SequencePlanned = ({ sequence, handleFocus}) => {
         </div>
 
         <div className="trash flex flex-row content-center justify-center px-3 border-l-2 border-gray-200">
-          <button 
+          <button
             className="trash btn-seqColl-red-outline cursor-pointer outline outline-2 flex flex-row self-center"
             onClick={() => handleRemoveSequence(sequence)}
           >
@@ -199,7 +197,7 @@ const SequencePlanned = ({ sequence, handleFocus}) => {
         </div>
 
         <div
-          className={`space items-center grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
+          className={`printAsanas items-center grid gap-4 ${gridResponsiveness()} grid-flow-row-dense  `}
         >
           {sequence &&
             cards?.map((card, index) => (

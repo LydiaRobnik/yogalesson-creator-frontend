@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { Fragment } from 'react';
@@ -21,13 +21,32 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
-  const { loggedIn, login, logout, user } = useContext(AuthContext);
+  const { loggedIn, login, logout, user, showLogin, setShowLogin } =
+    useContext(AuthContext);
   // const [name, setName] = useState('');
   // const [password, setPassword] = useState('');
   // const [error, setError] = useState('');
   // const [open, setOpen] = useState(true);
   const [ModalOpen, setModalOpen] = useState(false);
   const [SignupModalOpen, setSignupModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (showLogin) {
+      setSignupModalOpen(true);
+      setShowLogin(false);
+    }
+    return () => {};
+  }, [showLogin]);
+
+  const handleSwitch = (toLogin = true) => {
+    if (toLogin) {
+      setModalOpen(true);
+      setSignupModalOpen(false);
+    } else {
+      setSignupModalOpen(true);
+      setModalOpen(false);
+    }
+  };
 
   // async function handleLogin(e) {
   //   e.preventDefault();
@@ -49,10 +68,15 @@ export default function Navbar() {
 
   return (
     <>
-      <LoginModal ModalOpen={ModalOpen} setModalOpen={setModalOpen} />
+      <LoginModal
+        ModalOpen={ModalOpen}
+        setModalOpen={setModalOpen}
+        handleSwitch={handleSwitch}
+      />
       <SignupModal
         SignupModalOpen={SignupModalOpen}
         setSignupModalOpen={setSignupModalOpen}
+        handleSwitch={handleSwitch}
       />
       <Disclosure as="nav" className="bg-light color">
         {({ open }) => (
@@ -89,10 +113,13 @@ export default function Navbar() {
                         src="https://yogalesson-createor-backend.herokuapp.com/images/Logo_250x250px.png"
                         alt="Workflow"
                       />
-                      <p className="color-blue-darkest ml-2 text-2xl mt-1">
-                        Flowting Ananas<br></br>
-                        <p className="text-sm">Smooth Class planning</p>
-                      </p>
+                      <div className="ml-2">
+                        <p className="color-blue-darkest text-xl mt-1 tracking-[.18em] ">
+                          Monkey Plan
+                        </p>
+
+                        <p className="text-xs">Create Structured Classes</p>
+                      </div>
                     </div>
                   </NavLink>
 
@@ -135,7 +162,7 @@ export default function Navbar() {
                   ) : (
                     <>
                       <button
-                        className="bg-red hover:bg-red-500 text-white font-bold py-3 px-10"
+                        className="bg-red hover:bg-red-500 text-white font-bold py-2 px-10"
                         onClick={() => setModalOpen(true)}
                       >
                         login
@@ -146,11 +173,6 @@ export default function Navbar() {
                       >
                         sign up
                       </button>
-                      {/* {error && (
-                        <div className="text-sm pl-5 pt-2 text-red-500">
-                          {error}
-                        </div>
-                      )} */}
                     </>
                   )}
                 </div>
@@ -221,10 +243,10 @@ export default function Navbar() {
             <Disclosure.Panel className="sm:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1">
                 {navigation.map((item) => (
-                  <Disclosure.Button
+                  <NavLink
+                    to={item.path}
                     key={item.name}
                     as="a"
-                    href={item.href}
                     className={classNames(
                       item.current
                         ? 'bg-gray-900 text-white'
@@ -234,7 +256,7 @@ export default function Navbar() {
                     aria-current={item.current ? 'page' : undefined}
                   >
                     {item.name}
-                  </Disclosure.Button>
+                  </NavLink>
                 ))}
               </div>
             </Disclosure.Panel>
