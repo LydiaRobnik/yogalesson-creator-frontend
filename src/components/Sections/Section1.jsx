@@ -19,12 +19,12 @@ export default function Section1() {
   return (
     <>
       <div className="section-container md:flex h-full">
-        <div className="sectionTitleColor md:w-1/2 flex-col items-center justify-center text-6xl font-bold">
-          <div className="sectionTitle pt-4 flex items-center justify-center font-light text-10xl leading-relaxed">
+        <div className="sectionTitleColor md:w-1/2 flex-col justify-center font-bold ">
+          <div className="sectionTitle md:mt-32 pt-4 flex items-center justify-center font-light text-5xl md:text-6xl lg:text-7xl xl:text-9xl leading-relaxed">
             Beginners Class
           </div>
           <div className="max-w-screen-lg mx-auto p-4">
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap justify-center">
               {/* <div className="bg-clip-border m-4 p-16 border-4 bg-white rounded-lg"> */}
               {randomAsanas.map((asana) => (
                 <div
