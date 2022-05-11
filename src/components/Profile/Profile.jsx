@@ -194,15 +194,17 @@ export default function Profile() {
   return (
     <div
       onClick={(e) => handleResetEdits(e)}
-      className="flex justify-center border p-4 w-full md:w-3/4 lg:w-1/2 text-black"
+      className="flex justify-center border p-4 w-full md:w-3/4 lg:w-1/2 text-black my-auto"
     >
+
       <div
         onClick={(e) => {
           e.stopPropagation();
           setIsEditAvatar(true);
         }}
-        className="flex flex-col justify-center items-center cursor-pointer mb-2"
-      >
+        className="flex flex-row justify-center items-center cursor-pointer mb-2 p-2 space-x-9"
+      >   
+      <div className="flex">
         {image ? (
           <img
             onClick={() => setClickImage(true)}
@@ -210,16 +212,18 @@ export default function Profile() {
             // className="h-36 w-36 rounded-full border-4 border-black hover:scale-110 shadow-lg"
             src={image}
             alt="bild"
-          ></img>
+          />
+          
         ) : (
           <div onClick={() => setClickImage(true)} className="p-1">
             <img
-              className="h-36 w-36 rounded-full hover:scale-110 shadow-lg"
+              className="h-36 w-36 rounded-full hover:scale-110 shadow-lg "
               src="https://www.kindpng.com/picc/m/21-211456_user-icon-hd-png-download.png"
               alt=""
             />
           </div>
         )}
+      </div>
         <FileUpload
           className={`hidden`}
           accept={'image/*'}
@@ -227,6 +231,7 @@ export default function Profile() {
           click={clickImage}
         />
 
+<div className="">
         {/* username */}
         <div className="relative mt-3">
           {isEditName ? (
@@ -262,7 +267,7 @@ export default function Profile() {
                   className="btn-seqColl-neutral ml-3"
                   onClick={(e) => handleEditName(e)}
                 >
-                  <span className="font-material-symbols px-2 py-1">
+                  <span className="flex justify-end font-material-symbols px-2 py-1">
                     add_task
                   </span>
                 </button>
@@ -271,7 +276,7 @@ export default function Profile() {
           ) : (
             <div>
               <div className="text-4xl mr-4">{profile.username}</div>
-              <div className="absolute top-1 -right-5">
+              <div className="absolute top-1 -right-7">
                 <button
                   className="btn-seqColl-neutral "
                   onClick={(e) => {
@@ -287,9 +292,11 @@ export default function Profile() {
             </div>
           )}
         </div>
-        <div className="">
+    
+        
+    
           {/* email */}
-          <div className="flex relative mt-3">
+          <div className="flex relative mt-3 mb-5">
             {isEditEmail ? (
               <form onSubmit={(e) => handleEditEmail(e)}>
                 <div className="flex justify-center">
@@ -329,9 +336,9 @@ export default function Profile() {
               </form>
             ) : (
               <div className="flex relative mt-3">
-                <div className="text-md mr-4 w-24 text-right">Email:</div>
+                <div className="text-md mr-4 w-24 text-left">Email:</div>
                 <div className="text-xl mr-4">{profile.email}</div>
-                <div className="absolute top-0 -right-5">
+                <div className="absolute top-0 -right-12">
                   <button
                     className="btn-seqColl-neutral "
                     onClick={() => setIsEditEmail(true)}
@@ -407,9 +414,9 @@ export default function Profile() {
               </form>
             ) : (
               <div className="flex relative mt-3">
-                <div className="text-md mr-4 w-24 text-right">Password: </div>
+                <div className="text-md mr-4 w-24 text-left">Password: </div>
                 <div className="text-xl mr-4">**********</div>
-                <div className="absolute -top-1 -right-5">
+                <div className="absolute -top-1 -right-8">
                   <button
                     className="btn-seqColl-neutral "
                     onClick={() => setIsEditPassword(true)}
