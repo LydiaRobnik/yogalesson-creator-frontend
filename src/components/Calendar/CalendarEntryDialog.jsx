@@ -129,18 +129,18 @@ export default function CalendarEntryDialog({
                 {formatDate(date?.dateObj)}
               </div>
               <div className="flex flex-col gap-3 border border-dashed py-2">
-                <div className="grid grid-cols-1 md:grid-cols-[38px_1fr] gap-2">
-                  <div className="md:text-right mt-1">from</div>
+                <div className="grid grid-cols-1 md:grid-cols-[38px_1fr] gap-2 place-items-center">
+                  <div className="text-center md:text-right mt-1">from</div>
                   <TimePicker
                     onChange={onChangeFrom}
                     value={valueFrom}
-                    className="bg-white"
+                    className="bg-white w-36 self-center"
                   />
                   <div className="md:text-right mt-1">to</div>
                   <TimePicker
                     onChange={onChangeTo}
                     value={valueTo}
-                    className="bg-white"
+                    className="bg-white w-36"
                   />
                 </div>
               </div>
