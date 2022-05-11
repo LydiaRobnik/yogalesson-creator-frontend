@@ -170,11 +170,6 @@ export default function Navbar() {
                       >
                         sign up
                       </button>
-                      {/* {error && (
-                        <div className="text-sm pl-5 pt-2 text-red-500">
-                          {error}
-                        </div>
-                      )} */}
                     </>
                   )}
                 </div>
@@ -245,10 +240,10 @@ export default function Navbar() {
             <Disclosure.Panel className="sm:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1">
                 {navigation.map((item) => (
-                  <Disclosure.Button
+                  <NavLink
+                    to={item.path}
                     key={item.name}
                     as="a"
-                    href={item.href}
                     className={classNames(
                       item.current
                         ? 'bg-gray-900 text-white'
@@ -258,7 +253,7 @@ export default function Navbar() {
                     aria-current={item.current ? 'page' : undefined}
                   >
                     {item.name}
-                  </Disclosure.Button>
+                  </NavLink>
                 ))}
               </div>
             </Disclosure.Panel>
