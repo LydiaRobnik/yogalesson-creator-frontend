@@ -283,7 +283,7 @@ export default function Calendar() {
         id="div-calendar"
         className="flex flex-col gap-2 md:gap-4 md:flex-row text-black w-full h-full"
       >
-        <div className="w-60 order-1 self-center md:self-start border-2 text-black">
+        <div className="w-56 min-w-fit order-1 self-center md:self-start border-2 text-black">
           <div className="text-lg font-bold text-center border-dashed border-b-slate-400 rounded-t border-b pt-2 mb-4 text-white bg-blue-dark">
             Upcoming Events
           </div>
@@ -392,6 +392,8 @@ export default function Calendar() {
               initialView={calendarView}
               dateClick={handleDateClick}
               eventClick={handleEventClick}
+              // contentHeight={'auto'}
+              height={'max(600px, 100vh - 120px)'}
               weekends={true}
               events={events}
             />
