@@ -24,10 +24,20 @@ const Sequence = ({ sequence, selectedSequence }) => {
   return (
     <div>
       <div className="w-full min-h-40 flex flex-row justify-between">
-        <h3 className="color-blue-darkest pr-3 pt-3 font-bold text-lg">
-          {sequence.title}
-        </h3>
-        <p className="color-blue-darkest pt-3">
+        <div className="flex flex-row justify-center pt-2">
+          <div className="w-16 border-2 border-gray-200 rounded flex flex-row row-wrap items-center self-center">
+            <span className="font-material-symbols color-blue-darkest text-lg px-1">
+              schedule
+            </span>
+            <p className="pl-2 pt-1 color-blue-darkest w-8">
+              {sequence.duration}
+            </p>
+          </div>
+          <h3 className="color-blue-darkest px-3 pt-2 font-bold text-lg">
+            {sequence.title}
+          </h3>
+        </div>
+        <p className="color-blue-darkest pt-4">
           {new Date(sequence.modifiedAt).toLocaleString()}
         </p>
       </div>

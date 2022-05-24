@@ -175,13 +175,13 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
             className="trash btn-seqColl-red-outline cursor-pointer outline outline-2 flex flex-row self-center"
             onClick={() => handleRemoveSequence(sequence)}
           >
-            <p className="trash font-material-symbols py-1 px-2">delete</p>
+            <p className="trash font-material-symbols py-1 px-2">close</p>
           </button>
         </div>
       </div>
 
       <>
-        <div className="w-full min-h-40">
+        <div className="w-full min-h-40 pt-3">
           <span
             role="textbox"
             id="description"

@@ -194,107 +194,116 @@ export default function Profile() {
   return (
     <div
       onClick={(e) => handleResetEdits(e)}
-      className="flex justify-center border p-4 w-full md:w-3/4 lg:w-1/2 text-black"
+      className="border p-4 w-full md:w-11/12 lg:w-3/4 xl:w-2/3  text-black md:mt-8"
     >
       <div
         onClick={(e) => {
           e.stopPropagation();
           setIsEditAvatar(true);
         }}
-        className="flex flex-col justify-center items-center cursor-pointer mb-2"
+        className="grid grid-cols-1 md:grid-cols-2 gap-4 cursor-pointer mb-2"
       >
-        {image ? (
-          <img
-            onClick={() => setClickImage(true)}
-            className="h-36 w-36 rounded-full hover:scale-110 shadow-lg"
-            // className="h-36 w-36 rounded-full border-4 border-black hover:scale-110 shadow-lg"
-            src={image}
-            alt="bild"
-          ></img>
-        ) : (
-          <div onClick={() => setClickImage(true)} className="p-1">
+        <div className="col-span-1 justify-self-center">
+          {image ? (
             <img
-              className="h-36 w-36 rounded-full hover:scale-110 shadow-lg"
-              src="https://www.kindpng.com/picc/m/21-211456_user-icon-hd-png-download.png"
-              alt=""
-            />
-          </div>
-        )}
-        <FileUpload
-          className={`hidden`}
-          accept={'image/*'}
-          handleUpload={handleSelectImage}
-          click={clickImage}
-        />
-
-        {/* username */}
-        <div className="relative mt-3">
-          {isEditName ? (
-            <form className="flex justify-center">
-              <div className="flex justify-center">
-                <div
-                  className="timepicker relative form-floating mb-3 w-48 xl:w-96"
-                  data-mdb-with-icon="false"
-                  id="input-toggle-timepicker"
-                >
-                  <input
-                    type="text"
-                    className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    placeholder="Set Username"
-                    data-mdb-toggle="input-toggle-timepicker"
-                    minLength="3"
-                    maxLength={20}
-                    required
-                    autoFocus
-                    defaultValue={profile.username}
-                    onChange={(e) =>
-                      setProfile((prev) => {
-                        prev.username = e.target.value;
-                        return { ...prev };
-                      })
-                    }
-                  />
-                  <label forhtml="floatingInput" className="text-gray-500">
-                    Change Username
-                  </label>
-                </div>
-                <button
-                  className="btn-seqColl-neutral ml-3"
-                  onClick={(e) => handleEditName(e)}
-                >
-                  <span className="font-material-symbols px-2 py-1">
-                    add_task
-                  </span>
-                </button>
-              </div>
-            </form>
+              onClick={() => setClickImage(true)}
+              className="h-36 w-36 my-6 rounded-full hover:scale-110 shadow-lg"
+              // className="h-36 w-36 rounded-full border-4 border-black hover:scale-110 shadow-lg"
+              src={image}
+              alt="bild"
+            ></img>
           ) : (
-            <div>
-              <div className="text-4xl mr-4">{profile.username}</div>
-              <div className="absolute top-1 -right-5">
-                <button
-                  className="btn-seqColl-neutral "
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsEditName(true);
-                  }}
-                >
-                  <span className="font-material-symbols text-xs px-2 py-1">
-                    edit
-                  </span>
-                </button>
-              </div>
+            <div onClick={() => setClickImage(true)} className="p-1">
+              <img
+                className="h-36 w-36 rounded-full hover:scale-110 shadow-lg"
+                src="https://www.kindpng.com/picc/m/21-211456_user-icon-hd-png-download.png"
+                alt=""
+              />
             </div>
           )}
+          <FileUpload
+            className={`hidden`}
+            accept={'image/*'}
+            handleUpload={handleSelectImage}
+            click={clickImage}
+          />
         </div>
-        <div className="">
-          {/* email */}
-          <div className="flex relative mt-3">
-            {isEditEmail ? (
-              <form onSubmit={(e) => handleEditEmail(e)}>
+
+        <div className="col-span-1 justify-self-center md:justify-self-start md:self-center">
+          {/* username */}
+          <div className=" mt-3">
+            {isEditName ? (
+              <form className="flex justify-center">
                 <div className="flex justify-center">
                   <div
-                    className="timepicker relative form-floating mb-3 w-48 xl:w-96"
+                    className="timepicker form-floating mb-3 w-10/12"
+                    data-mdb-with-icon="false"
+                    id="input-toggle-timepicker"
+                  >
+                    <input
+                      type="text"
+                      className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                      placeholder="Set Username"
+                      data-mdb-toggle="input-toggle-timepicker"
+                      minLength="3"
+                      maxLength={20}
+                      required
+                      autoFocus
+                      defaultValue={profile.username}
+                      onChange={(e) =>
+                        setProfile((prev) => {
+                          prev.username = e.target.value;
+                          return { ...prev };
+                        })
+                      }
+                    />
+                    <label forhtml="floatingInput" className="text-gray-500">
+                      Change Username
+                    </label>
+                  </div>
+                  <button
+                    className="btn-seqColl-neutral ml-3"
+                    onClick={(e) => handleEditName(e)}
+                  >
+                    <span className="font-material-symbols px-2 py-1">
+                      add_task
+                    </span>
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <div className="flex mt-3">
+                <div className="text-md mr-4 w-24 text-left">User name:</div>
+                <div className="text-xl text-center mr-4 float-left">
+                  {profile.username}
+                </div>
+                <div className="pt-1">
+                  <button
+                    className="btn-seqColl-neutral "
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setIsEditName(true);
+                    }}
+                  >
+                    <span className="font-material-symbols text-xs px-2 py-1">
+                      edit
+                    </span>
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* email */}
+          <div className="flex mt-3 ">
+            {isEditEmail ? (
+              <form
+                onSubmit={(e) => handleEditEmail(e)}
+                className="border-dotted border w-full"
+              >
+                <div className="flex justify-center">
+                  <div
+                    className="timepicker form-floating mb-3 w-10/12"
                     data-mdb-with-icon="false"
                     id="input-toggle-timepicker"
                   >
@@ -328,10 +337,10 @@ export default function Profile() {
                 </div>
               </form>
             ) : (
-              <div className="flex relative mt-3">
-                <div className="text-md mr-4 w-24 text-right">Email:</div>
+              <div className="flex mt-3">
+                <div className="text-md mr-4 w-24 text-left">Email:</div>
                 <div className="text-xl mr-4">{profile.email}</div>
-                <div className="absolute top-0 -right-5">
+                <div className="">
                   <button
                     className="btn-seqColl-neutral "
                     onClick={() => setIsEditEmail(true)}
@@ -345,15 +354,15 @@ export default function Profile() {
             )}
           </div>
           {/* password */}
-          <div className="flex relative mt-3">
+          <div className="flex mt-3 ">
             {isEditPassword ? (
               <form
                 onSubmit={(e) => handleChangePassword(e)}
-                className="flex gap-2 border-dotted border p-2"
+                className="flex gap-2 border-dotted border p-2 w-full"
               >
-                <div className="flex flex-col justify-center">
+                <div className="flex flex-col items-center">
                   <div
-                    className="timepicker relative form-floating mb-3 w-48 xl:w-96"
+                    className="timepicker form-floating mb-3 w-full"
                     data-mdb-with-icon="false"
                     id="input-toggle-timepicker"
                   >
@@ -380,7 +389,7 @@ export default function Profile() {
                     </label>
                   </div>
                   <div
-                    className="timepicker relative form-floating mb-3 w-48 xl:w-96"
+                    className="timepicker form-floating mb-3 w-full"
                     data-mdb-with-icon="false"
                     id="input-toggle-timepicker"
                   >
@@ -406,10 +415,10 @@ export default function Profile() {
                 </button>
               </form>
             ) : (
-              <div className="flex relative mt-3">
-                <div className="text-md mr-4 w-24 text-right">Password: </div>
+              <div className="flex mt-3">
+                <div className="text-md mr-4 w-24 text-left">Password: </div>
                 <div className="text-xl mr-4">**********</div>
-                <div className="absolute -top-1 -right-5">
+                <div className="">
                   <button
                     className="btn-seqColl-neutral "
                     onClick={() => setIsEditPassword(true)}
@@ -425,14 +434,14 @@ export default function Profile() {
 
           {
             /* role */ user.role === 'admino' && (
-              <div className="flex relative mt-3">
+              <div className="flex mt-3">
                 {isEditRole ? (
                   <div>edit name</div>
                 ) : (
-                  <div className="flex relative mt-3">
-                    <div className="text-md mr-4 w-24 text-right">Role: </div>
+                  <div className="flex mt-3">
+                    <div className="text-md mr-4 w-3/6 text-right">Role: </div>
                     <div className="text-xl mr-4">{user.role}</div>
-                    <div className="absolute -top-1 -right-5">
+                    <div className="">
                       <button
                         className="btn-seqColl-neutral "
                         onClick={() => setIsEditRole(true)}

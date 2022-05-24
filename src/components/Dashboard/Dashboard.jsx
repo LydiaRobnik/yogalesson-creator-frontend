@@ -13,6 +13,7 @@ export default function Dashboard() {
   const { asanaService, addSystemError } = useOutletContext();
   const [selectedCard, setSelectedCard] = useState(null);
   const [toggleShowAll, setToggleShowAll] = useState(false);
+  const [toggleFavourites, setToggleFavourites] = useState(false);
 
   const point = useBreakpoint();
   const navigate = useNavigate();
@@ -30,6 +31,10 @@ export default function Dashboard() {
 
   const showAll = () => {
     setToggleShowAll(!toggleShowAll);
+  };
+
+  const showFavourites = () => {
+    setToggleFavourites(!toggleFavourites);
   };
 
   const createClass = async () => {
@@ -198,22 +203,38 @@ export default function Dashboard() {
               className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
             >
               {favorites &&
-                favorites.slice(0, 5).map((favoritItem) => (
-                  <div
-                    key={`${favoritItem._id}_favorite`}
-                    onClick={() => {
-                      markAsSelected(`${favoritItem._id}_favorite`);
-                    }}
-                    className={`rounded overflow-hidden w-full m-2 ${
-                      selectedCard === `${favoritItem._id}_favorite`
-                        ? 'border-solid border-2 border-rose-400 shadow-xl'
-                        : 'border-2 border-gray-200'
-                    }`}
-                  >
-                    <ClassCard classItem={favoritItem} />
-                  </div>
-                ))}
+                (toggleFavourites ? favorites : favorites.slice(0, 5)).map(
+                  (favoritItem) => (
+                    <div
+                      key={`${favoritItem._id}_favorite`}
+                      onClick={() => {
+                        markAsSelected(`${favoritItem._id}_favorite`);
+                      }}
+                      className={`rounded overflow-hidden w-full m-2 ${
+                        selectedCard === `${favoritItem._id}_favorite`
+                          ? 'border-solid border-2 border-rose-400 shadow-xl'
+                          : 'border-2 border-gray-200'
+                      }`}
+                    >
+                      <ClassCard classItem={favoritItem} />
+                    </div>
+                  )
+                )}
             </div>
+
+            {favorites.length > 5 && (
+              <button
+                className="btn-dash-neutral bg-white outline outline-2  pl-1 mr-2 mt-4 flex flex-row items-center"
+                onClick={() => showFavourites()}
+              >
+                <span className="font-material-symbols color-blue-darkest text-lg px-2 cursor-pointer">
+                  {`${toggleFavourites ? 'expand_less' : 'expand_more'}`}
+                </span>
+                <p className="inline pt-1 text-lg">{`${
+                  toggleFavourites ? 'show less' : 'show more'
+                }`}</p>
+              </button>
+            )}
           </div>
         </>
       )}
