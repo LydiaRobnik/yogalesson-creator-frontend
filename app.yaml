@@ -14,7 +14,15 @@
 # [START gae_storage_yaml]
 runtime: nodejs16
 service: default
-
+handlers:
+  # Serve all static files with url ending with a file extension
+  - url: /(.*\..+)$
+    static_files: build/\1
+    upload: build/(.*\..+)$
+  # Catch all handler to index.html
+  - url: /.*
+    static_files: build/index.html
+    upload: build/index.html
 env_variables:
-  REACT_APP_API_URL: https://yogalesson-createor-backend.herokuapp.com
+  REACT_APP_API_URL: https://api-dot-monkeyplan.ey.r.appspot.com
 # [END gae_storage_yaml]
