@@ -2,18 +2,17 @@
 
 .footer {
   background-color: $clr-light;
-  
+
   .icon {
     color: $clr-blue-darkest;
   }
   .copyright {
-  font-family: $font-manjari;
-
-}
+    font-family: $font-manjari;
+  }
 }
 
 .background {
-  background-image: url("../../pictures/Bottom.jpg");
+  // background-image: url("../../pictures/Bottom.jpg");
   background-size: cover;
   background-position: center;
   /* justify-self: baseline;
@@ -24,10 +23,3 @@
   position: relative;
   padding-bottom: 0px;
 } */
-
-
-
-
-
-
-
