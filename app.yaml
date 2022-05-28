@@ -23,6 +23,6 @@ handlers:
   - url: /.*
     static_files: build/index.html
     upload: build/index.html
-env_variables:
-  REACT_APP_API_URL: https://api-dot-monkeyplan.ey.r.appspot.com
+# env_variables:
+#   REACT_APP_API_URL: https://api-dot-monkeyplan.ey.r.appspot.com
 # [END gae_storage_yaml]
