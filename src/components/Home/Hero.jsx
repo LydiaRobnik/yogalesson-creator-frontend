@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 
 export default function Hero() {
+  console.log('Hero', process.env.REACT_APP_API_URL);
   const { setShowLogin } = useContext(AuthContext);
 
   return (
@@ -11,7 +12,7 @@ export default function Hero() {
           <h1 className="color-beige-light text-7xl mt-5 mb-5 px-5">
             yoga class planning
           </h1>
-          <h3 className="font-bold">easy and quick</h3>
+          <h3 className="font-bold"></h3>
           <h4 className="pb-5">create well structured yoga classes</h4>
         </div>
       </div>

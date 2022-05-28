@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 export default function TestResponsive() {
   return (
     <div className="h-full flex">
       <div
-        className="w-1/2 flex-col items-center justify-center 
+        className="w-1/2 flex-col items-center justify-center
           border-2 border-red-500 text-6xl font-bold
           hidden md:flex"
       >
@@ -12,7 +12,7 @@ export default function TestResponsive() {
           src="https://assets1.lottiefiles.com/packages/lf20_s00z9gco.json"
           background="transparent"
           speed="1"
-          style={{ width: "300px", height: "300px" }}
+          style={{ width: '300px', height: '300px' }}
           loop
           // controls
           autoplay
@@ -22,7 +22,7 @@ export default function TestResponsive() {
         <div>
           <img
             className="h-screen"
-            src="https://yogalesson-createor-backend.herokuapp.com//images/Section1.jpg"
+            src="https://storage.googleapis.com/monkeyplan-bucket/app/Section1.jpg"
             alt=""
           />
         </div>
