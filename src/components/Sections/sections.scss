@@ -39,23 +39,26 @@
 }
 
 .Section1right {
-  // background-image: url("../../pictures/flowers.jpg");
-  background-size: cover;
+  background-image: url('https://storage.googleapis.com/monkeyplan-bucket/app/flowers.jpg');
+  // background-size: cover;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  // background-size: 100% 100%;
+  background-position: bottom;
 }
 
 .section2pic {
-  // background-image: url("../../pictures/pineapple_sea.jpeg");
+  background-image: url('https://storage.googleapis.com/monkeyplan-bucket/app/pineapple_sea.jpeg');
   background-size: cover;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  // background-size: 100% 100%;
+  background-position: top;
 }
 
 .cardBenefits3 {
   // background-color: $clr-blue-darkest;
-  // background-image: url("../../pictures/Flowers_Section3.jpg");
+  background-image: url('https://storage.googleapis.com/monkeyplan-bucket/app/Flowers_Section3.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  // background-size: 100% 100%;
+  background-position: bottom;
 }
