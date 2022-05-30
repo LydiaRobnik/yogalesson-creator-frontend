@@ -47,29 +47,11 @@ const SequenceCollection = (ref) => {
   const [showNew, setShowNew] = useState(false);
   const [editSequenceId, setEditSequenceId] = useState(-1);
 
-  // useEffect(() => {
-  //   console.log('useEffect showNew');
-  //   if (showNew) setSequenceToAdd(newSeqObj(user?.id));
-  // }, [showNew]);
-
   const handleSelectSequence = (choice) => {
     yogaClassToAdd.plan.push(choice);
     console.log('sequence selected');
     navigate(`../planner`);
   };
-
-  // const handleCopySequence = async (sequenceToCopy) => {
-  //   const copy = {
-  //     ...sequenceToCopy,
-  //     title: `${sequenceToCopy.title} (copy)`,
-  //     _id: ''
-  //   };
-  //   const result = await asanaService.createSequence(copy);
-  //   console.log('📒 newSequence', result);
-  //   setSequenceToAdd(result);
-  //   setShowNewSequence(true);
-  //   navigate(`../planner`);
-  // };
 
   const handleDeleteSequence = async (sequenceToDelete) => {
     const id = sequenceToDelete._id;
@@ -92,12 +74,9 @@ const SequenceCollection = (ref) => {
     console.log('editSequence', sequence);
     setSequenceToAdd(sequence);
     setEditSequenceId(sequence._id);
-    // setShowNew(true);
   };
 
   const saveSequence = async (sequence) => {
-    // console.log('📒 save new Sequence!');
-
     sequence.user = user.id;
     if (sequence._id) {
       const result = await asanaService.saveSequence(sequence);
@@ -176,7 +155,7 @@ const SequenceCollection = (ref) => {
                   </button>
                 </div>
 
-                <div className="col-span-10">
+                <div className="col-span-11">
                   {sequence._id === editSequenceId ? (
                     <NewSequence
                       handleFocus={handleFocus}
@@ -188,10 +167,11 @@ const SequenceCollection = (ref) => {
                       sequence={sequence}
                       selectedSequence={selectedSequence}
                       handleEditSequence={handleEditSequence}
+                      handleDeleteSequence={handleDeleteSequence}
                     />
                   )}
                 </div>
-                <div className="col-span-1 flex flex-col justify-start mt-3">
+                {/* <div className="col-span-1 flex flex-col justify-start mt-3">
                   <button
                     className="btn-seqColl-blue "
                     onClick={() => handleEditSequence(sequence)}
@@ -206,7 +186,7 @@ const SequenceCollection = (ref) => {
                   >
                     <p className="font-material-symbols py-1 px-2">delete</p>
                   </button>
-                </div>
+                </div> */}
               </div>
             ))}
         </div>
