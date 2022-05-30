@@ -4,7 +4,7 @@ This application was built as final project of the Web & App Development Course 
 
 Target group are yoga teachers. They can easily create reusable components (asana flows) and complete classes, store and print them and schedule them into an integrated calendar.
 
-![preview landing page](preview_landing_page.jpg)
+![preview landing page](public/preview_landing_page.jpg)
 
 # Getting Started with Create React App
 
