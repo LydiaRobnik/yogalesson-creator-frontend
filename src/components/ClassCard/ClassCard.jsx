@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 // import asanaService from '../../api/asanaService';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate, useOutletContext } from 'react-router-dom';
@@ -16,7 +16,7 @@ const ClassCard = ({ classItem }) => {
     clearSystemMessages
   } = useOutletContext();
   const navigate = useNavigate();
-  // const [show, setShow] = useState(false);
+  const [duration, setDuration] = useState(0);
 
   const handleFavorite = async () => {
     classItem.favourite = !classItem.favourite;
@@ -55,6 +55,20 @@ const ClassCard = ({ classItem }) => {
     }
   };
 
+  const getDuration = () => {
+    let sum = 0;
+    classItem.plan.forEach((sequence) => {
+      sum += sequence.duration;
+      return sum;
+    });
+    console.log(sum);
+    setDuration(sum);
+  };
+
+  useEffect(() => {
+    getDuration();
+  }, [classItem]);
+
   return (
     <>
       <div
@@ -77,6 +91,15 @@ const ClassCard = ({ classItem }) => {
               {classItem.favourite ? 'star' : 'grade'}
             </span>
             <div className="col-span-6">
+              <div>
+                <span className="font-material-symbols color-blue-darkest text-lg pr-1 float-left">
+                  schedule
+                </span>
+                <p className="color-blue-darkest text-md pt-1">
+                  {duration} minutes
+                </p>
+              </div>
+
               <h3 className="color-blue-darkest">
                 {showShortTitle(classItem.title)}
               </h3>
