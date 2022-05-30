@@ -149,7 +149,7 @@ const Planner = forwardRef((props, ref) => {
 
         {!loading && (
           <>
-            <div className="w-11/12 plannerFrame bg-white printframe ">
+            <div className="w-11/12 plannerFrame bg-white printframe">
               <div className="w-full bg-white ">
                 <div
                   className={`flex flex-row ${
@@ -161,7 +161,7 @@ const Planner = forwardRef((props, ref) => {
                   <input
                     type="text"
                     maxlength="70"
-                    className={`color-blue-darkest px-10 text-2xl md:text-4xl pb-3 ${
+                    className={`color-blue-darkest px-10 pt-3 text-2xl md:text-4xl pb-3 ${
                       yogaClassToAdd.plan.length === 0
                         ? 'text-center'
                         : 'text-left'
@@ -183,7 +183,7 @@ const Planner = forwardRef((props, ref) => {
                   )}
                   {yogaClassToAdd.plan &&
                     yogaClassToAdd.plan.map((sequence, index) => (
-                      <div className="grid grid-cols-12 gap-4 items-start border-t-2 border-gray-200 mx-4">
+                      <div className="grid grid-cols-12 gap-4 items-start border-t-2 border-gray-200 mx-4 ">
                         <div className=" col-span-1 mt-3">
                           <div className="flex flex-row flex-wrap">
                             <span
@@ -200,7 +200,7 @@ const Planner = forwardRef((props, ref) => {
                             </span>
                           </div>
                           <div>
-                            <div className="w-16 border-2 border-gray-200 rounded flex flex-row row-wrap items-center">
+                            <div className="w-16 border-2 border-current color-blue-darkest rounded flex flex-row row-wrap items-center">
                               <span className="font-material-symbols color-blue-darkest text-lg px-1">
                                 schedule
                               </span>
@@ -220,7 +220,7 @@ const Planner = forwardRef((props, ref) => {
 
                         <div
                           key={sequence._id}
-                          className=" rounded col-span-11 my-2"
+                          className=" rounded col-span-11 my-3  print:break-after-auto"
                         >
                           <SequencePlanned
                             sequence={sequence}
@@ -234,7 +234,7 @@ const Planner = forwardRef((props, ref) => {
                   <>
                     <div className=" border-t-2 border-gray-300 mb-2"></div>
                     <div className="w-32 border-4 rounded flex flex-row row-wrap items-center ">
-                      <span className="font-material-symbols color-blue-darkest text-xl font-bold px-1">
+                      <span className="font-material-symbols text-gray-400 text-xl font-bold px-1">
                         schedule
                       </span>
                       <h4 className="totalTime">{totalDuration} minutes</h4>

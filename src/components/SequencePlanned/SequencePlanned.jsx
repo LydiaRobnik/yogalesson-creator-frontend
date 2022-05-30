@@ -130,12 +130,18 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
     if (point === 'xs') {
       return 'grid-cols-2';
     } else if (point === 'sm') {
-      return 'grid-cols-4';
+      return 'grid-cols-3';
     } else if (point === 'md') {
-      return 'grid-cols-5';
+      return 'grid-cols-4';
     } else if (point === 'lg') {
+      return 'grid-cols-6';
+    } else if (point === 'xl') {
       return 'grid-cols-7';
-    } else return 'grid-cols-8';
+    } else if (point === '2xl') {
+      return 'grid-cols-8';
+    } else {
+      return 'grid-cols-9';
+    }
   };
 
   // edit functions
@@ -197,7 +203,7 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
         </div>
 
         <div
-          className={`printAsanas items-center grid gap-4 ${gridResponsiveness()} grid-flow-row-dense  `}
+          className={`items-center grid gap-4 ${gridResponsiveness()} grid-flow-row-dense print:grid-cols-6 `}
         >
           {sequence &&
             cards?.map((card, index) => (

@@ -10,15 +10,14 @@ main{
     }
 
     .totalTime{
-        @apply text-lg font-bold text-center pt-2;
-        color: $clr-blue-darkest;
+        @apply text-lg font-bold text-center pt-2 text-gray-400;
     }
 
     .plannerFrame {
         border: 3px $clr-blue-darkest;
         margin: 3rem;
         padding: 2rem;
-        @apply rounded-md border-dashed;
+        @apply rounded-md border-dashed bg-light ;
       }
       
 }
