@@ -130,12 +130,18 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
     if (point === 'xs') {
       return 'grid-cols-2';
     } else if (point === 'sm') {
-      return 'grid-cols-4';
+      return 'grid-cols-3';
     } else if (point === 'md') {
-      return 'grid-cols-5';
+      return 'grid-cols-4';
     } else if (point === 'lg') {
+      return 'grid-cols-6';
+    } else if (point === 'xl') {
       return 'grid-cols-7';
-    } else return 'grid-cols-8';
+    } else if (point === '2xl') {
+      return 'grid-cols-8';
+    } else {
+      return 'grid-cols-9';
+    }
   };
 
   // edit functions
@@ -175,13 +181,13 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
             className="trash btn-seqColl-red-outline cursor-pointer outline outline-2 flex flex-row self-center"
             onClick={() => handleRemoveSequence(sequence)}
           >
-            <p className="trash font-material-symbols py-1 px-2">delete</p>
+            <p className="trash font-material-symbols py-1 px-2">close</p>
           </button>
         </div>
       </div>
 
       <>
-        <div className="w-full min-h-40">
+        <div className="w-full min-h-40 pt-3">
           <span
             role="textbox"
             id="description"
@@ -197,7 +203,7 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
         </div>
 
         <div
-          className={`printAsanas items-center grid gap-4 ${gridResponsiveness()} grid-flow-row-dense  `}
+          className={`items-center grid gap-4 ${gridResponsiveness()} grid-flow-row-dense print:grid-cols-6 `}
         >
           {sequence &&
             cards?.map((card, index) => (

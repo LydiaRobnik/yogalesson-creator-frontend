@@ -9,25 +9,37 @@ const Sequence = ({ sequence, selectedSequence }) => {
   // // functions
   const gridResponsiveness = () => {
     if (point === 'xs') {
-      return 'grid-cols-3';
+      return 'grid-cols-2';
     } else if (point === 'sm') {
-      return 'grid-cols-4';
+      return 'grid-cols-3';
     } else if (point === 'md') {
-      return 'grid-cols-6';
+      return 'grid-cols-4';
     } else if (point === 'lg') {
+      return 'grid-cols-6';
+    } else if (point === 'xl') {
+      return 'grid-cols-7';
+    } else if (point === '2xl') {
       return 'grid-cols-8';
     } else {
-      return 'grid-cols-10';
+      return 'grid-cols-9';
     }
   };
 
   return (
     <div>
       <div className="w-full min-h-40 flex flex-row justify-between">
-        <h3 className="color-blue-darkest pr-3 pt-3 font-bold text-lg">
-          {sequence.title}
-        </h3>
-        <p className="color-blue-darkest pt-3">
+        <div className="flex flex-row justify-center pt-2">
+          <div className="w-16 border-2 border-gray-200 rounded flex flex-row row-wrap items-center self-center">
+            <span className="font-material-symbols text-gray-400 text-lg px-1">
+              schedule
+            </span>
+            <p className="pl-2 pt-1 text-gray-400 w-8">{sequence.duration}</p>
+          </div>
+          <h3 className="color-blue-darkest px-3 pt-2 font-bold text-lg">
+            {sequence.title}
+          </h3>
+        </div>
+        <p className="color-blue-darkest pt-4">
           {new Date(sequence.modifiedAt).toLocaleString()}
         </p>
       </div>

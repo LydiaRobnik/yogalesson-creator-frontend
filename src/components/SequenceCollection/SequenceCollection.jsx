@@ -165,30 +165,13 @@ const SequenceCollection = (ref) => {
                 key={`${sequence._id}${index}`}
                 className="grid gap-4 grid-cols-12 border-t-2 border-gray-200 mt-4"
               >
-                <div className="col-span-1 flex flex-col justify-center">
-                  <div className="w-16 border-2 border-gray-200 rounded flex flex-row row-wrap items-center self-center mb-6">
-                    <span className="font-material-symbols color-blue-darkest text-lg px-1">
-                      schedule
-                    </span>
-                    <p className="pl-2 pt-1 color-blue-darkest w-8">
-                      {sequence.duration}
-                    </p>
-                  </div>
-
+                <div className="col-span-1 flex flex-col justify-start pt-3">
                   <button
                     className="btn-seqColl-neutral"
                     onClick={() => handleSelectSequence(sequence)}
                   >
                     <span className="font-material-symbols px-2 py-1">
                       add_task
-                    </span>
-                  </button>
-                  <button
-                    className="btn-seqColl-blue "
-                    onClick={() => handleEditSequence(sequence)}
-                  >
-                    <span className="font-material-symbols px-2 py-1">
-                      edit
                     </span>
                   </button>
                 </div>
@@ -209,6 +192,14 @@ const SequenceCollection = (ref) => {
                   )}
                 </div>
                 <div className="col-span-1 flex flex-col justify-start mt-3">
+                  <button
+                    className="btn-seqColl-blue "
+                    onClick={() => handleEditSequence(sequence)}
+                  >
+                    <span className="font-material-symbols px-2 py-1">
+                      edit
+                    </span>
+                  </button>
                   <button
                     className="btn-seqColl-red-outline"
                     onClick={() => handleDeleteSequence(sequence)}

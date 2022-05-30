@@ -22,17 +22,16 @@
 .btn-blueNew:hover {
   background-color: $clr-blue-dark;
   color: $clr-beige;
-  padding: 0.5rem 1rem;
-  @apply px-6;
+
 }
 
 .btn-redNew {
   background-color: $clr-red;
   color: $clr-light;
-  padding: 0.5rem 1.1rem;
+  padding: 0.5rem 0.5rem;
 }
 .btn-redNew:hover {
   background-color: $clr-beige;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.5rem;
   @apply text-white;
 }

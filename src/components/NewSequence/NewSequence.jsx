@@ -95,15 +95,15 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
     } else if (point === 'sm') {
       return 'grid-cols-3';
     } else if (point === 'md') {
-      return 'grid-cols-4';
+      return 'grid-cols-3';
     } else if (point === 'lg') {
-      return 'grid-cols-5';
+      return 'grid-cols-4';
     } else if (point === 'xl') {
-      return 'grid-cols-7';
+      return 'grid-cols-6';
     } else if (point === '2xl') {
-      return 'grid-cols-8';
+      return 'grid-cols-7';
     } else {
-      return 'grid-cols-10';
+      return 'grid-cols-8';
     }
   };
 
@@ -111,26 +111,47 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
 
   return (
     <>
-      <div className="editSequence w-full min-h-40 px-6 bg-light flex flex-row justify-between">
-        <div className="flex flex-col w-2/3 sm:w-3/4 md:w-full">
-          <input
-            type="text"
-            maxlength="50"
-            className="color-blue-darkest text-xl bg-light"
-            placeholder="draft sequence - title"
-            value={sequenceToAdd.title}
-            onChange={(e) =>
-              setSequenceToAdd({ ...sequenceToAdd, title: e.target.value })
-            }
-            onFocus={handleFocus}
-          />
+      <div className="editSequence w-full min-h-40 p-2 sm:p-4 md:p-6 bg-light flex flex-row justify-between">
+        <div className="flex flex-col w-4/5 sm:w-11/12 md:w-full mr-2 lg:mr-0 bg-white">
+          <div className="flex flex-row flex-wrap">
+            <div className="flex flex-row items-center my-2 border-2 border-current color-blue-darkest rounded w-32">
+              <span className="font-material-symbols color-blue-darkest text-lg px-1">
+                schedule
+              </span>
+              <input
+                type="number"
+                required
+                className="color-blue-darkest text-lg bg-white w-24 text-center"
+                placeholder="minutes"
+                // value={timeToConvert}
+                onChange={(e) =>
+                  setSequenceToAdd({
+                    ...sequenceToAdd,
+                    duration: +e.target.value
+                  })
+                }
+                onFocus={handleFocus}
+              />
+            </div>
+            <input
+              type="text"
+              maxlength="50"
+              className="color-blue-darkest text-xl ml-4 pt-1 w-full"
+              placeholder="draft sequence - title"
+              value={sequenceToAdd.title}
+              onChange={(e) =>
+                setSequenceToAdd({ ...sequenceToAdd, title: e.target.value })
+              }
+              onFocus={handleFocus}
+            />
+          </div>
 
           <textarea
             name="description"
             id="description"
             rows="4"
             cols="50"
-            className="color-blue-darkest break-words resize bg-light border-2 border-gray-300 mr-3"
+            className="color-blue-darkest break-words resize border-2 border-gray-300 mr-3 p-1 rounded"
             placeholder="Add your text - maybe for Shavasana "
             value={sequenceToAdd.description}
             onChange={(e) =>
@@ -143,7 +164,7 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
           />
 
           <div
-            className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense  sm:w-11/12 md:w-5/6`}
+            className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense  sm:w-11/12 md:w-5/6 pb-3`}
           >
             {sequenceToAdd.asanas?.map((asana, index) => (
               <div
@@ -165,46 +186,29 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
               </span>
             </button>
           </div>
-          <div className="flex flex-row items-center my-2">
-            <p className="color-blue-darkest pr-2">
-              Enter a duration for your sequence
-            </p>
-            <input
-              type="text"
-              required
-              className="color-blue-darkest text-lg bg-white w-24 text-center border-2 border-gray-200 rounded"
-              placeholder="minutes"
-              // value={timeToConvert}
-              onChange={(e) =>
-                setSequenceToAdd({
-                  ...sequenceToAdd,
-                  duration: +e.target.value
-                })
-              }
-              onFocus={handleFocus}
-            />
-          </div>
         </div>
 
-        <div className="flex flex-col justify-between my-3 w-12 md:w-32">
+        <div className="flex flex-col justify-between items-end  w-12 lg:w-32">
           <div className="flex flex-row">
             <button
-              className="btn-redNew flex flex-row items-center w-12 md:w-32"
+              className="btn-redNew flex flex-row items-center w-12 lg:w-24 ml-1"
               onClick={() => cancel()}
             >
-              <span className="font-material-symbols inline pr-2">cancel</span>
-              <p className="inline pt-1 text-lg invisible md:visible">cancel</p>
+              <span className="font-material-symbols inline pl-2 lg:pl-0 pr-1">
+                cancel
+              </span>
+              <p className="inline pt-1 text-lg invisible lg:visible">cancel</p>
             </button>
           </div>
           <div className="flex flex-row ">
             <button
-              className="btn-blueNew flex flex-row items-center md:px-6 py-2 w-12 md:w-32"
+              className="btn-blueNew flex flex-row items-center lg:px-2 py-2 w-12 lg:w-24 ml-1"
               onClick={() => addSequenceToClass()}
             >
-              <span className="font-material-symbols inline px-4 md:pr-2">
+              <span className="font-material-symbols inline pl-4 lg:pl-1 lg:pr-2">
                 save
               </span>
-              <p className="inline p-0 md:pt-1 text-lg invisible md:visible">
+              <p className="inline p-0 lg:pt-1 text-lg invisible lg:visible">
                 save
               </p>
             </button>
@@ -230,7 +234,7 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
               Select an Asana
             </h2>
             {/* <ModalAddAsana /> */}
-            <div className="modalAsana overflow-scroll overflow-x-hidden bg-light pt-4">
+            <div className="modalAsana overflow-scroll overflow-x-hidden pt-4">
               <Asanas selection={true} addAsana={addAsana} />
             </div>
           </div>
