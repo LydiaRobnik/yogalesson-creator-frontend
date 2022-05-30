@@ -329,22 +329,28 @@ class AsanaService {
   //  #########
 
   async uploadPreview(classId, image) {
+    console.log('🙈 uploading preview');
     let fd = new FormData();
-    fd.append('preview_pic', dataURItoBlob(image), 'preview_pic.png');
+    fd.append('preview_pic', dataURItoBlob(image), `preview_${classId}.png`);
 
-    const resp = await this.doApiCall(
-      async () =>
-        await axios({
-          method: 'post',
-          url: `${process.env.REACT_APP_API_URL}/class/${classId}/upload-preview`,
-          data: fd,
-          headers: {
-            'Content-Type': 'multipart/form-data; boundary=MyBoundary'
-          }
+    const resp = await this.doApiCall(async () => {
+      axios({
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}/class/${classId}/upload-preview`,
+        data: fd,
+        headers: {
+          'Content-Type': 'multipart/form-data; boundary=MyBoundary'
+        }
+      })
+        .then((resp) => {
+          console.log(resp);
+          return resp.data;
         })
-    );
-
-    return resp.data;
+        .catch((err) => {
+          console.log(err);
+          throw err;
+        });
+    });
   }
 
   async deleteClass(id) {
@@ -365,7 +371,7 @@ class AsanaService {
    * @returns
    */
   async createClassPreview(elementRef, classId) {
-    console.log('ref', elementRef);
+    console.log('🙈 ref', elementRef);
 
     if (!elementRef || !classId) return;
 
@@ -378,7 +384,7 @@ class AsanaService {
         return true;
       })
       .catch(function (error) {
-        console.error('oops, something went wrong!', error);
+        console.error('oopsie, something went wrong!', error);
         throw error;
       });
   }

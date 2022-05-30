@@ -6,6 +6,10 @@ const calendarColors = [
   'rgb(141, 23, 141)'
 ];
 
+const deepClone = (obj) => {
+  return JSON.parse(JSON.stringify(obj));
+};
+
 function dataURItoBlob(dataURI) {
   // convert base64/URLEncoded data component to raw binary data held in a string
   var byteString;
@@ -54,4 +58,4 @@ function formatDate(date) {
   return date.toLocaleDateString('en-US', options);
 }
 
-export { calendarColors, dataURItoBlob, getBase64, formatDate };
+export { calendarColors, dataURItoBlob, getBase64, formatDate, deepClone };
