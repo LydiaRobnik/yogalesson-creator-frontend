@@ -60,13 +60,11 @@ const Sequence = ({
 
             <div
               className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
+              // className="flex flex-row flex-wrap justify-start"
             >
               {sequence &&
                 sequence.asanas.map((asana, index) => (
-                  <div
-                    key={`${asana._id}${index}`}
-                    className="flex flex-row justify-start"
-                  >
+                  <div key={`${asana._id}${index}`} className="grow">
                     <AsanaCard asana={asana} />
                   </div>
                 ))}
