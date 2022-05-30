@@ -251,21 +251,21 @@ const Asanas = ({ selection = false, addAsana }) => {
   };
 
   // functions
-  const gridResponsiveness = () => {
-    if (point === 'xs') {
-      return 'grid-cols-1';
-    } else if (point === 'sm') {
-      return 'grid-cols-2';
-    } else if (point === 'md') {
-      return 'grid-cols-3';
-    } else if (point === 'lg') {
-      return 'grid-cols-4';
-    } else if (point === 'xl') {
-      return 'grid-cols-5';
-    } else {
-      return 'grid-cols-6';
-    }
-  };
+  // const gridResponsiveness = () => {
+  //   if (point === 'xs') {
+  //     return 'grid-cols-1';
+  //   } else if (point === 'sm') {
+  //     return 'grid-cols-2';
+  //   } else if (point === 'md') {
+  //     return 'grid-cols-3';
+  //   } else if (point === 'lg') {
+  //     return 'grid-cols-4';
+  //   } else if (point === 'xl') {
+  //     return 'grid-cols-5';
+  //   } else {
+  //     return 'grid-cols-6';
+  //   }
+  // };
 
   return (
     <>
@@ -456,7 +456,7 @@ const Asanas = ({ selection = false, addAsana }) => {
                       )
                   )
                   .map((asana) => (
-                    <div key={asana._id} className="">
+                    <div key={asana._id} className="grow">
                       <AsanaCard
                         asana={asana}
                         handleSelectAsana={handleSelectAsana}
