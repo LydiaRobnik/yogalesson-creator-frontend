@@ -205,8 +205,8 @@ const Planner = forwardRef((props, ref) => {
                                 schedule
                               </span>
                               <input
-                                type="text"
-                                className="pl-2 pt-1 color-blue-darkest w-8"
+                                type="number"
+                                className=" pt-1 color-blue-darkest w-8"
                                 // contenteditable="true"
                                 value={sequence.duration}
                                 onFocus={handleFocus}
