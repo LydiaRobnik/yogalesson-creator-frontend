@@ -1,3 +1,9 @@
+# This application was built as final project of the Web & App Development Course at WBW Coding School in May 2022.
+
+Target group are yoga teachers. They can easily create reusable components (asana flows) and complete classes, store and print them and schedule them into an integrated calendar.
+
+![preview landing page](preview_landing_page.png)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
