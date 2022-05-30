@@ -1,4 +1,6 @@
-# This application was built as final project of the Web & App Development Course at WBW Coding School in May 2022.
+# MonkeyPlan - Yoga lesson creator
+
+This application was built as final project of the Web & App Development Course at WBW Coding School in May 2022.
 
 Target group are yoga teachers. They can easily create reusable components (asana flows) and complete classes, store and print them and schedule them into an integrated calendar.
 
