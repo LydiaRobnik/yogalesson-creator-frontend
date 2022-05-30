@@ -1,6 +1,5 @@
 @import '../../style/variables.scss';
 
-
 .sectionTitle {
   font-family: $font-moontime;
   color: $clr-beige-light;
@@ -9,27 +8,25 @@
 .square {
   width: 100%;
   height: 100%;
-  }
+}
 
-  .sectionTitleColor {
-    background-color: $clr-blue-darkest;
-  }
+.sectionTitleColor {
+  background-color: $clr-blue-darkest;
+}
 
-  .featureText {
-    color: $clr-blue-darkest;
-    font-family: $font-manjari;
-    text-align: center;
-    @apply  mb-2 font-light;
-  }
-
+.featureText {
+  color: $clr-blue-darkest;
+  font-family: $font-manjari;
+  text-align: center;
+  @apply mb-2 font-light;
+}
 
 .cardsHome {
   background-color: $clr-beige;
 }
 
-
-.cardsHome:hover{
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+.cardsHome:hover {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   font-size: 1.5rem;
 }
 
@@ -41,27 +38,27 @@
   background-color: $clr-light;
 }
 
-
-
 .Section1right {
-  background-image: url("../../pictures/flowers.jpg");
-  background-size: cover;
+  background-image: url('https://storage.googleapis.com/monkeyplan-bucket/app/flowers.jpg');
+  // background-size: cover;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  // background-size: 100% 100%;
+  background-position: bottom;
 }
 
 .section2pic {
-  background-image: url("../../pictures/pineapple_sea.jpeg");
+  background-image: url('https://storage.googleapis.com/monkeyplan-bucket/app/pineapple_sea.jpeg');
   background-size: cover;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  // background-size: 100% 100%;
+  background-position: top;
 }
 
 .cardBenefits3 {
   // background-color: $clr-blue-darkest;
-  background-image: url("../../pictures/Flowers_Section3.jpg");
+  background-image: url('https://storage.googleapis.com/monkeyplan-bucket/app/Flowers_Section3.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
-
+  // background-size: 100% 100%;
+  background-position: bottom;
 }

@@ -293,7 +293,10 @@ export default function AsanaCreateDialog({ saveAsana, deleteAsana, asana }) {
             </div>
             <div className="flex flex-wrap gap-1">
               {asanaObj.tags?.map((tag, index) => (
-                <span className="px-1 pl-2 py-1 rounded-full text-gray-500 bg-gray-200 font-semibold text-sm flex align-center w-max cursor-pointer active:bg-gray-300 transition duration-300 ease">
+                <span
+                  key={index}
+                  className="px-1 pl-2 py-1 rounded-full text-gray-500 bg-gray-200 font-semibold text-sm flex align-center w-max cursor-pointer active:bg-gray-300 transition duration-300 ease"
+                >
                   <div className="mt-1">{tag}</div>
                   <button
                     type="button"

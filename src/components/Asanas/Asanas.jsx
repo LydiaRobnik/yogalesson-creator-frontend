@@ -11,6 +11,7 @@ import Modal from 'react-modal';
 import './asanas.scss';
 import AsanaCreateDialog from './AsanaCreateDialog';
 import useBreakpoint from '../../custom/useBreakpoint';
+import { deepClone } from '../../custom/utils';
 
 const emptyAsanaObj = () => ({
   asana: {
@@ -244,7 +245,7 @@ const Asanas = ({ selection = false, addAsana }) => {
       addAsana(asana);
     } else if (asana.default === false || user.role === 'admin') {
       console.log('asana', asana);
-      setEditAsana({ ...asana });
+      setEditAsana(deepClone(asana));
       openModal();
     }
   };

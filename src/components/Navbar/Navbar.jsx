@@ -105,12 +105,12 @@ export default function Navbar() {
                     <div className="flex-shrink-0 flex items-center">
                       <img
                         className="block lg:hidden h-8 w-auto height pr-3"
-                        src="https://yogalesson-createor-backend.herokuapp.com/images/Logo_250x250px.png"
+                        src="https://storage.googleapis.com/monkeyplan-bucket/app/Logo_250x250px.png"
                         alt="Workflow"
                       />
                       <img
                         className="hidden lg:block h-8 w-auto pr-3"
-                        src="https://yogalesson-createor-backend.herokuapp.com/images/Logo_250x250px.png"
+                        src="https://storage.googleapis.com/monkeyplan-bucket/app/Logo_250x250px.png"
                         alt="Workflow"
                       />
                       <div className="ml-2">
