@@ -20,6 +20,7 @@
     "@lottiefiles/lottie-player": "^1.5.7",
     "animate.css": "^4.1.1",
     "axios": "^0.26.1",
+    "daisyui": "^2.15.2",
     "dom-to-image": "^2.6.0",
     "immutability-helper": "^3.1.1",
     "loaders.css": "^0.1.2",

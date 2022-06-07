@@ -108,14 +108,17 @@ class AsanaService {
     return resp.data;
   }
 
-  async changeUserAvatar(id, user) {
+  async changeUserAvatar(id, user, cbUploadProgress) {
     console.log('changeUserAvatar', id, user);
     // throw new Error('Not implemented');
     const resp = await this.doApiCall(
       async () =>
         await http(localStorage.getItem('token')).put(
           `/user/${id}/change-avatar`,
-          user
+          user,
+          {
+            onUploadProgress: cbUploadProgress
+          }
         )
     );
 
