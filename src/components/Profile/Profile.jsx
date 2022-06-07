@@ -150,8 +150,8 @@ export default function Profile() {
 
   const handleChangeRole = () => {};
 
-  function handleSelectImage(imageUrl) {
-    console.log('📒 handleSelectImage', imageUrl);
+  function handleSelectImage(imageUrl, errorMessage) {
+    console.log('📒 handleSelectImage', imageUrl?.length, errorMessage);
     setClickImage(false);
     if (imageUrl) {
       setUploadProgress(0);
@@ -188,6 +188,8 @@ export default function Profile() {
           console.log('📒 handleSelectImage err', err);
           // addSystemError(err);
         });
+    } else if (errorMessage) {
+      addSystemError(errorMessage);
     }
   }
 
@@ -248,6 +250,7 @@ export default function Profile() {
             accept={'image/*'}
             handleUpload={handleSelectImage}
             click={clickImage}
+            maxSize={1024 * 400}
           />
         </div>
 
