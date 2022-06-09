@@ -71,6 +71,7 @@ const Asanas = ({ selection = false, addAsana }) => {
   const [filterTags, setFilterTags] = useState([]);
   const [showFilter, setShowFilter] = useState(true);
   const [editAsana, setEditAsana] = useState(emptyAsanaObj());
+  const [selectedAsanas, setSelectedAsanas] = useState([]);
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [error, setError] = useState('');
@@ -242,11 +243,25 @@ const Asanas = ({ selection = false, addAsana }) => {
       navigate(`../planner`);
     } else if (selection === true) {
       // console.log('asana', asana);
-      addAsana(asana);
+      // addAsana(asana);
+      if (selectedAsanas.includes(asana)) {
+        setSelectedAsanas(selectedAsanas.filter((a) => a._id !== asana._id));
+      } else {
+        setSelectedAsanas((prev) => [...prev, asana]);
+      }
     } else if (asana.default === false || user.role === 'admin') {
       console.log('asana', asana);
       setEditAsana(deepClone(asana));
       openModal();
+    }
+  };
+
+  const handleSelectAsanas = () => {
+    if (selection === true) {
+      // console.log('asanas', asanas);
+      addAsana(selectedAsanas);
+    } else {
+      // should not happen
     }
   };
 
@@ -456,7 +471,18 @@ const Asanas = ({ selection = false, addAsana }) => {
                       )
                   )
                   .map((asana) => (
-                    <div key={asana._id} className="grow">
+                    <div
+                      id="asana-card"
+                      data-selected-id={`${
+                        selectedAsanas.findIndex((a) => a._id === asana._id) + 1
+                      }`}
+                      key={asana._id}
+                      className={`relative ${
+                        selectedAsanas.find((a) => a._id === asana._id)
+                          ? 'border-4 rounded-md border-red-800 asana-selected-id'
+                          : 'border-4 rounded-md border-transparent'
+                      }`}
+                    >
                       <AsanaCard
                         asana={asana}
                         handleSelectAsana={handleSelectAsana}
@@ -466,6 +492,24 @@ const Asanas = ({ selection = false, addAsana }) => {
                   ))}
             </div>
           </div>
+          {selection === true && selectedAsanas.length > 0 && (
+            <div
+              id="asanaSelectDiv"
+              className="fixed bottom-3 right-6 rounded-md bg-amber-800 bg-opacity-80 text-2xl text-white p-3"
+            >
+              <div className="flex items-center gap-4 pt-1">
+                <div className="pl-3">
+                  {`${selectedAsanas.length} Asana selected`}
+                </div>
+                <button
+                  onClick={handleSelectAsanas}
+                  className="btn-neutral btn-neutral:hover text-xs bg-white outline outline-2 flex flex-row self-center my-1 mb-2 mr-3"
+                >
+                  <span className="font-material-symbols">add_task</span>
+                </button>
+              </div>
+            </div>
+          )}
           <div className="text-black">
             <Modal
               isOpen={modalIsOpen}

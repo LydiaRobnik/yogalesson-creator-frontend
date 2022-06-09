@@ -220,7 +220,7 @@ export default function Profile() {
           {uploadProgress >= 0 ? (
             <div
               onClick={() => setClickImage(true)}
-              class="radial-progress"
+              className="radial-progress"
               style={{
                 '--value': `${uploadProgress}`,
                 '--size': '10rem',

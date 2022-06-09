@@ -20,7 +20,8 @@ const customStyles = {
     borderRadius: '.7rem',
     border: '2px dotted lightgray',
     overflow: 'hidden',
-    width: '80%'
+    width: '85%',
+    maxWidth: '1024px'
   }
 };
 Modal.setAppElement('#root');
@@ -68,9 +69,10 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
    * @param {} asana from Asanas.jsx
    */
   function addAsana(asana) {
-    console.log('📒 addAsana', asana);
+    console.log('📒 addAsanas', [...sequenceToAdd.asanas].concat(asana));
+    // console.log('📒 addAsana', asana);
     setSequenceToAdd((prev) => {
-      return { ...prev, asanas: [...prev.asanas, asana] };
+      return { ...prev, asanas: [...prev.asanas].concat(asana) };
     });
     closeModal();
   }
