@@ -209,7 +209,7 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
           {sequence &&
             cards?.map((card, index) => (
               <>
-                <div className="flex flex-col content-center">
+                <div className={`flex flex-col content-center fade-in`}>
                   <div className="flex flex-col trash">
                     <span
                       className="delete"

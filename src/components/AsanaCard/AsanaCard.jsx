@@ -87,7 +87,7 @@ const AsanaCard = ({
         ${
           sizeAsanaOnSelectModal
             ? 'w-32 h-48 md:w-36 md:h-56 lg:w-40 lg:h-64 '
-            : 'w-full h-40'
+            : 'w-full md:w-32 xl:w-36 2xl:w-40 h-40'
         }
         `}
       >
