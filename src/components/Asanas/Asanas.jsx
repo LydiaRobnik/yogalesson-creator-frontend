@@ -338,7 +338,7 @@ const Asanas = ({ selection = false, addAsana }) => {
               )}
             </div>
           </div>
-          <div className="asanas-jsx flex justify-center gap-4 w-full">
+          <div className="asanas-jsx flex gap-4 w-full">
             <div
               className={`filter-section  flex flex-col gap-4 text-black ${
                 showFilter ? 'w-2/6 md:w-1/6' : 'w-0'
@@ -443,63 +443,71 @@ const Asanas = ({ selection = false, addAsana }) => {
               </div>
             </div>
             {/* <div className={`w-full grid grid-flow-row auto-rows-max`}> */}
-            <div className={`w-full flex flex-wrap gap-2`}>
-              {asanas &&
-                asanas
-                  // filter by name
-                  .filter(
-                    (asana) =>
-                      asana.asana.sanskrit.toLowerCase().includes(filterName) ||
-                      asana.asana.name.toLowerCase().includes(filterName)
-                  )
-                  // filter by level
-                  .filter(
-                    (asana) =>
-                      filterLevel.every((level) => !level.checked) ||
-                      filterLevel.some(
-                        (level) => level.checked && level.level === asana.level
-                      )
-                  )
-                  // filter by tags
-                  .filter(
-                    (asana) =>
-                      filterTags.every((tag) => !tag.checked) ||
-                      filterTags.some(
-                        (tag) =>
-                          tag.checked &&
-                          asana.tags.some((asanaTag) => asanaTag === tag.tag)
-                      )
-                  )
-                  .map((asana) => (
-                    <div
-                      id="asana-card"
-                      data-selected-id={`${
-                        selectedAsanas.findIndex((a) => a._id === asana._id) + 1
-                      }`}
-                      key={asana._id}
-                      className={`relative ${
-                        selectedAsanas.find((a) => a._id === asana._id)
-                          ? 'border-4 rounded-md border-red-800 asana-selected-id'
-                          : 'border-4 rounded-md border-transparent'
-                      }`}
-                    >
-                      <AsanaCard
-                        asana={asana}
-                        handleSelectAsana={handleSelectAsana}
-                        sizeAsanaOnSelectModal={true}
-                      />
-                    </div>
-                  ))}
+            <div>
+              <div className={`w-full flex flex-wrap gap-2`}>
+                {asanas &&
+                  asanas
+                    // filter by name
+                    .filter(
+                      (asana) =>
+                        asana.asana.sanskrit
+                          .toLowerCase()
+                          .includes(filterName) ||
+                        asana.asana.name.toLowerCase().includes(filterName)
+                    )
+                    // filter by level
+                    .filter(
+                      (asana) =>
+                        filterLevel.every((level) => !level.checked) ||
+                        filterLevel.some(
+                          (level) =>
+                            level.checked && level.level === asana.level
+                        )
+                    )
+                    // filter by tags
+                    .filter(
+                      (asana) =>
+                        filterTags.every((tag) => !tag.checked) ||
+                        filterTags.some(
+                          (tag) =>
+                            tag.checked &&
+                            asana.tags.some((asanaTag) => asanaTag === tag.tag)
+                        )
+                    )
+                    .map((asana) => (
+                      <div
+                        id="asana-card"
+                        data-selected-id={`${
+                          selectedAsanas.findIndex((a) => a._id === asana._id) +
+                          1
+                        }`}
+                        key={asana._id}
+                        className={`relative ${
+                          selectedAsanas.find((a) => a._id === asana._id)
+                            ? 'asana-selected-id'
+                            : 'border-4 rounded-md border-transparent'
+                        }`}
+                      >
+                        <AsanaCard
+                          asana={asana}
+                          handleSelectAsana={handleSelectAsana}
+                          sizeAsanaOnSelectModal={true}
+                        />
+                      </div>
+                    ))}
+              </div>
             </div>
           </div>
           {selection === true && selectedAsanas.length > 0 && (
             <div
               id="asanaSelectDiv"
-              className="fixed bottom-3 right-6 rounded-md bg-amber-800 bg-opacity-80 text-2xl text-white p-3"
+              className="fixed bottom-3 right-6 rounded-md bg-green-500 bg-opacity-80 text-2xl text-white p-3
+              border-2 border-slate-700 border-dashed"
             >
               <div className="flex items-center gap-4 pt-1">
-                <div className="pl-3">
-                  {`${selectedAsanas.length} Asana selected`}
+                <div className="pl-3 pt-1 text-shadow">
+                  <span className="font-bold text-red-400 text-3xl pr-1">{`${selectedAsanas.length}`}</span>{' '}
+                  Asana selected
                 </div>
                 <button
                   onClick={handleSelectAsanas}

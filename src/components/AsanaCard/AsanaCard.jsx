@@ -79,23 +79,29 @@ const AsanaCard = ({
         ref={ref}
         onClick={() => handleSelectAsana(asana)}
         data-handler-id={handlerId}
-        className={`flex flex-col content-center self-center justify-between rounded overflow-hidden shadow-lg cursor-pointer ${
+        className={`h-full flex flex-col content-center self-center justify-between rounded shadow-lg cursor-pointer ${
           isDragging
             ? 'border-4 border-rose-400 opacity-50'
             : 'bg-white opacity-100 border-2 border-gray-200'
-        } 
-        ${sizeAsanaOnSelectModal ? 'w-32 h-48 ' : 'w-28 h-28'} 
+        }
+        ${
+          sizeAsanaOnSelectModal
+            ? 'w-32 h-48 md:w-36 md:h-56 lg:w-40 lg:h-64 '
+            : 'w-full h-40'
+        }
         `}
       >
-        <div className="flex flex-row justify-center">
+        <div className="flex flex-row justify-center h-2/3 overflow-hidden">
           <img
-            className={`${sizeAsanaOnSelectModal ? '' : 'w-12 mt-2'}`}
+            className={`${
+              !asana.default && 'w-full object-cover object-center'
+            }`}
             src={asana.img_url}
             alt="preview class"
           />
         </div>
         <div
-          className={` p-1 rounded-b ${
+          className={` p-1 rounded-b  h-1/3 ${
             asana.default ? 'bg-light color-blue-darkest' : 'bg-red color-light'
           }  ${sizeAsanaOnSelectModal ? 'h-20 text-left' : ''}`}
         >
