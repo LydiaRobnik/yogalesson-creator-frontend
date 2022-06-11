@@ -168,7 +168,7 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
           />
 
           <div
-            className={`grid gap-1 ${gridResponsiveness()} grid-flow-row-dense`}
+            className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
           >
             {sequenceToAdd.asanas?.map((asana, index) => (
               <div
