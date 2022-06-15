@@ -20,7 +20,8 @@ const customStyles = {
     borderRadius: '.7rem',
     border: '2px dotted lightgray',
     overflow: 'hidden',
-    width: '80%'
+    width: '85%',
+    maxWidth: '1024px'
   }
 };
 Modal.setAppElement('#root');
@@ -68,9 +69,12 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
    * @param {} asana from Asanas.jsx
    */
   function addAsana(asana) {
-    console.log('📒 addAsana', asana);
+    // console.log('📒 addAsana', asana);
     setSequenceToAdd((prev) => {
-      return { ...prev, asanas: [...prev.asanas, asana] };
+      // prev.asanas.forEach((asana) => (asana.new = false));
+      asana.forEach((asana) => (asana.new = true));
+      console.log('📒 addAsanas', [...sequenceToAdd.asanas].concat(asana));
+      return { ...prev, asanas: [...prev.asanas].concat(asana) };
     });
     closeModal();
   }
@@ -164,12 +168,14 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
           />
 
           <div
-            className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense  sm:w-11/12 md:w-5/6 pb-3`}
+            className={`grid gap-4 ${gridResponsiveness()} grid-flow-row-dense`}
           >
             {sequenceToAdd.asanas?.map((asana, index) => (
               <div
                 key={`${asana._id}${index}`}
-                className="flex flex-col items-center md:w-4/5 lg:w-full"
+                className={`flex flex-col items-center ${
+                  asana.new === true && 'fade-in'
+                }`}
               >
                 <span
                   className="font-material-symbols color-blue-darkest cursor-pointer"
@@ -177,7 +183,15 @@ const NewSequence = ({ handleFocus, saveSequence, cancel }) => {
                 >
                   delete
                 </span>
-                <AsanaCard asana={asana} />
+                <div
+                  className={`h-full ${
+                    asana.new === true && 'border-2 border-green-500 rounded-md'
+                  }`}
+                >
+                  <div className="h-full flex flex-col">
+                    <AsanaCard asana={asana} />
+                  </div>
+                </div>
               </div>
             ))}
             <button className="addAsana" onClick={() => openModal()}>

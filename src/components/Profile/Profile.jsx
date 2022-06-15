@@ -4,6 +4,9 @@ import { useNavigate, useOutletContext } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import FileUpload from '../FileUpload/FileUpload';
 
+const avatarPlaceholder =
+  'https://www.kindpng.com/picc/m/21-211456_user-icon-hd-png-download.png';
+
 export default function Profile() {
   const navigate = useNavigate();
 
@@ -27,6 +30,7 @@ export default function Profile() {
   const [isEditRole, setIsEditRole] = useState(false);
 
   const [image, setImage] = useState(null);
+  const [uploadProgress, setUploadProgress] = useState(-1);
   const [clickImage, setClickImage] = useState(false);
 
   useEffect(() => {
@@ -146,21 +150,28 @@ export default function Profile() {
 
   const handleChangeRole = () => {};
 
-  function handleSelectImage(imageUrl) {
-    console.log('📒 handleSelectImage', imageUrl);
+  function handleSelectImage(imageUrl, errorMessage) {
+    console.log('📒 handleSelectImage', imageUrl?.length, errorMessage);
     setClickImage(false);
     if (imageUrl) {
+      setUploadProgress(0);
       asanaService
         .getUser(user.id)
         .then((userDb) => {
           userDb.avatar = imageUrl;
+          setUploadProgress(0);
 
           asanaService
-            .changeUserAvatar(userDb._id, userDb)
+            .changeUserAvatar(userDb._id, userDb, ({ loaded, total }) => {
+              console.log('📒 uploadProgress', loaded, total);
+              setUploadProgress(Math.floor((loaded * 100) / total));
+            })
             .then((user) => {
+              console.log('📒 uploaded!!');
               setProfile(user);
               setImage(imageUrl);
               setUser((prev) => ({ ...prev, avatar: user.avatar }));
+              setUploadProgress(-1);
               addSystemSuccess('Avatar changed');
               // setProfile((prev) => {
               //   prev.avatar = imageUrl;
@@ -177,6 +188,8 @@ export default function Profile() {
           console.log('📒 handleSelectImage err', err);
           // addSystemError(err);
         });
+    } else if (errorMessage) {
+      addSystemError(errorMessage);
     }
   }
 
@@ -204,20 +217,31 @@ export default function Profile() {
         className="grid grid-cols-1 md:grid-cols-2 gap-4 cursor-pointer mb-2"
       >
         <div className="col-span-1 justify-self-center">
-          {image ? (
-            <img
+          {uploadProgress >= 0 ? (
+            <div
               onClick={() => setClickImage(true)}
-              className="h-36 w-36 my-6 rounded-full hover:scale-110 shadow-lg"
-              // className="h-36 w-36 rounded-full border-4 border-black hover:scale-110 shadow-lg"
-              src={image}
-              alt="bild"
-            ></img>
+              className="radial-progress"
+              style={{
+                '--value': `${uploadProgress}`,
+                '--size': '10rem',
+                '--thickness': '2px'
+              }}
+            >
+              {uploadProgress}%
+            </div>
           ) : (
+            // <img
+            //   onClick={() => setClickImage(true)}
+            //   className="h-36 w-36 my-6 rounded-full hover:scale-110 shadow-lg"
+            //   // className="h-36 w-36 rounded-full border-4 border-black hover:scale-110 shadow-lg"
+            //   src={image}
+            //   alt="bild"
+            // ></img>
             <div onClick={() => setClickImage(true)} className="p-1">
               <img
                 className="h-36 w-36 rounded-full hover:scale-110 shadow-lg"
-                src="https://www.kindpng.com/picc/m/21-211456_user-icon-hd-png-download.png"
-                alt=""
+                src={image ? image : avatarPlaceholder}
+                alt="avatar"
               />
             </div>
           )}
@@ -226,6 +250,7 @@ export default function Profile() {
             accept={'image/*'}
             handleUpload={handleSelectImage}
             click={clickImage}
+            maxSize={1024 * 400}
           />
         </div>
 

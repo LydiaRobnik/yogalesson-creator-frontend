@@ -28,7 +28,8 @@ const customStyles = {
     borderRadius: '.7rem',
     border: '2px dotted lightgray',
     overflow: 'hidden',
-    width: '80%'
+    width: '85%',
+    maxWidth: '1024px'
   }
 };
 Modal.setAppElement('#root');
@@ -107,8 +108,8 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
    * @param {} asana from Asanas.jsx
    */
   function addAsana(asana) {
-    console.log('📒 addAsana', asana);
-    setCards((prev) => [...prev, asana]);
+    console.log('📒 addAsanas', [...cards].concat(asana));
+    setCards((prev) => [...prev].concat(asana));
     closeModal();
   }
 
@@ -208,7 +209,7 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
           {sequence &&
             cards?.map((card, index) => (
               <>
-                <div className="flex flex-col content-center">
+                <div className={`flex flex-col content-center fade-in`}>
                   <div className="flex flex-col trash">
                     <span
                       className="delete"

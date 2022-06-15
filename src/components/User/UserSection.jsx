@@ -116,7 +116,7 @@ export default function UserSection() {
     <div className="w-full h-full p-3 pt-4">
       {/* tailwind only add direct usage of utilities, not dynamic */}
       <div
-        className="hidden 
+        className="hidden
         bg-red-100 bg-green-100 bg-yellow-100 bg-blue-100
         bg-red-500 bg-green-500 bg-yellow-500 bg-blue-500
         bg-red-600 bg-green-600 bg-yellow-600 bg-blue-600
@@ -162,10 +162,10 @@ export default function UserSection() {
               id={msg.id}
               onAnimationEnd={() => handleDeleteMessage(msg.id)}
               key={msg.id}
-              class="fade-out text-center py-2 lg:px-4"
+              className="fade-out text-center py-2 lg:px-4"
             >
               <div
-                class={`flex p-2 bg-${getMessageColor(
+                className={`flex p-2 bg-${getMessageColor(
                   msg.type
                 )}-800 items-center text-${getMessageColor(
                   msg.type
@@ -173,21 +173,21 @@ export default function UserSection() {
                 role="alert"
               >
                 <span
-                  class={`flex rounded-full bg-${getMessageColor(
+                  className={`flex rounded-full bg-${getMessageColor(
                     msg.type
                   )}-500 uppercase px-2 py-1 text-xs font-bold mr-3`}
                 >
                   <span className={`mt-1`}>{msg.type}</span>
                 </span>
-                <span class="font-semibold text-left flex-auto mt-1 mr-4">
+                <span className="font-semibold text-left flex-auto mt-1 mr-4">
                   {msg.message.toString()}
                 </span>
                 <button
                   onClick={() => handleDeleteMessage(msg.id)}
-                  class="px-1 py-0"
+                  className="px-1 py-0"
                 >
                   <svg
-                    class={`fill-current h-6 w-6 text-${getMessageColor(
+                    className={`fill-current h-6 w-6 text-${getMessageColor(
                       msg.type
                     )}-500`}
                     role="button"

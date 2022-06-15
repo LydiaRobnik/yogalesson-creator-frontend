@@ -1,7 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { getBase64 } from '../../custom/utils';
 
-export default function FileUpload({ accept, handleUpload, click, className }) {
+export default function FileUpload({
+  accept,
+  handleUpload,
+  click,
+  className,
+  maxSize = 1024 * 1024
+}) {
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
 
@@ -17,15 +23,22 @@ export default function FileUpload({ accept, handleUpload, click, className }) {
   }, [click]);
 
   useEffect(() => {
-    // console.log('selectedFile', selectedFile);
-    console.log('before handleUpload', selectedFile);
-
     if (!selectedFile) return;
+
+    console.log(
+      'before handleUpload',
+      selectedFile?.size > maxSize ? 'File too big' : 'file ok!'
+    );
+
+    if (selectedFile.size > maxSize) {
+      setSelectedFile(null);
+      return handleUpload(null, 'File too big');
+    }
 
     getBase64(selectedFile)
       .then((base64) => {
         // console.log('base64', base64);
-        handleUpload(base64);
+        handleUpload(base64, selectedFile.siz);
       })
       .catch((err) => {
         console.log('err', err);

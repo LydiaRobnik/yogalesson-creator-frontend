@@ -1,2 +1,6 @@
-/node_modules/
-\*~
+.gcloudignore
+.git
+.gitignore
+
+**
+!build/**
