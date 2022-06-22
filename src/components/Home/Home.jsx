@@ -1,49 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import ReactFullpage from '@fullpage/react-fullpage';
-import 'fullpage.js/vendors/scrolloverflow'; // Optional. When using scrollOverflow:true
+// import ReactFullpage from '@fullpage/react-fullpage';
+// import 'fullpage.js/vendors/scrolloverflow'; // Optional. When using scrollOverflow:true
 import Navbar from '../Navbar/Navbar';
 import './home.scss';
-import Section1 from '../Sections/Section1';
-import Section2 from '../Sections/Section2';
-import Section3 from '../Sections/Section3';
-import FooterNew from '../FooterNew/FooterNew.jsx';
+import Section1 from './Sections/Section1';
+import Section2 from './Sections/Section2';
+import Section3 from './Sections/Section3';
+import Section4 from './Sections/Section4';
+import FooterNew from '../FooterNew/FooterNew';
 import Hero from './Hero.jsx';
 
 export default function Home() {
   const navigate = useNavigate();
-  return (
-    <div className="px-0">
-      <ReactFullpage
-        //fullpage options
-        licenseKey={'gplv3-license'}
-        scrollingSpeed={1000} /* Options here */
-        render={({ state, fullpageApi }) => {
-          return (
-            <ReactFullpage.Wrapper>
-              <div className="top section color-primary h-full w-full">
-                <div className="h-full">
-                  <Navbar className="z-1" />
-                  <Hero />
-                </div>
-              </div>
-              <div className="section color-primary">
-                <Section1 />
-              </div>
-              <div className="section color-primary">
-                <Section2 />
-              </div>
-              <div className="section color-primary">
-                <Section3 />
-              </div>
 
-              <div className="section color-primary w-full">
-                <FooterNew className="z-1" />
-              </div>
-            </ReactFullpage.Wrapper>
-          );
-        }}
-      />
+  return (
+    <div className="px-0 flex flex-col items-center bg-light">
+      <div className="max-w-7xl">
+        <div className="top color-primary pb-64 mb-2 w-full">
+          <Navbar className="z-1" />
+          <Hero />
+        </div>
+        <Section1 />
+        <Section2 />
+        <Section3 />
+        <Section4 />
+        <FooterNew className="z-1 color-primary w-full" />
+      </div>
     </div>
   );
 }

@@ -82,9 +82,10 @@ export default function Navbar() {
         {({ open }) => (
           <>
             <div className="navbar px-2 sm:px-5">
-              <div className="relative flex items-center justify-between h-16">
+              <div className="flex flex-row justify-between w-full h-16 relative">
+                {/* <div className="flex flex-row items-center justify-between h-16 relative"> */}
                 {loggedIn && (
-                  <div className="absolute inset-y-0 left-0 flex items-center sm:hidden mx-auto">
+                  <div className="absolute inset-y-0 left-0 flex items-center md:hidden mx-auto">
                     {/* Mobile menu button*/}
                     <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                       <span className="sr-only">Open main menu</span>
@@ -100,32 +101,32 @@ export default function Navbar() {
                   </div>
                 )}
 
-                <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start pl-0">
+                <div className="flex-1 flex items-center justify-start sm:items-stretch sm:justify-start pl-0">
                   <NavLink to={'/'}>
                     <div className="flex-shrink-0 flex items-center">
+                      {/* <img
+                        className="block md:hidden h-8 w-auto px-2"
+                        src="https://storage.googleapis.com/monkeyplan-bucket/app/Logo_250x250px.png"
+                        alt="Workflow"
+                      /> */}
                       <img
-                        className="block lg:hidden h-8 w-auto height pr-3"
+                        className="hidden md:block h-8 w-auto pr-3"
                         src="https://storage.googleapis.com/monkeyplan-bucket/app/Logo_250x250px.png"
                         alt="Workflow"
                       />
-                      <img
-                        className="hidden lg:block h-8 w-auto pr-3"
-                        src="https://storage.googleapis.com/monkeyplan-bucket/app/Logo_250x250px.png"
-                        alt="Workflow"
-                      />
-                      <div className="ml-2">
-                        <p className="color-blue-darkest text-xl mt-1 tracking-[.18em] ">
+                      <div className="ml-2 hidden lg:block">
+                        <p className="color-blue-darkest sm:text-md md:text-xl mt-1 tracking-[.18em] ">
                           Monkey Plan
                         </p>
 
-                        <p className="text-xs">Create Structured Classes</p>
+                        <p className="sm:text-xs">Create Structured Classes</p>
                       </div>
                     </div>
                   </NavLink>
 
                   {loggedIn && (
-                    <div className="hidden sm:block sm:ml-6 self-center ">
-                      <div className="flex space-x-4">
+                    <div className="hidden md:block sm:ml-6 self-center ">
+                      <div className="flex space-x-2">
                         {navigation.map((item) => (
                           <NavLink
                             key={item.name}
@@ -162,13 +163,13 @@ export default function Navbar() {
                   ) : (
                     <>
                       <button
-                        className="bg-red hover:bg-red-500 text-white font-bold py-2 px-10"
+                        className="bg-red hover:bg-red-500 text-white text-sm py-2 px-3 sm:px-10"
                         onClick={() => setModalOpen(true)}
                       >
                         login
                       </button>
                       <button
-                        className="hover:underline text-color-blue-darkest py-2 px-10 pr-10"
+                        className="hover:underline text-color-blue-darkest text-sm py-2 px-3 sm:px-8"
                         onClick={() => setSignupModalOpen(true)}
                       >
                         sign up

@@ -5,7 +5,7 @@ import { AuthContext } from '../../context/AuthContext';
 import './footer.scss';
 
 export default function Footer() {
-  const { loggedIn, login, logout, user, signup } = useContext(AuthContext);
+  const { loggedIn, user, signup } = useContext(AuthContext);
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -270,32 +270,9 @@ export default function Footer() {
   }
 
   return (
-    <footer className="footer p-4 sm:p-6">
-      {/* <div className="submitHome flex flex-wrap justify-center mt-4 pb-4"> */}
-      {/* <form onSubmit={handleSignup} className="flex gap-4 text-black">
-        <input
-          className="px-1 rounded-lg w-42"
-          type="text"
-          minLength={3}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Username"
-        />
-        <input
-          className="px-1 rounded-lg w-42"
-          type="password"
-          minLength={4}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-        <button type="submit" className="bg-red-700 hover:bg-red-500 text-white font-bold py-2 px-10">
-              signup
-        </button>
-        {error && <div className="text-sm pl-5 pt-2 text-red-500">{error}</div>}
-      </form> */}
-      {/* </div> */}
-      {/* <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" /> */}
-      <div className="iconsHome flex justify-center mt-9">
-        <div className="flex mt-4 space-x-6 sm:justify-center sm:m-0">
+    <div className=" w-full h-56 relative flex items-center justify-center ">
+      <footer className="footer w-full absolute bottom-0 py-10 flex flex-col items-center justify-center ">
+        <div className="flex mt-4 space-x-4 sm:justify-center sm:m-0">
           <a
             href="#"
             className="icon text-gray-700 hover:text-gray-900 dark:hover:text-white"
@@ -315,7 +292,7 @@ export default function Footer() {
           </a>
           <a
             href="#"
-            className=" icon text-gray-700 hover:text-gray-900 dark:hover:text-white"
+            className="icon text-gray-700 hover:text-gray-900 dark:hover:text-white"
           >
             <svg
               className="iconH w-8 h-8"
@@ -332,7 +309,7 @@ export default function Footer() {
           </a>
           <a
             href="#"
-            className=" icon text-gray-700 hover:text-gray-900 dark:hover:text-white"
+            className="icon text-gray-700 hover:text-gray-900 dark:hover:text-white"
           >
             <svg
               className="iconH w-8 h-8"
@@ -361,13 +338,15 @@ export default function Footer() {
             </svg>
           </a>
         </div>
-      </div>
-      <div className="sm:flex sm:items-center sm:justify-center text-center mt-4">
-        <span className="copyright text-sm text-gray-500 sm:text-center">
-          © 2022 <br></br> Copyright: Monkey Plan Lydia, Vita, Michael, Thomas.{' '}
-          <br></br> All Rights Reserved.
-        </span>
-      </div>
-    </footer>
+
+        <div className="flex flex-col md:flex-row items-center copyright text-sm text-gray-500 text-center mt-1">
+          <p className="mx-2">© 2022</p>
+          <p className="mx-2">
+            Copyright: Monkey Plan Lydia, Vita, Michael, Thomas.{' '}
+          </p>
+          <p className="mx-2">All Rights Reserved.</p>
+        </div>
+      </footer>
+    </div>
   );
 }

@@ -1,4 +1,4 @@
-@import '../../style/variables.scss';
+@import '../../../style/variables.scss';
 
 .sectionTitle {
   font-family: $font-moontime;
@@ -17,7 +17,6 @@
 .featureText {
   color: $clr-blue-darkest;
   font-family: $font-manjari;
-  text-align: center;
   @apply mb-2 font-light;
 }
 
@@ -42,7 +41,6 @@
   background-image: url('https://storage.googleapis.com/monkeyplan-bucket/app/flowers.jpg');
   // background-size: cover;
   background-repeat: no-repeat;
-  // background-size: 100% 100%;
   background-position: bottom;
 }
 
@@ -50,15 +48,18 @@
   background-image: url('https://storage.googleapis.com/monkeyplan-bucket/app/pineapple_sea.jpeg');
   background-size: cover;
   background-repeat: no-repeat;
-  // background-size: 100% 100%;
   background-position: top;
 }
 
 .cardBenefits3 {
-  // background-color: $clr-blue-darkest;
   background-image: url('https://storage.googleapis.com/monkeyplan-bucket/app/Flowers_Section3.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  // background-size: 100% 100%;
   background-position: bottom;
+}
+ 
+.background {
+  background-image: url('https://storage.googleapis.com/monkeyplan-bucket/app/Bottom.jpg');
+  background-size: cover;
+  background-position: center;
 }
