@@ -1,7 +1,7 @@
 import React from 'react';
 import './sections.scss';
 import { useState, useEffect } from 'react';
-import asanaService from '../../api/asanaService';
+import asanaService from '../../../api/asanaService';
 
 export default function Section1() {
   const [randomAsanas, setRandomAsanas] = useState([]);
@@ -18,14 +18,13 @@ export default function Section1() {
 
   return (
     <>
-      <div className="section-container md:flex h-full">
-        <div className="sectionTitleColor md:w-1/2 flex-col justify-center font-bold ">
-          <div className="sectionTitle md:mt-32 pt-4 flex items-center justify-center font-light text-5xl md:text-6xl lg:text-7xl xl:text-9xl leading-relaxed">
+      <div className="flex flex-row  flex-wrap w-full color-primary mb-2">
+        <div className="sectionTitleColor w-full md:w-1/2 flex-col justify-center pt-16 pb-24">
+          <div className="sectionTitle text-center pt-4 font-light text-6xl lg:text-7xl xl:text-9xl leading-relaxed">
             Beginners Class
           </div>
-          <div className="max-w-screen-lg mx-auto p-4">
+          <div className="max-w-screen-lg mx-auto px-8 pt-10">
             <div className="flex flex-wrap justify-center">
-              {/* <div className="bg-clip-border m-4 p-16 border-4 bg-white rounded-lg"> */}
               {randomAsanas.map((asana) => (
                 <div
                   key={asana._id}
@@ -39,12 +38,11 @@ export default function Section1() {
                   />
                 </div>
               ))}
-              {/* </div> */}
             </div>
           </div>
         </div>
-        <div className="w-full h-full flex md:items-center justify-center relative md:flex md:w-1/2 Section1right">
-          <div className="featureText flex items-center justify-center leading-relaxed p-5 m-16 sm:m-32  md:m-24 absolute bottom-50 text-xl md:text-3xl text-left bg-red-500 bg-opacity-20 backdrop-blur-md font-light">
+        <div className="Section1right w-full items-center justify-center md:w-1/2 py-32">
+          <div className="featureText flex items-center justify-center p-6 mx-12 md:mx-18 lg:mx-32 bottom-50 text-lg md:text-xl text-left bg-red-500 bg-opacity-20 backdrop-blur-md font-light">
             Select exercises from our library or add your own asanas. <br></br>
             <br></br>
             Prepare reusable text modules for shavasana or meditation sequences.
