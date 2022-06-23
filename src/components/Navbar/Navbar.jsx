@@ -101,14 +101,17 @@ export default function Navbar() {
                   </div>
                 )}
 
-                <div className="flex-1 flex items-center justify-start sm:items-stretch sm:justify-start pl-0">
+                <div className="flex-1 flex justify-start pl-0">
                   <NavLink to={'/'}>
                     <div className="flex-shrink-0 flex items-center">
-                      {/* <img
-                        className="block md:hidden h-8 w-auto px-2"
-                        src="https://storage.googleapis.com/monkeyplan-bucket/app/Logo_250x250px.png"
-                        alt="Workflow"
-                      /> */}
+                      {!loggedIn && (
+                        <img
+                          className="block md:hidden h-8 w-auto justify-self-center"
+                          src="https://storage.googleapis.com/monkeyplan-bucket/app/Logo_250x250px.png"
+                          alt="Workflow"
+                        />
+                      )}
+
                       <img
                         className="hidden md:block h-8 w-auto pr-3"
                         src="https://storage.googleapis.com/monkeyplan-bucket/app/Logo_250x250px.png"
