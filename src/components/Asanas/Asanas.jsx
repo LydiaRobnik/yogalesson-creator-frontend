@@ -297,7 +297,7 @@ const Asanas = ({ selection = false, addAsana }) => {
 
       {!loading && (
         <div className="asanas-jsx flex flex-col justify-center gap-4 w-full px-2 sm:px-4 md:px-6 lg:px-10">
-          <div className="asanas-jsx  flex justify-center gap-4 w-full">
+          <div className="asanas-jsx flex justify-center gap-4 w-full">
             <div
               className={`filter-section flex flex-col gap-4 text-black  lg:mr-48 ${
                 // showFilter ? 'w-2/6 md:w-1/6' : 'mr-0 w-2/6 sm:w-1/6'
@@ -444,7 +444,7 @@ const Asanas = ({ selection = false, addAsana }) => {
             </div>
             {/* <div className={`w-full grid grid-flow-row auto-rows-max`}> */}
             <div>
-              <div className={`w-full flex flex-wrap gap-2`}>
+              <div className={`w-full flex flex-row flex-wrap gap-4`}>
                 {asanas &&
                   asanas
                     // filter by name
@@ -482,7 +482,7 @@ const Asanas = ({ selection = false, addAsana }) => {
                           1
                         }`}
                         key={asana._id}
-                        className={`relative ${
+                        className={`relative flex-auto ${
                           selectedAsanas.find((a) => a._id === asana._id)
                             ? 'asana-selected-id'
                             : 'border-4 rounded-md border-transparent'

@@ -81,7 +81,11 @@ export default function Navbar() {
       <Disclosure as="nav" className="bg-light color">
         {({ open }) => (
           <>
-            <div className="navbar px-2 sm:px-5">
+            <div
+              className={
+                loggedIn ? 'navbar px-2 sm:px-5' : 'navbar px-2 xl:px-0 sm:px-5'
+              }
+            >
               <div className="flex flex-row justify-between w-full h-16 relative">
                 {/* <div className="flex flex-row items-center justify-between h-16 relative"> */}
                 {loggedIn && (
@@ -101,20 +105,33 @@ export default function Navbar() {
                   </div>
                 )}
 
-                <div className="flex-1 flex items-center justify-start sm:items-stretch sm:justify-start pl-0">
+                <div
+                  className={
+                    loggedIn
+                      ? 'flex-1 flex justify-center md:justify-start pl-20 md:pl-0'
+                      : 'flex-1 flex justify-start pl-1'
+                  }
+                >
                   <NavLink to={'/'}>
                     <div className="flex-shrink-0 flex items-center">
-                      {/* <img
-                        className="block md:hidden h-8 w-auto px-2"
+                      <img
+                        className="block md:hidden h-8 w-auto justify-self-center"
                         src="https://storage.googleapis.com/monkeyplan-bucket/app/Logo_250x250px.png"
                         alt="Workflow"
-                      /> */}
+                      />
+
                       <img
                         className="hidden md:block h-8 w-auto pr-3"
                         src="https://storage.googleapis.com/monkeyplan-bucket/app/Logo_250x250px.png"
                         alt="Workflow"
                       />
-                      <div className="ml-2 hidden lg:block">
+                      <div
+                        className={
+                          loggedIn
+                            ? 'ml-2 hidden lg:block'
+                            : 'ml-2 hidden sm:block'
+                        }
+                      >
                         <p className="color-blue-darkest sm:text-md md:text-xl mt-1 tracking-[.18em] ">
                           Monkey Plan
                         </p>
@@ -169,7 +186,7 @@ export default function Navbar() {
                         login
                       </button>
                       <button
-                        className="hover:underline text-color-blue-darkest text-sm py-2 px-3 sm:px-8"
+                        className="hover:underline text-color-blue-darkest text-sm py-2 px-3 sm:px-8 xl:px-0 xl:pl-8"
                         onClick={() => setSignupModalOpen(true)}
                       >
                         sign up
