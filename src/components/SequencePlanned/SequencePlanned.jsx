@@ -225,7 +225,6 @@ const SequencePlanned = ({ sequence, handleFocus }) => {
                       index={index}
                       id={card._id}
                       moveCard={moveCard}
-                      sequencePlannedStyles={true}
                     />
                   </div>
                 </div>

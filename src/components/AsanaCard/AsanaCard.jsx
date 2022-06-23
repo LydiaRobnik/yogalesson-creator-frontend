@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 // import { useNavigate, useOutletContext } from 'react-router-dom';
 import './asanaCard.scss';
 import { useDrag, useDrop } from 'react-dnd';
@@ -9,8 +9,7 @@ const AsanaCard = ({
   key,
   index,
   moveCard,
-  sizeAsanaOnSelectModal,
-  sequencePlannedStyles
+  sizeAsanaOnSelectModal
 }) => {
   // const navigate = useNavigate();
   // const { sequenceToAdd } = useOutletContext();
