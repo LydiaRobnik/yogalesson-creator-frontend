@@ -1,11 +1,12 @@
 // fonts
 // @font-face {
 // font-family: manjari;
-//   src: url('../../public/Manjari-Regular.ttf')
+//   src: url('../../public/Manjari-Thin.ttf')
 // };
 @font-face {
   font-family: manjari;
-  src: url('../../public/Manjari-Thin.ttf');
+  font-style: normal;
+  src: url('../../public/Manjari-Regular.ttf');
 }
 @font-face {
   font-family: moontime;
