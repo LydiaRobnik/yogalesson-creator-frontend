@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import useBreakpoint from '../../custom/useBreakpoint';
 import Sequence from '../Sequence/Sequence.jsx';
 // import asanaService from '../../api/asanaService';
 import NewSequence from '../NewSequence/NewSequence';
@@ -20,27 +19,14 @@ const SequenceCollection = (ref) => {
   // states
   const { loggedIn, user } = useContext(AuthContext);
   const {
-    userClasses,
-    setUserClasses,
-    asanas,
-    setAsanas,
     userSequences,
     setUserSequences,
     yogaClassToAdd,
     loading,
-    setSequenceToAdd,
-    setShowNewSequence
+    setSequenceToAdd
   } = useOutletContext();
-  const {
-    asanaService,
-    addSystemInfo,
-    addSystemSuccess,
-    addSystemError,
-    addSystemMessage,
-    clearSystemMessages
-  } = useOutletContext();
+  const { asanaService, addSystemSuccess } = useOutletContext();
 
-  const point = useBreakpoint();
   const navigate = useNavigate();
 
   const [selectedSequence, setSelectedSequence] = useState(true);
@@ -171,22 +157,6 @@ const SequenceCollection = (ref) => {
                     />
                   )}
                 </div>
-                {/* <div className="col-span-1 flex flex-col justify-start mt-3">
-                  <button
-                    className="btn-seqColl-blue "
-                    onClick={() => handleEditSequence(sequence)}
-                  >
-                    <span className="font-material-symbols px-2 py-1">
-                      edit
-                    </span>
-                  </button>
-                  <button
-                    className="btn-seqColl-red-outline"
-                    onClick={() => handleDeleteSequence(sequence)}
-                  >
-                    <p className="font-material-symbols py-1 px-2">delete</p>
-                  </button>
-                </div> */}
               </div>
             ))}
         </div>

@@ -1,21 +1,45 @@
 // fonts
-@import url('https://fonts.googleapis.com/css2?family=Manjari:wght@100;400;700&display=swap');
+// @font-face {
+// font-family: manjari;
+//   src: url('../../public/Manjari-Thin.ttf')
+// };
+@font-face {
+  font-family: manjari;
+  font-style: normal;
+  src: url('../../public/Manjari-Regular.ttf');
+}
 @font-face {
   font-family: moontime;
   src: url('../../public/MoonTime-Regular.ttf');
-};
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-@import url("https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0");
+}
 
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Material Icons'), local('MaterialIcons-Regular'),
+    url('../../public/MaterialIcons-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Material Icons Outlined';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Material Icons Outlined'), local('MaterialIconsOutlined-Regular'),
+    url('../../public/MaterialIconsOutlined-Regular.otf') format('opentype');
+}
+
+// @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+// @import url('https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0');
 
 // fonts
 $font-moontime: 'Moontime', serif;
 $font-manjari: 'Manjari', sans-serif;
 $font-material: 'Material Icons', sans-serif;
-$font-material-symbols: 'Material Symbols Outlined', sans-serif;
+$font-material-symbols: 'Material Icons Outlined', sans-serif;
 
 // colors
-$clr-light: #FFF6EC;
+$clr-light: #fff6ec;
 $clr-red: #c94d4e;
 $clr-beige: #f1a185;
 $clr-beige-light: #ffd2b9;
@@ -23,8 +47,6 @@ $clr-blue-light: #c9e0e5;
 $clr-blue-middle: #738b94;
 $clr-blue-dark: #1d3542;
 $clr-blue-darkest: #001a29;
-
-
 
 // ###################### Archive ######################
 
